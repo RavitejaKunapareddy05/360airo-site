@@ -13,11 +13,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const features = [
-  { name: 'Email Warmup', href: '/features#warmup' },
-  { name: 'Domains & Emails', href: '/features#domains' },
-  { name: 'AI & Manual Campaigns', href: '/features#campaigns' },
-  { name: 'AI Content Generation', href: '/features#ai-content' },
-  { name: 'Reports & Analytics', href: '/features#analytics' },
+  { name: 'Email Warmup', href: '/features/email-warmup' },
+  { name: 'Domains & Emails', href: '/features/domains-emails' },
+  { name: 'AI & Manual Campaigns', href: '/features/email-campaigns' },
+  { name: 'AI Content Generation', href: '/features/ai-pitch-generation' },
+  { name: 'Reports & Analytics', href: '/features/report-analytics' },
 ];
 
 export function Navbar() {
