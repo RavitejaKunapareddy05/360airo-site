@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -78,6 +78,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,14 +94,48 @@ export function Navbar() {
     setActiveItem(window.location.pathname);
   }, []);
 
+  // Clean hover handlers
+  const showDropdown = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setFeaturesOpen(true);
+  }, []);
+
+  const hideDropdown = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setFeaturesOpen(false);
+    }, 150);
+  }, []);
+
+  const cancelHide = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
-      {/* Modern Glassmorphic Navbar */}
+      {/* Modern Navbar */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 bottom-4 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl'
             : 'bg-transparent'
@@ -107,7 +143,7 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Enhanced Logo with Your Image */}
+            {/* Enhanced Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -138,32 +174,39 @@ export function Navbar() {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with Perfect Underline */}
+            {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1 relative">
               <NavLink 
                 href="/" 
                 label="Home" 
                 isActive={activeItem === '/'} 
-                onHover={() => setActiveItem('/')} 
+                onHover={() => setActiveItem('/')}
+                onMouseEnter={() => {
+                  setActiveItem('/');
+                  hideDropdown(); // Close dropdown when hovering other items
+                }}
               />
               
-              {/* Features Dropdown */}
-              <div className="relative group">
+              {/* Fixed Features Dropdown */}
+              <div 
+                ref={dropdownRef}
+                className="relative"
+                onMouseEnter={showDropdown}
+                onMouseLeave={hideDropdown}
+              >
                 <button
-                  onMouseEnter={() => setFeaturesOpen(true)}
-                  onMouseLeave={() => setFeaturesOpen(false)}
                   className="flex items-center space-x-1 px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 group relative"
                 >
                   <span>Features</span>
                   <motion.div
                     animate={{ rotate: featuresOpen ? 180 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="group-hover:text-[#A855F7] transition-colors"
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    className="group-hover:text-[#A855F7] transition-colors duration-200"
                   >
                     <ChevronDown className="h-4 w-4" />
                   </motion.div>
                   
-                  {/* Perfect Underline for Features */}
+                  {/* Underline for Features */}
                   {featuresOpen && (
                     <motion.div
                       layoutId="navbar-underline"
@@ -173,57 +216,76 @@ export function Navbar() {
                   )}
                 </button>
 
+                {/* Dropdown - NO BACKDROP BLOCKING */}
                 <AnimatePresence>
                   {featuresOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                      transition={{ duration: 0.15, ease: 'easeOut' }}
-                      onMouseEnter={() => setFeaturesOpen(true)}
-                      onMouseLeave={() => setFeaturesOpen(false)}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-white/8 backdrop-blur-2xl rounded-2xl border border-white/20 shadow-2xl overflow-hidden z-50"
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }}
+                      onMouseEnter={cancelHide}
+                      onMouseLeave={hideDropdown}
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
+                      style={{ 
+                        background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
+                      }}
                     >
-                      <div className="p-6">
+                      {/* Gradient Border Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
+                      
+                      <div className="relative p-6">
                         {/* Features Grid */}
                         <div className="grid grid-cols-2 gap-1">
                           {features.map((feature, index) => (
                             <motion.div
                               key={feature.name}
-                              initial={{ opacity: 0, y: 10 }}
+                              initial={{ opacity: 0, y: 8 }}
                               animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: index * 0.03, duration: 0.2 }}
-                              className="group/card"
+                              transition={{ 
+                                delay: index * 0.03,
+                                duration: 0.25,
+                                ease: 'easeOut'
+                              }}
                             >
                               <Link
                                 href={feature.href}
-                                className="block p-4 rounded-xl hover:bg-white/10 transition-all duration-200 border border-transparent hover:border-white/10"
+                                className="block p-4 rounded-xl transition-all duration-200 border border-transparent hover:bg-white/10 hover:border-[#8B5CF6]/30 group/card"
+                                onClick={() => setFeaturesOpen(false)}
                               >
                                 <div className="flex items-start space-x-3">
-                                  <div className={`w-10 h-10 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center flex-shrink-0 group-hover/card:scale-105 transition-transform duration-200`}>
+                                  <motion.div 
+                                    className={`w-10 h-10 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center flex-shrink-0`}
+                                    whileHover={{ scale: 1.05, rotate: 2 }}
+                                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                  >
                                     <feature.icon className="h-5 w-5 text-white" />
-                                  </div>
+                                  </motion.div>
                                   
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center space-x-2 mb-1">
-                                      <h4 className="font-semibold text-white text-sm group-hover/card:text-[#A855F7] transition-colors">
+                                      <h4 className="font-semibold text-white text-sm group-hover/card:text-[#A855F7] transition-colors duration-200">
                                         {feature.name}
                                       </h4>
                                       {feature.tag && (
                                         <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
                                           feature.tag === 'Popular' 
-                                            ? 'bg-emerald-500/20 text-emerald-400'
+                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                                             : feature.tag === 'New'
-                                            ? 'bg-blue-500/20 text-blue-400'
+                                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                                             : feature.tag === 'AI Powered'
-                                            ? 'bg-purple-500/20 text-purple-400'
-                                            : 'bg-orange-500/20 text-orange-400'
+                                            ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                                            : 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
                                         }`}>
                                           {feature.tag}
                                         </span>
                                       )}
                                     </div>
-                                    <p className="text-xs text-white/60 group-hover/card:text-white/80 transition-colors line-clamp-2">
+                                    <p className="text-xs text-white/70 group-hover/card:text-white/90 transition-colors duration-200 line-clamp-2">
                                       {feature.description}
                                     </p>
                                   </div>
@@ -234,20 +296,31 @@ export function Navbar() {
                         </div>
 
                         {/* Bottom CTA */}
-                        <div className="border-t border-white/10 mt-6 pt-4">
+                        <motion.div 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2, duration: 0.3 }}
+                          className="border-t border-[#8B5CF6]/20 mt-6 pt-4"
+                        >
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="text-sm font-medium text-white">Ready to get started?</p>
-                              <p className="text-xs text-white/60">Join thousands of businesses automating their campaigns</p>
+                              <p className="text-xs text-white/70">Join thousands of businesses automating campaigns</p>
                             </div>
-                            <Button 
-                              size="sm" 
-                              className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:shadow-lg text-white text-sm px-4 py-2"
+                            <motion.div
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
                             >
-                              Start Free Trial
-                            </Button>
+                              <Button 
+                                size="sm" 
+                                className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:shadow-lg text-white text-sm px-4 py-2"
+                                onClick={() => setFeaturesOpen(false)}
+                              >
+                                Start Free Trial
+                              </Button>
+                            </motion.div>
                           </div>
-                        </div>
+                        </motion.div>
                       </div>
                     </motion.div>
                   )}
@@ -258,13 +331,21 @@ export function Navbar() {
                 href="/pricing" 
                 label="Pricing" 
                 isActive={activeItem === '/pricing'} 
-                onHover={() => setActiveItem('/pricing')} 
+                onHover={() => setActiveItem('/pricing')}
+                onMouseEnter={() => {
+                  setActiveItem('/pricing');
+                  hideDropdown(); // Close dropdown
+                }}
               />
               <NavLink 
                 href="/blogs" 
                 label="Blog" 
                 isActive={activeItem === '/blogs'} 
-                onHover={() => setActiveItem('/blogs')} 
+                onHover={() => setActiveItem('/blogs')}
+                onMouseEnter={() => {
+                  setActiveItem('/blogs');
+                  hideDropdown(); // Close dropdown
+                }}
               />
             </div>
 
@@ -302,7 +383,7 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Enhanced Mobile Menu */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -310,7 +391,10 @@ export function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="lg:hidden bg-white/10 backdrop-blur-xl border-t border-white/20"
+              className="lg:hidden bg-[#1a0b2e] border-t border-[#8B5CF6]/20"
+              style={{ 
+                background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)'
+              }}
             >
               <div className="px-4 py-6 space-y-2">
                 <MobileNavLink href="/" label="Home" onClick={() => setIsOpen(false)} />
@@ -347,7 +431,7 @@ export function Navbar() {
                           <div className="text-xs text-white/50">{feature.description}</div>
                         </div>
                         {feature.tag && (
-                          <span className="text-xs px-2 py-1 bg-white/10 rounded-full">
+                          <span className="text-xs px-2 py-1 bg-white/10 rounded-full border border-white/20">
                             {feature.tag}
                           </span>
                         )}
@@ -359,10 +443,10 @@ export function Navbar() {
                 <MobileNavLink href="/pricing" label="Pricing" onClick={() => setIsOpen(false)} />
                 <MobileNavLink href="/blogs" label="Blog" onClick={() => setIsOpen(false)} />
 
-                <div className="pt-4 space-y-3 border-t border-white/20 mt-6">
+                <div className="pt-4 space-y-3 border-t border-[#8B5CF6]/20 mt-6">
                   <Button 
                     variant="outline" 
-                    className="w-full border-white/20 text-white hover:bg-white/10 transition-all duration-300"
+                    className="w-full border-[#8B5CF6]/30 text-white hover:bg-white/10 transition-all duration-300"
                   >
                     Login
                   </Button>
@@ -376,7 +460,7 @@ export function Navbar() {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Backdrop blur effect when mobile menu is open */}
+      {/* Mobile Backdrop Only */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -392,25 +476,27 @@ export function Navbar() {
   );
 }
 
-// Perfect NavLink Component with Underline
+// Enhanced NavLink Component
 const NavLink = ({ 
   href, 
   label, 
   isActive, 
-  onHover 
+  onHover,
+  onMouseEnter
 }: { 
   href: string; 
   label: string; 
   isActive?: boolean;
   onHover?: () => void;
+  onMouseEnter?: () => void;
 }) => (
   <Link
     href={href}
-    onMouseEnter={onHover}
+    onMouseEnter={onMouseEnter || onHover}
     className="px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 font-medium relative group"
   >
     {label}
-    {/* Perfect Underline Indicator */}
+    {/* Perfect Underline */}
     {isActive && (
       <motion.div
         layoutId="navbar-underline"
@@ -421,7 +507,7 @@ const NavLink = ({
   </Link>
 );
 
-// Enhanced Mobile NavLink Component
+// Mobile NavLink Component
 const MobileNavLink = ({ 
   href, 
   label, 
