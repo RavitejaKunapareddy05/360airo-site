@@ -1,11 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Calendar, Clock, ArrowRight, TrendingUp, Mail, Users, Sparkles, Target, BarChart3 } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Link from 'next/link';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -20,235 +19,251 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-const featuredPost = {
-  title: 'The Ultimate Guide to Cold Email Outreach in 2024',
-  excerpt: 'Learn proven strategies to increase your cold email response rates by 300% using AI-powered personalization and smart automation.',
-  date: '2024-01-15',
-  readTime: '12 min read',
-  category: 'Best Practices',
-  icon: Sparkles,
-};
-
+// Sample blog data - you can replace this with your actual blog posts
 const blogPosts = [
   {
-    title: '10 Email Subject Lines That Get 70% Open Rates',
-    excerpt: 'Discover the psychology behind high-performing subject lines and how to craft them for your campaigns.',
-    date: '2024-01-10',
-    readTime: '8 min read',
-    category: 'Email Marketing',
-    icon: Mail,
+    id: 1,
+    title: "Top Cold Email Tools in 2025: Which One Actually Delivers Replies?",
+    excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Businesses no longer care about sending thousands of emails. They care about getting responses that convert.",
+    slug: "Top-Cold-Email-Tools",
+    author: "Sales Team",
+    date: "october 23, 2025",
+    readTime: "8 min read",
+    category: "Cold Email",
+    image: "https://chatgpt.com/backend-api/estuary/content?id=file_0000000052ac6208b39c43f4bba97ac5&ts=489236&p=fs&cid=1&sig=8fc36ee870edbe9b9136f8e0940d32dc6d97ff294a1e7679800cfbe3f7f9d711&v=0",
+    featured: true
   },
+ 
   {
-    title: 'How to Build an Email List from Scratch',
-    excerpt: 'Step-by-step guide to building a high-quality email list that converts, including lead generation tactics.',
-    date: '2024-01-08',
-    readTime: '10 min read',
-    category: 'Lead Generation',
-    icon: Users,
-  },
-  {
-    title: 'AI Personalization: The Future of Email Outreach',
-    excerpt: 'Why AI-powered personalization is revolutionizing cold email and how to implement it effectively.',
-    date: '2024-01-05',
-    readTime: '15 min read',
-    category: 'AI & Automation',
-    icon: Sparkles,
-  },
-  {
-    title: 'Email Warmup: Complete Guide to Deliverability',
-    excerpt: 'Everything you need to know about email warmup to ensure your messages land in the inbox.',
-    date: '2024-01-03',
-    readTime: '11 min read',
-    category: 'Deliverability',
-    icon: TrendingUp,
-  },
-  {
-    title: 'Maximizing ROI with Campaign Analytics',
-    excerpt: 'Learn how to track, measure, and optimize your email campaigns for maximum return on investment.',
-    date: '2024-01-01',
-    readTime: '9 min read',
-    category: 'Analytics',
-    icon: BarChart3,
-  },
-  {
-    title: 'Advanced Segmentation Strategies',
-    excerpt: 'Master the art of audience segmentation to send more targeted and effective email campaigns.',
-    date: '2023-12-28',
-    readTime: '7 min read',
-    category: 'Strategy',
-    icon: Target,
-  },
+  id: 2,
+  title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
+  excerpt: "LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Whether you're a founder, SDR, or agency owner, mastering LinkedIn outreach can completely transform your lead generation in 2025.",
+  slug: "linkedin-outreach-strategy",
+  author: "Sales Team",
+  date: "october 23 ,2025",
+  readTime: "7 min read",
+  category: "LinkedIn",
+}
 ];
 
-const categories = ['All', 'Best Practices', 'Email Marketing', 'AI & Automation', 'Deliverability', 'Analytics', 'Strategy'];
+const categories = [
+  "All Posts",
+  "Cold Email",
+  "Outreach",
+  "AI & Automation",
+  "Sales Strategy",
+  "Email Marketing",
+  "LinkedIn"
+];
 
 export default function BlogsPage() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+        <Navbar />
 
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-7xl mx-auto"
-        >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Email Outreach
-              <br />
-              <span className="gradient-text">Insights & Tips</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Expert advice, industry trends, and actionable strategies to help you master email outreach
-            </p>
-          </motion.div>
+        {/* Hero Section */}
+        <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="max-w-6xl mx-auto text-center"
+          >
+            <motion.div variants={itemVariants} className="mb-8">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                Our <span className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] bg-clip-text text-transparent">Blog</span>
+              </h1>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                Insights, strategies, and tips to help you master cold outreach, 
+                automate your sales process, and grow your business faster.
+              </p>
+            </motion.div>
 
-          <motion.div variants={itemVariants} className="mb-12">
-            <Card className="card-gradient p-8 md:p-12 glow-effect overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
-                <featuredPost.icon className="w-full h-full" />
-              </div>
-              <div className="relative z-10">
-                <span className="inline-block bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white px-4 py-1 rounded-full text-sm font-medium mb-4">
-                  Featured
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  {featuredPost.title}
-                </h2>
-                <p className="text-lg text-white/80 mb-6 max-w-3xl">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="flex flex-wrap items-center gap-4 mb-6 text-white/70">
-                  <span className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    {new Date(featuredPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-                  </span>
-                  <span className="flex items-center">
-                    <Clock className="h-4 w-4 mr-2" />
-                    {featuredPost.readTime}
-                  </span>
-                  <span className="bg-[#b45ecf]/20 px-3 py-1 rounded-full text-[#b45ecf] text-sm">
-                    {featuredPost.category}
-                  </span>
-                </div>
-                <Button className="bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:opacity-90 text-white group">
-                  Read Full Article
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </div>
-            </Card>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="mb-12">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {categories.map((category) => (
-                <Button
+            {/* Categories Filter */}
+            <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 mb-12">
+              {categories.map((category, index) => (
+                <motion.button
                   key={category}
-                  variant="outline"
-                  className={`border-[#b45ecf]/30 text-white hover:bg-[#b45ecf]/20 ${
-                    category === 'All' ? 'bg-[#b45ecf]/20' : ''
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    index === 0 
+                      ? 'bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white'
+                      : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
                   }`}
                 >
                   {category}
-                </Button>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -10 }}
-              >
-                <Card className="card-gradient p-6 h-full flex flex-col hover:glow-effect transition-all duration-300">
-                  <div className="bg-gradient-to-br from-[#b45ecf] to-[#480056] w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                    <post.icon className="h-6 w-6 text-white" />
-                  </div>
-
-                  <span className="inline-block bg-[#480056]/50 text-[#b45ecf] px-3 py-1 rounded-full text-xs font-medium mb-3 w-fit">
-                    {post.category}
-                  </span>
-
-                  <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-white/70 mb-4 flex-grow line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex items-center gap-4 text-sm text-white/60 mb-4">
-                    <span className="flex items-center">
-                      <Calendar className="h-3 w-3 mr-1" />
-                      {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                    </span>
-                    <span className="flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {post.readTime}
-                    </span>
-                  </div>
-
-                  <Button
-                    variant="ghost"
-                    className="text-[#b45ecf] hover:text-white hover:bg-[#b45ecf]/20 w-full group"
-                  >
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div variants={itemVariants} className="mt-12 text-center">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-[#b45ecf] text-white hover:bg-[#b45ecf]/20"
+        {/* Featured Blog Post */}
+        <section className="pb-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-8 border border-[#b45ecf]/20"
             >
-              Load More Articles
-            </Button>
-          </motion.div>
-        </motion.div>
-      </section>
+              <div className="grid lg:grid-cols-2 gap-8 items-center">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-sm font-medium">
+                    Featured Post
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-white">
+                    {blogPosts[0].title}
+                  </h2>
+                  <p className="text-white/70 text-lg leading-relaxed">
+                    {blogPosts[0].excerpt}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4 text-white/60 text-sm">
+                    <div className="flex items-center gap-1">
+                      <User className="h-4 w-4" />
+                      <span>{blogPosts[0].author}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>{blogPosts[0].date}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{blogPosts[0].readTime}</span>
+                    </div>
+                  </div>
+                  <Link href={`/blogs/${blogPosts[0].slug}`}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold transition-all"
+                    >
+                      Read Full Article
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </motion.button>
+                  </Link>
+                </div>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="relative h-64 lg:h-80 rounded-2xl bg-gradient-to-br from-[#b45ecf]/20 to-[#480056]/20 border border-[#b45ecf]/30 flex items-center justify-center"
+                >
+                  <div className="text-4xl">📧</div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#480056]/30 to-[#19001d]/30">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <motion.div variants={itemVariants} className="space-y-8">
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
-              Stay Updated with <span className="gradient-text">Latest Tips</span>
-            </h2>
-            <p className="text-xl text-white/80">
-              Subscribe to our newsletter for weekly email marketing insights and strategies
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-lg bg-[#480056]/30 border border-[#b45ecf]/30 text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-[#b45ecf]"
-              />
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:opacity-90 text-white glow-effect"
-              >
-                Subscribe
-              </Button>
+        {/* Blog Posts Grid */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={containerVariants}
+            >
+              <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+                Latest <span className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] bg-clip-text text-transparent">Articles</span>
+              </motion.h2>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {blogPosts.slice(1).map((post, index) => (
+                  <motion.article
+                    key={post.id}
+                    variants={itemVariants}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300"
+                  >
+                    {/* Category Badge */}
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-xs font-medium mb-4">
+                      {post.category}
+                    </div>
+
+                    {/* Post Image */}
+                    <div className="relative h-48 rounded-xl bg-gradient-to-br from-[#b45ecf]/20 to-[#480056]/20 border border-[#b45ecf]/20 mb-4 flex items-center justify-center">
+                      <div className="text-2xl">📊</div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-bold text-white group-hover:text-[#b45ecf] transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      
+                      <p className="text-white/70 text-sm leading-relaxed line-clamp-3">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Meta Information */}
+                      <div className="flex items-center justify-between text-white/60 text-xs">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          <span>{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+
+                      {/* Read More Button */}
+                      <Link href={`/blogs/${post.slug}`}>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="group w-full flex items-center justify-center gap-2 py-2 px-4 bg-white/10 hover:bg-[#b45ecf]/20 text-white rounded-lg text-sm font-medium transition-all mt-4"
+                        >
+                          Read More
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </motion.button>
+                      </Link>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Newsletter Section */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <div className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-12 border border-[#b45ecf]/20">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Stay Updated with Our Latest Insights
+              </h2>
+              <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+                Get the latest cold outreach strategies, AI automation tips, and sales insights delivered directly to your inbox.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf]"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold"
+                >
+                  Subscribe
+                </motion.button>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
-      </section>
+        </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }

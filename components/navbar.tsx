@@ -19,7 +19,12 @@ import {
   Target,
   TrendingUp,
   Shield,
-  Rocket
+  Rocket,
+  Users,
+  Inbox,
+  Workflow,
+  MessageSquare,
+  Linkedin
 } from 'lucide-react';
 
 const features = [
@@ -56,6 +61,46 @@ const features = [
     tag: 'AI Powered'
   },
   { 
+    name: 'Prospect CRM', 
+    href: '/features/prospect-crm',
+    description: 'Manage, track, and nurture every lead from first contact to conversion',
+    icon: Users,
+    color: 'from-indigo-500 to-blue-400',
+    tag: 'New'
+  },
+  { 
+    name: 'Unified Shared Inbox', 
+    href: '/features/unified-shared-inbox',
+    description: 'Centralized inbox for team collaboration and customer communication',
+    icon: Inbox,
+    color: 'from-violet-500 to-purple-400',
+    tag: 'Team'
+  },
+  { 
+    name: 'Email Sequences', 
+    href: '/features/email-sequences',
+    description: 'Automated multi-step email campaigns that nurture leads',
+    icon: Workflow,
+    color: 'from-pink-500 to-rose-400',
+    tag: 'Automation'
+  },
+  { 
+    name: 'AI Automation', 
+    href: '/features/ai-automation',
+    description: 'Intelligent workflow automation powered by artificial intelligence',
+    icon: Rocket,
+    color: 'from-amber-500 to-orange-400',
+    tag: 'AI Powered'
+  },
+  { 
+    name: 'LinkedIn Automation', 
+    href: '/features/linkedin-automation',
+    description: 'Automate LinkedIn outreach and connection management',
+    icon: Linkedin,
+    color: 'from-blue-600 to-blue-400',
+    tag: 'Social'
+  },
+  { 
     name: 'Reports & Analytics', 
     href: '/features/report-analytics',
     description: 'Deep insights and performance analytics dashboard',
@@ -63,14 +108,14 @@ const features = [
     color: 'from-violet-500 to-purple-400',
     tag: null
   },
-  { 
-    name: 'Email Security', 
-    href: '/features/email-security',
-    description: 'Advanced security protocols and spam protection',
-    icon: Shield,
-    color: 'from-green-500 to-emerald-400',
-    tag: 'Enterprise'
-  }
+  // { 
+  //   name: 'Email Security', 
+  //   href: '/features/email-security',
+  //   description: 'Advanced security protocols and spam protection',
+  //   icon: Shield,
+  //   color: 'from-green-500 to-emerald-400',
+  //   tag: 'Enterprise'
+  // }
 ];
 
 export function Navbar() {
@@ -116,6 +161,15 @@ export function Navbar() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
+    }
+  }, []);
+
+  // Handle Features click - navigate and close dropdown
+  const handleFeaturesClick = useCallback((e: React.MouseEvent) => {
+    // Only navigate if it's a direct click (not from hover)
+    if (e.type === 'click') {
+      setFeaturesOpen(false);
+      // Navigation will happen via the Link component
     }
   }, []);
 
@@ -187,14 +241,17 @@ export function Navbar() {
                 }}
               />
               
-              {/* Fixed Features Dropdown */}
+              {/* Fixed Features Dropdown - POSITIONED ON LEFT SIDE */}
               <div 
                 ref={dropdownRef}
                 className="relative"
                 onMouseEnter={showDropdown}
                 onMouseLeave={hideDropdown}
               >
-                <button
+                {/* Features Link that navigates to /features */}
+                <Link
+                  href="/features"
+                  onClick={handleFeaturesClick}
                   className="flex items-center space-x-1 px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 group relative"
                 >
                   <span>Features</span>
@@ -214,9 +271,9 @@ export function Navbar() {
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
-                </button>
+                </Link>
 
-                {/* Dropdown - NO BACKDROP BLOCKING */}
+                {/* Dropdown - POSITIONED ON LEFT SIDE */}
                 <AnimatePresence>
                   {featuresOpen && (
                     <motion.div
@@ -229,7 +286,7 @@ export function Navbar() {
                       }}
                       onMouseEnter={cancelHide}
                       onMouseLeave={hideDropdown}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
+                      className="absolute top-full left-0 mt-2 w-[800px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
                       style={{ 
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
@@ -239,8 +296,8 @@ export function Navbar() {
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
                       
                       <div className="relative p-6">
-                        {/* Features Grid */}
-                        <div className="grid grid-cols-2 gap-1">
+                        {/* Features Grid - 3 columns */}
+                        <div className="grid grid-cols-3 gap-1">
                           {features.map((feature, index) => (
                             <motion.div
                               key={feature.name}
@@ -279,6 +336,12 @@ export function Navbar() {
                                             ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                                             : feature.tag === 'AI Powered'
                                             ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                                            : feature.tag === 'Team'
+                                            ? 'bg-violet-500/20 text-violet-400 border border-violet-500/30'
+                                            : feature.tag === 'Automation'
+                                            ? 'bg-pink-500/20 text-pink-400 border border-pink-500/30'
+                                            : feature.tag === 'Social'
+                                            ? 'bg-blue-600/20 text-blue-400 border border-blue-600/30'
                                             : 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
                                         }`}>
                                           {feature.tag}
@@ -399,8 +462,13 @@ export function Navbar() {
               <div className="px-4 py-6 space-y-2">
                 <MobileNavLink href="/" label="Home" onClick={() => setIsOpen(false)} />
                 
+                {/* Mobile Features Section */}
                 <div className="space-y-2">
-                  <div className="text-white/90 font-semibold px-4 py-2 flex items-center space-x-2">
+                  <Link
+                    href="/features"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center space-x-2 px-4 py-3 text-white font-semibold hover:bg-white/10 rounded-xl transition-all duration-300"
+                  >
                     <div className="w-4 h-4 relative">
                       <Image
                         src="/favicon_360airo__1_-removebg-preview.png"
@@ -410,7 +478,7 @@ export function Navbar() {
                       />
                     </div>
                     <span>Features</span>
-                  </div>
+                  </Link>
                   {features.map((feature, index) => (
                     <motion.div
                       key={feature.name}
