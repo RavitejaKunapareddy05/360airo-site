@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, User, Eye, Share2 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
@@ -19,31 +19,87 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Sample blog data - you can replace this with your actual blog posts
+// Enhanced blog data with proper images and categories
 const blogPosts = [
   {
     id: 1,
     title: "Top Cold Email Tools in 2025: Which One Actually Delivers Replies?",
-    excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Businesses no longer care about sending thousands of emails. They care about getting responses that convert.",
-    slug: "Top-Cold-Email-Tools",
-    author: "Sales Team",
-    date: "october 23, 2025",
+    excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Discover the tools that actually get responses.",
+    slug: "top-cold-email-tools",
+    author: "Sarah Chen",
+    date: "October 23, 2025",
     readTime: "8 min read",
     category: "Cold Email",
-    image: "https://chatgpt.com/backend-api/estuary/content?id=file_0000000052ac6208b39c43f4bba97ac5&ts=489236&p=fs&cid=1&sig=8fc36ee870edbe9b9136f8e0940d32dc6d97ff294a1e7679800cfbe3f7f9d711&v=0",
-    featured: true
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    featured: true,
+    views: "2.4K",
+    tags: ["Cold Email", "Sales Tools", "Automation"]
   },
- 
   {
-  id: 2,
-  title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
-  excerpt: "LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Whether you're a founder, SDR, or agency owner, mastering LinkedIn outreach can completely transform your lead generation in 2025.",
-  slug: "linkedin-outreach-strategy",
-  author: "Sales Team",
-  date: "october 23 ,2025",
-  readTime: "7 min read",
-  category: "LinkedIn",
-}
+    id: 2,
+    title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
+    excerpt: "LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Learn the exact playbook that's generating 3x more meetings.",
+    slug: "linkedin-outreach-strategy",
+    author: "Mike Rodriguez",
+    date: "October 20, 2025",
+    readTime: "7 min read",
+    category: "LinkedIn",
+    image: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    views: "1.8K",
+    tags: ["LinkedIn", "Outreach", "B2B Sales"]
+  },
+  {
+    id: 3,
+    title: "AI-Powered Sales Automation: Boost Your Efficiency by 300%",
+    excerpt: "How artificial intelligence is revolutionizing sales processes and what you need to implement today to stay ahead of the competition.",
+    slug: "ai-sales-automation-2025",
+    author: "Dr. Alex Thompson",
+    date: "October 18, 2025",
+    readTime: "6 min read",
+    category: "AI & Automation",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    views: "3.1K",
+    tags: ["AI", "Automation", "Sales"]
+  },
+  {
+    id: 4,
+    title: "The Psychology of Cold Calling: Turning Rejections into Opportunities",
+    excerpt: "Master the mental game of cold calling with proven psychological techniques that convert objections into appointments.",
+    slug: "psychology-cold-calling",
+    author: "Jessica Williams",
+    date: "October 15, 2025",
+    readTime: "5 min read",
+    category: "Sales Strategy",
+    image: "https://images.unsplash.com/photo-1584438784894-089f454kda99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    views: "1.2K",
+    tags: ["Cold Calling", "Psychology", "Sales"]
+  },
+  {
+    id: 5,
+    title: "Email Marketing Metrics That Actually Matter in 2025",
+    excerpt: "Stop tracking vanity metrics. Here are the key performance indicators that truly impact your bottom line and how to optimize them.",
+    slug: "email-marketing-metrics-2025",
+    author: "David Park",
+    date: "October 12, 2025",
+    readTime: "9 min read",
+    category: "Email Marketing",
+    image: "https://images.unsplash.com/photo-1601379327927-c60e6f7d7c38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    views: "2.7K",
+    tags: ["Email Marketing", "Analytics", "ROI"]
+  },
+  {
+    id: 6,
+    title: "Building a Scalable Outreach System That Grows With Your Business",
+    excerpt: "Learn how to create an outreach framework that adapts to your growing business needs without sacrificing personalization.",
+    slug: "scalable-outreach-system",
+    author: "Emily Zhang",
+    date: "October 10, 2025",
+    readTime: "7 min read",
+    category: "Outreach",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    views: "1.5K",
+    tags: ["Outreach", "Scaling", "Systems"]
+  }
 ];
 
 const categories = [
@@ -89,8 +145,8 @@ export default function BlogsPage() {
                   whileTap={{ scale: 0.95 }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     index === 0 
-                      ? 'bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white'
-                      : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white'
+                      ? 'bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white shadow-lg shadow-[#b45ecf]/25'
+                      : 'bg-white/10 text-white/70 hover:bg-white/20 hover:text-white backdrop-blur-sm'
                   }`}
                 >
                   {category}
@@ -108,14 +164,14 @@ export default function BlogsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-8 border border-[#b45ecf]/20"
+              className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-8 border border-[#b45ecf]/20 backdrop-blur-sm"
             >
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div className="space-y-6">
                   <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-sm font-medium">
                     Featured Post
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                     {blogPosts[0].title}
                   </h2>
                   <p className="text-white/70 text-lg leading-relaxed">
@@ -134,12 +190,23 @@ export default function BlogsPage() {
                       <Clock className="h-4 w-4" />
                       <span>{blogPosts[0].readTime}</span>
                     </div>
+                    <div className="flex items-center gap-1">
+                      <Eye className="h-4 w-4" />
+                      <span>{blogPosts[0].views}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {blogPosts[0].tags.map((tag, index) => (
+                      <span key={index} className="px-2 py-1 bg-white/10 rounded-lg text-white/70 text-xs">
+                        #{tag}
+                      </span>
+                    ))}
                   </div>
                   <Link href={`/blogs/${blogPosts[0].slug}`}>
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold transition-all"
+                      className="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold transition-all shadow-lg shadow-[#b45ecf]/25"
                     >
                       Read Full Article
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -148,9 +215,14 @@ export default function BlogsPage() {
                 </div>
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="relative h-64 lg:h-80 rounded-2xl bg-gradient-to-br from-[#b45ecf]/20 to-[#480056]/20 border border-[#b45ecf]/30 flex items-center justify-center"
+                  className="relative h-64 lg:h-80 rounded-2xl overflow-hidden border border-[#b45ecf]/30"
                 >
-                  <div className="text-4xl">📧</div>
+                  <img 
+                    src={blogPosts[0].image} 
+                    alt={blogPosts[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 </motion.div>
               </div>
             </motion.div>
@@ -171,26 +243,30 @@ export default function BlogsPage() {
               </motion.h2>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {blogPosts.slice(1).map((post, index) => (
+                {blogPosts.slice(1).map((post) => (
                   <motion.article
                     key={post.id}
                     variants={itemVariants}
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300"
+                    className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300 shadow-lg hover:shadow-[#b45ecf]/10"
                   >
-                    {/* Category Badge */}
-                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-xs font-medium mb-4">
-                      {post.category}
-                    </div>
-
                     {/* Post Image */}
-                    <div className="relative h-48 rounded-xl bg-gradient-to-br from-[#b45ecf]/20 to-[#480056]/20 border border-[#b45ecf]/20 mb-4 flex items-center justify-center">
-                      <div className="text-2xl">📊</div>
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-xs font-medium">
+                          {post.category}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Content */}
-                    <div className="space-y-4">
-                      <h3 className="text-xl font-bold text-white group-hover:text-[#b45ecf] transition-colors line-clamp-2">
+                    <div className="p-6 space-y-4">
+                      <h3 className="text-xl font-bold text-white group-hover:text-[#b45ecf] transition-colors line-clamp-2 leading-tight">
                         {post.title}
                       </h3>
                       
@@ -208,19 +284,41 @@ export default function BlogsPage() {
                           <Clock className="h-3 w-3" />
                           <span>{post.readTime}</span>
                         </div>
+                        <div className="flex items-center gap-1">
+                          <Eye className="h-3 w-3" />
+                          <span>{post.views}</span>
+                        </div>
                       </div>
 
-                      {/* Read More Button */}
-                      <Link href={`/blogs/${post.slug}`}>
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-1">
+                        {post.tags.slice(0, 2).map((tag, index) => (
+                          <span key={index} className="px-2 py-1 bg-white/5 rounded text-white/50 text-xs">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex items-center justify-between pt-2">
+                        <Link href={`/blogs/${post.slug}`}>
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex items-center gap-2 py-2 px-4 bg-white/10 hover:bg-[#b45ecf]/20 text-white rounded-lg text-sm font-medium transition-all"
+                          >
+                            Read More
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          </motion.button>
+                        </Link>
                         <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="group w-full flex items-center justify-center gap-2 py-2 px-4 bg-white/10 hover:bg-[#b45ecf]/20 text-white rounded-lg text-sm font-medium transition-all mt-4"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-all"
                         >
-                          Read More
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          <Share2 className="h-4 w-4" />
                         </motion.button>
-                      </Link>
+                      </div>
                     </div>
                   </motion.article>
                 ))}
@@ -235,28 +333,33 @@ export default function BlogsPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-4xl mx-auto"
           >
-            <div className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-12 border border-[#b45ecf]/20">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Stay Updated with Our Latest Insights
-              </h2>
-              <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-                Get the latest cold outreach strategies, AI automation tips, and sales insights delivered directly to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf]"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold"
-                >
-                  Subscribe
-                </motion.button>
+            <div className="bg-gradient-to-br from-[#480056]/30 to-[#19001d]/50 rounded-3xl p-12 border border-[#b45ecf]/20 backdrop-blur-sm">
+              <div className="text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  Stay Updated with Our Latest Insights
+                </h2>
+                <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+                  Get the latest cold outreach strategies, AI automation tips, and sales insights delivered directly to your inbox.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf] backdrop-blur-sm"
+                  />
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold shadow-lg shadow-[#b45ecf]/25"
+                  >
+                    Subscribe
+                  </motion.button>
+                </div>
+                <p className="text-white/50 text-sm mt-4">
+                  No spam. Unsubscribe at any time.
+                </p>
               </div>
             </div>
           </motion.div>
