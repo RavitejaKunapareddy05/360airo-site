@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Mail, Linkedin, Twitter, ArrowRight, Sparkles, Zap, Shield, Rocket, CheckCircle } from 'lucide-react';
+import { Mail, Linkedin, Twitter, ArrowRight, Sparkles, Zap, Shield, Rocket, CheckCircle, XCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Footer() {
@@ -13,15 +13,24 @@ export function Footer() {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
     setIsLoading(true);
+    setError('');
     
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      setIsLoading(false);
+      return;
+    }
+
     try {
-      // Send email to stellross2002@gmail.com
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
@@ -30,39 +39,30 @@ export function Footer() {
         body: JSON.stringify({ email }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Success
         setIsSubscribed(true);
         setEmail('');
+        setTimeout(() => setIsSubscribed(false), 5000);
         
-        // Hide success message after 3 seconds
-        setTimeout(() => {
-          setIsSubscribed(false);
-        }, 3000);
+        // Log success
+        console.log('✅ Subscription successful:', data);
       } else {
-        // Fallback: Open email client as backup
-        const subject = 'New Subscription Request';
-        const body = `New subscriber email: ${email}`;
-        window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-        
-        setIsSubscribed(true);
-        setEmail('');
-        
-        setTimeout(() => {
-          setIsSubscribed(false);
-        }, 3000);
+        // API returned error
+        throw new Error(data.error || 'Subscription failed. Please try again.');
       }
     } catch (error) {
-      // Fallback: Open email client if API fails
-      const subject = 'New Subscription Request';
-      const body = `New subscriber email: ${email}`;
-      window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+      console.error('❌ Subscription error:', error);
+      setError(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
       
-      setIsSubscribed(true);
-      setEmail('');
-      
+      // Fallback: Open email client
       setTimeout(() => {
-        setIsSubscribed(false);
-      }, 3000);
+        const subject = 'New 360airo Subscription';
+        const body = `Please add this email to your 360airo mailing list:\n\nEmail: ${email}\nDate: ${new Date().toLocaleString()}\n\nThank you!`;
+        window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+      }, 1000);
     } finally {
       setIsLoading(false);
     }
@@ -70,6 +70,10 @@ export function Footer() {
 
   const handleGetStarted = () => {
     window.location.href = 'https://app.360airo.com';
+  };
+
+  const clearError = () => {
+    setError('');
   };
 
   return (
@@ -104,7 +108,7 @@ export function Footer() {
 
       {/* Main Footer Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Newsletter Section - Reduced spacing */}
+        {/* Newsletter Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,20 +132,27 @@ export function Footer() {
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    clearError();
+                  }}
                   placeholder="Enter your email"
                   className="flex-1 px-4 py-2 rounded-lg bg-black/50 border border-[#b45ecf]/30 text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf] transition-colors text-sm"
                   required
+                  disabled={isLoading}
                 />
                 <motion.button
                   type="submit"
                   disabled={isLoading}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-5 py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold flex items-center space-x-2 disabled:opacity-50 text-sm"
+                  whileHover={{ scale: isLoading ? 1 : 1.05 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.95 }}
+                  className="px-5 py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm min-w-[120px] justify-center"
                 >
                   {isLoading ? (
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Subscribing...</span>
+                    </>
                   ) : (
                     <>
                       <span>Subscribe</span>
@@ -150,6 +161,31 @@ export function Footer() {
                   )}
                 </motion.button>
               </form>
+
+              {/* Error Message */}
+              <AnimatePresence>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 5, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -5, scale: 0.95 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-red-500/20 border border-red-500/30 rounded-lg p-3 backdrop-blur-sm"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2 text-red-400 text-sm">
+                        <XCircle className="h-4 w-4" />
+                        <span>{error}</span>
+                      </div>
+                      <button
+                        onClick={clearError}
+                        className="text-red-400 hover:text-red-300 transition-colors"
+                      >
+                        <XCircle className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Success Message */}
               <AnimatePresence>
@@ -162,7 +198,7 @@ export function Footer() {
                   >
                     <div className="flex items-center space-x-2 text-green-400 text-sm">
                       <CheckCircle className="h-4 w-4" />
-                      <span>Thank you for subscribing! We'll be in touch.</span>
+                      <span>Thank you for subscribing! Welcome to 360airo.</span>
                     </div>
                   </motion.div>
                 )}
@@ -171,7 +207,7 @@ export function Footer() {
           </div>
         </motion.div>
 
-        {/* Main Footer Grid - Reduced spacing */}
+        {/* Rest of footer content remains the same */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
           {/* Brand Section */}
           <div className="lg:col-span-2 space-y-4">
@@ -249,17 +285,11 @@ export function Footer() {
               Product
             </motion.h4>
             <ul className="space-y-2">
-              {[
-                { name: "Features", href: "/features" },
-                { name: "Pricing", href: "/pricing" },
-                { name: "AI SDR", href: "/ai-sdr-page" },
-                { name: "Integrations", href: "/airo-integrations" },
-                { name: "API", href: "#" }
-              ].map((link, index) => (
-                <motion.li key={link.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={link.href} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {['Features', 'Pricing', 'AI SDR', 'Integrations', 'API'].map((name, index) => (
+                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {link.name}
+                    {name}
                   </Link>
                 </motion.li>
               ))}
@@ -277,17 +307,11 @@ export function Footer() {
               Resources
             </motion.h4>
             <ul className="space-y-2">
-              {[
-                { name: "Blog", href: "/blogs" },
-                { name: "360 Academy", href: "/academy-page" },
-                { name: "Case Studies", href: "/airo-case-studies" },
-                { name: "Community", href: "/Community-Page" },
-                { name: "Help Center", href: "#" }
-              ].map((link, index) => (
-                <motion.li key={link.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={link.href} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {['Blog', '360 Academy', 'Case Studies', 'Community', 'Help Center'].map((name, index) => (
+                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {link.name}
+                    {name}
                   </Link>
                 </motion.li>
               ))}
@@ -305,17 +329,11 @@ export function Footer() {
               Company
             </motion.h4>
             <ul className="space-y-2">
-              {[
-                { name: "About Us", href: "#" },
-                { name: "Careers", href: "#" },
-                { name: "Privacy Policy", href: "/Privacy-Policy-Page" },
-                { name: "Anti-Spam Policy", href: "/anti-Spam-Policy" },
-                { name: "Terms of Service", href: "#" }
-              ].map((link, index) => (
-                <motion.li key={link.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={link.href} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {['About Us', 'Careers', 'Privacy Policy', 'Anti-Spam Policy', 'Terms of Service'].map((name, index) => (
+                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {link.name}
+                    {name}
                   </Link>
                 </motion.li>
               ))}
@@ -345,15 +363,26 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar - Reduced spacing */}
+        {/* Bottom Bar */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           className="border-t border-[#b45ecf]/20 pt-6"
         >
-          <div className="flex justify-center">
-            <div className="text-white/60 text-xs text-center">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-white/60 text-xs text-center md:text-left">
               © {currentYear} 360airo. All rights reserved.
+            </div>
+            <div className="flex space-x-6 text-xs">
+              <Link href="/privacy-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/anti-spam-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+                Anti-Spam Policy
+              </Link>
+              <Link href="/terms-of-service" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+                Terms of Service
+              </Link>
             </div>
           </div>
         </motion.div>

@@ -151,7 +151,6 @@ const OrbitalAnimation = () => {
             animate={{
               x: 120 * Math.cos((i * 60 * Math.PI) / 180),
               y: 120 * Math.sin((i * 60 * Math.PI) / 180),
-              rotate: -rotation * (i % 2 === 0 ? 1 : -1),
             }}
             style={{
               background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.darkPurple})`,
@@ -240,7 +239,6 @@ const AnimatedSteps = () => {
           whileHover={{ 
             y: -10, 
             scale: 1.05,
-            rotateY: 10
           }}
           transition={{ 
             duration: 0.6, 
@@ -266,8 +264,8 @@ const AnimatedSteps = () => {
           <div className="relative bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-8 border border-[#480056] group-hover:border-transparent transition-all duration-500 backdrop-blur-sm">
             {/* Animated Number */}
             <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
               transition={{ delay: index * 0.2, type: "spring" }}
               className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full flex items-center justify-center shadow-lg"
             >
@@ -278,7 +276,6 @@ const AnimatedSteps = () => {
             <motion.div
               whileHover={{ 
                 scale: 1.2,
-                rotate: 360 
               }}
               transition={{ duration: 0.6 }}
               className={`w-16 h-16 bg-gradient-to-r ${step.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
@@ -343,11 +340,10 @@ const FloatingBenefits = () => {
       {benefits.map((benefit, index) => (
         <motion.div
           key={benefit.title}
-          initial={{ opacity: 0, y: 30, rotateY: 90 }}
-          whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           whileHover={{ 
             y: -15,
-            rotateZ: index % 2 === 0 ? -2 : 2
           }}
           transition={{ 
             duration: 0.6, 
@@ -387,7 +383,6 @@ const FloatingBenefits = () => {
             <motion.div
               whileHover={{ 
                 scale: 1.1,
-                rotate: 360 
               }}
               transition={{ duration: 0.6 }}
               className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative z-10"
@@ -459,7 +454,7 @@ const WhoCanReferGrid = () => {
           className="bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-8 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 group"
         >
           <motion.div
-            whileHover={{ rotate: 360, scale: 1.1 }}
+            whileHover={{ scale: 1.1 }}
             transition={iconTransition}
             className="w-16 h-16 bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-2xl flex items-center justify-center mb-6 shadow-lg"
           >
@@ -527,7 +522,7 @@ const AnalyticsFeatures = () => {
           className="bg-gradient-to-br from-[#19001d] to-black rounded-2xl p-6 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 text-center group"
         >
           <motion.div
-            whileHover={{ rotate: 360, scale: 1.1 }}
+            whileHover={{ scale: 1.1 }}
             transition={iconTransition}
             className="w-14 h-14 bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-xl flex items-center justify-center mb-4 mx-auto shadow-lg"
           >
