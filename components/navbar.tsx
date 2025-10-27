@@ -29,7 +29,8 @@ import {
   Users2,
   PlayCircle,
   CreditCard,
-  Share2
+  Share2,
+  Database
 } from 'lucide-react';
 
 const features = [
@@ -138,21 +139,29 @@ const features = [
     tag: 'Demo'
   },
   { 
-    name: 'Pricing', 
-    href: '/features/360airo-pricing',
-    description: 'Flexible pricing plans for businesses of all sizes',
-    icon: CreditCard,
-    color: 'from-yellow-500 to-orange-400',
-    tag: 'Plans'
-  },
-  { 
     name: 'Multi-Channel', 
     href: '/features/multi-channel-platform',
     description: 'Reach customers across multiple channels seamlessly',
     icon: Share2,
     color: 'from-indigo-500 to-purple-400',
     tag: 'Omnichannel'
-  }
+  },
+  {
+    name: 'Team Collaboration',
+    href: '/features/team-collaboration',
+    description: 'Work smarter together with unified team workspace',
+    icon: Users2,
+    color: 'from-purple-500 to-pink-400',
+    tag: 'New'
+},
+{
+    name: 'Prospect Management',
+    href: '/features/prospect-management',
+    description: 'Centralize, organize, and track all your leads efficiently',
+    icon: Database,
+    color: 'from-indigo-500 to-purple-400',
+    tag: 'New'
+}
 ];
 
 export function Navbar() {
@@ -210,6 +219,16 @@ export function Navbar() {
     }
   }, []);
 
+  // Handle login redirect
+  const handleLogin = useCallback(() => {
+    window.location.href = 'https://app.360airo.com';
+  }, []);
+
+  // Handle get started redirect
+  const handleGetStarted = useCallback(() => {
+    window.location.href = 'https://app.360airo.com';
+  }, []);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
@@ -234,20 +253,16 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Enhanced Logo */}
+            {/* Enhanced Logo - Rotation Removed */}
             <Link href="/" className="flex items-center space-x-3 group">
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="relative"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] rounded-xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
                 <div className="relative w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                    className="w-full h-full relative"
-                  >
+                  <div className="w-full h-full relative">
                     <Image
                       src="/favicon_360airo__1_-removebg-preview.png"
                       alt="360airo Logo"
@@ -255,7 +270,7 @@ export function Navbar() {
                       className="object-contain"
                       priority
                     />
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
               <motion.div
@@ -427,7 +442,7 @@ export function Navbar() {
                               <Button 
                                 size="sm" 
                                 className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] hover:shadow-lg text-white text-sm px-4 py-2"
-                                onClick={() => setFeaturesOpen(false)}
+                                onClick={handleGetStarted}
                               >
                                 Start Free Trial
                               </Button>
@@ -467,6 +482,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300"
+                onClick={handleLogin}
               >
                 Login
               </Button>
@@ -474,7 +490,10 @@ export function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#C084FC] hover:shadow-2xl hover:shadow-purple-500/25 text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-300 group">
+                <Button 
+                  className="bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#C084FC] hover:shadow-2xl hover:shadow-purple-500/25 text-white font-semibold px-6 py-2.5 rounded-xl transition-all duration-300 group"
+                  onClick={handleGetStarted}
+                >
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -574,10 +593,14 @@ export function Navbar() {
                     <Button 
                       variant="outline" 
                       className="w-full border-[#8B5CF6]/30 text-white hover:bg-white/10 transition-all duration-300"
+                      onClick={handleLogin}
                     >
                       Login
                     </Button>
-                    <Button className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white font-semibold">
+                    <Button 
+                      className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white font-semibold"
+                      onClick={handleGetStarted}
+                    >
                       Get Started Free
                     </Button>
                   </div>
