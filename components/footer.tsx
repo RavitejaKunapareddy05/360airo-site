@@ -20,21 +20,56 @@ export function Footer() {
 
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      // Send email to stellross2002@gmail.com
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setIsSubscribed(true);
+        setEmail('');
+        
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setIsSubscribed(false);
+        }, 3000);
+      } else {
+        // Fallback: Open email client as backup
+        const subject = 'New Subscription Request';
+        const body = `New subscriber email: ${email}`;
+        window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+        
+        setIsSubscribed(true);
+        setEmail('');
+        
+        setTimeout(() => {
+          setIsSubscribed(false);
+        }, 3000);
+      }
+    } catch (error) {
+      // Fallback: Open email client if API fails
+      const subject = 'New Subscription Request';
+      const body = `New subscriber email: ${email}`;
+      window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+      
       setIsSubscribed(true);
-      setIsLoading(false);
       setEmail('');
       
-      // Hide success message after 3 seconds
       setTimeout(() => {
         setIsSubscribed(false);
       }, 3000);
-    }, 1000);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGetStarted = () => {
-    router.push('/');
+    window.location.href = 'https://app.360airo.com';
   };
 
   return (
@@ -127,7 +162,7 @@ export function Footer() {
                   >
                     <div className="flex items-center space-x-2 text-green-400 text-sm">
                       <CheckCircle className="h-4 w-4" />
-                      <span>Thank you for subscribing!</span>
+                      <span>Thank you for subscribing! We'll be in touch.</span>
                     </div>
                   </motion.div>
                 )}
