@@ -71,7 +71,6 @@ const AIBrainAnimation = () => {
         className="absolute inset-4 border-2 border-[#3B82F6]/50 rounded-full"
         animate={{
           scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
         }}
         transition={{
           duration: 4,
@@ -146,7 +145,7 @@ const WorkflowVisualization = () => {
           >
             <motion.div
               className={`w-20 h-20 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5 }}
             >
               <step.icon className="h-8 w-8 text-white" />
@@ -182,13 +181,9 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
       />
       
       <div className="relative z-10">
-        <motion.div
-          animate={{ rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="w-12 h-12 bg-gradient-to-br from-[#ad60f8] to-[#3B82F6] rounded-xl flex items-center justify-center mb-4"
-        >
+        <div className="w-12 h-12 bg-gradient-to-br from-[#ad60f8] to-[#3B82F6] rounded-xl flex items-center justify-center mb-4">
           <Icon className="h-6 w-6 text-white" />
-        </motion.div>
+        </div>
         
         <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
         <p className="text-white/70 mb-4 leading-relaxed">{description}</p>
@@ -202,10 +197,7 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
               transition={{ delay: delay + index * 0.1 }}
               className="flex items-center space-x-2 text-white/80 text-sm"
             >
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                className="w-1.5 h-1.5 bg-white rounded-full"
-              />
+              <div className="w-1.5 h-1.5 bg-white rounded-full" />
               <span>{feature}</span>
             </motion.div>
           ))}
@@ -360,13 +352,9 @@ const BenefitsGrid = () => {
           whileHover={{ y: -5, scale: 1.02 }}
           className="bg-[#1A1A1A] rounded-2xl border border-[#ad60f8]/30 p-6 hover:border-[#ad60f8]/50 transition-all duration-300"
         >
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 360 }}
-            transition={{ duration: 0.5 }}
-            className="w-12 h-12 bg-gradient-to-br from-[#ad60f8] to-[#3B82F6] rounded-xl flex items-center justify-center mb-4"
-          >
+          <div className="w-12 h-12 bg-gradient-to-br from-[#ad60f8] to-[#3B82F6] rounded-xl flex items-center justify-center mb-4">
             <benefit.icon className="h-6 w-6 text-white" />
-          </motion.div>
+          </div>
           <h4 className="text-white font-bold mb-2">{benefit.title}</h4>
           <p className="text-white/70 text-sm leading-relaxed">{benefit.description}</p>
         </motion.div>
@@ -405,7 +393,6 @@ const HeroSection = () => {
                 Math.random() * 200 - 100,
                 Math.random() * 100 - 50,
               ],
-              rotate: [0, 180, 360],
             }}
             transition={{
               duration: 15 + Math.random() * 10,
@@ -415,7 +402,7 @@ const HeroSection = () => {
           >
             <div className={`w-4 h-4 ${
               i % 3 === 0 ? 'bg-[#ad60f8]/30 rounded-full' :
-              i % 3 === 1 ? 'bg-[#3B82F6]/30 rotate-45' :
+              i % 3 === 1 ? 'bg-[#3B82F6]/30' :
               'bg-white/30 rounded-lg'
             }`} />
           </motion.div>
@@ -467,13 +454,9 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="inline-flex items-center space-x-3 bg-[#1A1A1A] backdrop-blur-sm rounded-2xl px-4 py-3 border border-[#ad60f8]/40 mb-8"
         >
-          <motion.div
-            animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="w-6 h-6 bg-gradient-to-r from-[#ad60f8] to-[#3B82F6] rounded-full flex items-center justify-center"
-          >
+          <div className="w-6 h-6 bg-gradient-to-r from-[#ad60f8] to-[#3B82F6] rounded-full flex items-center justify-center">
             <Zap className="h-3 w-3 text-white" />
-          </motion.div>
+          </div>
           <span className="text-white/80 font-medium text-sm">AI Automation Platform</span>
         </motion.div>
 
@@ -728,17 +711,7 @@ export default function AIAutomationPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </motion.div>
-
             </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="pt-8"
-            >
-
-            </motion.div>
           </motion.div>
         </div>
       </section>

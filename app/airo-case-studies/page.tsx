@@ -62,7 +62,7 @@ const FloatingShapes = () => {
           ease: "easeInOut",
           delay: 2
         }}
-        className="absolute top-3/4 right-1/3 w-80 h-80 bg-gradient-to-r from-[#480056] to-[#19001d] rounded-full opacity-15 blur-3xl"
+        className="absolute top-3/4 right-1/3 w-80 h-80 bg-gradient-to-r from-[#480056] to-[#000000] rounded-full opacity-15 blur-3xl"
       />
       <motion.div
         animate={{
@@ -76,7 +76,7 @@ const FloatingShapes = () => {
           ease: "easeInOut",
           delay: 1
         }}
-        className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-gradient-to-r from-[#19001d] to-[#b45ecf] rounded-full opacity-10 blur-3xl"
+        className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-gradient-to-r from-[#000000] to-[#b45ecf] rounded-full opacity-10 blur-3xl"
       />
 
       {/* Floating hexagons */}
@@ -213,7 +213,7 @@ export default function CaseStudies() {
       solution: "When they adopted 360Airo, the centralized dashboard allowed them to manage all outreach channels under one roof. The platform's AI analytics gave them visibility into which subject lines, sequences, and send times worked best. They were also able to create audience segments based on industry, title, and engagement score, resulting in highly focused campaigns.",
       results: "Within six weeks, the agency increased lead conversion rates by 38 percent and reduced bounce rates by half. The automation features helped the small team operate at enterprise-level efficiency.",
       quote: "We didn't just automate our outreach. We gained clarity. 360Airo gave us the visibility and control we never had before.",
-      gradient: "from-[#480056] to-[#19001d]",
+      gradient: "from-[#480056] to-[#000000]",
       delay: 0.2,
       metrics: [
         { metric: "38%", label: "Lead Conversion Increase" },
@@ -231,7 +231,7 @@ export default function CaseStudies() {
       solution: "After implementing 360Airo, the firm automated time-based follow-ups, ensuring every lead received a timely and personalized response. The team also leveraged LinkedIn integrations to maintain engagement with key decision-makers.",
       results: "By the second month, the firm reported a 50 percent reduction in response time and an overall 40 percent increase in booked consultations. The AI-assisted scheduling tool ensured that prospects never fell through the cracks again.",
       quote: "360Airo helped us humanize automation. Every lead now feels attended to, even before we manually reach out.",
-      gradient: "from-[#b45ecf] to-[#19001d]",
+      gradient: "from-[#b45ecf] to-[#000000]",
       delay: 0.4,
       metrics: [
         { metric: "50%", label: "Faster Response Time" },
@@ -271,13 +271,13 @@ export default function CaseStudies() {
       icon: Brain,
       title: "Personalize at Scale",
       description: "Use AI-driven insights to tailor every message. Whether you're reaching out to a hundred prospects or a thousand, your outreach still feels personal.",
-      gradient: "from-[#480056] to-[#19001d]"
+      gradient: "from-[#480056] to-[#000000]"
     },
     {
       icon: BarChart3,
       title: "Analyze, Adapt, and Improve",
       description: "360Airo's analytics dashboard helps you understand what's working and what's not. You can continuously refine campaigns based on real-time data.",
-      gradient: "from-[#b45ecf] to-[#19001d]"
+      gradient: "from-[#b45ecf] to-[#000000]"
     },
     {
       icon: Shield,
@@ -294,7 +294,7 @@ export default function CaseStudies() {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#19001d] relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
         <Navbar />
       {/* Enhanced background elements */}
       <ParticlesBackground />
@@ -302,7 +302,7 @@ export default function CaseStudies() {
       
       {/* Animated gradient overlay */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-[#19001d] via-[#480056] to-[#b45ecf]/20"
+        className="absolute inset-0 bg-gradient-to-br from-black via-[#480056] to-[#b45ecf]/20"
         style={{ y: backgroundY }}
         animate={{
           backgroundPosition: ['0% 0%', '100% 100%'],
@@ -409,7 +409,7 @@ export default function CaseStudies() {
             >
               <Button 
                 size="lg" 
-                className="bg-white text-[#19001d] hover:bg-white/90 hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group relative overflow-hidden"
+                className="bg-white text-black hover:bg-white/90 hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group relative overflow-hidden"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
@@ -447,7 +447,7 @@ export default function CaseStudies() {
       </section>
 
       {/* Challenge & Opportunity Section */}
-      <section className="py-20 bg-[#19001d]/80 backdrop-blur-sm border-y border-white/10 relative overflow-hidden">
+      <section className="py-20 bg-black/80 backdrop-blur-sm border-y border-white/10 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -533,7 +533,7 @@ export default function CaseStudies() {
       </section>
 
       {/* Case Studies Showcase */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-20 bg-black relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -724,7 +724,7 @@ export default function CaseStudies() {
       </section>
 
       {/* What These Case Studies Show Section */}
-      <section className="py-20 bg-gradient-to-br from-[#19001d] to-[#480056] relative overflow-hidden">
+      <section className="py-20 bg-black relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -754,7 +754,7 @@ export default function CaseStudies() {
       </section>
 
       {/* Key Insights Section */}
-      <section className="py-20 bg-[#19001d] relative overflow-hidden">
+      <section className="py-20 bg-black relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -826,7 +826,7 @@ export default function CaseStudies() {
 
       {/* Final CTA Section */}
       <section className="py-20 bg-gradient-to-br from-[#480056] to-[#b45ecf] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#19001d]/40" />
+        <div className="absolute inset-0 bg-black/40" />
         <ParticlesBackground />
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <motion.div
@@ -846,7 +846,7 @@ export default function CaseStudies() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="w-20 h-20 bg-gradient-to-br from-white to-[#b45ecf] rounded-2xl flex items-center justify-center text-[#19001d] mb-8 mx-auto"
+              className="w-20 h-20 bg-gradient-to-br from-white to-[#b45ecf] rounded-2xl flex items-center justify-center text-black mb-8 mx-auto"
             >
               <Star className="w-10 h-10" />
             </motion.div>
@@ -872,7 +872,7 @@ export default function CaseStudies() {
             >
               <Button 
                 size="lg" 
-                className="bg-white text-[#19001d] hover:bg-white/90 hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group relative overflow-hidden"
+                className="bg-white text-black hover:bg-white/90 hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group relative overflow-hidden"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"

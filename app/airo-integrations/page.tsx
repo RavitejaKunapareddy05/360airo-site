@@ -27,11 +27,10 @@ import {
   Rocket,
   Brain,
   Eye,
-  Wifi,
-  WifiOff,
-  RefreshCw,
   Code,
-  Database
+  Database,
+  ShoppingCart,
+  Key
 } from "lucide-react";
 
 export default function Integrations() {
@@ -41,15 +40,7 @@ export default function Integrations() {
     offset: ["start start", "end end"]
   });
 
-  const [isOnline, setIsOnline] = useState(true);
   const [activeIntegration, setActiveIntegration] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsOnline(prev => !prev);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -67,42 +58,48 @@ export default function Integrations() {
       title: "Connect Your Tools",
       description: "Start by logging into your 360Airo account and selecting the tools you want to integrate. From CRMs and analytics to email marketing and automation platforms, the setup takes just a few clicks.",
       icon: Link2,
-      color: "#908335"
+      color: "#b45ecf",
+      iconColor: "#b45ecf"
     },
     {
       step: "02",
       title: "Authenticate Securely",
       description: "Each integration uses encrypted API connections. You authenticate your account securely, ensuring that only you have control over what gets shared and when.",
       icon: Lock,
-      color: "#b45ecf"
+      color: "#10b981",
+      iconColor: "#10b981"
     },
     {
       step: "03",
       title: "Map Your Data Fields",
       description: "Choose what data flows where. Map lead names, contact details, engagement stats, or any custom field between 360Airo and your chosen tool.",
       icon: GitBranch,
-      color: "#480056"
+      color: "#8b5cf6",
+      iconColor: "#8b5cf6"
     },
     {
       step: "04",
       title: "Automate and Sync",
       description: "Once connected, the system automatically syncs information in real time. Leads generated through one tool appear instantly in your CRM, campaign performance reflects in analytics dashboards, and updates happen continuously.",
       icon: Cloud,
-      color: "#908335"
+      color: "#06b6d4",
+      iconColor: "#06b6d4"
     },
     {
       step: "05",
       title: "Track and Optimize",
       description: "360Airo lets you monitor all integrations in one place. You can check connection status, control sync intervals, and view detailed logs to ensure everything runs smoothly.",
       icon: BarChart3,
-      color: "#b45ecf"
+      color: "#f59e0b",
+      iconColor: "#f59e0b"
     },
     {
       step: "06",
       title: "Grow at Scale",
       description: "As your business expands, new integrations can be added anytime without disrupting your existing setup. The system is flexible enough to grow with your operations.",
       icon: Rocket,
-      color: "#480056"
+      color: "#ef4444",
+      iconColor: "#ef4444"
     }
   ];
 
@@ -111,37 +108,43 @@ export default function Integrations() {
       icon: Eye,
       title: "Unified Customer View",
       description: "Say goodbye to scattered data. Every integration feeds into a single dashboard that gives you a full view of every customer touchpoint — from the first interaction to the final conversion.",
-      color: "#908335"
+      color: "#b45ecf",
+      iconColor: "#b45ecf"
     },
     {
       icon: Brain,
       title: "Smarter Decisions with Real-Time Data",
       description: "When systems talk to each other instantly, you can make faster, more accurate decisions. Every change, every update, and every engagement is visible as it happens.",
-      color: "#b45ecf"
+      color: "#10b981",
+      iconColor: "#10b981"
     },
     {
       icon: Target,
       title: "Better Campaign Performance",
       description: "With all your tools connected, you can design campaigns that adapt dynamically. Target the right leads at the right time using insights gathered across multiple channels.",
-      color: "#480056"
+      color: "#8b5cf6",
+      iconColor: "#8b5cf6"
     },
     {
       icon: Zap,
       title: "Reduced Manual Work",
       description: "Automation eliminates repetitive tasks. No more downloading CSV files or switching between tools to compare results. Everything updates automatically, giving your team more time to focus on creativity and strategy.",
-      color: "#908335"
+      color: "#06b6d4",
+      iconColor: "#06b6d4"
     },
     {
       icon: Users,
       title: "Improved Collaboration",
       description: "Marketing, sales, and analytics teams can finally operate on the same data. Everyone has access to the same information, ensuring no lead is missed and no campaign goes off-track.",
-      color: "#b45ecf"
+      color: "#f59e0b",
+      iconColor: "#f59e0b"
     },
     {
       icon: Server,
       title: "Built for Scalability",
       description: "Whether you're a small business automating simple lead flows or a large enterprise managing thousands of records daily, 360Airo scales effortlessly to handle higher sync loads and growing data volumes.",
-      color: "#480056"
+      color: "#ef4444",
+      iconColor: "#ef4444"
     }
   ];
 
@@ -150,37 +153,43 @@ export default function Integrations() {
       category: "CRM Systems",
       tools: ["Salesforce", "HubSpot", "Zoho", "Pipedrive", "Freshworks"],
       icon: Users,
-      color: "#908335"
+      color: "#b45ecf",
+      iconColor: "#b45ecf"
     },
     {
       category: "Email Marketing",
       tools: ["Mailchimp", "ActiveCampaign", "Constant Contact", "SendGrid", "ConvertKit"],
       icon: Mail,
-      color: "#b45ecf"
+      color: "#10b981",
+      iconColor: "#10b981"
     },
     {
       category: "Analytics Platforms",
       tools: ["Google Analytics", "Google Data Studio", "Mixpanel", "Amplitude", "Hotjar"],
       icon: BarChart3,
-      color: "#480056"
+      color: "#8b5cf6",
+      iconColor: "#8b5cf6"
     },
     {
       category: "Collaboration Tools",
       tools: ["Slack", "Trello", "Asana", "Microsoft Teams", "Notion"],
       icon: MessageSquare,
-      color: "#908335"
+      color: "#06b6d4",
+      iconColor: "#06b6d4"
     },
     {
       category: "Lead Generation",
       tools: ["Unbounce", "Typeform", "Facebook Lead Ads", "LinkedIn Lead Gen", "Calendly"],
       icon: Target,
-      color: "#b45ecf"
+      color: "#f59e0b",
+      iconColor: "#f59e0b"
     },
     {
       category: "E-commerce",
       tools: ["Shopify", "WooCommerce", "BigCommerce", "Magento", "Stripe"],
       icon: ShoppingCart,
-      color: "#480056"
+      color: "#ef4444",
+      iconColor: "#ef4444"
     }
   ];
 
@@ -189,64 +198,35 @@ export default function Integrations() {
       feature: "Encrypted API Connections",
       description: "All data transfers use industry-standard encryption protocols",
       icon: Lock,
-      color: "#908335"
+      color: "#b45ecf",
+      iconColor: "#b45ecf"
     },
     {
       feature: "GDPR & CCPA Compliant",
       description: "Full compliance with international data protection standards",
       icon: Shield,
-      color: "#b45ecf"
+      color: "#10b981",
+      iconColor: "#10b981"
     },
     {
       feature: "Tokenized Authentication",
       description: "No sensitive credentials stored, only secure access tokens",
       icon: Key,
-      color: "#480056"
+      color: "#8b5cf6",
+      iconColor: "#8b5cf6"
     },
     {
       feature: "Regular Security Audits",
       description: "Continuous monitoring and compliance checks for maximum safety",
       icon: Eye,
-      color: "#908335"
+      color: "#06b6d4",
+      iconColor: "#06b6d4"
     }
   ];
-
-  const ConnectionStatus = () => (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="fixed top-4 right-4 z-50"
-    >
-      <motion.div
-        animate={{ 
-          scale: isOnline ? [1, 1.2, 1] : [1, 0.8, 1],
-          backgroundColor: isOnline ? "#10b981" : "#ef4444"
-        }}
-        transition={{ duration: 0.5 }}
-        className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 text-white text-sm font-semibold shadow-lg backdrop-blur-sm"
-      >
-        <motion.div
-          animate={{ rotate: isOnline ? 0 : 360 }}
-          transition={{ duration: 1 }}
-        >
-          {isOnline ? <Wifi className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
-        </motion.div>
-        <span>{isOnline ? "All Systems Connected" : "Reconnecting..."}</span>
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="w-4 h-4"
-        >
-          <RefreshCw className="w-4 h-4" />
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  );
 
   return (
     <div ref={containerRef} className="min-h-screen bg-black relative overflow-hidden">
         <Navbar />
-      <ConnectionStatus />
       
       {/* Animated Background Elements */}
       <motion.div
@@ -259,7 +239,7 @@ export default function Integrations() {
           repeat: Infinity,
           ease: "linear"
         }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#908335]/20 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#b45ecf]/20 rounded-full blur-3xl"
       />
       <motion.div
         animate={{
@@ -272,7 +252,7 @@ export default function Integrations() {
           ease: "linear",
           delay: 5
         }}
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#b45ecf]/20 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#10b981]/20 rounded-full blur-3xl"
       />
       <motion.div
         animate={{
@@ -285,7 +265,7 @@ export default function Integrations() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#480056]/30 rounded-full blur-3xl"
+        className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#8b5cf6]/30 rounded-full blur-3xl"
       />
 
       {/* Hero Section */}
@@ -302,7 +282,7 @@ export default function Integrations() {
               animate={{ rotate: 360 }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             >
-              <Link2 className="w-5 h-5 text-[#908335] mr-3" />
+              <Link2 className="w-5 h-5 text-[#b45ecf] mr-3" />
             </motion.div>
             <span className="text-white/90 font-semibold">360Airo Integrations</span>
           </motion.div>
@@ -313,7 +293,7 @@ export default function Integrations() {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
           >
-            <span className="bg-gradient-to-r from-[#908335] via-[#b45ecf] to-[#480056] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#b45ecf] via-[#10b981] to-[#8b5cf6] bg-clip-text text-transparent">
               Integrations
             </span>
           </motion.h1>
@@ -327,10 +307,10 @@ export default function Integrations() {
             Connect Everything.{" "}
             <motion.span
               animate={{ 
-                color: ["#908335", "#b45ecf", "#480056", "#908335"],
+                color: ["#b45ecf", "#10b981", "#8b5cf6", "#b45ecf"],
               }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="bg-gradient-to-r from-[#908335] to-[#b45ecf] bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-[#b45ecf] to-[#10b981] bg-clip-text text-transparent"
             >
               Simplify Marketing.
             </motion.span>
@@ -366,7 +346,7 @@ export default function Integrations() {
             >
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-[#908335] to-[#b45ecf] hover:from-[#a09a45] hover:to-[#c46ed9] text-white hover:shadow-2xl hover:shadow-[#908335]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group"
+                className="bg-gradient-to-r from-[#b45ecf] to-[#10b981] hover:from-[#c46ed9] hover:to-[#34d399] text-white hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-lg px-8 py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group"
               >
                 <motion.div
                   animate={{ rotate: [0, 360] }}
@@ -386,7 +366,7 @@ export default function Integrations() {
               <Button 
                 variant="outline"
                 size="lg" 
-                className="border-[#908335] text-[#908335] hover:bg-[#908335]/10 hover:border-[#b45ecf] text-lg px-8 py-6 rounded-full font-semibold backdrop-blur-sm transition-all duration-300 group"
+                className="border-[#b45ecf] text-[#b45ecf] hover:bg-[#b45ecf]/10 hover:border-[#10b981] text-lg px-8 py-6 rounded-full font-semibold backdrop-blur-sm transition-all duration-300 group"
               >
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
@@ -412,7 +392,7 @@ export default function Integrations() {
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               How Integration{" "}
-              <span className="bg-gradient-to-r from-[#908335] to-[#b45ecf] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#b45ecf] to-[#10b981] bg-clip-text text-transparent">
                 Actually Works
               </span>
             </h2>
@@ -425,21 +405,21 @@ export default function Integrations() {
               transition={{ duration: 0.8 }}
               className="space-y-6"
             >
-              <div className="p-6 rounded-2xl bg-red-500/10 border border-red-500/20 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-[#ef4444]/10 border border-[#ef4444]/20 backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white mb-3">The Challenge</h3>
                 <p className="text-white/80 leading-relaxed">
                   Leads live in one platform, emails in another, analytics somewhere else, and before you know it, valuable time is lost moving data manually between disconnected systems.
                 </p>
               </div>
               
-              <div className="p-6 rounded-2xl bg-green-500/10 border border-green-500/20 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-[#10b981]/10 border border-[#10b981]/20 backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white mb-3">The Solution</h3>
                 <p className="text-white/80 leading-relaxed">
                   360Airo integrations create a two-way communication bridge between systems using secure APIs. This means your CRM, automation tools, and analytics platforms can send and receive information in real time without manual exports.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-[#06b6d4]/10 border border-[#06b6d4]/20 backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white mb-3">Intelligent Automation</h3>
                 <p className="text-white/80 leading-relaxed">
                   This isn't just a sync. It's an intelligent automation process designed to maintain consistency, reduce human error, and make every piece of data actionable the moment it enters your system.
@@ -453,7 +433,7 @@ export default function Integrations() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-[#908335]/20 to-[#b45ecf]/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
+              <div className="bg-gradient-to-br from-[#b45ecf]/20 to-[#10b981]/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
                 <div className="text-center mb-8">
                   <Cpu className="w-16 h-16 text-white mx-auto mb-4" />
                   <h4 className="text-2xl font-bold text-white">Real-Time Data Flow</h4>
@@ -511,11 +491,11 @@ export default function Integrations() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -8 }}
                 animate={activeIntegration === index ? { scale: 1.02 } : {}}
-                className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group border border-[#908335]/20 hover:border-[#908335]/40 relative overflow-hidden"
+                className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group border border-white/10 hover:border-white/20 relative overflow-hidden"
               >
                 <motion.div
                   animate={{ 
-                    backgroundColor: [step.color, "#b45ecf", step.color],
+                    backgroundColor: [step.color, "#10b981", step.color],
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                   className="absolute inset-0 opacity-5"
@@ -529,13 +509,13 @@ export default function Integrations() {
                         rotate: activeIntegration === index ? [0, 10, 0] : 0
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
-                      className="w-14 h-14 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center text-white text-lg font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 border border-[#908335]/30"
+                      className="w-14 h-14 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center text-white text-lg font-bold shadow-lg group-hover:shadow-xl transition-all duration-300 border border-white/20"
                     >
                       {step.step}
                     </motion.div>
                     <motion.div
                       animate={{ 
-                        color: step.color,
+                        color: step.iconColor,
                         scale: activeIntegration === index ? [1, 1.3, 1] : 1
                       }}
                       transition={{ duration: 2, repeat: Infinity }}
@@ -543,7 +523,7 @@ export default function Integrations() {
                       <step.icon className="w-8 h-8" />
                     </motion.div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#908335] group-hover:to-[#b45ecf] group-hover:bg-clip-text">
+                  <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#b45ecf] group-hover:to-[#10b981] group-hover:bg-clip-text">
                     {step.title}
                   </h3>
                   <p className="text-gray-400 leading-relaxed">
@@ -585,7 +565,7 @@ export default function Integrations() {
               >
                 <motion.div
                   animate={{ 
-                    backgroundColor: [benefit.color, "#b45ecf", benefit.color],
+                    backgroundColor: [benefit.color, "#10b981", benefit.color],
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                   className="absolute inset-0 opacity-10"
@@ -597,9 +577,9 @@ export default function Integrations() {
                       rotate: [0, 5, 0]
                     }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="w-14 h-14 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg border border-[#908335]/30"
+                    className="w-14 h-14 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg border border-white/20"
                   >
-                    <benefit.icon className="w-6 h-6" style={{ color: benefit.color }} />
+                    <benefit.icon className="w-6 h-6" style={{ color: benefit.iconColor }} />
                   </motion.div>
                   <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-blue-200 group-hover:bg-clip-text">
                     {benefit.title}
@@ -655,7 +635,7 @@ export default function Integrations() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-[#908335]/20 to-[#b45ecf]/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
+              <div className="bg-gradient-to-br from-[#b45ecf]/20 to-[#10b981]/20 rounded-3xl p-8 backdrop-blur-sm border border-white/10">
                 <div className="text-center mb-8">
                   <Code className="w-16 h-16 text-white mx-auto mb-4" />
                   <h4 className="text-2xl font-bold text-white">Technical Features</h4>
@@ -715,7 +695,7 @@ export default function Integrations() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 text-center hover:bg-white/15 transition-all duration-500 group"
               >
-                <feature.icon className="w-12 h-12 text-white mb-4 mx-auto group-hover:scale-110 transition-transform" style={{ color: feature.color }} />
+                <feature.icon className="w-12 h-12 text-white mb-4 mx-auto group-hover:scale-110 transition-transform" style={{ color: feature.iconColor }} />
                 <h3 className="text-lg font-bold text-white mb-3">{feature.feature}</h3>
                 <p className="text-white/70 text-sm">{feature.description}</p>
               </motion.div>
@@ -760,12 +740,12 @@ export default function Integrations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group border border-gray-800"
+                className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 group border border-white/10"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 border border-[#908335]/30">
-                  <category.icon className="w-8 h-8" style={{ color: category.color }} />
+                <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/20">
+                  <category.icon className="w-8 h-8" style={{ color: category.iconColor }} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#908335] group-hover:to-[#b45ecf] group-hover:bg-clip-text">
+                <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#b45ecf] group-hover:to-[#10b981] group-hover:bg-clip-text">
                   {category.category}
                 </h3>
                 <div className="space-y-2">
@@ -817,7 +797,7 @@ export default function Integrations() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="w-20 h-20 bg-gradient-to-br from-[#908335] to-[#b45ecf] rounded-2xl flex items-center justify-center text-white mb-8 mx-auto"
+              className="w-20 h-20 bg-gradient-to-br from-[#b45ecf] to-[#10b981] rounded-2xl flex items-center justify-center text-white mb-8 mx-auto"
             >
               <Brain className="w-10 h-10" />
             </motion.div>
@@ -845,13 +825,13 @@ export default function Integrations() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-12 border border-[#908335]/20 relative overflow-hidden"
+            className="bg-gradient-to-br from-gray-900/50 to-black/50 rounded-3xl p-12 border border-white/10 relative overflow-hidden"
           >
             <motion.div
               animate={{ 
                 scale: [1, 1.1, 1],
                 rotate: [0, 360, 0],
-                backgroundColor: ["#908335", "#b45ecf", "#480056", "#908335"]
+                backgroundColor: ["#b45ecf", "#10b981", "#8b5cf6", "#b45ecf"]
               }}
               transition={{ 
                 duration: 6,
@@ -888,7 +868,7 @@ export default function Integrations() {
             >
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-[#908335] to-[#b45ecf] hover:from-[#a09a45] hover:to-[#c46ed9] text-white text-lg px-8 py-6 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="bg-gradient-to-r from-[#b45ecf] to-[#10b981] hover:from-[#c46ed9] hover:to-[#34d399] text-white text-lg px-8 py-6 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 group"
               >
                 <motion.div
                   animate={{ rotate: [0, 360] }}
@@ -908,28 +888,3 @@ export default function Integrations() {
     </div>
   );
 }
-
-// Add missing icon components
-const ShoppingCart = ({ className }: { className?: string }) => (
-  <motion.svg 
-    className={className} 
-    fill="none" 
-    stroke="currentColor" 
-    viewBox="0 0 24 24"
-    whileHover={{ scale: 1.1, rotate: 5 }}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5.5M7 13l2.5 5.5m0 0L17 21" />
-  </motion.svg>
-);
-
-const Key = ({ className }: { className?: string }) => (
-  <motion.svg 
-    className={className} 
-    fill="none" 
-    stroke="currentColor" 
-    viewBox="0 0 24 24"
-    whileHover={{ scale: 1.1, rotate: -5 }}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-  </motion.svg>
-);

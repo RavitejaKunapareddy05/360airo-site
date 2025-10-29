@@ -170,8 +170,6 @@ const AnimatedCRMDashboard = () => {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-4">
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                 className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg"
               >
                 <Users className="h-6 w-6 text-white" />
@@ -210,8 +208,6 @@ const AnimatedCRMDashboard = () => {
                 <div className="flex items-center justify-between mb-2">
                   <motion.div
                     className={`w-10 h-10 bg-gradient-to-br ${metric.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
                   >
                     <metric.icon className="h-5 w-5 text-white" />
                   </motion.div>
@@ -265,7 +261,7 @@ const AnimatedCRMDashboard = () => {
               >
                 <div className="flex items-start space-x-4">
                   <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.1 }}
                     className={`w-16 h-16 rounded-xl bg-gradient-to-br ${prospects[currentProspect].color} flex items-center justify-center text-white font-bold shadow-lg`}
                   >
                     {prospects[currentProspect].avatar}
@@ -438,7 +434,6 @@ const FloatingBackground = () => {
             scale: [0.5, 1.15, 0.5],
             x: [0, Math.sin(i) * 40, 0],
             y: [0, Math.cos(i) * 24, 0],
-            rotate: [0, 180, 360],
           }}
           transition={{ 
             duration: 8 + i * 1.2, 
@@ -448,11 +443,11 @@ const FloatingBackground = () => {
           }}
           className={`absolute w-16 h-16 ${
             i % 6 === 0 ? 'rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-400/10' :
-            i % 6 === 1 ? 'rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-400/10 rotate-45' :
-            i % 6 === 2 ? 'rounded-none bg-gradient-to-br from-cyan-500/20 to-blue-400/10 rotate-12' :
+            i % 6 === 1 ? 'rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-400/10' :
+            i % 6 === 2 ? 'rounded-none bg-gradient-to-br from-cyan-500/20 to-blue-400/10' :
             i % 6 === 3 ? 'rounded-xl bg-gradient-to-br from-pink-500/15 to-purple-400/15' :
             i % 6 === 4 ? 'rounded-full bg-gradient-to-br from-green-500/15 to-emerald-400/10' :
-            'rounded-2xl bg-gradient-to-br from-orange-500/15 to-red-400/10 rotate-12'
+            'rounded-2xl bg-gradient-to-br from-orange-500/15 to-red-400/10'
           } blur-xl`}
           style={{ 
             top: `${10 + i * 7}%`, 
@@ -483,7 +478,7 @@ const FeatureCard = ({ feature, index }: any) => (
       <div className="relative z-10">
         <motion.div
           className={`bg-gradient-to-r ${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg`}
-          whileHover={{ rotate: 360, scale: 1.2 }}
+          whileHover={{ scale: 1.2 }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.7, type: "spring" }}
         >
@@ -577,7 +572,7 @@ const HeroSection = () => {
                 />
                 <span className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-blue-500/50 text-white font-semibold text-sm sm:text-base">
                   <motion.div
-                    animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+                    animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 5.5, repeat: Infinity, ease: 'linear' }}
                     className="mr-3"
                   >
@@ -850,7 +845,7 @@ export default function ProspectCRMPage() {
                       className="flex items-start space-x-3 group"
                     >
                       <motion.div
-                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        whileHover={{ scale: 1.2 }}
                         transition={{ duration: 0.5 }}
                         className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:shadow-lg"
                       >
@@ -998,7 +993,7 @@ export default function ProspectCRMPage() {
                   className="flex items-start space-x-3 group"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.2, rotate: 360 }}
+                    whileHover={{ scale: 1.2 }}
                     transition={{ duration: 0.5 }}
                     className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:shadow-lg"
                   >
@@ -1031,7 +1026,6 @@ export default function ProspectCRMPage() {
             >
               <motion.div
                 animate={{ 
-                  rotate: [0, 5, -5, 0],
                   scale: [1, 1.05, 1]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
@@ -1195,7 +1189,7 @@ export default function ProspectCRMPage() {
                   className="flex items-start space-x-3 group"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.2, rotate: 360 }}
+                    whileHover={{ scale: 1.2 }}
                     transition={{ duration: 0.5 }}
                     className="w-6 h-6 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:shadow-lg"
                   >
@@ -1228,7 +1222,6 @@ export default function ProspectCRMPage() {
             >
               <motion.div
                 animate={{ 
-                  rotate: [0, 5, -5, 0],
                   scale: [1, 1.05, 1]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
@@ -1306,7 +1299,7 @@ export default function ProspectCRMPage() {
           >
             <motion.div
               className={`w-16 h-16 ${step.color} rounded-2xl flex items-center justify-center mb-3 shadow-lg`}
-              whileHover={{ scale: 1.1, rotate: 360, y: -5 }}
+              whileHover={{ scale: 1.1, y: -5 }}
               transition={{ duration: 0.5, type: "spring" }}
             >
               <step.icon className="h-8 w-8 text-white" />
@@ -1379,7 +1372,7 @@ export default function ProspectCRMPage() {
                     className="flex items-start space-x-3 group"
                   >
                     <motion.div
-                      whileHover={{ scale: 1.2, rotate: 360 }}
+                      whileHover={{ scale: 1.2 }}
                       className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:shadow-lg"
                     >
                       <CheckCircle2 className="h-4 w-4 text-white" />

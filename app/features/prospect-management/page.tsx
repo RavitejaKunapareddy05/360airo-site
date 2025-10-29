@@ -54,7 +54,6 @@ const FloatingParticles = () => {
           animate={{
             y: [0, -100, 0],
             x: [0, Math.sin(i) * 50, 0],
-            rotate: [0, 180, 360],
             scale: [0.3, 1, 0.3],
           }}
           transition={{
@@ -175,7 +174,7 @@ const PipelineVisualization = () => {
                 style={{
                   background: `linear-gradient(135deg, ${stage.color}, ${COLORS.purpleDark})`,
                 }}
-                whileHover={{ rotate: 360 }}
+                whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6 }}
               >
                 <stage.icon className="h-6 w-6 text-white z-10" />
@@ -259,8 +258,8 @@ const FeatureCards = () => {
       {features.map((feature, index) => (
         <motion.div
           key={feature.title}
-          initial={{ opacity: 0, y: 50, rotateY: 180 }}
-          whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
           whileHover={{ y: -10, scale: 1.02 }}
           onHoverStart={() => setHoveredCard(index)}
           onHoverEnd={() => setHoveredCard(null)}
@@ -286,7 +285,7 @@ const FeatureCards = () => {
             <motion.div
               className="w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-2xl relative overflow-hidden mx-auto"
               style={{ background: feature.color }}
-              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileHover={{ scale: 1.2 }}
               transition={{ duration: 0.8, type: "spring" }}
             >
               <feature.icon className="h-10 w-10 text-white z-10" />
@@ -436,7 +435,6 @@ const AIInsightsSection = () => {
                 className="w-24 h-24 rounded-3xl flex items-center justify-center shadow-2xl relative overflow-hidden"
                 style={{ background: COLORS.purpleLight }}
                 animate={{
-                  rotate: [0, 360],
                   scale: [1, 1.1, 1],
                 }}
                 transition={{
@@ -526,7 +524,7 @@ const AIInsightsSection = () => {
                     <motion.div
                       className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 relative"
                       style={{ background: COLORS.purpleLight }}
-                      whileHover={{ scale: 1.3, rotate: 360 }}
+                      whileHover={{ scale: 1.3 }}
                       animate={{
                         boxShadow: hoveredInsight === index ? 
                           `0 0 20px ${COLORS.purpleLight}` : 
@@ -717,8 +715,8 @@ const MultiChannelSection = () => {
           {/* Channel Visualization */}
           <motion.div
             key={activeChannel}
-            initial={{ opacity: 0, scale: 0.8, rotateY: 180 }}
-            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, type: "spring" }}
             className="bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] rounded-3xl p-8 border-2 border-gray-800 text-center shadow-2xl relative overflow-hidden"
           >
@@ -749,7 +747,6 @@ const MultiChannelSection = () => {
               className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl relative overflow-hidden"
               style={{ background: currentChannel.color }}
               animate={{
-                rotate: [0, 10, -10, 0],
                 y: [0, -5, 0],
               }}
               transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
@@ -833,7 +830,7 @@ const BenefitsGrid = () => {
             <motion.div
               className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg relative overflow-hidden"
               style={{ background: COLORS.purpleLight }}
-              whileHover={{ rotate: 360, scale: 1.2 }}
+              whileHover={{ scale: 1.2 }}
               transition={{ duration: 0.8 }}
             >
               <benefit.icon className="h-8 w-8 text-white" />

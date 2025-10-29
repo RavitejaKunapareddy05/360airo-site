@@ -76,6 +76,11 @@ export function Footer() {
     setError('');
   };
 
+  // Navigation handlers for specific routes
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-[#0A0A0A] to-[#19001d] border-t border-[#b45ecf]/30">
       {/* Animated Background Elements */}
@@ -285,11 +290,20 @@ export function Footer() {
               Product
             </motion.h4>
             <ul className="space-y-2">
-              {['Features', 'Pricing', 'AI SDR', 'Integrations', 'API'].map((name, index) => (
-                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {[
+                { name: 'Features', path: '/features' },
+                { name: 'Pricing', path: '/pricing' },
+                { name: 'AI SDR', path: '/ai-sdr-page' },
+                { name: 'Integrations', path: '/airo-integrations' },
+                // { name: 'API', path: '/api' }
+              ].map((item, index) => (
+                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link 
+                    href={item.path} 
+                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                  >
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {name}
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
@@ -307,11 +321,20 @@ export function Footer() {
               Resources
             </motion.h4>
             <ul className="space-y-2">
-              {['Blog', '360 Academy', 'Case Studies', 'Community', 'Help Center'].map((name, index) => (
-                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {[
+                { name: 'Blog', path: '/blog' },
+                { name: '360 Academy', path: '/360-academy' },
+                { name: 'Case Studies', path: '/airo-case-studies' },
+                { name: 'Community', path: '/community' },
+                // { name: 'Help Center', path: '/help-center' }
+              ].map((item, index) => (
+                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link 
+                    href={item.path} 
+                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                  >
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {name}
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
@@ -329,11 +352,20 @@ export function Footer() {
               Company
             </motion.h4>
             <ul className="space-y-2">
-              {['About Us', 'Careers', 'Privacy Policy', 'Anti-Spam Policy', 'Terms of Service'].map((name, index) => (
-                <motion.li key={name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link href={`/${name.toLowerCase().replace(' ', '-')}`} className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs">
+              {[
+                // { name: 'About Us', path: '/about-us' },
+                // { name: 'Careers', path: '/careers' },
+                { name: 'Privacy Policy', path: '/privacy-policy' },
+                { name: 'Anti-Spam Policy', path: '/anti-spam-policy' }
+        
+              ].map((item, index) => (
+                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                  <Link 
+                    href={item.path} 
+                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                  >
                     <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {name}
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
@@ -371,7 +403,15 @@ export function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-white/60 text-xs text-center md:text-left">
-              © {currentYear} 360airo. All rights reserved.
+              © {currentYear} 360airo. All Rights Reserved and designed by{' '}
+              <a 
+                href="https://360marco.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#b45ecf] transition-colors underline"
+              >
+                360 Marketing Concepts
+              </a>
             </div>
             <div className="flex space-x-6 text-xs">
               <Link href="/privacy-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">

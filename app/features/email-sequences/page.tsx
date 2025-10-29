@@ -13,22 +13,13 @@ import {
   Clock,
   ArrowRight,
   CheckCircle2,
-  Target,
   BarChart3,
-  Workflow,
   Eye,
   MousePointer,
-  Calendar,
-  PlayCircle,
-  PauseCircle,
-  TrendingUp,
-  Shield,
-  GitBranch,
   MessageCircle,
   Users,
-  Sparkles,
-  RotateCcw,
-  Filter
+  TrendingUp,
+  Shield
 } from 'lucide-react';
 
 // Color constants
@@ -76,7 +67,7 @@ const EmailFlowVisualization = () => {
                   ? 'bg-[#b45ecf] shadow-lg shadow-[#b45ecf]/30' 
                   : 'bg-black border border-[#b45ecf]/30'
               }`}
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               animate={{ 
                 scale: activeStep === index ? [1, 1.2, 1] : 1,
                 boxShadow: activeStep === index ? 
@@ -216,13 +207,9 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
       />
       
       <div className="relative z-10">
-        <motion.div
-          animate={{ rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="w-12 h-12 bg-[#b45ecf] rounded-xl flex items-center justify-center mb-4"
-        >
+        <div className="w-12 h-12 bg-[#b45ecf] rounded-xl flex items-center justify-center mb-4">
           <Icon className="h-6 w-6 text-white" />
-        </motion.div>
+        </div>
         
         <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
         <p className="text-white/70 mb-4 leading-relaxed">{description}</p>
@@ -236,10 +223,7 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
               transition={{ delay: delay + index * 0.1 }}
               className="flex items-center space-x-2 text-white/80 text-sm"
             >
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full"
-              />
+              <div className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full" />
               <span>{feature}</span>
             </motion.div>
           ))}
@@ -463,7 +447,6 @@ export default function EmailSequencesPage() {
                   Math.random() * 200 - 100,
                   Math.random() * 100 - 50,
                 ],
-                rotate: [0, 180, 360],
               }}
               transition={{
                 duration: 20 + Math.random() * 10,
@@ -473,7 +456,7 @@ export default function EmailSequencesPage() {
             >
               <div className={`w-6 h-6 ${
                 i % 3 === 0 ? 'bg-[#b45ecf]/20 rounded-full' :
-                i % 3 === 1 ? 'bg-[#b45ecf]/20 rotate-45' :
+                i % 3 === 1 ? 'bg-[#b45ecf]/20' :
                 'bg-[#b45ecf]/20 rounded-lg'
               }`} />
             </motion.div>
@@ -540,13 +523,9 @@ export default function EmailSequencesPage() {
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center space-x-3 bg-black backdrop-blur-sm rounded-2xl px-4 py-3 border border-[#b45ecf]/30"
               >
-                <motion.div
-                  animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="w-6 h-6 bg-[#b45ecf] rounded-full flex items-center justify-center"
-                >
+                <div className="w-6 h-6 bg-[#b45ecf] rounded-full flex items-center justify-center">
                   <Mail className="h-3 w-3 text-white" />
-                </motion.div>
+                </div>
                 <span className="text-white/80 font-medium text-sm">Email Automation</span>
               </motion.div>
 
@@ -559,10 +538,9 @@ export default function EmailSequencesPage() {
                   className="text-4xl md:text-5xl font-bold text-white leading-tight"
                 >
                   <span className="text-[#b45ecf]">
-               
                   </span>
                   <br />
-               <motion.span
+                  <motion.span
                     animate={{ 
                       color: ['#b45ecf', '#ffffff', '#b45ecf'],
                     }}
@@ -689,8 +667,8 @@ export default function EmailSequencesPage() {
               
               {/* Main Card */}
               <motion.div
-                initial={{ opacity: 0, x: 50, rotateY: 10 }}
-                animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="bg-black rounded-2xl border border-[#b45ecf]/30 p-6 backdrop-blur-sm shadow-xl"
               >
@@ -698,13 +676,9 @@ export default function EmailSequencesPage() {
                 {/* Card Header */}
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center space-x-3">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                      className="w-8 h-8 bg-[#b45ecf] rounded-lg flex items-center justify-center"
-                    >
+                    <div className="w-8 h-8 bg-[#b45ecf] rounded-lg flex items-center justify-center">
                       <Mail className="h-4 w-4 text-white" />
-                    </motion.div>
+                    </div>
                     <div>
                       <h3 className="text-white font-semibold">Sequence Builder</h3>
                       <p className="text-white/60 text-sm">Active Campaign</p>
@@ -735,18 +709,15 @@ export default function EmailSequencesPage() {
                       className="flex items-center justify-between p-3 bg-black rounded-lg border border-[#b45ecf]/20 hover:border-[#b45ecf]/40 transition-all duration-300 group"
                     >
                       <div className="flex items-center space-x-3">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                            email.status === 'sent' ? 'bg-[#b45ecf]/20 text-[#b45ecf]' :
-                            email.status === 'scheduled' ? 'bg-[#b45ecf]/20 text-[#b45ecf]' :
-                            'bg-[#b45ecf]/20 text-[#b45ecf]'
-                          }`}
-                        >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                          email.status === 'sent' ? 'bg-[#b45ecf]/20 text-[#b45ecf]' :
+                          email.status === 'scheduled' ? 'bg-[#b45ecf]/20 text-[#b45ecf]' :
+                          'bg-[#b45ecf]/20 text-[#b45ecf]'
+                        }`}>
                           {email.status === 'sent' && <CheckCircle2 className="h-4 w-4" />}
                           {email.status === 'scheduled' && <Clock className="h-4 w-4" />}
                           {email.status === 'draft' && <Mail className="h-4 w-4" />}
-                        </motion.div>
+                        </div>
                         <div>
                           <div className="text-white text-sm font-medium">{email.title}</div>
                           <div className="text-white/40 text-xs">{email.step}</div>
@@ -792,7 +763,6 @@ export default function EmailSequencesPage() {
               <motion.div
                 animate={{
                   y: [0, -10, 0],
-                  rotate: [0, 5, 0],
                 }}
                 transition={{
                   duration: 4,
@@ -807,7 +777,6 @@ export default function EmailSequencesPage() {
               <motion.div
                 animate={{
                   y: [0, 8, 0],
-                  rotate: [0, -5, 0],
                 }}
                 transition={{
                   duration: 5,
@@ -902,12 +871,9 @@ export default function EmailSequencesPage() {
                 whileHover={{ y: -5, scale: 1.05 }}
                 className="flex items-start space-x-3 p-6 bg-black rounded-xl border border-[#b45ecf]/30 hover:border-[#b45ecf]/50 transition-all duration-300"
               >
-                <motion.div
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  className="w-6 h-6 bg-[#b45ecf]/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                >
+                <div className="w-6 h-6 bg-[#b45ecf]/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle2 className="h-4 w-4 text-[#b45ecf]" />
-                </motion.div>
+                </div>
                 <span className="text-white/80 leading-relaxed text-left">{benefit}</span>
               </motion.div>
             ))}

@@ -70,7 +70,6 @@ const PricingParticles = () => {
           animate={{
             y: [0, -100, 0],
             opacity: [0, 1, 0],
-            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 8 + (i % 4) * 2,
@@ -190,8 +189,8 @@ const PricingCards = () => {
           {/* Popular Badge */}
           {plan.popular && (
             <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
             >
@@ -221,7 +220,7 @@ const PricingCards = () => {
             {/* Header */}
             <div className="text-center mb-8 relative z-10">
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 360 }}
+                whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6 }}
                 className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
                 style={{ background: plan.color }}
@@ -346,7 +345,6 @@ const IncludedFeatures = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           whileHover={{ 
             scale: 1.05,
-            rotateY: 10,
           }}
           transition={{ 
             duration: 0.6, 
@@ -356,7 +354,7 @@ const IncludedFeatures = () => {
           className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 hover:border-current transition-all duration-300 group perspective-1000"
         >
           <motion.div
-            whileHover={{ scale: 1.1, rotate: 360 }}
+            whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.6 }}
             className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg"
             style={{ background: feature.color }}

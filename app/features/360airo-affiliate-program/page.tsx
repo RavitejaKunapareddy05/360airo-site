@@ -128,7 +128,6 @@ const GeometricPattern = () => {
           animate={{
             y: [0, -80, 0],
             x: [0, Math.cos(i) * 40, 0],
-            rotate: [0, 180, 360],
             scale: [0.5, 1.2, 0.5],
           }}
           transition={{
@@ -249,8 +248,8 @@ const AnimatedIconGrid = () => {
       {icons.map((Icon, index) => (
         <motion.div
           key={index}
-          initial={{ opacity: 0, scale: 0, rotate: -180 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{
             duration: 0.8,
             delay: index * 0.1,
@@ -258,8 +257,7 @@ const AnimatedIconGrid = () => {
             stiffness: 100
           }}
           whileHover={{ 
-            scale: 1.2, 
-            rotate: 360,
+            scale: 1.2,
             transition: { duration: 0.3 }
           }}
           className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl relative group"
@@ -317,7 +315,6 @@ const EnhancedFloatingCardsAnimation = () => {
         className="absolute inset-0 m-auto w-32 h-32 rounded-full shadow-2xl"
         animate={{
           scale: [1, 1.1, 1],
-          rotate: [0, 180, 360],
         }}
         transition={{
           duration: 8,
@@ -337,7 +334,6 @@ const EnhancedFloatingCardsAnimation = () => {
           animate={{
             y: [0, -60, 0],
             x: [0, Math.sin(index) * 40, 0],
-            rotate: [0, 10, -10, 0],
             scale: [1, 1.1, 1],
           }}
           transition={{
@@ -353,7 +349,6 @@ const EnhancedFloatingCardsAnimation = () => {
           }}
           whileHover={{
             scale: 1.2,
-            rotate: 360,
             transition: { duration: 0.5 }
           }}
         >
@@ -472,7 +467,6 @@ const FloatingCardsAnimation = () => {
           className="absolute w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl"
           animate={{
             y: [0, -40, 0],
-            rotate: [0, 10, -10, 0],
           }}
           transition={{
             duration: 4,
@@ -539,7 +533,7 @@ const BouncingIconGrid = () => {
           animate={{
             y: [0, -20, 0],
             scale: [1, 1.2, 1],
-          }}
+            }}
           transition={{
             duration: 2,
             repeat: Number.POSITIVE_INFINITY,
@@ -597,10 +591,9 @@ const RotatingBenefits = () => {
       {benefits.map((benefit, index) => (
         <motion.div
           key={benefit.title}
-          initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           whileHover={{ 
-            rotateY: 10,
             scale: 1.05
           }}
           transition={{ 
@@ -609,14 +602,13 @@ const RotatingBenefits = () => {
             type: "spring",
             stiffness: 100
           }}
-          className="relative group perspective-1000"
+          className="relative group"
         >
-          <div className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 group-hover:border-current transition-all duration-500 transform-style-preserve-3d">
+          <div className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 group-hover:border-current transition-all duration-500">
             {/* Icon with bounce effect */}
             <motion.div
               whileHover={{ 
                 scale: 1.2,
-                rotate: 360 
               }}
               transition={{ duration: 0.6 }}
               className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg"
@@ -688,7 +680,7 @@ const AffiliateTypes = () => {
         >
           <div className="flex items-center space-x-4">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
               className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0"
               style={{ background: type.color }}
@@ -755,7 +747,7 @@ const ProcessSteps = () => {
           {/* Step card */}
           <div className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 hover:border-current transition-all duration-300">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
               className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-lg"
               style={{ background: step.color }}
@@ -873,12 +865,7 @@ export default function AffiliateProgramPage() {
                     }}
                   >
                     <span className="text-white font-bold text-sm uppercase tracking-wider flex items-center">
-                      <motion.div
-                        animate={{ rotate: [0, 360] }}
-                        transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      >
-                        <Sparkle className="h-4 w-4 mr-2" />
-                      </motion.div>
+                      <Sparkle className="h-4 w-4 mr-2" />
                       360Airo Affiliate Program
                     </span>
                   </motion.div>

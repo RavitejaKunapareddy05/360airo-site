@@ -81,7 +81,6 @@ const LinkedInNetworkAnimation = () => {
         className="absolute inset-4 border-2 border-[#ad60f8]/50 rounded-full"
         animate={{
           scale: [1, 1.2, 1],
-          rotate: [0, 180, 360],
         }}
         transition={{
           duration: 4,
@@ -189,13 +188,9 @@ const LinkedInDashboard = () => {
         {/* Dashboard Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center shadow-lg"
-            >
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center shadow-lg">
               <Linkedin className="h-6 w-6 text-white" />
-            </motion.div>
+            </div>
             <div>
               <h3 className="text-xl font-bold text-white">LinkedIn Automation Dashboard</h3>
               <p className="text-sm text-white/60">Smart outreach management</p>
@@ -228,13 +223,9 @@ const LinkedInDashboard = () => {
               className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-[#0077B5]/30 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-2">
-                <motion.div
-                  className={`w-10 h-10 bg-gradient-to-br ${metric.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <div className={`w-10 h-10 bg-gradient-to-br ${metric.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                   <metric.icon className="h-5 w-5 text-white" />
-                </motion.div>
+                </div>
                 <motion.span 
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -346,13 +337,9 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
       />
       
       <div className="relative z-10">
-        <motion.div
-          animate={{ rotate: isHovered ? 360 : 0 }}
-          transition={{ duration: 0.6 }}
-          className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4"
-        >
+        <div className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4">
           <Icon className="h-6 w-6 text-white" />
-        </motion.div>
+        </div>
         
         <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
         <p className="text-white/70 mb-4 leading-relaxed">{description}</p>
@@ -366,10 +353,7 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
               transition={{ delay: delay + index * 0.1 }}
               className="flex items-center space-x-2 text-white/80 text-sm"
             >
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                className="w-1.5 h-1.5 bg-white rounded-full"
-              />
+              <div className="w-1.5 h-1.5 bg-white rounded-full" />
               <span>{feature}</span>
             </motion.div>
           ))}
@@ -436,13 +420,9 @@ const BenefitsGrid = () => {
           whileHover={{ y: -5, scale: 1.02 }}
           className="bg-[#1A1A1A] rounded-2xl border border-[#0077B5]/30 p-6 hover:border-[#0077B5]/50 transition-all duration-300"
         >
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 360 }}
-            transition={{ duration: 0.5 }}
-            className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4"
-          >
+          <div className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4">
             <benefit.icon className="h-6 w-6 text-white" />
-          </motion.div>
+          </div>
           <h4 className="text-white font-bold mb-2">{benefit.title}</h4>
           <p className="text-white/70 text-sm leading-relaxed">{benefit.description}</p>
         </motion.div>
@@ -479,16 +459,15 @@ const HeroSection = () => {
               scale: [0.5, 1.15, 0.5],
               x: [0, 40 * (i % 2 === 0 ? 1 : -1), 0],
               y: [0, 24 * (i % 2 === 0 ? 1 : -1), 0],
-              rotate: [0, 180, 360],
             }}
             transition={{ duration: 11 + i * 1.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
             className={`absolute w-20 h-20 ${
               i % 4 === 0
                 ? 'rounded-full bg-gradient-to-br from-[#0077B5]/20 to-[#00A0DC]/10'
                 : i % 4 === 1
-                ? 'rounded-2xl bg-gradient-to-br from-[#00A0DC]/20 to-[#ad60f8]/10 rotate-45'
+                ? 'rounded-2xl bg-gradient-to-br from-[#00A0DC]/20 to-[#ad60f8]/10'
                 : i % 4 === 2
-                ? 'rounded-none bg-gradient-to-br from-[#ad60f8]/20 to-[#0077B5]/10 rotate-12'
+                ? 'rounded-none bg-gradient-to-br from-[#ad60f8]/20 to-[#0077B5]/10'
                 : 'rounded-xl bg-gradient-to-br from-[#0077B5]/15 to-[#00A0DC]/15'
             } blur-xl`}
             style={{ top: `${14 + i * 11}%`, left: `${8 + i * 10.5}%` }}
@@ -525,13 +504,9 @@ const HeroSection = () => {
                   className="absolute inset-0 bg-gradient-to-r from-[#0077B5]/30 via-[#ad60f8]/20 to-[#00A0DC]/30 rounded-full blur-xl"
                 />
                 <span className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-[#0077B5]/50 text-white font-semibold text-sm sm:text-base">
-                  <motion.div
-                    animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-                    transition={{ duration: 5.5, repeat: Infinity, ease: 'linear' }}
-                    className="mr-3"
-                  >
+                  <div className="mr-3">
                     <Flame className="h-4 w-4 sm:h-5 sm:w-5 text-[#ad60f8]" />
-                  </motion.div>
+                  </div>
                   <span>LinkedIn Automation</span>
                 </span>
               </div>
@@ -1004,18 +979,7 @@ export default function LinkedInAutomationPage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </motion.div>
-              
-  
             </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="pt-8"
-            >
-
-            </motion.div>
           </motion.div>
         </div>
       </section>

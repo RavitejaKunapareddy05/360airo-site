@@ -110,7 +110,7 @@ const ChannelNetwork = () => {
               background: channel.color,
               borderColor: channel.color,
             }}
-            whileHover={{ rotate: 360 }}
+            whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.6 }}
           >
             <channel.icon className="h-10 w-10 text-white" />
@@ -150,11 +150,9 @@ const ChannelNetwork = () => {
       <motion.div
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         animate={{
-          rotate: 360,
           scale: [1, 1.1, 1],
         }}
         transition={{
-          rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
           scale: { duration: 2, repeat: Number.POSITIVE_INFINITY }
         }}
       >
@@ -214,7 +212,7 @@ const CampaignManagement = () => {
         >
           <div className="flex items-start space-x-4">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
               className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 mt-1"
               style={{ background: feature.color }}
@@ -297,8 +295,8 @@ const AIPersonalization = () => {
             {hoveredFeature === index && (
               <motion.div
                 className="absolute top-2 right-2"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
                 transition={{ type: "spring" }}
               >
                 <Cpu className="h-6 w-6 text-purple-400" />
@@ -460,7 +458,7 @@ const PlatformBenefits = () => {
             key={benefit}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.05, rotateY: 10 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ 
               duration: 0.6, 
               delay: index * 0.1,
@@ -471,7 +469,7 @@ const PlatformBenefits = () => {
             <motion.div
               className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
               style={{ background: COLORS.purpleLight }}
-              whileHover={{ rotate: 360, scale: 1.1 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
             >
               <CheckCircle2 className="h-6 w-6 text-white" />

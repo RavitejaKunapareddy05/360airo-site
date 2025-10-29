@@ -61,7 +61,6 @@ const FloatingDemoElements = () => {
           animate={{
             y: [0, -30, 0],
             x: [0, Math.sin(i) * 20, 0],
-            rotate: [0, 5, -5, 0],
           }}
           transition={{
             duration: 6 + Math.random() * 4,
@@ -183,7 +182,6 @@ const DemoFeaturesGrid = () => {
             <motion.div
               whileHover={{ 
                 scale: 1.1,
-                rotate: [0, -5, 5, 0]
               }}
               transition={{ duration: 0.6 }}
               className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 shadow-lg relative overflow-hidden"
@@ -285,7 +283,7 @@ const DemoSteps = () => {
           {/* Step Card */}
           <div className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 group-hover:border-current transition-all duration-300 h-full">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
               className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-lg"
               style={{ background: step.color }}
@@ -351,7 +349,7 @@ const TargetAudience = () => {
         >
           <div className="flex items-start space-x-4">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
               className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0 mt-1"
               style={{ background: audience.color }}
@@ -602,7 +600,6 @@ export default function DemoPage() {
               <motion.div
                 animate={{
                   y: [0, -20, 0],
-                  rotateY: [0, 5, 0],
                 }}
                 transition={{
                   duration: 6,
@@ -652,7 +649,6 @@ export default function DemoPage() {
               <motion.div
                 animate={{
                   y: [0, -30, 0],
-                  rotate: [0, 180, 360],
                 }}
                 transition={{
                   duration: 8,
@@ -665,7 +661,6 @@ export default function DemoPage() {
               <motion.div
                 animate={{
                   y: [0, 20, 0],
-                  rotate: [360, 180, 0],
                 }}
                 transition={{
                   duration: 6,
@@ -816,11 +811,11 @@ export default function DemoPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-16 text-center"
+            className="mt-20 text-center"
           >
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center space-x-3 bg-[#1A1A1A] rounded-2xl px-6 py-4 border-2"
+              className="inline-flex items-center space-x-5 bg-[#1A1A1A] rounded-2xl px-10 py-4 border-2"
               style={{ borderColor: COLORS.purpleLight }}
             >
               <Gift className="h-6 w-6" style={{ color: COLORS.purpleLight }} />
