@@ -35,6 +35,21 @@ const blogPosts = [
     views: "2.4K",
     tags: ["Cold Email", "Sales Tools", "Automation"]
   },
+   {
+    id: 3,
+    title: "Top Cold Email Tools in 2025: Which One Actually Delivers Replies?",
+    excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Discover the tools that actually get responses.",
+    slug: "top-cold-email-tools",
+    author: "Sarah Chen",
+    date: "October 23, 2025",
+    readTime: "8 min read",
+    category: "Cold Email",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+  
+    views: "2.4K",
+    tags: ["Cold Email", "Sales Tools", "Automation"]
+  },
+  
   {
     id: 2,
     title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
@@ -48,58 +63,58 @@ const blogPosts = [
     views: "1.8K",
     tags: ["LinkedIn", "Outreach", "B2B Sales"]
   },
-  {
-    id: 3,
-    title: "AI-Powered Sales Automation: Boost Your Efficiency by 300%",
-    excerpt: "How artificial intelligence is revolutionizing sales processes and what you need to implement today to stay ahead of the competition.",
-    slug: "ai-sales-automation-2025",
-    author: "Dr. Alex Thompson",
-    date: "October 18, 2025",
-    readTime: "6 min read",
-    category: "AI & Automation",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    views: "3.1K",
-    tags: ["AI", "Automation", "Sales"]
-  },
-  {
-    id: 4,
-    title: "The Psychology of Cold Calling: Turning Rejections into Opportunities",
-    excerpt: "Master the mental game of cold calling with proven psychological techniques that convert objections into appointments.",
-    slug: "psychology-cold-calling",
-    author: "Jessica Williams",
-    date: "October 15, 2025",
-    readTime: "5 min read",
-    category: "Sales Strategy",
-    image: "https://images.unsplash.com/photo-1584438784894-089f454kda99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    views: "1.2K",
-    tags: ["Cold Calling", "Psychology", "Sales"]
-  },
-  {
-    id: 5,
-    title: "Email Marketing Metrics That Actually Matter in 2025",
-    excerpt: "Stop tracking vanity metrics. Here are the key performance indicators that truly impact your bottom line and how to optimize them.",
-    slug: "email-marketing-metrics-2025",
-    author: "David Park",
-    date: "October 12, 2025",
-    readTime: "9 min read",
-    category: "Email Marketing",
-    image: "https://images.unsplash.com/photo-1601379327927-c60e6f7d7c38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    views: "2.7K",
-    tags: ["Email Marketing", "Analytics", "ROI"]
-  },
-  {
-    id: 6,
-    title: "Building a Scalable Outreach System That Grows With Your Business",
-    excerpt: "Learn how to create an outreach framework that adapts to your growing business needs without sacrificing personalization.",
-    slug: "scalable-outreach-system",
-    author: "Emily Zhang",
-    date: "October 10, 2025",
-    readTime: "7 min read",
-    category: "Outreach",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    views: "1.5K",
-    tags: ["Outreach", "Scaling", "Systems"]
-  }
+  // {
+  //   id: 3,
+  //   title: "AI-Powered Sales Automation: Boost Your Efficiency by 300%",
+  //   excerpt: "How artificial intelligence is revolutionizing sales processes and what you need to implement today to stay ahead of the competition.",
+  //   slug: "ai-sales-automation-2025",
+  //   author: "Dr. Alex Thompson",
+  //   date: "October 18, 2025",
+  //   readTime: "6 min read",
+  //   category: "AI & Automation",
+  //   image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+  //   views: "3.1K",
+  //   tags: ["AI", "Automation", "Sales"]
+  // },
+  // {
+  //   id: 4,
+  //   title: "The Psychology of Cold Calling: Turning Rejections into Opportunities",
+  //   excerpt: "Master the mental game of cold calling with proven psychological techniques that convert objections into appointments.",
+  //   slug: "psychology-cold-calling",
+  //   author: "Jessica Williams",
+  //   date: "October 15, 2025",
+  //   readTime: "5 min read",
+  //   category: "Sales Strategy",
+  //   image: "https://images.unsplash.com/photo-1584438784894-089f454kda99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+  //   views: "1.2K",
+  //   tags: ["Cold Calling", "Psychology", "Sales"]
+  // },
+  // {
+  //   id: 5,
+  //   title: "Email Marketing Metrics That Actually Matter in 2025",
+  //   excerpt: "Stop tracking vanity metrics. Here are the key performance indicators that truly impact your bottom line and how to optimize them.",
+  //   slug: "email-marketing-metrics-2025",
+  //   author: "David Park",
+  //   date: "October 12, 2025",
+  //   readTime: "9 min read",
+  //   category: "Email Marketing",
+  //   image: "https://images.unsplash.com/photo-1601379327927-c60e6f7d7c38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+  //   views: "2.7K",
+  //   tags: ["Email Marketing", "Analytics", "ROI"]
+  // },
+  // {
+  //   id: 6,
+  //   title: "Building a Scalable Outreach System That Grows With Your Business",
+  //   excerpt: "Learn how to create an outreach framework that adapts to your growing business needs without sacrificing personalization.",
+  //   slug: "scalable-outreach-system",
+  //   author: "Emily Zhang",
+  //   date: "October 10, 2025",
+  //   readTime: "7 min read",
+  //   category: "Outreach",
+  //   image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+  //   views: "1.5K",
+  //   tags: ["Outreach", "Scaling", "Systems"]
+  // }
 ];
 
 const categories = [

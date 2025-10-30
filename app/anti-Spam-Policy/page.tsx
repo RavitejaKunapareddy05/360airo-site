@@ -19,6 +19,7 @@ import {
   ArrowRight,
   Sparkles
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Define types for the NoteBox component
 type NoteBoxType = 'info' | 'warning' | 'error' | 'success' | 'action' | 'neutral';
@@ -56,25 +57,25 @@ const ContentList = ({ items, title, icon: Icon, color }: ContentListProps) => (
   <motion.div
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true }}
-    className="mb-8"
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true, margin: '-50px' }}
+    className="mb-6 lg:mb-8"
   >
-    <h4 className={`text-xl font-semibold text-white mb-4 flex items-center gap-3`}>
-      <Icon className={`w-5 h-5 ${color}`} />
+    <h4 className={`text-lg lg:text-xl font-semibold text-white mb-3 lg:mb-4 flex items-center gap-2 lg:gap-3`}>
+      <Icon className={`w-4 h-4 lg:w-5 lg:h-5 ${color}`} />
       {title}:
     </h4>
-    <ul className="space-y-3">
+    <ul className="space-y-2 lg:space-y-3">
       {items.map((item: string, index: number) => (
         <motion.li
           key={index}
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -15 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: index * 0.1 }}
-          viewport={{ once: true }}
-          className="flex items-center text-white/70 hover:text-white transition-colors duration-200 text-lg"
+          transition={{ duration: 0.3, delay: index * 0.08 }}
+          viewport={{ once: true, margin: '-30px' }}
+          className="flex items-center text-white/70 hover:text-white transition-colors duration-200 text-base lg:text-lg"
         >
-          <div className={`w-2 h-2 rounded-full ${color} mr-4 flex-shrink-0`} />
+          <div className={`w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full ${color} mr-3 lg:mr-4 flex-shrink-0`} />
           {item}
         </motion.li>
       ))}
@@ -89,15 +90,31 @@ const NoteBox = ({ content, type }: NoteBoxProps) => {
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      className={`p-6 rounded-2xl border backdrop-blur-lg transition-all duration-500 hover:scale-105 ${config.bg} ${config.border} ${config.text}`}
+      viewport={{ once: true, margin: '-30px' }}
+      className={`p-4 lg:p-6 rounded-xl lg:rounded-2xl border backdrop-blur-lg transition-all duration-300 hover:scale-102 ${config.bg} ${config.border} ${config.text}`}
     >
-      <p className="leading-relaxed font-medium">{content}</p>
+      <p className="leading-relaxed font-medium text-sm lg:text-base">{content}</p>
     </motion.div>
   );
 };
 
 export default function UsagePolicy() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const redirectToApp = () => {
+    window.open('https://app.360airo.com/', '_blank');
+  };
+
   const policySections = [
     {
       number: "01",
@@ -206,79 +223,80 @@ export default function UsagePolicy() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-black">
-       <Navbar />
-      {/* Enhanced Animated Background */}
+      <Navbar />
+      
+      {/* Enhanced Animated Background - Mobile Optimized */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        {/* Floating Gradient Orbs */}
+        {/* Floating Gradient Orbs - Mobile Optimized */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.2, 1],
-            x: [0, 100, 0],
-            y: [0, -80, 0]
+            opacity: [0.2, 0.4, 0.2],
+            scale: [1, 1.1, 1],
+            x: [0, 40, 0],
+            y: [0, -30, 0]
           }}
           transition={{ 
-            duration: 25,
+            duration: 20,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-r from-[#b45ecf]/20 to-[#480056]/20 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-gradient-to-r from-[#b45ecf]/20 to-[#480056]/20 rounded-full blur-2xl lg:blur-3xl"
         />
         
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
-            opacity: [0.4, 0.7, 0.4],
-            scale: [1.1, 1.3, 1.1],
-            x: [0, -120, 0],
-            y: [0, 100, 0]
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.2, 1],
+            x: [0, -60, 0],
+            y: [0, 50, 0]
           }}
           transition={{ 
-            duration: 30,
+            duration: 25,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 3
+            delay: 2
           }}
-          className="absolute top-3/4 right-1/3 w-[400px] h-[400px] bg-gradient-to-r from-[#b45ecf]/15 to-[#480056]/15 rounded-full blur-3xl"
+          className="absolute top-3/4 right-1/3 w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] bg-gradient-to-r from-[#b45ecf]/15 to-[#480056]/15 rounded-full blur-2xl lg:blur-3xl"
         />
 
-        {/* Animated Grid */}
+        {/* Animated Grid - Mobile Optimized */}
         <motion.div
           animate={{
-            backgroundPosition: ['0px 0px', '100px 100px'],
+            backgroundPosition: ['0px 0px', '50px 50px'],
           }}
           transition={{
-            duration: 20,
+            duration: 15,
             repeat: Infinity,
             ease: "linear"
           }}
-          className="absolute inset-0 bg-[linear-gradient(rgba(180,94,207,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(180,94,207,0.05)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"
+          className="absolute inset-0 bg-[linear-gradient(rgba(180,94,207,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(180,94,207,0.05)_1px,transparent_1px)] bg-[size:40px_40px] lg:bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"
         />
 
-        {/* Floating Particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Floating Particles - Reduced on Mobile */}
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
             initial={{ 
               opacity: 0,
               scale: 0,
-              x: Math.random() * 100,
-              y: Math.random() * 100
+              x: Math.random() * 80,
+              y: Math.random() * 80
             }}
             animate={{ 
-              opacity: [0, 0.8, 0],
+              opacity: [0, 0.6, 0],
               scale: [0, 1, 0],
-              x: Math.random() * 100,
-              y: Math.random() * 100
+              x: Math.random() * 80,
+              y: Math.random() * 80
             }}
             transition={{ 
-              duration: Math.random() * 15 + 15,
+              duration: Math.random() * 12 + 12,
               repeat: Infinity,
-              delay: Math.random() * 8,
+              delay: Math.random() * 6,
               ease: "easeInOut"
             }}
-            className="absolute w-2 h-2 bg-gradient-to-r from-[#b45ecf] to-white rounded-full"
+            className="absolute w-1.5 h-1.5 lg:w-2 lg:h-2 bg-gradient-to-r from-[#b45ecf] to-white rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -286,148 +304,148 @@ export default function UsagePolicy() {
           />
         ))}
 
-        {/* Pulse Rings */}
-        {[...Array(3)].map((_, i) => (
+        {/* Pulse Rings - Mobile Optimized */}
+        {[...Array(2)].map((_, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0 }}
             animate={{ 
-              opacity: [0.3, 0],
-              scale: [1, 3]
+              opacity: [0.2, 0],
+              scale: [1, 2]
             }}
             transition={{ 
-              duration: 4,
+              duration: 3,
               repeat: Infinity,
-              delay: i * 1.5,
+              delay: i * 1.2,
               ease: "easeOut"
             }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-[#b45ecf]/20 rounded-full"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 lg:w-32 lg:h-32 border-2 border-[#b45ecf]/20 rounded-full"
           />
         ))}
       </div>
 
       {/* Main Content */}
       <div className="relative z-10">
-        {/* Header Section */}
-        <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        {/* Header Section - Mobile Optimized */}
+        <section className="pt-24 lg:pt-32 pb-16 lg:pb-20 px-4 relative overflow-hidden">
           <div className="max-w-4xl mx-auto text-center relative">
             <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              className="inline-flex items-center px-6 py-3 rounded-full bg-[#b45ecf]/10 border border-[#b45ecf]/30 mb-8 backdrop-blur-lg"
+              transition={{ duration: 0.6, type: "spring" }}
+              className="inline-flex items-center px-4 py-2 lg:px-6 lg:py-3 rounded-full bg-[#b45ecf]/10 border border-[#b45ecf]/30 mb-6 lg:mb-8 backdrop-blur-lg"
             >
-              <Sparkles className="w-5 h-5 text-[#b45ecf] mr-3" />
-              <span className="text-[#b45ecf] font-semibold">Policy & Compliance</span>
+              <Sparkles className="w-4 h-4 lg:w-5 lg:h-5 text-[#b45ecf] mr-2 lg:mr-3" />
+              <span className="text-[#b45ecf] font-semibold text-sm lg:text-base">Policy & Compliance</span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2, type: "spring" }}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#b45ecf] via-white to-[#b45ecf] bg-clip-text text-transparent"
+              transition={{ duration: 0.8, delay: 0.15, type: "spring" }}
+              className="text-3xl sm:text-4xl lg:text-7xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-[#b45ecf] via-white to-[#b45ecf] bg-clip-text text-transparent leading-tight"
             >
               Usage and Anti-Spam Policy
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-lg lg:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed"
             >
               At 360Airo, we are committed to promoting responsible, ethical, and compliant outreach practices. This Usage and Anti-Spam Policy outlines the standards every user must follow while using our platform to ensure safe, respectful, and lawful communication across all channels.
             </motion.p>
 
-            {/* Animated Scroll Indicator */}
+            {/* Animated Scroll Indicator - Mobile Optimized */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
-              className="absolute -bottom-8 left-1/2 transform -translate-x-1/2"
+              transition={{ delay: 1.2 }}
+              className="absolute -bottom-6 lg:-bottom-8 left-1/2 transform -translate-x-1/2"
             >
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-6 h-10 border-2 border-[#b45ecf] rounded-full flex justify-center"
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-5 h-8 lg:w-6 lg:h-10 border-2 border-[#b45ecf] rounded-full flex justify-center"
               >
                 <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="w-1 h-3 bg-[#b45ecf] rounded-full mt-2"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-0.5 h-2.5 lg:h-3 bg-[#b45ecf] rounded-full mt-1.5 lg:mt-2"
                 />
               </motion.div>
             </motion.div>
           </div>
         </section>
 
-        {/* Policy Sections */}
-        <section className="py-20 px-4 relative">
+        {/* Policy Sections - Mobile Optimized */}
+        <section className="py-16 lg:py-20 px-4 relative">
           <div className="max-w-4xl mx-auto">
-            <div className="space-y-12">
+            <div className="space-y-8 lg:space-y-12">
               {policySections.map((section, index) => (
                 <motion.div
                   key={section.number}
-                  initial={{ opacity: 0, y: 60, scale: 0.95 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ 
-                    y: -8,
-                    transition: { duration: 0.3 }
-                  }}
+                  whileHover={!isMobile ? { 
+                    y: -4,
+                    transition: { duration: 0.2 }
+                  } : {}}
                   transition={{ 
-                    duration: 0.8, 
-                    delay: index * 0.15,
+                    duration: 0.6, 
+                    delay: index * 0.12,
                     type: "spring",
                     stiffness: 80
                   }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "-50px" }}
                   className="group relative"
                 >
-                  {/* Connection Line */}
+                  {/* Connection Line - Hidden on Mobile */}
                   {index < policySections.length - 1 && (
                     <motion.div
                       initial={{ scaleY: 0 }}
                       whileInView={{ scaleY: 1 }}
-                      transition={{ duration: 1, delay: index * 0.15 + 0.5 }}
+                      transition={{ duration: 0.8, delay: index * 0.12 + 0.4 }}
                       viewport={{ once: true }}
-                      className="absolute left-8 top-full w-0.5 bg-gradient-to-b from-[#b45ecf] to-transparent h-16 -z-10"
+                      className="hidden lg:block absolute left-8 top-full w-0.5 bg-gradient-to-b from-[#b45ecf] to-transparent h-16 -z-10"
                     />
                   )}
 
                   <div className="relative">
                     {/* Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/10 to-[#480056]/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/10 to-[#480056]/10 rounded-2xl lg:rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
-                    <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-500 relative overflow-hidden">
+                    <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl rounded-2xl lg:rounded-3xl p-6 lg:p-8 border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300 relative overflow-hidden">
                       {/* Animated Background */}
                       <motion.div
                         animate={{
                           backgroundPosition: ['0% 0%', '100% 100%'],
                         }}
                         transition={{
-                          duration: 20,
+                          duration: 15,
                           repeat: Infinity,
                           repeatType: 'reverse',
                         }}
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-[#b45ecf]/5 to-transparent bg-[length:200%_200%] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-[#b45ecf]/5 to-transparent bg-[length:200%_200%] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       />
                       
-                      <div className="flex items-start gap-6 relative z-10">
-                        {/* Animated Section Number */}
+                      <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6 relative z-10">
+                        {/* Animated Section Number - Mobile Optimized */}
                         <motion.div
-                          whileHover={{ 
-                            scale: 1.1,
-                            rotate: [0, -5, 5, 0]
-                          }}
+                          whileHover={!isMobile ? { 
+                            scale: 1.05,
+                            rotate: [0, -3, 3, 0]
+                          } : {}}
                           transition={{ 
-                            duration: 0.4,
-                            rotate: { duration: 0.6 }
+                            duration: 0.3,
+                            rotate: { duration: 0.4 }
                           }}
-                          className={`w-20 h-20 bg-gradient-to-br ${section.gradient} rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-2xl flex-shrink-0 group-hover:shadow-3xl transition-all duration-500 relative overflow-hidden`}
+                          className={`w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br ${section.gradient} rounded-xl lg:rounded-2xl flex items-center justify-center text-white text-xl lg:text-2xl font-bold shadow-xl lg:shadow-2xl flex-shrink-0 group-hover:shadow-2xl lg:group-hover:shadow-3xl transition-all duration-300 relative overflow-hidden self-start`}
                         >
                           <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                           />
                           <span className="relative z-10">{section.number}</span>
@@ -435,14 +453,14 @@ export default function UsagePolicy() {
 
                         {/* Content */}
                         <div className="flex-1">
-                          <div className="flex items-center gap-4 mb-6">
+                          <div className="flex items-center gap-3 lg:gap-4 mb-4 lg:mb-6">
                             <motion.div
-                              whileHover={{ scale: 1.1, rotate: 360 }}
-                              transition={{ duration: 0.6 }}
+                              whileHover={!isMobile ? { scale: 1.05, rotate: 360 } : {}}
+                              transition={{ duration: 0.5 }}
                             >
-                              <section.icon className="w-8 h-8 text-[#b45ecf]" />
+                              <section.icon className="w-6 h-6 lg:w-8 lg:h-8 text-[#b45ecf]" />
                             </motion.div>
-                            <h2 className="text-3xl font-bold text-white group-hover:text-[#b45ecf] transition-colors duration-300">
+                            <h2 className="text-xl lg:text-3xl font-bold text-white group-hover:text-[#b45ecf] transition-colors duration-300 leading-tight">
                               {section.title}
                             </h2>
                           </div>
@@ -450,9 +468,9 @@ export default function UsagePolicy() {
                           <motion.p
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
-                            viewport={{ once: true }}
-                            className="text-white/80 leading-relaxed text-lg mb-8"
+                            transition={{ delay: 0.2 }}
+                            viewport={{ once: true, margin: '-30px' }}
+                            className="text-white/80 leading-relaxed text-base lg:text-lg mb-6 lg:mb-8"
                           >
                             {section.description}
                           </motion.p>
@@ -488,18 +506,18 @@ export default function UsagePolicy() {
                           {/* Contact Information */}
                           {section.contact && (
                             <motion.div
-                              initial={{ opacity: 0, x: -20 }}
+                              initial={{ opacity: 0, x: -15 }}
                               whileInView={{ opacity: 1, x: 0 }}
-                              viewport={{ once: true }}
-                              className="space-y-4"
+                              viewport={{ once: true, margin: '-30px' }}
+                              className="space-y-3 lg:space-y-4"
                             >
-                              <div className="space-y-3">
-                                <div className="flex items-center text-white/80 hover:text-white transition-colors duration-200 text-lg">
-                                  <Mail className="w-5 h-5 text-[#b45ecf] mr-3" />
+                              <div className="space-y-2 lg:space-y-3">
+                                <div className="flex items-center text-white/80 hover:text-white transition-colors duration-200 text-base lg:text-lg">
+                                  <Mail className="w-4 h-4 lg:w-5 lg:h-5 text-[#b45ecf] mr-2 lg:mr-3" />
                                   Email: {section.contact.email}
                                 </div>
-                                <div className="flex items-center text-white/80 hover:text-white transition-colors duration-200 text-lg">
-                                  <Eye className="w-5 h-5 text-[#b45ecf] mr-3" />
+                                <div className="flex items-center text-white/80 hover:text-white transition-colors duration-200 text-base lg:text-lg">
+                                  <Eye className="w-4 h-4 lg:w-5 lg:h-5 text-[#b45ecf] mr-2 lg:mr-3" />
                                   Website: {section.contact.website}
                                 </div>
                               </div>
@@ -540,104 +558,105 @@ export default function UsagePolicy() {
           </div>
         </section>
 
-        {/* Enhanced Compliance Commitment Section */}
-        <section className="py-32 px-4 relative overflow-hidden">
-          {/* Animated Background */}
+        {/* Enhanced Compliance Commitment Section - Mobile Optimized */}
+        <section className="py-20 lg:py-32 px-4 relative overflow-hidden">
+          {/* Animated Background - Mobile Optimized */}
           <motion.div
             animate={{
               background: [
-                'radial-gradient(circle at 30% 50%, #b45ecf 0%, transparent 50%)',
-                'radial-gradient(circle at 70% 50%, #480056 0%, transparent 50%)',
-                'radial-gradient(circle at 30% 50%, #b45ecf 0%, transparent 50%)',
+                'radial-gradient(circle at 30% 50%, #b45ecf 0%, transparent 40%)',
+                'radial-gradient(circle at 70% 50%, #480056 0%, transparent 40%)',
+                'radial-gradient(circle at 30% 50%, #b45ecf 0%, transparent 40%)',
               ]
             }}
-            transition={{ duration: 10, repeat: Infinity }}
+            transition={{ duration: 8, repeat: Infinity }}
             className="absolute inset-0"
           />
           
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true, margin: '-50px' }}
               className="text-white"
             >
               <motion.div
                 animate={{ 
-                  rotate: [0, 10, -10, 0],
-                  scale: [1, 1.1, 1]
+                  rotate: [0, 8, -8, 0],
+                  scale: [1, 1.05, 1]
                 }}
                 transition={{ 
-                  duration: 6,
+                  duration: 4,
                   repeat: Infinity,
                   repeatType: 'reverse'
                 }}
-                className="mb-8"
+                className="mb-6 lg:mb-8"
               >
-                <Shield className="w-20 h-20 text-white mx-auto drop-shadow-2xl" />
+                <Shield className="w-16 h-16 lg:w-20 lg:h-20 text-white mx-auto drop-shadow-xl lg:drop-shadow-2xl" />
               </motion.div>
               
               <motion.h2
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white via-[#b45ecf] to-white bg-clip-text text-transparent"
+                transition={{ duration: 0.6, delay: 0.15 }}
+                viewport={{ once: true, margin: '-50px' }}
+                className="text-2xl lg:text-6xl font-bold mb-6 lg:mb-8 bg-gradient-to-r from-white via-[#b45ecf] to-white bg-clip-text text-transparent leading-tight"
               >
                 Committed to Ethical Outreach
               </motion.h2>
               
               <motion.p
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                viewport={{ once: true }}
-                className="text-xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed"
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true, margin: '-50px' }}
+                className="text-lg lg:text-xl text-white/80 mb-8 lg:mb-12 max-w-2xl mx-auto leading-relaxed"
               >
                 We believe in building lasting relationships through respectful, compliant, and value-driven communication. 
                 Together, we can maintain the highest standards of outreach excellence.
               </motion.p>
               
               <motion.div
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.3 }
-                }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={!isMobile ? { 
+                  scale: 1.03,
+                  transition: { duration: 0.2 }
+                } : {}}
+                whileTap={{ scale: 0.97 }}
+                onClick={redirectToApp}
               >
                 <Button 
                   size="lg"
-                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white hover:from-[#c36ed9] hover:to-[#580066] text-lg px-12 py-8 rounded-2xl font-semibold shadow-2xl transition-all duration-500 group backdrop-blur-lg border border-white/20"
+                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white hover:from-[#c36ed9] hover:to-[#580066] text-base lg:text-lg px-8 lg:px-12 py-4 lg:py-8 rounded-xl lg:rounded-2xl font-semibold shadow-xl lg:shadow-2xl transition-all duration-300 group backdrop-blur-lg border border-white/20 w-full lg:w-auto"
                 >
-                  <span className="flex items-center">
+                  <span className="flex items-center justify-center lg:justify-start">
                     Back to Safety
-                    <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
+                    <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-6 lg:w-6 group-hover:translate-x-1 lg:group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                 </Button>
               </motion.div>
             </motion.div>
           </div>
 
-          {/* Floating Elements */}
-          {[...Array(8)].map((_, i) => (
+          {/* Floating Elements - Reduced on Mobile */}
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
               animate={{
-                y: [0, -30, 0],
-                x: [0, Math.random() * 20 - 10, 0],
+                y: [0, -20, 0],
+                x: [0, Math.random() * 15 - 7.5, 0],
                 rotate: [0, 180, 360],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 8 + 8,
                 repeat: Infinity,
-                delay: Math.random() * 5,
+                delay: Math.random() * 4,
               }}
-              className="absolute text-[#b45ecf]/30"
+              className="absolute text-[#b45ecf]/20 lg:text-[#b45ecf]/30"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
-                fontSize: `${Math.random() * 24 + 12}px`,
+                fontSize: `${Math.random() * 16 + 8}px`,
               }}
             >
               ★

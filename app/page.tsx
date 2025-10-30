@@ -259,11 +259,11 @@ const SectionDivider = ({ variant = 'center' }: { variant?: 'center' | 'left' | 
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-hidden">
         <Navbar />
 
-        {/* HERO: Better sizing + creative right visual */}
-        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* HERO SECTION - Responsive */}
+        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 lg:pt-0">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
               initial={{ opacity: 0 }}
@@ -290,7 +290,7 @@ export default function Home() {
                   rotate: [0, 180, 360],
                 }}
                 transition={{ duration: 11 + i * 1.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
-                className={`absolute w-20 h-20 ${
+                className={`absolute w-16 h-16 sm:w-20 sm:h-20 ${
                   i % 4 === 0
                     ? 'rounded-full bg-gradient-to-br from-[#b45ecf]/20 to-[#d67bff]/10'
                     : i % 4 === 1
@@ -299,7 +299,10 @@ export default function Home() {
                     ? 'rounded-none bg-gradient-to-br from-[#480056]/20 to-[#b45ecf]/10 rotate-12'
                     : 'rounded-xl bg-gradient-to-br from-[#b45ecf]/15 to-[#d67bff]/15'
                 } blur-xl`}
-                style={{ top: `${14 + i * 11}%`, left: `${8 + i * 10.5}%` }}
+                style={{ 
+                  top: `${14 + i * 11}%`, 
+                  left: `${8 + i * 10.5}%` 
+                }}
               />
             ))}
           </div>
@@ -310,9 +313,9 @@ export default function Home() {
             transition={{ duration: 1.2 }}
             className="max-w-7xl mx-auto relative z-10 w-full"
           >
-            <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen py-20">
-              {/* LEFT: Better text sizing */}
-              <div className="space-y-8">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh] lg:min-h-screen py-12 lg:py-20">
+              {/* LEFT CONTENT - Responsive text sizing */}
+              <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -331,25 +334,25 @@ export default function Home() {
                       transition={{ duration: 3.6, repeat: Infinity }}
                       className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/30 via-[#d67bff]/20 to-[#480056]/30 rounded-full blur-xl"
                     />
-                    <span className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-[#b45ecf]/50 text-white font-semibold text-sm sm:text-base">
+                    <span className="relative inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-sm border border-[#b45ecf]/50 text-white font-semibold text-xs sm:text-sm">
                       <motion.div
                         animate={{ rotate: 360, scale: [1, 1.1, 1] }}
                         transition={{ duration: 5.5, repeat: Infinity, ease: 'linear' }}
-                        className="mr-3"
+                        className="mr-2 sm:mr-3"
                       >
-                        <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-[#d67bff]" />
+                        <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-[#d67bff]" />
                       </motion.div>
                       <span>The All-in-One AI Outreach Platform</span>
                     </span>
                   </div>
                 </motion.div>
 
-                <div className="space-y-5">
+                <div className="space-y-4 lg:space-y-5">
                   <motion.h1
                     initial={{ opacity: 0, y: 80 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.45, duration: 1, type: 'spring', stiffness: 100 }}
-                    className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[0.95] tracking-tight"
+                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[1.1] lg:leading-[0.95] tracking-tight"
                   >
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -403,9 +406,9 @@ export default function Home() {
                   initial={{ opacity: 0, y: 36 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.35, duration: 0.7 }}
-                  className="space-y-5 max-w-xl"
+                  className="space-y-4 lg:space-y-5 max-w-xl"
                 >
-                  <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-light">
+                  <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed font-light">
                     Simplify and organise your sales pipeline with the most powerful{' '}
                     <motion.span
                       animate={{ color: ['#b45ecf', '#d67bff', '#ffffff', '#b45ecf'] }}
@@ -416,7 +419,7 @@ export default function Home() {
                     </motion.span>{' '}
                     designed for teams that want to scale faster.
                   </p>
-                  <p className="text-base text-white/75">
+                  <p className="text-sm sm:text-base text-white/75">
                     Automate LinkedIn messages, cold emails, and calling sequences from a single, intuitive dashboard.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -435,7 +438,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.6, duration: 0.7 }}
-                  className="flex flex-col sm:flex-row gap-4 pt-2"
+                  className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-2"
                 >
                   <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                     <motion.div
@@ -448,7 +451,7 @@ export default function Home() {
                       transition={{ duration: 2, repeat: Infinity }}
                       className="absolute inset-0"
                     />
-                    <Button size="lg" className="relative bg-transparent text-[#480056] px-8 py-3 text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-2xl">
+                    <Button size="lg" className="relative bg-transparent text-[#480056] px-6 lg:px-8 py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-2xl w-full sm:w-auto">
                       <span>Start Free Trial</span>
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -468,7 +471,7 @@ export default function Home() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="relative border-2 border-[#b45ecf] bg-transparent text-white hover:bg-transparent px-8 py-3 text-base font-bold rounded-xl backdrop-blur-md transition-all duration-300"
+                      className="relative border-2 border-[#b45ecf] bg-transparent text-white hover:bg-transparent px-6 lg:px-8 py-3 text-sm lg:text-base font-bold rounded-xl backdrop-blur-md transition-all duration-300 w-full sm:w-auto"
                     >
                       <Play className="mr-2 h-4 w-4" />
                       <span>Book a Demo</span>
@@ -477,41 +480,41 @@ export default function Home() {
                 </motion.div>
 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 0.6 }} className="pt-1">
-                  <p className="text-lg font-semibold text-white">
+                  <p className="text-base lg:text-lg font-semibold text-white">
                     Just smarter conversations, higher conversions, and <span className="text-[#b45ecf]">unstoppable growth.</span>
                   </p>
                 </motion.div>
               </div>
 
-              {/* RIGHT: Ultra-creative dashboard ecosystem */}
+              {/* RIGHT VISUAL - Responsive dashboard */}
               <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6, duration: 0.9 }}
-                className="relative flex items-center justify-center h-full"
+                className="relative flex items-center justify-center h-full order-1 lg:order-2 mb-8 lg:mb-0"
               >
                 {/* Central Command Hub */}
-                <div className="relative">
+                <div className="relative scale-90 sm:scale-100">
                   {/* Main Dashboard Core */}
                   <motion.div
                     initial={{ scale: 0.88, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 1, duration: 0.85 }}
-                    className="relative w-80 h-52 bg-gradient-to-br from-[#19001d] via-[#480056] to-[#19001d] rounded-2xl border border-[#b45ecf]/30 backdrop-blur-sm overflow-hidden"
+                    className="relative w-64 sm:w-72 lg:w-80 h-40 sm:h-48 lg:h-52 bg-gradient-to-br from-[#19001d] via-[#480056] to-[#19001d] rounded-2xl border border-[#b45ecf]/30 backdrop-blur-sm overflow-hidden"
                   >
                     {/* Glass overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/8 to-transparent" />
                     
                     {/* Dashboard content */}
-                    <div className="relative z-10 p-5 h-full">
-                      <div className="flex items-center justify-between mb-4">
+                    <div className="relative z-10 p-4 sm:p-5 h-full">
+                      <div className="flex items-center justify-between mb-3 sm:mb-4">
                         <motion.div
                           animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                           transition={{ duration: 3.6, repeat: Infinity }}
                           className="flex items-center space-x-2"
                         >
-                          <span className="text-3xl font-black text-white/70">360°</span>
-                          <span className="text-lg font-bold text-[#b45ecf]">airo</span>
+                          <span className="text-2xl sm:text-3xl font-black text-white/70">360°</span>
+                          <span className="text-base sm:text-lg font-bold text-[#b45ecf]">airo</span>
                         </motion.div>
                         
                         {/* Live status indicator */}
@@ -526,20 +529,20 @@ export default function Home() {
                       </div>
                       
                       {/* Mini analytics bars */}
-                      <div className="space-y-2 mb-4">
+                      <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-4">
                         {[75, 92, 68, 85].map((width, i) => (
                           <motion.div
                             key={i}
                             initial={{ width: 0 }}
                             animate={{ width: `${width}%` }}
                             transition={{ delay: 1.2 + i * 0.1, duration: 0.8 }}
-                            className="h-1.5 bg-gradient-to-r from-[#b45ecf] to-[#d67bff] rounded-full opacity-60"
+                            className="h-1 sm:h-1.5 bg-gradient-to-r from-[#b45ecf] to-[#d67bff] rounded-full opacity-60"
                           />
                         ))}
                       </div>
                       
                       {/* Campaign stats */}
-                      <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="grid grid-cols-3 gap-2 sm:gap-3 text-center">
                         {[
                           { label: 'Sent', value: '2.4K', icon: Send },
                           { label: 'Opens', value: '1.8K', icon: Eye },
@@ -550,7 +553,7 @@ export default function Home() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 1.4 + i * 0.1 }}
-                            className="bg-white/5 rounded-lg p-2"
+                            className="bg-white/5 rounded-lg p-1 sm:p-2"
                           >
                             <Icon className="h-3 w-3 text-[#b45ecf] mx-auto mb-1" />
                             <div className="text-xs font-bold text-white">{value}</div>
@@ -561,57 +564,57 @@ export default function Home() {
                     </div>
                   </motion.div>
 
-{/* Orbiting Platform Icons */}
-{[
-  { icon: Linkedin, color: '#0077B5', position: 'top-left' as const, delay: 1.3 },
-  { icon: Mail, color: '#EA4335', position: 'top-right' as const, delay: 1.5 },
-  { icon: Phone, color: '#b45ecf', position: 'bottom-left' as const, delay: 1.7 },
-  { icon: Brain, color: '#d67bff', position: 'bottom-right' as const, delay: 1.9 }
-].map(({ icon: Icon, color, position, delay }, i) => {
-  const positions: Record<string, string> = {
-    'top-left': 'absolute -top-4 -left-4',
-    'top-right': 'absolute -top-4 -right-4',
-    'bottom-left': 'absolute -bottom-4 -left-4',
-    'bottom-right': 'absolute -bottom-4 -right-4'
-  };
+                  {/* Orbiting Platform Icons */}
+                  {[
+                    { icon: Linkedin, color: '#0077B5', position: 'top-left' as const, delay: 1.3 },
+                    { icon: Mail, color: '#EA4335', position: 'top-right' as const, delay: 1.5 },
+                    { icon: Phone, color: '#b45ecf', position: 'bottom-left' as const, delay: 1.7 },
+                    { icon: Brain, color: '#d67bff', position: 'bottom-right' as const, delay: 1.9 }
+                  ].map(({ icon: Icon, color, position, delay }, i) => {
+                    const positions: Record<string, string> = {
+                      'top-left': 'absolute -top-3 -left-3 sm:-top-4 sm:-left-4',
+                      'top-right': 'absolute -top-3 -right-3 sm:-top-4 sm:-right-4',
+                      'bottom-left': 'absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4',
+                      'bottom-right': 'absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4'
+                    };
 
-  return (
-    <motion.div
-      key={i}
-      initial={{ opacity: 0, scale: 0, rotate: -180 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{ delay, duration: 0.6, type: 'spring' }}
-      className={`${positions[position]} w-12 h-12 rounded-xl backdrop-blur-sm border border-white/20 flex items-center justify-center`}
-      style={{ backgroundColor: `${color}15` }}
-      whileHover={{ 
-        scale: 1.2, 
-        rotate: 15,
-        boxShadow: `0 0 25px ${color}40`
-      }}
-    >
-      <Icon className="h-5 w-5" style={{ color }} />
-    </motion.div>
-  );
-})}
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                        transition={{ delay, duration: 0.6, type: 'spring' }}
+                        className={`${positions[position]} w-10 h-10 sm:w-12 sm:h-12 rounded-xl backdrop-blur-sm border border-white/20 flex items-center justify-center`}
+                        style={{ backgroundColor: `${color}15` }}
+                        whileHover={{ 
+                          scale: 1.2, 
+                          rotate: 15,
+                          boxShadow: `0 0 25px ${color}40`
+                        }}
+                      >
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" style={{ color }} />
+                      </motion.div>
+                    );
+                  })}
 
                   {/* Floating Metric Cards */}
                   <motion.div
                     initial={{ opacity: 0, y: 40, x: -20 }}
                     animate={{ opacity: 1, y: 0, x: 0 }}
                     transition={{ delay: 2, duration: 0.7 }}
-                    className="absolute -bottom-8 -left-8 bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-[#b45ecf]/30 min-w-[120px]"
+                    className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-3 border border-[#b45ecf]/30 min-w-[100px] sm:min-w-[120px]"
                     whileHover={{ scale: 1.05, y: -5 }}
                   >
                     <div className="text-center">
                       <motion.div 
                         animate={{ scale: [1, 1.1, 1] }} 
                         transition={{ duration: 2, repeat: Infinity }} 
-                        className="text-2xl font-bold text-white mb-1"
+                        className="text-xl sm:text-2xl font-bold text-white mb-1"
                       >
                         98%
                       </motion.div>
                       <div className="text-xs text-white/70">Deliverability</div>
-                      <div className="w-full h-1 bg-gradient-to-r from-[#b45ecf] to-[#d67bff] rounded-full mt-2" />
+                      <div className="w-full h-1 bg-gradient-to-r from-[#b45ecf] to-[#d67bff] rounded-full mt-1 sm:mt-2" />
                     </div>
                   </motion.div>
 
@@ -619,19 +622,19 @@ export default function Home() {
                     initial={{ opacity: 0, y: 40, x: 20 }}
                     animate={{ opacity: 1, y: 0, x: 0 }}
                     transition={{ delay: 2.2, duration: 0.7 }}
-                    className="absolute -top-8 -right-8 bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-[#d67bff]/30 min-w-[120px]"
+                    className="absolute -top-6 -right-6 sm:-top-8 sm:-right-8 bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-3 border border-[#d67bff]/30 min-w-[100px] sm:min-w-[120px]"
                     whileHover={{ scale: 1.05, y: -5 }}
                   >
                     <div className="text-center">
                       <motion.div
                         animate={{ scale: [1, 1.1, 1] }}
                         transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-                        className="text-2xl font-bold text-white mb-1"
+                        className="text-xl sm:text-2xl font-bold text-white mb-1"
                       >
                         3x
                       </motion.div>
                       <div className="text-xs text-white/70">Response Rate</div>
-                      <div className="w-full h-1 bg-gradient-to-r from-[#d67bff] to-[#480056] rounded-full mt-2" />
+                      <div className="w-full h-1 bg-gradient-to-r from-[#d67bff] to-[#480056] rounded-full mt-1 sm:mt-2" />
                     </div>
                   </motion.div>
 
@@ -642,12 +645,12 @@ export default function Home() {
                     transition={{ duration: 3, repeat: Infinity, delay: 2.5 }}
                     className="absolute inset-0 pointer-events-none"
                   >
-                    {[...Array(6)].map((_, i) => (
+                    {[...Array(4)].map((_, i) => (
                       <motion.div
                         key={i}
                         animate={{
-                          x: [Math.random() * 300 - 150, Math.random() * 300 - 150],
-                          y: [Math.random() * 200 - 100, Math.random() * 200 - 100],
+                          x: [Math.random() * 200 - 100, Math.random() * 200 - 100],
+                          y: [Math.random() * 150 - 75, Math.random() * 150 - 75],
                           scale: [0, 1, 0],
                         }}
                         transition={{
@@ -670,11 +673,11 @@ export default function Home() {
                     initial={{ opacity: 0, x: 100, scale: 0.8 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
                     transition={{ delay: 2.8, duration: 0.6 }}
-                    className="absolute top-16 -right-16 bg-green-500/20 backdrop-blur-sm border border-green-500/30 rounded-lg p-2 flex items-center space-x-2 min-w-[160px]"
+                    className="absolute top-12 -right-12 sm:top-16 sm:-right-16 bg-green-500/20 backdrop-blur-sm border border-green-500/30 rounded-lg p-2 flex items-center space-x-2 min-w-[140px] sm:min-w-[160px]"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <CheckCircle2 className="h-4 w-4 text-green-400" />
-                    <div className="text-xs text-white">
+                    <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
+                    <div className="text-xs sm:text-xs text-white">
                       <div className="font-semibold">Meeting Booked!</div>
                       <div className="text-white/70">John D. - Acme Corp</div>
                     </div>
@@ -685,26 +688,26 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Problem / Promise */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+        {/* Problem / Promise Section */}
+        <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-4xl mx-auto text-center">
-            <motion.div variants={itemVariants} className="space-y-8">
+            <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">The Problem with Traditional Outreach</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
                 In a world where prospects receive hundreds of sales messages daily, personalization and timing make all the difference.
               </h2>
               <SectionDivider />
-              <div className="text-left space-y-6 text-lg text-white/80 leading-relaxed">
+              <div className="text-left space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed">
                 <p>
                   Most sales teams juggle five different tools just to run a single campaign — one for email, another for LinkedIn, another for CRM syncing, and yet another for analytics. The result? <span className="text-[#b45ecf] font-semibold">Wasted time, inconsistent data, and missed deals.</span>
                 </p>
                 <p>
                   360Airo unifies prospect discovery, multichannel outreach, analytics, and CRM sync in one place so your team operates with clarity and speed.
                 </p>
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-[#b45ecf]/20">
-                  <p className="text-white font-semibold text-xl">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 lg:p-6 border border-[#b45ecf]/20">
+                  <p className="text-white font-semibold text-lg lg:text-xl">
                     Our mission is simple: help you reach more people, automate repetitive tasks, and close more deals, without compromising personalization or compliance.
                   </p>
                 </div>
@@ -713,44 +716,44 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Channels */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        {/* Channels Section - Responsive grid */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-6xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">What Makes This Platform Different</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
                 LinkedIn, Email, and Calls — <span className="text-[#b45ecf]">All in One Place</span>
               </h2>
               <SectionDivider />
-              <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 360Airo is an AI-driven multichannel outreach platform that reaches prospects where they're most active while keeping every message personal, timely, and authentic.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {channels.map((channel, index) => (
                 <GlowCard key={index} className="group cursor-pointer rounded-2xl">
-                  <Card className="relative bg-white/5 backdrop-blur-sm p-8 h-full border border-white/10 rounded-2xl transition-all duration-500 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 group-hover:scale-105">
+                  <Card className="relative bg-white/5 backdrop-blur-sm p-6 lg:p-8 h-full border border-white/10 rounded-2xl transition-all duration-500 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 group-hover:scale-105">
                     <div className="relative z-10">
                       <motion.div
-                        className={`bg-gradient-to-r ${channel.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6`}
+                        className={`bg-gradient-to-r ${channel.color} w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mb-4 lg:mb-6`}
                         whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
                         transition={{ duration: 0.5 }}
                       >
-                        <channel.icon className="h-8 w-8 text-white" />
+                        <channel.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
                       </motion.div>
-                      <h3 className="text-xl font-bold text-white mb-4 transition-colors group-hover:text-[#d67bff]">{channel.title}</h3>
+                      <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4 transition-colors group-hover:text-[#d67bff]">{channel.title}</h3>
                       <motion.div
-                        className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-6"
+                        className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-4 lg:mb-6"
                         initial={{ width: 0 }}
                         whileInView={{ width: '100%' }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.15, duration: 0.8 }}
                       />
-                      <p className="text-white/80 mb-6 leading-relaxed text-sm">{channel.description}</p>
-                      <div className="bg-[#b45ecf]/20 px-4 py-2 rounded-full inline-block border border-[#b45ecf]/30">
+                      <p className="text-white/80 mb-4 lg:mb-6 leading-relaxed text-sm">{channel.description}</p>
+                      <div className="bg-[#b45ecf]/20 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full inline-block border border-[#b45ecf]/30">
                         <span className="text-white font-semibold text-xs">{channel.stats}</span>
                       </div>
                     </div>
@@ -761,24 +764,24 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Why Us + Stats */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
+        {/* Why Us + Stats Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-6xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Why Thousands of Businesses Choose Us</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Because it works.</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Because it works.</h2>
               <SectionDivider />
-              <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 Users report 3x higher response rates, faster conversions, and a clear boost in pipeline growth within weeks.
               </p>
             </motion.div>
 
-            <div className="space-y-12">
+            <div className="space-y-8 lg:space-y-12">
               <motion.div variants={itemVariants}>
-                <h3 className="text-2xl font-bold text-white mb-8 text-center">Key advantages that set us apart:</h3>
-                <div className="grid md:grid-cols-2 gap-4">
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-6 lg:mb-8 text-center">Key advantages that set us apart:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
                   {keyAdvantages.map((advantage, index) => (
                     <motion.div
                       key={index}
@@ -786,29 +789,29 @@ export default function Home() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.08, duration: 0.5 }}
-                      className="flex items-center bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10"
+                      className="flex items-center bg-white/5 backdrop-blur-sm p-3 lg:p-4 rounded-xl border border-white/10"
                     >
-                      <CheckCircle2 className="h-6 w-6 text-[#b45ecf] mr-4 flex-shrink-0" />
-                      <span className="text-white">{advantage}</span>
+                      <CheckCircle2 className="h-5 w-5 lg:h-6 lg:w-6 text-[#b45ecf] mr-3 lg:mr-4 flex-shrink-0" />
+                      <span className="text-white text-sm lg:text-base">{advantage}</span>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                   {stats.map((stat, index) => (
                     <GlowCard key={index} className="group cursor-pointer rounded-2xl">
-                      <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50">
+                      <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl p-4 lg:p-6 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50">
                         <motion.div
-                          className="bg-white/15 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-all duration-300 group-hover:bg-[#b45ecf]/30"
+                          className="bg-white/15 w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#b45ecf]/30"
                           whileHover={{ rotate: 360, scale: 1.2 }}
                           transition={{ duration: 0.7 }}
                         >
-                          <stat.icon className="h-8 w-8 text-[#b45ecf] transition-colors group-hover:text-white" />
+                          <stat.icon className="h-6 w-6 lg:h-8 lg:w-8 text-[#b45ecf] transition-colors group-hover:text-white" />
                         </motion.div>
                         <motion.div
-                          className="text-3xl md:text-4xl font-black text-white mb-2"
+                          className="text-2xl lg:text-3xl xl:text-4xl font-black text-white mb-1 lg:mb-2"
                           initial={{ opacity: 0, scale: 0.85 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
@@ -816,7 +819,7 @@ export default function Home() {
                         >
                           {stat.value}
                         </motion.div>
-                        <div className="text-white/80 font-semibold text-sm">{stat.label}</div>
+                        <div className="text-white/80 font-semibold text-xs lg:text-sm">{stat.label}</div>
                       </div>
                     </GlowCard>
                   ))}
@@ -827,25 +830,25 @@ export default function Home() {
         </section>
 
         {/* AI Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-5xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Intelligent Automation</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
                 AI That <span className="text-[#b45ecf]">Never Sleeps</span>
               </h2>
               <SectionDivider />
-              <div className="space-y-6 text-lg text-white/80 leading-relaxed">
+              <div className="space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed">
                 <p>
                   Imagine a sales assistant that writes your emails, finds leads, analyzes engagement, and follows up automatically. It studies your campaigns, identifies patterns, and continually optimizes performance.
                 </p>
                 <p>
                   From crafting the perfect cold email to predicting which prospects will respond next, it transforms data into opportunity and compounds advantage over time.
                 </p>
-                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-[#b45ecf]/20">
-                  <p className="text-white font-semibold text-xl">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 lg:p-6 border border-[#b45ecf]/20">
+                  <p className="text-white font-semibold text-lg lg:text-xl">
                     With every message sent and every reply tracked, it learns and refines — giving you a competitive edge traditional tools can't match.
                   </p>
                 </div>
@@ -853,8 +856,8 @@ export default function Home() {
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-white mb-8 text-center">Our AI helps you:</h3>
-              <div className="grid md:grid-cols-2 gap-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-white mb-6 lg:mb-8 text-center">Our AI helps you:</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 {aiCapabilities.map((capability, index) => (
                   <motion.div
                     key={index}
@@ -863,12 +866,12 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.08, duration: 0.5 }}
                     whileHover={{ scale: 1.04 }}
-                    className="flex items-center bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 group hover:border-[#b45ecf]/30 transition-all duration-300"
+                    className="flex items-center bg-white/5 backdrop-blur-sm p-4 lg:p-6 rounded-xl border border-white/10 group hover:border-[#b45ecf]/30 transition-all duration-300"
                   >
-                    <div className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Brain className="h-6 w-6 text-white" />
+                    <div className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center mr-3 lg:mr-4 flex-shrink-0">
+                      <Brain className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
                     </div>
-                    <span className="text-white group-hover:text-[#d67bff] transition-colors">{capability}</span>
+                    <span className="text-white text-sm lg:text-base group-hover:text-[#d67bff] transition-colors">{capability}</span>
                   </motion.div>
                 ))}
               </div>
@@ -877,9 +880,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-center mt-10"
+                className="text-center mt-8 lg:mt-10"
               >
-                <p className="text-xl font-bold text-white">
+                <p className="text-lg lg:text-xl font-bold text-white">
                   It's not just automation, it's <span className="text-[#b45ecf]">intelligence in motion.</span>
                 </p>
               </motion.div>
@@ -887,42 +890,42 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Use Cases */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
+        {/* Use Cases Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-6xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Built for Every Growth-Focused Team</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
                 Scale outreach without scaling chaos.
               </h2>
               <SectionDivider />
-              <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 Whether you're a founder, sales rep, or agency, this is your workspace for precision outreach.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {useCases.map((useCase, index) => (
                 <GlowCard key={index} className="group cursor-pointer rounded-xl">
-                  <div className="relative bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 text-center transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 h-full group-hover:scale-105">
+                  <div className="relative bg-white/5 backdrop-blur-sm p-4 lg:p-6 rounded-xl border border-white/10 text-center transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 h-full group-hover:scale-105">
                     <motion.div
-                      className={`bg-gradient-to-r ${useCase.color} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6`}
+                      className={`bg-gradient-to-r ${useCase.color} w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6`}
                       whileHover={{ rotate: 360, scale: 1.2, boxShadow: '0 0 30px rgba(180,94,207,0.5)' }}
                       transition={{ duration: 0.7 }}
                     >
-                      <useCase.icon className="h-8 w-8 text-white" />
+                      <useCase.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
                     </motion.div>
-                    <h3 className="text-xl font-bold text-white mb-4 transition-colors group-hover:text-[#d67bff]">{useCase.title}</h3>
+                    <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4 transition-colors group-hover:text-[#d67bff]">{useCase.title}</h3>
                     <motion.div
-                      className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4"
+                      className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-3 lg:mb-4"
                       initial={{ width: 0 }}
                       whileInView={{ width: '100%' }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.08, duration: 0.5 }}
                     />
-                    <p className="text-white/80 text-sm">{useCase.description}</p>
+                    <p className="text-white/80 text-xs lg:text-sm">{useCase.description}</p>
                   </div>
                 </GlowCard>
               ))}
@@ -933,52 +936,52 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-center mt-10"
+              className="text-center mt-8 lg:mt-10"
             >
-              <p className="text-xl font-bold text-white">
+              <p className="text-lg lg:text-xl font-bold text-white">
                 You bring the leads, we bring <span className="text-[#b45ecf]">efficiency.</span>
               </p>
             </motion.div>
           </motion.div>
         </section>
 
-        {/* Features / Integrations */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        {/* Features / Integrations Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={containerVariants} className="max-w-6xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Integrate With the Tools You Already Use</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
                 Every conversation, note, and reply stays in sync, with zero data duplication.
               </h2>
               <SectionDivider />
-              <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              <p className="text-base lg:text-lg text-white/80 max-w-2xl mx-auto">
                 Security that gives you peace of mind — enterprise-grade encryption, permission controls, and compliance built in.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               {features.map((feature, index) => (
                 <GlowCard key={index} className="group cursor-pointer rounded-2xl">
-                  <Card className="relative bg-white/5 backdrop-blur-sm p-6 h-full border border-white/10 rounded-2xl transition-all duration-500 group-hover:bg-white/8 group-hover:border-[#b45ecf]/30 group-hover:scale-105">
+                  <Card className="relative bg-white/5 backdrop-blur-sm p-4 lg:p-6 h-full border border-white/10 rounded-2xl transition-all duration-500 group-hover:bg-white/8 group-hover:border-[#b45ecf]/30 group-hover:scale-105">
                     <div className="relative z-10 h-full flex flex-col">
                       <motion.div
-                        className={`bg-gradient-to-r ${feature.color} w-14 h-14 rounded-xl flex items-center justify-center mb-4`}
+                        className={`bg-gradient-to-r ${feature.color} w-12 h-12 lg:w-14 lg:h-14 rounded-xl flex items-center justify-center mb-3 lg:mb-4`}
                         whileHover={{ rotate: [0, -15, 15, 0], scale: 1.15 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <feature.icon className="h-7 w-7 text-white" />
+                        <feature.icon className="h-6 w-6 lg:h-7 lg:w-7 text-white" />
                       </motion.div>
-                      <h3 className="text-lg font-semibold text-white mb-3 transition-colors group-hover:text-[#d67bff]">{feature.title}</h3>
+                      <h3 className="text-base lg:text-lg font-semibold text-white mb-2 lg:mb-3 transition-colors group-hover:text-[#d67bff]">{feature.title}</h3>
                       <motion.div
-                        className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-4"
+                        className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-3 lg:mb-4"
                         initial={{ width: 0 }}
                         whileInView={{ width: '100%' }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.08, duration: 0.6 }}
                       />
-                      <p className="text-white/80 text-sm leading-relaxed flex-grow">{feature.description}</p>
+                      <p className="text-white/80 text-xs lg:text-sm leading-relaxed flex-grow">{feature.description}</p>
                     </div>
                   </Card>
                 </GlowCard>
@@ -987,18 +990,18 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        {/* Testimonials Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-5xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">What Our Users Say</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Real results from real customers</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Real results from real customers</h2>
               <SectionDivider />
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {[
                 {
                   name: 'Head of Sales',
@@ -1026,33 +1029,33 @@ export default function Home() {
                 },
               ].map((t, index) => (
                 <GlowCard key={index} className="group cursor-pointer rounded-2xl">
-                  <div className="relative bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 h-full group-hover:scale-105">
-                    <Quote className="h-8 w-8 text-[#b45ecf]/60 mb-6" />
-                    <div className="flex mb-6">
+                  <div className="relative bg-white/5 backdrop-blur-sm p-6 lg:p-8 rounded-2xl border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#b45ecf]/50 h-full group-hover:scale-105">
+                    <Quote className="h-6 w-6 lg:h-8 lg:w-8 text-[#b45ecf]/60 mb-4 lg:mb-6" />
+                    <div className="flex mb-4 lg:mb-6">
                       {[...Array(t.rating)].map((_, i) => (
                         <motion.div key={i} whileHover={{ scale: 1.25, rotate: 360 }} transition={{ duration: 0.35, delay: i * 0.06 }}>
-                          <Star className="h-5 w-5 text-[#b45ecf] fill-current" />
+                          <Star className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] fill-current" />
                         </motion.div>
                       ))}
                     </div>
                     <motion.div
-                      className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-6"
+                      className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-4 lg:mb-6"
                       initial={{ width: 0 }}
                       whileInView={{ width: '100%' }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.15, duration: 0.6 }}
                     />
-                    <p className="text-white/90 mb-8 italic text-lg leading-relaxed">"{t.content}"</p>
+                    <p className="text-white/90 mb-6 lg:mb-8 italic text-base lg:text-lg leading-relaxed">"{t.content}"</p>
                     <div className="flex items-center">
                       <motion.div
-                        className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-12 h-12 rounded-full flex items-center justify-center mr-4 text-white font-bold"
+                        className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-10 h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center mr-3 lg:mr-4 text-white font-bold text-sm lg:text-base"
                         whileHover={{ scale: 1.16, boxShadow: '0 0 20px rgba(180,94,207,0.6)' }}
                       >
                         {t.initials}
                       </motion.div>
                       <div>
-                        <div className="font-bold text-white">{t.name}</div>
-                        <div className="text-white/70 text-sm">{t.company}</div>
+                        <div className="font-bold text-white text-sm lg:text-base">{t.name}</div>
+                        <div className="text-white/70 text-xs lg:text-sm">{t.company}</div>
                       </div>
                     </div>
                   </div>
@@ -1062,31 +1065,31 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* How It Works */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
+        {/* How It Works Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={containerVariants} className="max-w-5xl mx-auto">
-            <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">How It Works — From Prospect to Pipeline</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Simple 3-step process that transforms your outreach</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Simple 3-step process that transforms your outreach</h2>
               <SectionDivider />
-              <p className="text-lg text-white/80">The result: a consistently growing pipeline with less manual work.</p>
+              <p className="text-base lg:text-lg text-white/80">The result: a consistently growing pipeline with less manual work.</p>
             </motion.div>
 
-            <div className="space-y-14">
+            <div className="space-y-8 lg:space-y-14">
               {howItWorks.map((item, index) => (
-                <motion.div key={index} variants={itemVariants} className="flex flex-col md:flex-row items-center gap-8 group">
+                <motion.div key={index} variants={itemVariants} className="flex flex-col md:flex-row items-center gap-6 lg:gap-8 group">
                   <GlowCard className="flex-shrink-0 cursor-pointer rounded-full">
                     <div className="relative">
                       <motion.div
-                        className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-20 h-20 rounded-full flex items-center justify-center"
+                        className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] w-16 h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center"
                         whileHover={{ scale: 1.18, rotate: 12, boxShadow: '0 0 50px rgba(180,94,207,0.8)' }}
                       >
-                        <item.icon className="h-10 w-10 text-white" />
+                        <item.icon className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                       </motion.div>
                       <motion.div
-                        className="absolute -top-2 -right-2 bg-white text-[#480056] w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm"
+                        className="absolute -top-2 -right-2 bg-white text-[#480056] w-6 h-6 lg:w-8 lg:h-8 rounded-full flex items-center justify-center font-bold text-xs lg:text-sm"
                         whileHover={{ scale: 1.25, rotate: 360 }}
                         transition={{ duration: 0.45 }}
                       >
@@ -1094,10 +1097,10 @@ export default function Home() {
                       </motion.div>
                     </div>
                   </GlowCard>
-                  <div className="flex-1 text-center md:text-left">
+                  <div className="flex-1 text-center md:text-left mt-4 md:mt-0">
                     <SectionDivider variant="left" />
-                    <h3 className="text-2xl font-bold text-white mb-3 transition-colors group-hover:text-[#d67bff]">{item.title}</h3>
-                    <p className="text-white/80 text-lg leading-relaxed">{item.description}</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-3 transition-colors group-hover:text-[#d67bff]">{item.title}</h3>
+                    <p className="text-white/80 text-base lg:text-lg leading-relaxed">{item.description}</p>
                   </div>
                 </motion.div>
               ))}
@@ -1105,26 +1108,26 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Pricing Blurb */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
+        {/* Pricing Blurb Section */}
+        <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-5xl mx-auto text-center">
-            <motion.div variants={itemVariants} className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-white">Pricing That Scales With You</h2>
+            <motion.div variants={itemVariants} className="space-y-4 lg:space-y-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">Pricing That Scales With You</h2>
               <SectionDivider />
-              <p className="text-white/90 text-lg">
+              <p className="text-white/90 text-base lg:text-lg">
                 Get enterprise-grade automation without enterprise pricing. Every plan includes unlimited sending accounts, free email verification, AI content generation, smart inbox rotation, CRM integrations, and deliverability monitoring.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-4">
                 <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-10 py-6 text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20">
+                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20 w-full sm:w-auto">
                     Start Free Trial
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/20 via-[#d67bff]/20 to-[#480056]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button size="lg" variant="outline" className="relative border-white/60 bg-white/10 text-white hover:bg-transparent px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:border-white">
+                  <Button size="lg" variant="outline" className="relative border-white/60 bg-white/10 text-white hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:border-white w-full sm:w-auto">
                     Book a Demo
                   </Button>
                 </motion.div>
@@ -1133,15 +1136,15 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Final CTA */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Final CTA Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#480056]/20 via-[#19001d]/40 to-[#480056]/20" />
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={containerVariants} className="max-w-4xl mx-auto text-center relative z-10">
-            <motion.div variants={itemVariants} className="space-y-8">
+            <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block">
                 <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Ready to Transform Your Outreach?</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white">
                 Stop juggling multiple tools. <br className="hidden sm:block" />
                 Start engaging leads smarter. <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-white via-[#d67bff] to-[#b45ecf] bg-clip-text text-transparent">
@@ -1149,26 +1152,26 @@ export default function Home() {
                 </span>
               </h2>
               <SectionDivider />
-              <p className="text-white/90 text-lg">
+              <p className="text-white/90 text-base lg:text-lg">
                 Experience the future of outbound communication, where every campaign is personalized, automated, and optimized for success.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
                 <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-10 py-6 text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20">
+                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20 w-full sm:w-auto">
                     Start Free Trial
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/20 via-[#d67bff]/20 to-[#480056]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button size="lg" variant="outline" className="relative border-white/60 bg-white/10 text-white hover:bg-transparent px-10 py-6 text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:border-white">
+                  <Button size="lg" variant="outline" className="relative border-white/60 bg-white/10 text-white hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-base lg:text-lg font-semibold rounded-xl backdrop-blur-sm transition-all duration-300 group-hover:border-white w-full sm:w-auto">
                     Book a Demo
                   </Button>
                 </motion.div>
               </div>
               <motion.div
-                className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-6 mb-2"
+                className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-4 lg:mt-6 mb-2"
                 initial={{ width: 0 }}
                 whileInView={{ width: '150px' }}
                 viewport={{ once: true }}

@@ -62,15 +62,27 @@ const COLORS = {
 
 // Floating Particles Background
 const FloatingParticles = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
+      {[...Array(isMobile ? 10 : 20)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full"
           animate={{
             y: [0, -100, 0],
-            x: [0, Math.sin(i) * 50, 0],
+            x: [0, Math.sin(i) * (isMobile ? 25 : 50), 0],
             scale: [0, 1, 0],
             opacity: [0, 0.6, 0],
           }}
@@ -80,8 +92,8 @@ const FloatingParticles = () => {
             delay: Math.random() * 2,
           }}
           style={{
-            width: Math.random() * 6 + 2,
-            height: Math.random() * 6 + 2,
+            width: Math.random() * (isMobile ? 4 : 6) + 2,
+            height: Math.random() * (isMobile ? 4 : 6) + 2,
             background: COLORS.primary,
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -95,19 +107,35 @@ const FloatingParticles = () => {
 // Orbital Animation Component
 const OrbitalAnimation = () => {
   const [rotation, setRotation] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     const interval = setInterval(() => {
       setRotation(prev => (prev + 0.5) % 360);
     }, 50);
-    return () => clearInterval(interval);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
+  const size = isMobile ? 200 : 320;
+  const orbitRadius = isMobile ? 60 : 120;
+  const elementSize = isMobile ? 10 : 16;
+
   return (
-    <div className="relative w-80 h-80 mx-auto">
+    <div className={`relative ${isMobile ? 'w-48 h-48' : 'w-80 h-80'} mx-auto`}>
       {/* Central Orb */}
       <motion.div
-        className="absolute inset-20 bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-full shadow-2xl"
+        className={`absolute ${isMobile ? 'ins-12' : 'ins-20'} bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-full shadow-2xl`}
         animate={{
           scale: [1, 1.1, 1],
           boxShadow: [
@@ -122,15 +150,23 @@ const OrbitalAnimation = () => {
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center">
-          <Share2 className="h-16 w-16 text-white" />
+          <Share2 className={isMobile ? "h-8 w-8" : "h-16 w-16"} />
         </div>
       </motion.div>
 
       {/* Orbiting Elements */}
-      {[...Array(6)].map((_, i) => (
+      {[...Array(isMobile ? 4 : 6)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-16 h-16"
+          className="absolute"
+          style={{
+            width: elementSize * 2,
+            height: elementSize * 2,
+            left: '50%',
+            top: '50%',
+            marginLeft: -elementSize,
+            marginTop: -elementSize,
+          }}
           animate={{
             rotate: rotation * (i % 2 === 0 ? 1 : -1),
           }}
@@ -139,29 +175,23 @@ const OrbitalAnimation = () => {
             repeat: Number.POSITIVE_INFINITY,
             ease: "linear",
           }}
-          style={{
-            left: '50%',
-            top: '50%',
-            marginLeft: -32,
-            marginTop: -32,
-          }}
         >
           <motion.div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg"
+            className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} rounded-2xl flex items-center justify-center shadow-lg`}
             animate={{
-              x: 120 * Math.cos((i * 60 * Math.PI) / 180),
-              y: 120 * Math.sin((i * 60 * Math.PI) / 180),
+              x: orbitRadius * Math.cos((i * (360 / (isMobile ? 4 : 6)) * Math.PI) / 180),
+              y: orbitRadius * Math.sin((i * (360 / (isMobile ? 4 : 6)) * Math.PI) / 180),
             }}
             style={{
               background: `linear-gradient(135deg, ${COLORS.primary}, ${COLORS.darkPurple})`,
             }}
           >
             {i % 3 === 0 ? (
-              <Coins className="h-6 w-6 text-white" />
+              <Coins className={isMobile ? "h-4 w-4" : "h-6 w-6"} />
             ) : i % 3 === 1 ? (
-              <Users className="h-6 w-6 text-white" />
+              <Users className={isMobile ? "h-4 w-4" : "h-6 w-6"} />
             ) : (
-              <TrendingUp className="h-6 w-6 text-white" />
+              <TrendingUp className={isMobile ? "h-4 w-4" : "h-6 w-6"} />
             )}
           </motion.div>
         </motion.div>
@@ -169,13 +199,13 @@ const OrbitalAnimation = () => {
 
       {/* Connection Lines */}
       <svg className="absolute inset-0 w-full h-full">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(isMobile ? 4 : 6)].map((_, i) => (
           <motion.line
             key={i}
             x1="50%"
             y1="50%"
-            x2={50 + 40 * Math.cos((i * 60 * Math.PI) / 180) + '%'}
-            y2={50 + 40 * Math.sin((i * 60 * Math.PI) / 180) + '%'}
+            x2={50 + 30 * Math.cos((i * (360 / (isMobile ? 4 : 6)) * Math.PI) / 180) + '%'}
+            y2={50 + 30 * Math.sin((i * (360 / (isMobile ? 4 : 6)) * Math.PI) / 180) + '%'}
             stroke="url(#gradient)"
             strokeWidth="2"
             animate={{
@@ -202,6 +232,18 @@ const OrbitalAnimation = () => {
 
 // Animated Step Cards with Morphing Effect
 const AnimatedSteps = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const steps = [
     {
       icon: UserCheck,
@@ -230,16 +272,16 @@ const AnimatedSteps = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
       {steps.map((step, index) => (
         <motion.div
           key={step.title}
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          whileHover={{ 
+          whileHover={!isMobile ? { 
             y: -10, 
             scale: 1.05,
-          }}
+          } : {}}
           transition={{ 
             duration: 0.6, 
             delay: index * 0.1,
@@ -261,36 +303,36 @@ const AnimatedSteps = () => {
           />
           
           {/* Card Content */}
-          <div className="relative bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-8 border border-[#480056] group-hover:border-transparent transition-all duration-500 backdrop-blur-sm">
+          <div className="relative bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-6 md:p-8 border border-[#480056] group-hover:border-transparent transition-all duration-500 backdrop-blur-sm">
             {/* Animated Number */}
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               transition={{ delay: index * 0.2, type: "spring" }}
-              className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full flex items-center justify-center shadow-lg"
+              className="absolute -top-3 -right-3 w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full flex items-center justify-center shadow-lg"
             >
-              <span className="text-white font-bold text-sm">{index + 1}</span>
+              <span className="text-white font-bold text-xs md:text-sm">{index + 1}</span>
             </motion.div>
 
             {/* Icon */}
             <motion.div
               whileHover={{ 
-                scale: 1.2,
+                scale: !isMobile ? 1.2 : 1,
               }}
               transition={{ duration: 0.6 }}
-              className={`w-16 h-16 bg-gradient-to-r ${step.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
+              className={`${isMobile ? 'w-12 h-12' : 'w-16 h-16'} bg-gradient-to-r ${step.gradient} rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-lg`}
             >
-              <step.icon className="h-8 w-8 text-white" />
+              <step.icon className={isMobile ? "h-6 w-6" : "h-8 w-8"} />
             </motion.div>
             
-            <h3 className="text-white font-bold text-xl mb-4">{step.title}</h3>
-            <p className="text-gray-300 leading-relaxed">{step.description}</p>
+            <h3 className="text-white font-bold text-lg md:text-xl mb-3 md:mb-4">{step.title}</h3>
+            <p className="text-gray-300 leading-relaxed text-sm md:text-base">{step.description}</p>
 
             {/* Hover Effect Line */}
             <motion.div
               className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full"
               initial={{ width: 0 }}
-              whileHover={{ width: '100%' }}
+              whileHover={!isMobile ? { width: '100%' } : {}}
               transition={{ duration: 0.3 }}
             />
           </div>
@@ -302,6 +344,18 @@ const AnimatedSteps = () => {
 
 // Floating Benefits Grid
 const FloatingBenefits = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const benefits = [
     {
       icon: Coins,
@@ -336,15 +390,15 @@ const FloatingBenefits = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {benefits.map((benefit, index) => (
         <motion.div
           key={benefit.title}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ 
+          whileHover={!isMobile ? { 
             y: -15,
-          }}
+          } : {}}
           transition={{ 
             duration: 0.6, 
             delay: index * 0.1,
@@ -356,18 +410,18 @@ const FloatingBenefits = () => {
           {/* Floating Animation */}
           <motion.div
             animate={{
-              y: [0, -10, 0],
+              y: isMobile ? 0 : [0, -10, 0],
             }}
             transition={{
               duration: 3 + index * 0.5,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut"
             }}
-            className="bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-8 border border-[#480056] group-hover:border-transparent transition-all duration-500 backdrop-blur-sm"
+            className="bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-6 md:p-8 border border-[#480056] group-hover:border-transparent transition-all duration-500 backdrop-blur-sm"
           >
             {/* Animated Icon Background */}
             <motion.div
-              className="absolute top-4 right-4 w-20 h-20 rounded-full opacity-10"
+              className="absolute top-4 right-4 w-16 h-16 md:w-20 md:h-20 rounded-full opacity-10"
               animate={{
                 scale: [1, 1.2, 1],
                 opacity: [0.1, 0.2, 0.1],
@@ -382,17 +436,17 @@ const FloatingBenefits = () => {
             
             <motion.div
               whileHover={{ 
-                scale: 1.1,
+                scale: !isMobile ? 1.1 : 1,
               }}
               transition={{ duration: 0.6 }}
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative z-10"
+              className={`${isMobile ? 'w-12 h-12' : 'w-14 h-14'} rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-lg relative z-10`}
               style={{ background: benefit.color }}
             >
-              <benefit.icon className="h-7 w-7 text-white" />
+              <benefit.icon className={isMobile ? "h-5 w-5" : "h-7 w-7"} />
             </motion.div>
             
-            <h4 className="text-white font-bold text-xl mb-4 relative z-10">{benefit.title}</h4>
-            <p className="text-gray-300 leading-relaxed relative z-10">{benefit.description}</p>
+            <h4 className="text-white font-bold text-lg md:text-xl mb-3 md:mb-4 relative z-10">{benefit.title}</h4>
+            <p className="text-gray-300 leading-relaxed text-sm md:text-base relative z-10">{benefit.description}</p>
 
             {/* Sparkle Effect */}
             <motion.div
@@ -415,6 +469,18 @@ const FloatingBenefits = () => {
 
 // Who Can Refer Grid Component
 const WhoCanReferGrid = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const referrers = [
     {
       icon: Users,
@@ -443,26 +509,26 @@ const WhoCanReferGrid = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {referrers.map((referrer, index) => (
         <motion.div
           key={referrer.title}
           initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: index * 0.2, duration: 0.6 }}
-          whileHover={{ y: -10, scale: 1.02 }}
-          className="bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-8 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 group"
+          whileHover={!isMobile ? { y: -10, scale: 1.02 } : {}}
+          className="bg-gradient-to-br from-[#19001d] to-black rounded-3xl p-6 md:p-8 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 group"
         >
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: !isMobile ? 1.1 : 1 }}
             transition={iconTransition}
-            className="w-16 h-16 bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-2xl flex items-center justify-center mb-6 shadow-lg"
+            className={`${isMobile ? 'w-12 h-12' : 'w-16 h-16'} bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-lg`}
           >
-            <referrer.icon className="h-8 w-8 text-white" />
+            <referrer.icon className={isMobile ? "h-6 w-6" : "h-8 w-8"} />
           </motion.div>
           
-          <h4 className="text-white font-bold text-xl mb-4">{referrer.title}</h4>
-          <p className="text-gray-300 leading-relaxed">{referrer.description}</p>
+          <h4 className="text-white font-bold text-lg md:text-xl mb-3 md:mb-4">{referrer.title}</h4>
+          <p className="text-gray-300 leading-relaxed text-sm md:text-base">{referrer.description}</p>
 
           {/* Hover glow effect */}
           <motion.div
@@ -483,6 +549,18 @@ const WhoCanReferGrid = () => {
 
 // Analytics Features Component
 const AnalyticsFeatures = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const features = [
     {
       icon: UserPlus,
@@ -511,26 +589,26 @@ const AnalyticsFeatures = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {features.map((feature, index) => (
         <motion.div
           key={feature.title}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1, duration: 0.6 }}
-          whileHover={{ y: -8, scale: 1.05 }}
-          className="bg-gradient-to-br from-[#19001d] to-black rounded-2xl p-6 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 text-center group"
+          whileHover={!isMobile ? { y: -8, scale: 1.05 } : {}}
+          className="bg-gradient-to-br from-[#19001d] to-black rounded-2xl p-4 md:p-6 border border-[#480056] hover:border-[#b45ecf] transition-all duration-300 text-center group"
         >
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: !isMobile ? 1.1 : 1 }}
             transition={iconTransition}
-            className="w-14 h-14 bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-xl flex items-center justify-center mb-4 mx-auto shadow-lg"
+            className={`${isMobile ? 'w-10 h-10' : 'w-14 h-14'} bg-gradient-to-br from-[#b45ecf] to-[#480056] rounded-xl flex items-center justify-center mb-3 md:mb-4 mx-auto shadow-lg`}
           >
-            <feature.icon className="h-7 w-7 text-white" />
+            <feature.icon className={isMobile ? "h-5 w-5" : "h-7 w-7"} />
           </motion.div>
           
-          <h4 className="text-white font-bold text-lg mb-3">{feature.title}</h4>
-          <p className="text-gray-300 text-sm leading-relaxed">{feature.description}</p>
+          <h4 className="text-white font-bold text-base md:text-lg mb-2 md:mb-3">{feature.title}</h4>
+          <p className="text-gray-300 text-xs md:text-sm leading-relaxed">{feature.description}</p>
 
           {/* Pulse animation on hover */}
           <motion.div
@@ -554,29 +632,43 @@ const AnalyticsFeatures = () => {
 
 // Pulse Wave Section
 const PulseWaveSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {/* Pulse Waves */}
-      <div className="absolute inset-0">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0 rounded-full"
-            animate={{
-              scale: [1, 2, 1],
-              opacity: [0.1, 0.05, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i * 1.5,
-            }}
-            style={{
-              background: `radial-gradient(circle, ${COLORS.primary}20, transparent)`,
-            }}
-          />
-        ))}
-      </div>
+      {!isMobile && (
+        <div className="absolute inset-0">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute inset-0 rounded-full"
+              animate={{
+                scale: [1, 2, 1],
+                opacity: [0.1, 0.05, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 1.5,
+              }}
+              style={{
+                background: `radial-gradient(circle, ${COLORS.primary}20, transparent)`,
+              }}
+            />
+          ))}
+        </div>
+      )}
       
       <div className="relative z-10">
         {children}
@@ -587,10 +679,22 @@ const PulseWaveSection = ({ children, className = "" }: { children: React.ReactN
 
 // Animated Background Grid
 const AnimatedGrid = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
-      <div className="grid grid-cols-12 gap-4 h-full">
-        {[...Array(144)].map((_, i) => (
+      <div className={`grid ${isMobile ? 'grid-cols-8' : 'grid-cols-12'} gap-4 h-full`}>
+        {[...Array(isMobile ? 64 : 144)].map((_, i) => (
           <motion.div
             key={i}
             className="bg-current rounded"
@@ -633,14 +737,14 @@ export default function ReferralProgramPage() {
         <FloatingParticles />
         
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen py-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
             
             {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              className="relative space-y-8"
+              className="relative space-y-6 lg:space-y-8"
             >
               {/* Animated Badge */}
               <motion.div
@@ -657,10 +761,10 @@ export default function ReferralProgramPage() {
                     ],
                   }}
                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-                  className="px-6 py-3 rounded-full shadow-2xl"
+                  className="px-4 py-2 md:px-6 md:py-3 rounded-full shadow-2xl"
                 >
-                  <span className="text-white font-bold text-sm uppercase tracking-wider flex items-center">
-                    <Sparkle className="h-4 w-4 mr-2" />
+                  <span className="text-white font-bold text-xs md:text-sm uppercase tracking-wider flex items-center">
+                    <Sparkle className="h-3 w-3 md:h-4 md:w-4 mr-2" />
                     360Airo Referral Program
                   </span>
                 </motion.div>
@@ -671,9 +775,9 @@ export default function ReferralProgramPage() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="space-y-6"
+                className="space-y-4 lg:space-y-6"
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
                   <motion.span
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -696,11 +800,11 @@ export default function ReferralProgramPage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1 }}
-                  className="text-2xl text-white/80 font-light leading-relaxed"
+                  className="text-lg md:text-2xl text-white/80 font-light leading-relaxed"
                 >
                   Your Network Deserves Smarter Outreach
                   <br />
-                  <span className="text-white/60">(And You Deserve Rewards for Sharing It)</span>
+                  <span className="text-white/60 text-base md:text-xl">(And You Deserve Rewards for Sharing It)</span>
                 </motion.p>
               </motion.div>
 
@@ -711,11 +815,11 @@ export default function ReferralProgramPage() {
                 transition={{ delay: 1.2, duration: 0.7 }}
                 className="space-y-4 max-w-xl"
               >
-                <p className="text-lg text-white/70 leading-relaxed">
+                <p className="text-base md:text-lg text-white/70 leading-relaxed">
                   <span className="text-white font-semibold">Growth feels better when it's shared.</span>{' '}
                   With the 360Airo Referral Program, you can introduce your network to a platform that simplifies outreach — and earn rewards every time someone joins through your link.
                 </p>
-                <p className="text-lg text-white/70 leading-relaxed">
+                <p className="text-base md:text-lg text-white/70 leading-relaxed">
                   Whether you're referring a teammate, an agency, or a friend running cold email campaigns, everyone wins. You help others scale smarter, and we reward you for spreading the word.
                 </p>
               </motion.div>
@@ -725,7 +829,7 @@ export default function ReferralProgramPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.4, duration: 0.6 }}
-                className="pt-8"
+                className="pt-6 lg:pt-8"
               >
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -734,7 +838,8 @@ export default function ReferralProgramPage() {
                 >
                   <Button 
                     size="lg" 
-                    className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-8 py-4 text-lg font-bold rounded-2xl shadow-2xl border-0"
+                    className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold rounded-2xl shadow-2xl border-0"
+                    onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
                     <motion.span
                       animate={{
@@ -749,7 +854,7 @@ export default function ReferralProgramPage() {
                     />
                     <span className="relative z-10 flex items-center">
                       Get Your Referral Link
-                      <ArrowRight className="ml-3 h-5 w-5" />
+                      <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-5 md:w-5" />
                     </span>
                   </Button>
                 </motion.div>
@@ -761,7 +866,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative"
+              className="relative order-first lg:order-last mb-8 lg:mb-0"
             >
               <OrbitalAnimation />
             </motion.div>
@@ -770,19 +875,19 @@ export default function ReferralProgramPage() {
       </section>
 
       {/* How It Works Section */}
-      <PulseWaveSection className="py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
+      <PulseWaveSection className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
             <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 lg:mb-6"
             >
               How the Referral Program Works
             </motion.h2>
@@ -790,7 +895,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
             >
               We designed our refer and earn system to be as simple and transparent as possible
             </motion.p>
@@ -803,16 +908,16 @@ export default function ReferralProgramPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-16 text-center"
+            className="mt-12 lg:mt-16 text-center"
           >
-            <p className="text-white/80 text-lg leading-relaxed max-w-4xl mx-auto">
+            <p className="text-white/80 text-base md:text-lg leading-relaxed max-w-4xl mx-auto">
               You can track every click, conversion, and earning inside your referral dashboard, giving you real-time visibility into your performance.
             </p>
             <motion.p
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-white text-xl font-bold mt-6 bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent"
+              className="text-white text-lg md:text-xl font-bold mt-4 lg:mt-6 bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent"
             >
               The more you share, the more you earn — and there's no cap on how much you can make.
             </motion.p>
@@ -821,20 +926,20 @@ export default function ReferralProgramPage() {
       </PulseWaveSection>
 
       {/* Why Join Section */}
-      <section className="py-20 px-6 bg-[#19001d] relative overflow-hidden">
+      <section className="py-12 lg:py-20 px-6 bg-[#19001d] relative overflow-hidden">
         <FloatingParticles />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
             <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 lg:mb-6"
             >
               Why Join the 360Airo Referral Program
             </motion.h2>
@@ -842,7 +947,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
             >
               We believe in rewarding relationships. That's why our customer referral program is designed to benefit both sides — you and your network.
             </motion.p>
@@ -855,7 +960,7 @@ export default function ReferralProgramPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-16 text-center"
+            className="mt-12 lg:mt-16 text-center"
           >
             <motion.p
               animate={{
@@ -866,7 +971,7 @@ export default function ReferralProgramPage() {
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "linear"
               }}
-              className="text-2xl font-bold italic bg-gradient-to-r from-[#b45ecf] via-[#480056] to-[#b45ecf] bg-clip-text text-transparent bg-size-200"
+              className="text-xl md:text-2xl font-bold italic bg-gradient-to-r from-[#b45ecf] via-[#480056] to-[#b45ecf] bg-clip-text text-transparent bg-size-200"
             >
               Our program isn't about one-time rewards — it's about building partnerships that grow alongside your influence.
             </motion.p>
@@ -875,19 +980,19 @@ export default function ReferralProgramPage() {
       </section>
 
       {/* Who Can Become a Referrer Section */}
-      <PulseWaveSection className="py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
+      <PulseWaveSection className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
             <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 lg:mb-6"
             >
               Who Can Become a 360Airo Referrer
             </motion.h2>
@@ -895,7 +1000,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
             >
               You don't need to be an influencer or a marketer — just someone who loves helping businesses grow.
             </motion.p>
@@ -908,9 +1013,9 @@ export default function ReferralProgramPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-12 text-center"
+            className="mt-8 lg:mt-12 text-center"
           >
-            <p className="text-white text-xl font-bold bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent">
+            <p className="text-white text-lg md:text-xl font-bold bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent">
               If you believe in smarter communication, you already qualify.
             </p>
           </motion.div>
@@ -918,20 +1023,20 @@ export default function ReferralProgramPage() {
       </PulseWaveSection>
 
       {/* Track, Grow, and Earn Section */}
-      <section className="py-20 px-6 bg-[#19001d] relative overflow-hidden">
+      <section className="py-12 lg:py-20 px-6 bg-[#19001d] relative overflow-hidden">
         <FloatingParticles />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-12 lg:mb-16"
           >
             <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 lg:mb-6"
             >
               Track, Grow, and Earn Transparently
             </motion.h2>
@@ -939,7 +1044,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
             >
               Transparency is at the heart of our referral management system. Every referral you make is logged and monitored — from click to conversion — so you always know exactly how much you've earned.
             </motion.p>
@@ -952,9 +1057,9 @@ export default function ReferralProgramPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-12 text-center"
+            className="mt-8 lg:mt-12 text-center"
           >
-            <p className="text-white text-xl font-bold">
+            <p className="text-white text-lg md:text-xl font-bold">
               No hidden policies, no guesswork — just clear numbers that reward your effort.
             </p>
           </motion.div>
@@ -962,19 +1067,19 @@ export default function ReferralProgramPage() {
       </section>
 
       {/* Final CTA Section */}
-      <PulseWaveSection className="py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
+      <PulseWaveSection className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6 lg:space-y-8"
           >
             <motion.h2
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-6xl font-black text-white mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 lg:mb-6"
             >
               Your Influence, Rewarded
             </motion.h2>
@@ -983,7 +1088,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
             >
               The 360Airo Referral Program isn't just a reward system — it's a way to turn your professional network into a revenue stream. By helping others discover automation that improves email deliverability, lead engagement, and campaign performance, you build your influence while earning long-term rewards.
             </motion.p>
@@ -992,7 +1097,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-2xl text-white font-bold bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent"
+              className="text-xl md:text-2xl text-white font-bold bg-gradient-to-r from-[#b45ecf] to-[#480056] bg-clip-text text-transparent"
             >
               Every referral brings value to two sides — the user who grows faster, and you, who grows alongside them.
             </motion.p>
@@ -1001,7 +1106,7 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="pt-8"
+              className="pt-6 lg:pt-8"
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -1010,7 +1115,8 @@ export default function ReferralProgramPage() {
               >
                 <Button 
                   size="lg" 
-                  className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl border-0"
+                  className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-bold rounded-2xl shadow-2xl border-0"
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
                   <motion.span
                     animate={{
@@ -1025,7 +1131,7 @@ export default function ReferralProgramPage() {
                   />
                   <span className="relative z-10 flex items-center">
                     Start Referring Today — It Only Takes a Minute
-                    <ArrowRight className="ml-3 h-6 w-6" />
+                    <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-6 md:w-6" />
                   </span>
                 </Button>
               </motion.div>
@@ -1035,15 +1141,15 @@ export default function ReferralProgramPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="space-y-4 pt-8"
+              className="space-y-4 pt-6 lg:pt-8"
             >
-              <p className="text-white/80 text-lg italic">
+              <p className="text-white/80 text-base md:text-lg italic">
                 Don't let your recommendations go unrewarded.
               </p>
-              <p className="text-white/70 text-lg">
+              <p className="text-white/70 text-base md:text-lg">
                 Join the 360Airo Referral Program today and earn for every successful signup you bring in.
               </p>
-              <p className="text-white text-xl font-bold">
+              <p className="text-white text-lg md:text-xl font-bold">
                 Empower your network. Boost your income. Grow together.
               </p>
             </motion.div>

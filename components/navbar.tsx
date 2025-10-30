@@ -153,23 +153,25 @@ const features = [
     icon: Users2,
     color: 'from-purple-500 to-pink-400',
     tag: 'New'
-},
-{
+  },
+  {
     name: 'Prospect Management',
     href: '/features/prospect-management',
     description: 'Centralize, organize, and track all your leads efficiently',
     icon: Database,
     color: 'from-indigo-500 to-purple-400',
     tag: 'New'
-}
+  }
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false); // New state for mobile dropdown
   const [activeItem, setActiveItem] = useState('/');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -185,7 +187,7 @@ export function Navbar() {
     setActiveItem(window.location.pathname);
   }, []);
 
-  // Clean hover handlers
+  // Clean hover handlers for desktop
   const showDropdown = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -210,6 +212,11 @@ export function Navbar() {
     }
   }, []);
 
+  // Handle mobile features toggle
+  const toggleMobileFeatures = useCallback(() => {
+    setMobileFeaturesOpen(!mobileFeaturesOpen);
+  }, [mobileFeaturesOpen]);
+
   // Handle Features click - navigate and close dropdown
   const handleFeaturesClick = useCallback((e: React.MouseEvent) => {
     // Only navigate if it's a direct click (not from hover)
@@ -227,6 +234,20 @@ export function Navbar() {
   // Handle get started redirect
   const handleGetStarted = useCallback(() => {
     window.location.href = 'https://app.360airo.com';
+  }, []);
+
+  // Close mobile dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
+        setMobileFeaturesOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   // Cleanup on unmount
@@ -520,7 +541,7 @@ export function Navbar() {
           {isOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: '80vh' }}
+              animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="lg:hidden bg-[#1a0b2e] border-t border-[#8B5CF6]/20"
@@ -528,82 +549,101 @@ export function Navbar() {
                 background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)'
               }}
             >
-              <div className="h-full flex flex-col">
-                {/* Scrollable Content */}
-                <div className="flex-1 overflow-y-auto">
-                  <div className="px-4 py-6 space-y-2">
-                    <MobileNavLink href="/" label="Home" onClick={() => setIsOpen(false)} />
-                    
-                    {/* Mobile Features Section */}
-                    <div className="space-y-2">
-                      <Link
-                        href="/features"
-                        onClick={() => setIsOpen(false)}
-                        className="flex items-center space-x-2 px-4 py-3 text-white font-semibold hover:bg-white/10 rounded-xl transition-all duration-300"
-                      >
-                        <div className="w-4 h-4 relative">
-                          <Image
-                            src="/favicon_360airo__1_-removebg-preview.png"
-                            alt="360airo Logo"
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                        <span>Features</span>
-                      </Link>
-                      <div className="max-h-96 overflow-y-auto space-y-2">
-                        {features.map((feature, index) => (
-                          <motion.div
-                            key={feature.name}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.05, duration: 0.3 }}
-                          >
-                            <Link
-                              href={feature.href}
-                              onClick={() => setIsOpen(false)}
-                              className="flex items-center space-x-4 px-6 py-4 text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 group"
-                            >
-                              <div className={`w-8 h-8 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                                <feature.icon className="h-4 w-4 text-white" />
-                              </div>
-                              <div className="flex-1">
-                                <div className="font-medium">{feature.name}</div>
-                                <div className="text-xs text-white/50">{feature.description}</div>
-                              </div>
-                              {feature.tag && (
-                                <span className="text-xs px-2 py-1 bg-white/10 rounded-full border border-white/20">
-                                  {feature.tag}
-                                </span>
-                              )}
-                            </Link>
-                          </motion.div>
-                        ))}
+              <div className="px-4 py-6 space-y-2">
+                <MobileNavLink href="/" label="Home" onClick={() => setIsOpen(false)} />
+                
+                {/* Mobile Features Dropdown */}
+                <div ref={mobileDropdownRef} className="space-y-2">
+                  <button
+                    onClick={toggleMobileFeatures}
+                    className="flex items-center justify-between w-full px-4 py-3 text-white font-semibold hover:bg-white/10 rounded-xl transition-all duration-300"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <div className="w-4 h-4 relative">
+                        <Image
+                          src="/favicon_360airo__1_-removebg-preview.png"
+                          alt="360airo Logo"
+                          fill
+                          className="object-contain"
+                        />
                       </div>
+                      <span>Features</span>
                     </div>
+                    <motion.div
+                      animate={{ rotate: mobileFeaturesOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </motion.div>
+                  </button>
 
-                    <MobileNavLink href="/pricing" label="Pricing" onClick={() => setIsOpen(false)} />
-                    <MobileNavLink href="/blogs" label="Blog" onClick={() => setIsOpen(false)} />
-                  </div>
+                  {/* Mobile Features Dropdown Content */}
+                  <AnimatePresence>
+                    {mobileFeaturesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="max-h-64 overflow-y-auto space-y-2 ml-4 border-l border-[#8B5CF6]/20 pl-4">
+                          {features.map((feature, index) => (
+                            <motion.div
+                              key={feature.name}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.03, duration: 0.2 }}
+                            >
+                              <Link
+                                href={feature.href}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setMobileFeaturesOpen(false);
+                                }}
+                                className="flex items-center space-x-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 group"
+                              >
+                                <div className={`w-8 h-8 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                                  <feature.icon className="h-4 w-4 text-white" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center space-x-2">
+                                    <div className="font-medium text-sm">{feature.name}</div>
+                                    {feature.tag && (
+                                      <span className="text-xs px-1.5 py-0.5 bg-white/10 rounded-full border border-white/20 flex-shrink-0">
+                                        {feature.tag}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="text-xs text-white/50 line-clamp-1">{feature.description}</div>
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
-                {/* Fixed Bottom CTA */}
-                <div className="border-t border-[#8B5CF6]/20 bg-[#1a0b2e]/80 backdrop-blur-lg p-4">
-                  <div className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-[#8B5CF6]/30 text-white hover:bg-white/10 transition-all duration-300"
-                      onClick={handleLogin}
-                    >
-                      Login
-                    </Button>
-                    <Button 
-                      className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white font-semibold"
-                      onClick={handleGetStarted}
-                    >
-                      Get Started Free
-                    </Button>
-                  </div>
+                <MobileNavLink href="/pricing" label="Pricing" onClick={() => setIsOpen(false)} />
+                <MobileNavLink href="/blogs" label="Blog" onClick={() => setIsOpen(false)} />
+
+                {/* Mobile CTA Buttons */}
+                <div className="pt-4 border-t border-[#8B5CF6]/20 space-y-3">
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-[#8B5CF6]/30 text-white hover:bg-white/10 transition-all duration-300"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </Button>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white font-semibold"
+                    onClick={handleGetStarted}
+                  >
+                    Get Started Free
+                  </Button>
                 </div>
               </div>
             </motion.div>

@@ -70,6 +70,7 @@ const PricingParticles = () => {
           animate={{
             y: [0, -100, 0],
             opacity: [0, 1, 0],
+            rotate: [0, 180, 360],
           }}
           transition={{
             duration: 8 + (i % 4) * 2,
@@ -167,6 +168,17 @@ const PricingCards = () => {
   ];
 
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -175,9 +187,9 @@ const PricingCards = () => {
           key={plan.name}
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ y: -10 }}
-          onHoverStart={() => setHoveredCard(index)}
-          onHoverEnd={() => setHoveredCard(null)}
+          whileHover={!isMobile ? { y: -10 } : {}}
+          onHoverStart={() => !isMobile && setHoveredCard(index)}
+          onHoverEnd={() => !isMobile && setHoveredCard(null)}
           transition={{ 
             duration: 0.6, 
             delay: index * 0.2,
@@ -189,8 +201,8 @@ const PricingCards = () => {
           {/* Popular Badge */}
           {plan.popular && (
             <motion.div
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
+              initial={{ scale: 0, rotate: -180 }}
+              whileInView={{ scale: 1, rotate: 0 }}
               transition={{ delay: 0.5, type: "spring" }}
               className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
             >
@@ -220,7 +232,7 @@ const PricingCards = () => {
             {/* Header */}
             <div className="text-center mb-8 relative z-10">
               <motion.div
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.1, rotate: 360 }}
                 transition={{ duration: 0.6 }}
                 className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
                 style={{ background: plan.color }}
@@ -283,6 +295,7 @@ const PricingCards = () => {
                   background: plan.color,
                   borderColor: plan.color
                 }}
+                onClick={() => window.open('https://app.360airo.com/', '_blank')}
               >
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -336,6 +349,18 @@ const IncludedFeatures = () => {
     }
   ];
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
       {features.map((feature, index) => (
@@ -343,9 +368,10 @@ const IncludedFeatures = () => {
           key={feature.title}
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          whileHover={{ 
+          whileHover={!isMobile ? { 
             scale: 1.05,
-          }}
+            rotateY: 10,
+          } : {}}
           transition={{ 
             duration: 0.6, 
             delay: index * 0.1,
@@ -354,7 +380,7 @@ const IncludedFeatures = () => {
           className="bg-[#1A1A1A] rounded-2xl p-6 border-2 border-gray-800 hover:border-current transition-all duration-300 group perspective-1000"
         >
           <motion.div
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.1, rotate: 360 }}
             transition={{ duration: 0.6 }}
             className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-lg"
             style={{ background: feature.color }}
@@ -391,25 +417,36 @@ const ComparisonTable = () => {
   ];
 
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div className="max-w-4xl mx-auto bg-[#1A1A1A] rounded-3xl p-8 border-2 border-gray-800">
       <div className="grid grid-cols-4 gap-4 text-center mb-6">
         <div></div>
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileHover={!isMobile ? { scale: 1.05 } : {}}
           className="text-sm font-bold text-purple-400"
         >
           Starter
         </motion.div>
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileHover={!isMobile ? { scale: 1.05 } : {}}
           className="text-sm font-bold text-purple-500"
         >
           Growth
         </motion.div>
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          whileHover={!isMobile ? { scale: 1.05 } : {}}
           className="text-sm font-bold text-purple-600"
         >
           Pro
@@ -422,8 +459,8 @@ const ComparisonTable = () => {
             key={feature.name}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            onHoverStart={() => setHoveredRow(index)}
-            onHoverEnd={() => setHoveredRow(null)}
+            onHoverStart={() => !isMobile && setHoveredRow(index)}
+            onHoverEnd={() => !isMobile && setHoveredRow(null)}
             transition={{ duration: 0.4, delay: index * 0.1 }}
             className={`grid grid-cols-4 gap-4 p-4 rounded-2xl transition-all duration-300 ${
               hoveredRow === index ? 'bg-purple-500/10 border border-purple-500/30' : 'bg-[#0A0A0A]'
@@ -433,19 +470,19 @@ const ComparisonTable = () => {
               {feature.name}
             </div>
             <motion.div
-              animate={{ scale: hoveredRow === index ? 1.1 : 1 }}
+              animate={{ scale: !isMobile && hoveredRow === index ? 1.1 : 1 }}
               className="text-gray-300 text-sm text-center"
             >
               {feature.starter}
             </motion.div>
             <motion.div
-              animate={{ scale: hoveredRow === index ? 1.1 : 1 }}
+              animate={{ scale: !isMobile && hoveredRow === index ? 1.1 : 1 }}
               className="text-gray-300 text-sm text-center"
             >
               {feature.growth}
             </motion.div>
             <motion.div
-              animate={{ scale: hoveredRow === index ? 1.1 : 1 }}
+              animate={{ scale: !isMobile && hoveredRow === index ? 1.1 : 1 }}
               className="text-gray-300 text-sm text-center"
             >
               {feature.pro}
@@ -526,6 +563,7 @@ const FreeTrialSection = () => {
             size="lg"
             className="px-12 py-6 text-xl font-bold rounded-xl shadow-2xl shadow-purple-500/50 border-0"
             style={{ background: COLORS.purpleLight }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
           >
             <Sparkles className="mr-3 h-6 w-6" />
             Start Free Trial
@@ -595,7 +633,7 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-tight"
+                className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight"
               >
                 <span className="block">Simple Plans for</span>
                 <motion.span
@@ -619,7 +657,7 @@ export default function PricingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
-                className="text-2xl text-white/80 font-light leading-relaxed"
+                className="text-xl sm:text-2xl text-white/80 font-light leading-relaxed"
               >
                 Start Smart. Scale Seamlessly. Pay Only for What You Need.
               </motion.p>
@@ -630,10 +668,10 @@ export default function PricingPage() {
                 transition={{ delay: 1.2, duration: 0.7 }}
                 className="space-y-4 max-w-2xl mx-auto"
               >
-                <p className="text-lg text-white/70 leading-relaxed">
+                <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                   At 360Airo, we believe pricing should be as straightforward as your outreach. That's why our pricing plans are designed to grow with you — whether you're a solo founder testing cold emails or a full-scale team managing multi-channel campaigns.
                 </p>
-                <p className="text-lg text-white/70 leading-relaxed">
+                <p className="text-base sm:text-lg text-white/70 leading-relaxed">
                   Choose the plan that fits your workflow and goals. No hidden fees, no setup costs — just transparent value.
                 </p>
               </motion.div>
@@ -649,14 +687,7 @@ export default function PricingPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button 
-                    size="lg" 
-                    className="px-8 py-4 text-lg font-bold rounded-xl shadow-2xl border-0"
-                    style={{ background: COLORS.purpleLight }}
-                  >
-                    View Pricing Plans
-                    <ArrowRight className="ml-3 h-5 w-5" />
-                  </Button>
+
                 </motion.div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
@@ -667,6 +698,7 @@ export default function PricingPage() {
                     variant="outline"
                     className="px-8 py-4 text-lg font-bold rounded-xl border-2"
                     style={{ borderColor: COLORS.purpleDark, color: COLORS.white }}
+                    onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
                     Start Free Trial
                     <Sparkles className="ml-3 h-5 w-5" />
@@ -692,7 +724,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6"
             >
               Find the Perfect Plan for Your Outreach Goals
             </motion.h2>
@@ -700,7 +732,7 @@ export default function PricingPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto"
             >
               Each 360Airo plan comes with built-in access to our full suite of AI-powered tools — including email warmup, AI automation, LinkedIn outreach, prospect CRM, and reports & analytics.
             </motion.p>
@@ -734,7 +766,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-black mb-6"
               style={{ color: COLORS.purpleLight }}
             >
               What's Included in Every Plan
@@ -743,7 +775,7 @@ export default function PricingPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto"
             >
               No matter which plan you choose, every user gets access to our complete suite of features.
             </motion.p>
@@ -778,7 +810,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6"
             >
               Compare Plans Side by Side
             </motion.h2>
@@ -786,7 +818,7 @@ export default function PricingPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-white/70 max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-white/70 max-w-3xl mx-auto"
             >
               Not sure which plan is right for you? Our interactive pricing comparison lets you evaluate key features.
             </motion.p>
@@ -817,7 +849,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
-              className="text-5xl md:text-6xl font-black text-white mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6"
             >
               Simple, Transparent, Scalable
             </motion.h2>
@@ -826,7 +858,7 @@ export default function PricingPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+              className="text-lg sm:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
             >
               At 360Airo, we don't lock you in — we grow with you. Upgrade, downgrade, or cancel anytime. Your data, campaigns, and progress remain secure.
             </motion.p>
@@ -835,7 +867,7 @@ export default function PricingPage() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-lg text-white/60 leading-relaxed max-w-3xl mx-auto"
+              className="text-base sm:text-lg text-white/60 leading-relaxed max-w-3xl mx-auto"
             >
               Every plan is built to ensure that whether you're sending 100 emails a day or 10,000, your outreach stays consistent, compliant, and impactful.
             </motion.p>
@@ -850,14 +882,7 @@ export default function PricingPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button 
-                  size="lg" 
-                  className="px-12 py-6 text-xl font-bold rounded-xl shadow-2xl border-0"
-                  style={{ background: COLORS.purpleLight }}
-                >
-                  View Pricing Plans
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Button>
+
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -866,11 +891,12 @@ export default function PricingPage() {
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="px-12 py-6 text-xl font-bold rounded-xl border-2"
+                  className="px-8 sm:px-12 py-6 text-lg sm:text-xl font-bold rounded-xl border-2"
                   style={{ borderColor: COLORS.purpleDark, color: COLORS.white }}
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
                   Start Free Trial
-                  <Sparkles className="ml-3 h-6 w-6" />
+                  <Sparkles className="ml-3 h-5 sm:h-6 w-5 sm:w-6" />
                 </Button>
               </motion.div>
             </motion.div>

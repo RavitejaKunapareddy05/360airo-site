@@ -112,19 +112,19 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Newsletter Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-r from-[#b45ecf]/10 to-[#480056]/10 rounded-2xl p-6 mb-12 border border-[#b45ecf]/20 backdrop-blur-lg"
+          className="bg-gradient-to-r from-[#b45ecf]/10 to-[#480056]/10 rounded-2xl p-4 sm:p-6 mb-8 lg:mb-12 border border-[#b45ecf]/20 backdrop-blur-lg"
         >
-          <div className="grid lg:grid-cols-2 gap-6 items-center">
-            <div>
+          <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 items-center">
+            <div className="text-left">
               <div className="flex items-center mb-3">
                 <Zap className="h-5 w-5 text-[#b45ecf] mr-2" />
-                <h3 className="text-xl font-bold text-white">
+                <h3 className="text-lg sm:text-xl font-bold text-white">
                   Stay Ahead in Prospecting
                 </h3>
               </div>
@@ -133,7 +133,7 @@ export function Footer() {
               </p>
             </div>
             <div className="relative">
-              <form onSubmit={handleSubscribe} className="flex space-x-3">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   value={email}
@@ -142,7 +142,7 @@ export function Footer() {
                     clearError();
                   }}
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 rounded-lg bg-black/50 border border-[#b45ecf]/30 text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf] transition-colors text-sm"
+                  className="flex-1 px-4 py-3 sm:py-2 rounded-lg bg-black/50 border border-[#b45ecf]/30 text-white placeholder-white/50 focus:outline-none focus:border-[#b45ecf] transition-colors text-sm"
                   required
                   disabled={isLoading}
                 />
@@ -151,7 +151,7 @@ export function Footer() {
                   disabled={isLoading}
                   whileHover={{ scale: isLoading ? 1 : 1.05 }}
                   whileTap={{ scale: isLoading ? 1 : 0.95 }}
-                  className="px-5 py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm min-w-[120px] justify-center"
+                  className="px-5 py-3 sm:py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm min-w-[140px] sm:min-w-[120px]"
                 >
                   {isLoading ? (
                     <>
@@ -212,10 +212,10 @@ export function Footer() {
           </div>
         </motion.div>
 
-        {/* Rest of footer content remains the same */}
+        {/* Footer Links Grid - All Left Aligned */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
           {/* Brand Section */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="md:col-span-2 lg:col-span-2 space-y-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -295,7 +295,6 @@ export function Footer() {
                 { name: 'Pricing', path: '/pricing' },
                 { name: 'AI SDR', path: '/ai-sdr-page' },
                 { name: 'Integrations', path: '/airo-integrations' },
-                // { name: 'API', path: '/api' }
               ].map((item, index) => (
                 <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
                   <Link 
@@ -322,11 +321,10 @@ export function Footer() {
             </motion.h4>
             <ul className="space-y-2">
               {[
-                { name: 'Blog', path: '/blog' },
+                { name: 'Blog', path: '/blogs' },
                 { name: '360 Academy', path: '/360-academy' },
                 { name: 'Case Studies', path: '/airo-case-studies' },
                 { name: 'Community', path: '/community' },
-                // { name: 'Help Center', path: '/help-center' }
               ].map((item, index) => (
                 <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
                   <Link 
@@ -353,11 +351,8 @@ export function Footer() {
             </motion.h4>
             <ul className="space-y-2">
               {[
-                // { name: 'About Us', path: '/about-us' },
-                // { name: 'Careers', path: '/careers' },
-                { name: 'Privacy Policy', path: '/privacy-policy' },
-                { name: 'Anti-Spam Policy', path: '/anti-spam-policy' }
-        
+                { name: 'Privacy Policy', path: '/Privacy-Policy-Page' },
+                { name: 'Anti-Spam Policy', path: '/anti-Spam-Policy' }
               ].map((item, index) => (
                 <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
                   <Link 
@@ -402,7 +397,7 @@ export function Footer() {
           className="border-t border-[#b45ecf]/20 pt-6"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-white/60 text-xs text-center md:text-left">
+            <div className="text-white/60 text-xs text-left">
               © {currentYear} 360airo. All Rights Reserved and designed by{' '}
               <a 
                 href="https://360marco.com/" 
@@ -413,7 +408,7 @@ export function Footer() {
                 360 Marketing Concepts
               </a>
             </div>
-            <div className="flex space-x-6 text-xs">
+            <div className="flex flex-wrap gap-4 md:gap-6 text-xs">
               <Link href="/privacy-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
                 Privacy Policy
               </Link>
@@ -428,12 +423,12 @@ export function Footer() {
         </motion.div>
       </div>
 
-      {/* Floating CTA */}
+      {/* Floating CTA - Hidden on mobile, visible on tablet and desktop */}
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="fixed bottom-4 right-4 z-50"
+        className="fixed bottom-4 right-4 z-50 hidden sm:block"
       >
         <motion.div
           whileHover={{ scale: 1.05 }}
@@ -462,6 +457,18 @@ export function Footer() {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Mobile Bottom CTA - Visible only on mobile */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-[#0A0A0A] to-transparent">
+        <motion.button
+          onClick={handleGetStarted}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-xl font-semibold text-sm shadow-lg border border-white/10"
+        >
+          Get Started with 360airo
+        </motion.button>
+      </div>
     </footer>
   );
 }
