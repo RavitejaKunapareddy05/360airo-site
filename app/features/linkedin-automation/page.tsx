@@ -184,34 +184,34 @@ const LinkedInDashboard = () => {
       transition={{ duration: 0.8 }}
       className="relative"
     >
-      <div className="bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-slate-900/90 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl">
+      <div className="bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-slate-900/90 backdrop-blur-xl rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl">
         {/* Dashboard Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center shadow-lg">
-              <Linkedin className="h-6 w-6 text-white" />
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
+          <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center shadow-lg">
+              <Linkedin className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">LinkedIn Automation Dashboard</h3>
-              <p className="text-sm text-white/60">Smart outreach management</p>
+              <h3 className="text-lg sm:text-xl font-bold text-white">LinkedIn Automation Dashboard</h3>
+              <p className="text-xs sm:text-sm text-white/60">Smart outreach management</p>
             </div>
           </div>
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="flex items-center space-x-2 bg-green-500/20 px-4 py-2 rounded-lg border border-green-500/30"
+            className="flex items-center space-x-2 bg-green-500/20 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-green-500/30"
           >
             <motion.div 
               animate={{ scale: [1, 1.3, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-2 h-2 bg-green-400 rounded-full" 
+              className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full" 
             />
-            <span className="text-sm font-medium text-green-300">Live</span>
+            <span className="text-xs sm:text-sm font-medium text-green-300">Live</span>
           </motion.div>
         </div>
 
         {/* Animated Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
           {metrics.map((metric, index) => (
             <motion.div
               key={metric.label}
@@ -219,12 +219,12 @@ const LinkedInDashboard = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-[#0077B5]/30 transition-all duration-300 group"
+              whileHover={{ y: -3, scale: 1.02 }}
+              className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/10 hover:border-[#0077B5]/30 transition-all duration-300 group"
             >
               <div className="flex items-center justify-between mb-2">
-                <div className={`w-10 h-10 bg-gradient-to-br ${metric.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                  <metric.icon className="h-5 w-5 text-white" />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${metric.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                  <metric.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
                 <motion.span 
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -239,18 +239,18 @@ const LinkedInDashboard = () => {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: index * 0.3 }}
-                className="text-2xl font-bold text-white mb-1"
+                className="text-xl sm:text-2xl font-bold text-white mb-1"
               >
                 {metric.value}
               </motion.div>
-              <div className="text-xs text-white/60">{metric.label}</div>
+              <div className="text-xs text-white/60 leading-tight">{metric.label}</div>
             </motion.div>
           ))}
         </div>
 
         {/* Active Campaigns */}
-        <div className="space-y-4">
-          <h4 className="text-lg font-semibold text-white mb-4">Active Campaigns</h4>
+        <div className="space-y-3 sm:space-y-4">
+          <h4 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">Active Campaigns</h4>
           {campaigns.map((campaign, index) => (
             <motion.div
               key={campaign.name}
@@ -258,23 +258,23 @@ const LinkedInDashboard = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/5 rounded-xl p-4 border border-white/10 hover:border-[#0077B5]/30 transition-all duration-300"
+              className="bg-white/5 rounded-xl p-3 sm:p-4 border border-white/10 hover:border-[#0077B5]/30 transition-all duration-300"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <motion.div
-                    className={`w-3 h-3 rounded-full ${
+                    className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${
                       campaign.status === 'active' ? 'bg-green-400' : 'bg-yellow-400'
                     }`}
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-white font-medium">{campaign.name}</span>
+                  <span className="text-white font-medium text-sm sm:text-base">{campaign.name}</span>
                 </div>
-                <div className="flex items-center space-x-4 text-sm text-white/60">
-                  <span>{campaign.connections} connections</span>
+                <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-white/60">
+                  <span>{campaign.connections} conn</span>
                   <span>{campaign.replies} replies</span>
-                  <span className="text-green-400">{campaign.acceptance} acceptance</span>
+                  <span className="text-green-400">{campaign.acceptance}</span>
                 </div>
               </div>
             </motion.div>
@@ -286,17 +286,17 @@ const LinkedInDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-8 p-6 bg-gradient-to-r from-[#0077B5]/10 to-[#ad60f8]/10 rounded-xl border border-[#0077B5]/20"
+          className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-[#0077B5]/10 to-[#ad60f8]/10 rounded-xl border border-[#0077B5]/20"
         >
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex items-center space-x-2">
-              <Send className="h-5 w-5 text-[#0077B5]" />
-              <span className="font-semibold text-white">Message Delivery</span>
+              <Send className="h-4 w-4 sm:h-5 sm:w-5 text-[#0077B5]" />
+              <span className="font-semibold text-white text-sm sm:text-base">Message Delivery</span>
             </div>
-            <div className="text-sm text-white/60">Real-time updates</div>
+            <div className="text-xs sm:text-sm text-white/60">Real-time</div>
           </div>
           
-          <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 sm:h-2 bg-white/10 rounded-full overflow-hidden">
             <motion.div
               animate={{ width: `${progress}%` }}
               className="h-full bg-gradient-to-r from-[#0077B5] to-[#ad60f8] rounded-full relative"
@@ -322,11 +322,11 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5, scale: 1.02 }}
+      whileHover={{ y: -3, scale: 1.01 }}
       transition={{ duration: 0.6, delay }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="bg-[#1A1A1A] rounded-2xl border border-[#0077B5]/30 p-6 hover:border-[#0077B5]/50 transition-all duration-300 relative overflow-hidden"
+      className="bg-[#1A1A1A] rounded-2xl border border-[#0077B5]/30 p-4 sm:p-6 hover:border-[#0077B5]/50 transition-all duration-300 relative overflow-hidden"
     >
       {/* Animated Background */}
       <motion.div
@@ -337,23 +337,23 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
       />
       
       <div className="relative z-10">
-        <div className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4">
-          <Icon className="h-6 w-6 text-white" />
+        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+          <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </div>
         
-        <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-        <p className="text-white/70 mb-4 leading-relaxed">{description}</p>
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">{title}</h3>
+        <p className="text-white/70 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{description}</p>
         
-        <div className="space-y-2">
+        <div className="space-y-1.5 sm:space-y-2">
           {features.map((feature: string, index: number) => (
             <motion.div
               key={feature}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: delay + index * 0.1 }}
-              className="flex items-center space-x-2 text-white/80 text-sm"
+              className="flex items-center space-x-2 text-white/80 text-xs sm:text-sm"
             >
-              <div className="w-1.5 h-1.5 bg-white rounded-full" />
+              <div className="w-1.5 h-1.5 bg-white rounded-full flex-shrink-0" />
               <span>{feature}</span>
             </motion.div>
           ))}
@@ -364,7 +364,7 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: delay + 0.4 }}
-            className="text-[#0077B5] text-sm mt-4 italic"
+            className="text-[#0077B5] text-xs sm:text-sm mt-3 sm:mt-4 italic"
           >
             {note}
           </motion.p>
@@ -410,21 +410,21 @@ const BenefitsGrid = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {benefits.map((benefit, index) => (
         <motion.div
           key={benefit.title}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: index * 0.1 }}
-          whileHover={{ y: -5, scale: 1.02 }}
-          className="bg-[#1A1A1A] rounded-2xl border border-[#0077B5]/30 p-6 hover:border-[#0077B5]/50 transition-all duration-300"
+          whileHover={{ y: -3, scale: 1.02 }}
+          className="bg-[#1A1A1A] rounded-2xl border border-[#0077B5]/30 p-4 sm:p-6 hover:border-[#0077B5]/50 transition-all duration-300"
         >
-          <div className="w-12 h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-4">
-            <benefit.icon className="h-6 w-6 text-white" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#0077B5] to-[#ad60f8] rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <benefit.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
           </div>
-          <h4 className="text-white font-bold mb-2">{benefit.title}</h4>
-          <p className="text-white/70 text-sm leading-relaxed">{benefit.description}</p>
+          <h4 className="text-white font-bold text-sm sm:text-base mb-1 sm:mb-2">{benefit.title}</h4>
+          <p className="text-white/70 text-xs sm:text-sm leading-relaxed">{benefit.description}</p>
         </motion.div>
       ))}
     </div>
@@ -461,7 +461,7 @@ const HeroSection = () => {
               y: [0, 24 * (i % 2 === 0 ? 1 : -1), 0],
             }}
             transition={{ duration: 11 + i * 1.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.7 }}
-            className={`absolute w-20 h-20 ${
+            className={`absolute w-16 h-16 sm:w-20 sm:h-20 ${
               i % 4 === 0
                 ? 'rounded-full bg-gradient-to-br from-[#0077B5]/20 to-[#00A0DC]/10'
                 : i % 4 === 1
@@ -481,12 +481,12 @@ const HeroSection = () => {
         transition={{ duration: 1.2 }}
         className="max-w-7xl mx-auto relative z-10 w-full"
       >
-        <div className="grid lg:grid-cols-2 gap-16 items-center min-h-screen py-20">
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center min-h-screen py-16 sm:py-20">
           {/* LEFT CONTENT */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
               className="inline-block"
@@ -495,17 +495,17 @@ const HeroSection = () => {
                 <motion.div
                   animate={{
                     boxShadow: [
-                      '0 0 30px rgba(0, 119, 181, 0.4)',
-                      '0 0 60px rgba(173, 96, 248, 0.6)',
-                      '0 0 30px rgba(0, 119, 181, 0.4)',
+                      '0 0 20px rgba(0, 119, 181, 0.4)',
+                      '0 0 40px rgba(173, 96, 248, 0.6)',
+                      '0 0 20px rgba(0, 119, 181, 0.4)',
                     ],
                   }}
                   transition={{ duration: 3.6, repeat: Infinity }}
                   className="absolute inset-0 bg-gradient-to-r from-[#0077B5]/30 via-[#ad60f8]/20 to-[#00A0DC]/30 rounded-full blur-xl"
                 />
-                <span className="relative inline-flex items-center px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-[#0077B5]/50 text-white font-semibold text-sm sm:text-base">
-                  <div className="mr-3">
-                    <Flame className="h-4 w-4 sm:h-5 sm:w-5 text-[#ad60f8]" />
+                <span className="relative inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-sm border border-[#0077B5]/50 text-white font-semibold text-xs sm:text-sm">
+                  <div className="mr-2 sm:mr-3">
+                    <Flame className="h-3 w-3 sm:h-4 sm:w-4 text-[#ad60f8]" />
                   </div>
                   <span>LinkedIn Automation</span>
                 </span>
@@ -513,12 +513,12 @@ const HeroSection = () => {
             </motion.div>
 
             {/* Main Heading */}
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               <motion.h1
-                initial={{ opacity: 0, y: 80 }}
+                initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.45, duration: 1, type: 'spring', stiffness: 100 }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[0.95] tracking-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-[0.95] tracking-tight"
               >
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
@@ -551,7 +551,7 @@ const HeroSection = () => {
                 initial={{ width: 0, opacity: 0 }}
                 animate={{ width: '100%', opacity: 1 }}
                 transition={{ delay: 1.8, duration: 1.1, ease: 'easeOut' }}
-                className="h-1.5 bg-gradient-to-r from-[#0077B5] via-[#ad60f8] to-[#00A0DC] rounded-full relative overflow-hidden max-w-md"
+                className="h-1 bg-gradient-to-r from-[#0077B5] via-[#ad60f8] to-[#00A0DC] rounded-full relative overflow-hidden max-w-md"
               >
                 <motion.div
                   animate={{ x: ['-100%', '200%'] }}
@@ -563,12 +563,12 @@ const HeroSection = () => {
 
             {/* Description */}
             <motion.div
-              initial={{ opacity: 0, y: 36 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.35, duration: 0.7 }}
-              className="space-y-5 max-w-xl"
+              className="space-y-3 sm:space-y-5 max-w-xl"
             >
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed font-light">
                 Automate Outreach Without Losing{' '}
                 <motion.span
                   animate={{ color: ['#0077B5', '#ad60f8', '#ffffff', '#0077B5'] }}
@@ -578,22 +578,26 @@ const HeroSection = () => {
                   the Human Touch
                 </motion.span>
               </p>
-              <p className="text-base text-white/75">
+              <p className="text-sm sm:text-base text-white/75">
                 Building meaningful connections on LinkedIn takes time — and consistency. 360Airo's LinkedIn automation tool helps you scale your network, engage prospects, and manage outreach campaigns with precision.
               </p>
-              <p className="text-base text-white/75">
+              <p className="text-sm sm:text-base text-white/75">
                 Designed to mimic genuine human behavior, it automates routine tasks while keeping every interaction personal and authentic.
               </p>
             </motion.div>
 
             {/* CTA Button */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.6, duration: 0.7 }}
-              className="flex flex-col sm:flex-row gap-4 pt-2"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2"
             >
-              <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
+              <motion.div 
+                whileHover={{ scale: 1.04, y: -2 }} 
+                whileTap={{ scale: 0.96 }} 
+                className="group relative overflow-hidden rounded-xl"
+              >
                 <motion.div
                   animate={{
                     background: [
@@ -604,7 +608,11 @@ const HeroSection = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                   className="absolute inset-0"
                 />
-                <Button size="lg" className="relative bg-transparent text-white px-8 py-3 text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-2xl">
+                <Button 
+                  size="lg" 
+                  className="relative bg-transparent text-white px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl w-full sm:w-auto"
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                >
                   <span>Start Automating LinkedIn Outreach</span>
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -614,16 +622,16 @@ const HeroSection = () => {
 
           {/* RIGHT - COMPACT VERTICAL PROGRESS TIMELINE */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.9 }}
             className="relative flex items-center justify-center h-full"
           >
-            <div className="relative w-full max-w-sm">
+            <div className="relative w-full max-w-xs sm:max-w-sm">
               {/* Timeline Container */}
-              <div className="relative py-8">
+              <div className="relative py-6 sm:py-8">
                 {/* Vertical Progress Line */}
-                <div className="absolute left-6 top-8 bottom-8 w-0.5 bg-gray-700/30 rounded-full">
+                <div className="absolute left-5 sm:left-6 top-6 sm:top-8 bottom-6 sm:bottom-8 w-0.5 bg-gray-700/30 rounded-full">
                   <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: '65%' }}
@@ -669,17 +677,17 @@ const HeroSection = () => {
                 ].map((step, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: 30 }}
+                    initial={{ opacity: 0, x: 25 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: step.delay, duration: 0.6 }}
-                    className="relative flex items-start mb-6 group"
+                    className="relative flex items-start mb-4 sm:mb-6 group"
                   >
                     {/* Timeline Node - Compact */}
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: step.delay + 0.2, duration: 0.5, type: 'spring' }}
-                      className={`relative z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg ${
+                      className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center shadow-lg ${
                         step.status === 'completed' 
                           ? 'bg-gradient-to-br from-[#0077B5] to-[#00A0DC]' 
                           : step.status === 'active'
@@ -687,7 +695,7 @@ const HeroSection = () => {
                           : 'bg-gradient-to-br from-gray-600 to-gray-700'
                       }`}
                     >
-                      <step.icon className="h-5 w-5 text-white" />
+                      <step.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                       
                       {/* Status Indicator - Smaller */}
                       {step.status === 'completed' && (
@@ -695,9 +703,9 @@ const HeroSection = () => {
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ delay: step.delay + 0.4 }}
-                          className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full flex items-center justify-center"
+                          className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full flex items-center justify-center"
                         >
-                          <CheckCircle2 className="h-2 w-2 text-white" />
+                          <CheckCircle2 className="h-1.5 w-1.5 sm:h-2 sm:w-2 text-white" />
                         </motion.div>
                       )}
                       
@@ -705,22 +713,22 @@ const HeroSection = () => {
                         <motion.div
                           animate={{ scale: [1, 1.15, 1] }}
                           transition={{ duration: 2, repeat: Infinity }}
-                          className="absolute -inset-1 bg-[#ad60f8]/20 rounded-xl"
+                          className="absolute -inset-0.5 sm:-inset-1 bg-[#ad60f8]/20 rounded-xl"
                         />
                       )}
                     </motion.div>
 
                     {/* Step Content - Compact */}
                     <motion.div
-                      initial={{ opacity: 0, x: 15 }}
+                      initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: step.delay + 0.3, duration: 0.5 }}
-                      className="ml-4 flex-1"
+                      className="ml-3 sm:ml-4 flex-1"
                     >
-                      <div className="bg-gradient-to-br from-black/40 via-black/30 to-transparent backdrop-blur-lg rounded-xl border border-white/10 p-3 shadow-lg group-hover:border-[#0077B5]/30 transition-all duration-300">
+                      <div className="bg-gradient-to-br from-black/40 via-black/30 to-transparent backdrop-blur-lg rounded-xl border border-white/10 p-2.5 sm:p-3 shadow-lg group-hover:border-[#0077B5]/30 transition-all duration-300">
                         <div className="flex items-center justify-between mb-1">
-                          <h3 className="text-sm font-bold text-white">{step.title}</h3>
-                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                          <h3 className="text-xs sm:text-sm font-bold text-white">{step.title}</h3>
+                          <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
                             step.status === 'completed' 
                               ? 'bg-green-500/20 text-green-400' 
                               : step.status === 'active'
@@ -730,7 +738,7 @@ const HeroSection = () => {
                             {step.status === 'completed' ? '✓' : step.status === 'active' ? '●' : '○'}
                           </span>
                         </div>
-                        <p className="text-[#ad60f8] font-medium text-xs mb-1">{step.subtitle}</p>
+                        <p className="text-[#ad60f8] font-medium text-xs mb-0.5 sm:mb-1">{step.subtitle}</p>
                         <p className="text-white/60 text-xs leading-relaxed">{step.description}</p>
                       </div>
                     </motion.div>
@@ -739,34 +747,34 @@ const HeroSection = () => {
 
                 {/* Current Status Card - Compact */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.2, duration: 0.6 }}
-                  className="relative bg-gradient-to-br from-[#0077B5]/20 via-[#ad60f8]/10 to-transparent backdrop-blur-lg rounded-xl border border-[#0077B5]/20 p-4 shadow-lg mt-4"
+                  className="relative bg-gradient-to-br from-[#0077B5]/20 via-[#ad60f8]/10 to-transparent backdrop-blur-lg rounded-xl border border-[#0077B5]/20 p-3 sm:p-4 shadow-lg mt-3 sm:mt-4"
                 >
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-2 sm:mb-3">
                     <div className="flex items-center space-x-2">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center">
-                        <Linkedin className="h-4 w-4 text-white" />
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-[#0077B5] to-[#ad60f8] flex items-center justify-center">
+                        <Linkedin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">Campaign Status</h4>
+                        <h4 className="text-xs sm:text-sm font-bold text-white">Campaign Status</h4>
                         <p className="text-xs text-white/60">Current Progress</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-black text-[#0077B5]">Week 5</div>
+                      <div className="text-base sm:text-lg font-black text-[#0077B5]">Week 5</div>
                       <div className="text-xs text-white/50">of 8</div>
                     </div>
                   </div>
                   
                   {/* Progress Bar - Compact */}
-                  <div className="space-y-1 mb-3">
+                  <div className="space-y-1 mb-2 sm:mb-3">
                     <div className="flex justify-between text-xs">
                       <span className="text-white/70">Outreach Progress</span>
                       <span className="text-[#ad60f8] font-medium">62%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="w-full h-1 sm:h-1.5 bg-white/10 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: '62%' }}
@@ -777,7 +785,7 @@ const HeroSection = () => {
                   </div>
 
                   {/* Quick Stats - Compact */}
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                     {[
                       { label: 'Connections', value: '156', icon: Users },
                       { label: 'Replies', value: '42', icon: MessageCircle },
@@ -788,10 +796,10 @@ const HeroSection = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 2.6 + i * 0.1 }}
-                        className="text-center bg-white/5 rounded-lg p-2"
+                        className="text-center bg-white/5 rounded-lg p-1.5 sm:p-2"
                       >
-                        <stat.icon className="h-3 w-3 text-[#0077B5] mx-auto mb-1" />
-                        <div className="text-sm font-bold text-white">{stat.value}</div>
+                        <stat.icon className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-[#0077B5] mx-auto mb-0.5 sm:mb-1" />
+                        <div className="text-xs sm:text-sm font-bold text-white">{stat.value}</div>
                         <div className="text-xs text-white/50">{stat.label}</div>
                       </motion.div>
                     ))}
@@ -806,8 +814,8 @@ const HeroSection = () => {
                     animate={{
                       opacity: [0, 0.6, 0],
                       scale: [0, 1, 0],
-                      y: [0, -25, -50],
-                      x: [0, Math.sin(i) * 8, Math.sin(i) * 15],
+                      y: [0, -20, -40],
+                      x: [0, Math.sin(i) * 6, Math.sin(i) * 12],
                     }}
                     transition={{
                       duration: 2.5,
@@ -815,7 +823,7 @@ const HeroSection = () => {
                       delay: i * 0.6,
                       ease: 'easeOut'
                     }}
-                    className="absolute top-16 left-6 w-1.5 h-1.5 bg-[#0077B5] rounded-full blur-sm"
+                    className="absolute top-12 sm:top-16 left-5 sm:left-6 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-[#0077B5] rounded-full blur-sm"
                   />
                 ))}
               </div>
@@ -885,17 +893,17 @@ export default function LinkedInAutomationPage() {
       <HeroSection />
 
       {/* LinkedIn Dashboard Section */}
-      <section className="py-20 px-6 bg-black">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-10 sm:mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
               Smart LinkedIn Automation Dashboard
             </h2>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg text-white/70 max-w-2xl mx-auto">
               Monitor and manage your LinkedIn outreach with real-time insights and intelligent automation
             </p>
           </motion.div>
@@ -904,22 +912,22 @@ export default function LinkedInAutomationPage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-white/2 via-[#0077B5]/10 to-white/2">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-r from-white/2 via-[#0077B5]/10 to-white/2">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
               Powerful LinkedIn Automation Features
             </h2>
-            <p className="text-lg text-white/70 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-lg text-white/70 max-w-3xl mx-auto">
               Discover how our intelligent automation can transform your LinkedIn outreach and drive meaningful connections
             </p>
           </motion.div>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {features.map((feature, index) => (
               <FeatureCard 
                 key={feature.title}
@@ -932,17 +940,17 @@ export default function LinkedInAutomationPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 px-6 bg-black">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-10 sm:mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
               Why Choose 360Airo for LinkedIn Automation
             </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-white/70 max-w-2xl mx-auto">
               Build genuine connections at scale with intelligent automation that respects the human element
             </p>
           </motion.div>
@@ -952,31 +960,32 @@ export default function LinkedInAutomationPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-6 bg-black">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-black">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Ready to Transform Your LinkedIn Outreach?
             </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
               Join thousands of professionals using 360Airo's LinkedIn automation to build meaningful connections and grow their network smarter.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6">
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
               >
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-[#0077B5] to-[#ad60f8] hover:from-[#0077B5]/90 hover:to-[#ad60f8]/90 px-8 py-3 text-lg font-semibold rounded-xl shadow-lg shadow-[#0077B5]/30"
+                  className="bg-gradient-to-r from-[#0077B5] to-[#ad60f8] hover:from-[#0077B5]/90 hover:to-[#ad60f8]/90 px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-lg font-semibold rounded-xl shadow-lg shadow-[#0077B5]/30 w-full sm:w-auto"
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
                   Start Automating LinkedIn Outreach
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </motion.div>
             </div>

@@ -168,7 +168,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
-  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false); // New state for mobile dropdown
+  const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
@@ -219,10 +219,8 @@ export function Navbar() {
 
   // Handle Features click - navigate and close dropdown
   const handleFeaturesClick = useCallback((e: React.MouseEvent) => {
-    // Only navigate if it's a direct click (not from hover)
     if (e.type === 'click') {
       setFeaturesOpen(false);
-      // Navigation will happen via the Link component
     }
   }, []);
 
@@ -311,7 +309,7 @@ export function Navbar() {
                 onHover={() => setActiveItem('/')}
                 onMouseEnter={() => {
                   setActiveItem('/');
-                  hideDropdown(); // Close dropdown when hovering other items
+                  hideDropdown();
                 }}
               />
               
@@ -322,7 +320,6 @@ export function Navbar() {
                 onMouseEnter={showDropdown}
                 onMouseLeave={hideDropdown}
               >
-                {/* Features Link that navigates to /features */}
                 <Link
                   href="/features"
                   onClick={handleFeaturesClick}
@@ -337,7 +334,6 @@ export function Navbar() {
                     <ChevronDown className="h-5 w-4" />
                   </motion.div>
                   
-                  {/* Underline for Features */}
                   {featuresOpen && (
                     <motion.div
                       layoutId="navbar-underline"
@@ -366,11 +362,9 @@ export function Navbar() {
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
                       }}
                     >
-                      {/* Gradient Border Effect */}
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
                       
                       <div className="relative p-6">
-                        {/* Features Grid - 3 columns with scroll */}
                         <div className="max-h-[400px] overflow-y-auto pr-2">
                           <div className="grid grid-cols-3 gap-2">
                             {features.map((feature, index) => (
@@ -444,7 +438,6 @@ export function Navbar() {
                           </div>
                         </div>
 
-                        {/* Bottom CTA */}
                         <motion.div 
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
@@ -483,7 +476,7 @@ export function Navbar() {
                 onHover={() => setActiveItem('/pricing')}
                 onMouseEnter={() => {
                   setActiveItem('/pricing');
-                  hideDropdown(); // Close dropdown
+                  hideDropdown();
                 }}
               />
               <NavLink 
@@ -493,7 +486,7 @@ export function Navbar() {
                 onHover={() => setActiveItem('/blogs')}
                 onMouseEnter={() => {
                   setActiveItem('/blogs');
-                  hideDropdown(); // Close dropdown
+                  hideDropdown();
                 }}
               />
             </div>
@@ -521,18 +514,31 @@ export function Navbar() {
               </motion.div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="lg:hidden text-white p-2 rounded-xl hover:bg-white/10 transition-all duration-300"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <motion.div
-                animate={{ rotate: isOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
+            {/* Mobile Menu Button with Login Button */}
+            <div className="lg:hidden flex items-center space-x-2">
+              {/* Login Button - Visible on mobile */}
+              <motion.button
+                onClick={handleLogin}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-4 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white rounded-lg font-semibold text-sm"
               >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </motion.div>
-            </button>
+                Login
+              </motion.button>
+
+              {/* Burger Menu */}
+              <button
+                className="text-white p-2 rounded-xl hover:bg-white/10 transition-all duration-300"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <motion.div
+                  animate={{ rotate: isOpen ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isOpen ? <X size={24} /> : <Menu size={24} />}
+                </motion.div>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -552,23 +558,14 @@ export function Navbar() {
               <div className="px-4 py-6 space-y-2">
                 <MobileNavLink href="/" label="Home" onClick={() => setIsOpen(false)} />
                 
-                {/* Mobile Features Dropdown */}
+                {/* Mobile Features Dropdown - Remove icon from Features title only */}
                 <div ref={mobileDropdownRef} className="space-y-2">
                   <button
                     onClick={toggleMobileFeatures}
                     className="flex items-center justify-between w-full px-4 py-3 text-white font-semibold hover:bg-white/10 rounded-xl transition-all duration-300"
                   >
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 relative">
-                        <Image
-                          src="/favicon_360airo__1_-removebg-preview.png"
-                          alt="360airo Logo"
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <span>Features</span>
-                    </div>
+                    {/* Removed the logo icon from Features title */}
+                    <span>Features</span>
                     <motion.div
                       animate={{ rotate: mobileFeaturesOpen ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
@@ -577,7 +574,7 @@ export function Navbar() {
                     </motion.div>
                   </button>
 
-                  {/* Mobile Features Dropdown Content */}
+                  {/* Mobile Features Dropdown Content - KEEP ICONS for sub-feature pages */}
                   <AnimatePresence>
                     {mobileFeaturesOpen && (
                       <motion.div
@@ -603,6 +600,7 @@ export function Navbar() {
                                 }}
                                 className="flex items-center space-x-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 group"
                               >
+                                {/* KEEP ICONS for individual feature pages */}
                                 <div className={`w-8 h-8 bg-gradient-to-br ${feature.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
                                   <feature.icon className="h-4 w-4 text-white" />
                                 </div>
@@ -631,13 +629,6 @@ export function Navbar() {
 
                 {/* Mobile CTA Buttons */}
                 <div className="pt-4 border-t border-[#8B5CF6]/20 space-y-3">
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-[#8B5CF6]/30 text-white hover:bg-white/10 transition-all duration-300"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button>
                   <Button 
                     className="w-full bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white font-semibold"
                     onClick={handleGetStarted}
@@ -687,7 +678,6 @@ const NavLink = ({
     className="px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 font-medium relative group"
   >
     {label}
-    {/* Perfect Underline */}
     {isActive && (
       <motion.div
         layoutId="navbar-underline"

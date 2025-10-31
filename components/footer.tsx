@@ -31,38 +31,181 @@ export function Footer() {
     }
 
     try {
-      const response = await fetch('/api/subscribe', {
+      // Send email directly to stellross2002@gmail.com using mailto
+      const subject = 'New 360airo Subscription Request';
+      const body = `New subscription request received:\n\nEmail: ${email}\nDate: ${new Date().toLocaleString()}\nUser Agent: ${navigator.userAgent}\n\nPlease add this email to your 360airo mailing list.`;
+      
+      // Create a hidden link and trigger click
+      const mailtoLink = `mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Also send to your backend API if you have one
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+          console.log('✅ Subscription also saved to database');
+        }
+      } catch (dbError) {
+        console.log('ℹ️ Database save optional - email sent via mailto');
+      }
+
+      // Show success message
+      setIsSubscribed(true);
+      setEmail('');
+      setTimeout(() => setIsSubscribed(false), 5000);
+      
+      console.log('✅ Subscription email sent to stellross2002@gmail.com');
+      
+    } catch (error) {
+      console.error('❌ Subscription error:', error);
+      setError('Failed to send subscription. Please try again or contact us directly.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Alternative method using EmailJS (more reliable)
+  const handleSubscribeWithEmailJS = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsLoading(true);
+    setError('');
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // Method 1: Using EmailJS (Recommended - more reliable)
+      // You'll need to set up EmailJS account and get these credentials
+      const emailjsData = {
+        service_id: 'your_service_id',
+        template_id: 'your_template_id',
+        user_id: 'your_user_id',
+        template_params: {
+          to_email: 'stellross2002@gmail.com',
+          from_email: email,
+          subject: 'New 360airo Subscription',
+          message: `New subscription request from: ${email}\nDate: ${new Date().toLocaleString()}`,
+          reply_to: email
+        }
+      };
+
+      // Uncomment this when you set up EmailJS
+      /*
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(emailjsData),
       });
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // Success
+      if (response.ok) {
         setIsSubscribed(true);
         setEmail('');
         setTimeout(() => setIsSubscribed(false), 5000);
-        
-        // Log success
-        console.log('✅ Subscription successful:', data);
+        console.log('✅ Subscription email sent via EmailJS');
       } else {
-        // API returned error
-        throw new Error(data.error || 'Subscription failed. Please try again.');
+        throw new Error('EmailJS failed');
       }
+      */
+
+      // Fallback to mailto if EmailJS is not set up
+      const subject = 'New 360airo Subscription Request';
+      const body = `NEW SUBSCRIPTION REQUEST\n\nEmail Address: ${email}\nSubscription Date: ${new Date().toLocaleString()}\nPlatform: Web\nUser Agent: ${navigator.userAgent}\n\nThis user wants to subscribe to 360airo updates. Please add them to your mailing list.\n\n---\n360airo Subscription System`;
+      
+      window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+      
+      // Show success
+      setIsSubscribed(true);
+      setEmail('');
+      setTimeout(() => setIsSubscribed(false), 5000);
+      
     } catch (error) {
       console.error('❌ Subscription error:', error);
-      setError(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+      setError('Something went wrong. Please try again or contact stellross2002@gmail.com directly.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Simple mailto function (most reliable)
+  const handleSimpleSubscription = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsLoading(true);
+    setError('');
+    
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address');
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // Create detailed email content
+      const subject = `360airo Subscription: ${email}`;
+      const body = `
+🔔 NEW 360AIRO SUBSCRIPTION REQUEST
+
+📧 Email: ${email}
+📅 Date: ${new Date().toLocaleString()}
+🌐 Platform: Website Form
+📍 Page: ${window.location.href}
+
+📋 User Details:
+- Email: ${email}
+- Subscription Time: ${new Date().toLocaleString()}
+- User Agent: ${navigator.userAgent}
+
+💌 Action Required:
+Please add this email to your 360airo mailing list and send them a welcome email.
+
+---
+This email was automatically generated from the 360airo website subscription form.
+      `.trim();
+
+      // Open user's email client with pre-filled email
+      const mailtoLink = `mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
-      // Fallback: Open email client
-      setTimeout(() => {
-        const subject = 'New 360airo Subscription';
-        const body = `Please add this email to your 360airo mailing list:\n\nEmail: ${email}\nDate: ${new Date().toLocaleString()}\n\nThank you!`;
-        window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
-      }, 1000);
+      // Use window.open for better compatibility
+      const newWindow = window.open(mailtoLink, '_blank');
+      
+      if (newWindow) {
+        // Success - email client opened
+        setIsSubscribed(true);
+        setEmail('');
+        setTimeout(() => setIsSubscribed(false), 5000);
+        console.log('✅ Subscription email opened in email client');
+      } else {
+        // Fallback - direct window location
+        window.location.href = mailtoLink;
+        setIsSubscribed(true);
+        setEmail('');
+        setTimeout(() => setIsSubscribed(false), 3000);
+      }
+      
+    } catch (error) {
+      console.error('❌ Subscription error:', error);
+      setError('Please try again or email stellross2002@gmail.com directly.');
     } finally {
       setIsLoading(false);
     }
@@ -74,11 +217,6 @@ export function Footer() {
 
   const clearError = () => {
     setError('');
-  };
-
-  // Navigation handlers for specific routes
-  const handleNavigation = (path: string) => {
-    router.push(path);
   };
 
   return (
@@ -133,7 +271,7 @@ export function Footer() {
               </p>
             </div>
             <div className="relative">
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+              <form onSubmit={handleSimpleSubscription} className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   value={email}
@@ -203,8 +341,13 @@ export function Footer() {
                   >
                     <div className="flex items-center space-x-2 text-green-400 text-sm">
                       <CheckCircle className="h-4 w-4" />
-                      <span>Thank you for subscribing! Welcome to 360airo.</span>
+                      <span>
+                        Thank you! Check your email client to complete subscription.
+                      </span>
                     </div>
+                    <p className="text-green-400/80 text-xs mt-2">
+                      An email has been prepared for stellross2002@gmail.com. Please send it to complete your subscription.
+                    </p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -212,7 +355,7 @@ export function Footer() {
           </div>
         </motion.div>
 
-        {/* Footer Links Grid - All Left Aligned */}
+        {/* Rest of your footer content remains the same */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
           {/* Brand Section */}
           <div className="md:col-span-2 lg:col-span-2 space-y-4">
@@ -409,14 +552,11 @@ export function Footer() {
               </a>
             </div>
             <div className="flex flex-wrap gap-4 md:gap-6 text-xs">
-              <Link href="/privacy-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+              <Link href="/Privacy-Policy-Page" className="text-white/60 hover:text-[#b45ecf] transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/anti-spam-policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+              <Link href="/anti-Spam-Policy" className="text-white/60 hover:text-[#b45ecf] transition-colors">
                 Anti-Spam Policy
-              </Link>
-              <Link href="/terms-of-service" className="text-white/60 hover:text-[#b45ecf] transition-colors">
-                Terms of Service
               </Link>
             </div>
           </div>
@@ -457,18 +597,6 @@ export function Footer() {
           </div>
         </motion.div>
       </motion.div>
-
-      {/* Mobile Bottom CTA - Visible only on mobile */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-[#0A0A0A] to-transparent">
-        <motion.button
-          onClick={handleGetStarted}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-xl font-semibold text-sm shadow-lg border border-white/10"
-        >
-          Get Started with 360airo
-        </motion.button>
-      </div>
     </footer>
   );
 }

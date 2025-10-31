@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Shield, Lock, Eye, Mail, Globe, UserCheck, Settings, Link, Users, Bell, AlertTriangle } from 'lucide-react';
+import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 
 interface Section {
@@ -191,6 +192,9 @@ Our data protection team is committed to ensuring your experience remains secure
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#19001d] via-[#480056] to-[#19001d] text-white">
+      {/* Add Navbar Component */}
+      <Navbar />
+      
       <motion.div
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -325,7 +329,10 @@ Our data protection team is committed to ensuring your experience remains secure
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button className="bg-gradient-to-r from-[#b45ecf] to-[#d16ae6] hover:from-[#a34cbf] hover:to-[#b45ecf] text-white px-10 py-6 rounded-full font-semibold text-lg shadow-lg">
+            <Button 
+              className="bg-gradient-to-r from-[#b45ecf] to-[#d16ae6] hover:from-[#a34cbf] hover:to-[#b45ecf] text-white px-10 py-6 rounded-full font-semibold text-lg shadow-lg"
+              onClick={() => window.open('mailto:privacy@360airo.com', '_blank')}
+            >
               Contact Us
             </Button>
           </motion.div>
