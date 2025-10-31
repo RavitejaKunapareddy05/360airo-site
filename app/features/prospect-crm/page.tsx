@@ -620,9 +620,11 @@ const HeroSection = () => {
         transition={{ duration: 0.8 }}
         className="max-w-7xl mx-auto relative z-10 w-full"
       >
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
-          {/* LEFT CONTENT - Mobile optimized */}
-          <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+        {/* MOBILE: Content first, then animation */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
+          
+          {/* CONTENT COLUMN - Always first on mobile */}
+          <div className="space-y-6 lg:space-y-8 order-1">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -752,12 +754,12 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* RIGHT - ANIMATED CRM DASHBOARD - Mobile optimized */}
+          {/* ANIMATION COLUMN - Always second on mobile */}
           <motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : 100, y: isMobile ? 30 : 0, scale: 0.9 }}
             animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.7, type: "spring" }}
-            className="relative flex items-center justify-center h-full order-1 lg:order-2 mb-8 lg:mb-0"
+            className="relative flex items-center justify-center h-full order-2 mt-8 lg:mt-0"
           >
             <AnimatedCRMDashboard />
           </motion.div>

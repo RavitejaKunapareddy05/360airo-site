@@ -31,136 +31,6 @@ export function Footer() {
     }
 
     try {
-      // Send email directly to stellross2002@gmail.com using mailto
-      const subject = 'New 360airo Subscription Request';
-      const body = `New subscription request received:\n\nEmail: ${email}\nDate: ${new Date().toLocaleString()}\nUser Agent: ${navigator.userAgent}\n\nPlease add this email to your 360airo mailing list.`;
-      
-      // Create a hidden link and trigger click
-      const mailtoLink = `mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      // Open email client
-      window.location.href = mailtoLink;
-      
-      // Also send to your backend API if you have one
-      try {
-        const response = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        });
-
-        if (response.ok) {
-          console.log('✅ Subscription also saved to database');
-        }
-      } catch (dbError) {
-        console.log('ℹ️ Database save optional - email sent via mailto');
-      }
-
-      // Show success message
-      setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 5000);
-      
-      console.log('✅ Subscription email sent to stellross2002@gmail.com');
-      
-    } catch (error) {
-      console.error('❌ Subscription error:', error);
-      setError('Failed to send subscription. Please try again or contact us directly.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Alternative method using EmailJS (more reliable)
-  const handleSubscribeWithEmailJS = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setIsLoading(true);
-    setError('');
-    
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      // Method 1: Using EmailJS (Recommended - more reliable)
-      // You'll need to set up EmailJS account and get these credentials
-      const emailjsData = {
-        service_id: 'your_service_id',
-        template_id: 'your_template_id',
-        user_id: 'your_user_id',
-        template_params: {
-          to_email: 'stellross2002@gmail.com',
-          from_email: email,
-          subject: 'New 360airo Subscription',
-          message: `New subscription request from: ${email}\nDate: ${new Date().toLocaleString()}`,
-          reply_to: email
-        }
-      };
-
-      // Uncomment this when you set up EmailJS
-      /*
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(emailjsData),
-      });
-
-      if (response.ok) {
-        setIsSubscribed(true);
-        setEmail('');
-        setTimeout(() => setIsSubscribed(false), 5000);
-        console.log('✅ Subscription email sent via EmailJS');
-      } else {
-        throw new Error('EmailJS failed');
-      }
-      */
-
-      // Fallback to mailto if EmailJS is not set up
-      const subject = 'New 360airo Subscription Request';
-      const body = `NEW SUBSCRIPTION REQUEST\n\nEmail Address: ${email}\nSubscription Date: ${new Date().toLocaleString()}\nPlatform: Web\nUser Agent: ${navigator.userAgent}\n\nThis user wants to subscribe to 360airo updates. Please add them to your mailing list.\n\n---\n360airo Subscription System`;
-      
-      window.open(`mailto:stellross2002@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
-      
-      // Show success
-      setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 5000);
-      
-    } catch (error) {
-      console.error('❌ Subscription error:', error);
-      setError('Something went wrong. Please try again or contact stellross2002@gmail.com directly.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // Simple mailto function (most reliable)
-  const handleSimpleSubscription = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-
-    setIsLoading(true);
-    setError('');
-    
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
       // Create detailed email content
       const subject = `360airo Subscription: ${email}`;
       const body = `
@@ -219,6 +89,41 @@ This email was automatically generated from the 360airo website subscription for
     setError('');
   };
 
+  // Footer links data
+  const footerLinks = [
+    {
+      category: "Product",
+      links: [
+        { name: 'Features', path: '/features' },
+        { name: 'Pricing', path: '/pricing' },
+        { name: 'AI SDR', path: '/ai-sdr-page' },
+        { name: 'Integrations', path: '/airo-integrations' },
+      ]
+    },
+    {
+      category: "Resources",
+      links: [
+        { name: 'Blog', path: '/blogs' },
+        { name: '360 Academy', path: '/360-academy' },
+        { name: 'Case Studies', path: '/airo-case-studies' },
+        { name: 'Community', path: '/community' },
+      ]
+    },
+    {
+      category: "Company",
+      links: [
+        { name: 'Privacy Policy', path: '/Privacy-Policy-Page' },
+        { name: 'Anti-Spam Policy', path: '/anti-Spam-Policy' }
+      ]
+    }
+  ];
+
+  const socialLinks = [
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Mail, href: "#", label: "Email" }
+  ];
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-[#0A0A0A] to-[#19001d] border-t border-[#b45ecf]/30">
       {/* Animated Background Elements */}
@@ -271,7 +176,7 @@ This email was automatically generated from the 360airo website subscription for
               </p>
             </div>
             <div className="relative">
-              <form onSubmit={handleSimpleSubscription} className="flex flex-col sm:flex-row gap-3">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="email"
                   value={email}
@@ -355,181 +260,287 @@ This email was automatically generated from the 360airo website subscription for
           </div>
         </motion.div>
 
-        {/* Rest of your footer content remains the same */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
-          {/* Brand Section */}
-          <div className="md:col-span-2 lg:col-span-2 space-y-4">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="flex items-center space-x-2"
-            >
-              <div className="relative w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1">
-                <div className="w-full h-full relative">
-                  <Image
-                    src="/favicon_360airo__1_-removebg-preview.png"
-                    alt="360airo Logo"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
+        {/* Footer Links - Updated Layout */}
+        <div className="mb-8">
+          {/* Mobile View - Single row layout */}
+          <div className="lg:hidden">
+            <div className="flex flex-col space-y-6">
+              {/* Brand Section */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="flex items-center justify-between"
+              >
+                <div className="flex items-center space-x-2">
+                  <div className="relative w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1">
+                    <div className="w-full h-full relative">
+                      <Image
+                        src="/favicon_360airo__1_-removebg-preview.png"
+                        alt="360airo Logo"
+                        fill
+                        className="object-contain"
+                        priority
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold bg-gradient-to-r from-white to-[#b45ecf] bg-clip-text text-transparent">
+                      360airo
+                    </h3>
+                    <p className="text-[#b45ecf] text-xs font-semibold">AI-Powered Prospecting</p>
+                  </div>
+                </div>
+                
+                {/* Social Links - Top right on mobile */}
+                <div className="flex space-x-2">
+                  {socialLinks.map((social, index) => (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      whileHover={{ scale: 1.1, y: -1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-[#b45ecf] hover:border-[#b45ecf]/30 transition-all duration-300 group"
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <social.icon className="h-4 w-4" />
+                    </motion.a>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* All Links in Single Row */}
+              <div className="grid grid-cols-2 gap-4">
+                {footerLinks.map((section, sectionIndex) => (
+                  <div key={section.category} className="space-y-3">
+                    <motion.h4
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      className="text-white font-bold text-sm flex items-center"
+                    >
+                      <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
+                      {section.category}
+                    </motion.h4>
+                    <ul className="space-y-1">
+                      {section.links.map((item, index) => (
+                        <motion.li 
+                          key={item.name} 
+                          initial={{ opacity: 0, x: -15 }} 
+                          whileInView={{ opacity: 1, x: 0 }} 
+                          transition={{ delay: (sectionIndex * 0.2) + (index * 0.1) }}
+                        >
+                          <Link 
+                            href={item.path} 
+                            className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                          >
+                            <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
+                            {item.name}
+                          </Link>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              {/* Trust Indicators */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="space-y-2"
+              >
+                <div className="flex items-center space-x-2 text-white/60">
+                  <Shield className="h-3 w-3 text-[#b45ecf]" />
+                  <span className="text-xs">SOC 2 Compliant</span>
+                </div>
+                <div className="flex items-center space-x-2 text-white/60">
+                  <Sparkles className="h-3 w-3 text-[#b45ecf]" />
+                  <span className="text-xs">99.9% Uptime</span>
+                </div>
+              </motion.div>
+
+              {/* Contact CTA - Mobile */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/10 rounded-xl p-4 border border-[#b45ecf]/20"
+              >
+                <h4 className="text-white font-bold text-sm mb-2">Ready to Transform?</h4>
+                <p className="text-white/60 text-xs mb-3">
+                  Start your journey with 360airo today.
+                </p>
+                <motion.button
+                  onClick={handleGetStarted}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold text-xs"
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Desktop View - Original Layout */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
+            {/* Brand Section */}
+            <div className="md:col-span-2 lg:col-span-2 space-y-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                className="flex items-center space-x-2"
+              >
+                <div className="relative w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1">
+                  <div className="w-full h-full relative">
+                    <Image
+                      src="/favicon_360airo__1_-removebg-preview.png"
+                      alt="360airo Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-white to-[#b45ecf] bg-clip-text text-transparent">
+                    360airo
+                  </h3>
+                  <p className="text-[#b45ecf] text-xs font-semibold">AI-Powered Prospecting</p>
+                </div>
+              </motion.div>
+
+              <p className="text-white/70 text-sm leading-relaxed">
+                Transform your sales pipeline with intelligent prospect management and AI-driven outreach.
+              </p>
+
+              {/* Trust Indicators */}
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2 text-white/60">
+                  <Shield className="h-3 w-3 text-[#b45ecf]" />
+                  <span className="text-xs">SOC 2 Compliant</span>
+                </div>
+                <div className="flex items-center space-x-2 text-white/60">
+                  <Sparkles className="h-3 w-3 text-[#b45ecf]" />
+                  <span className="text-xs">99.9% Uptime</span>
                 </div>
               </div>
-              <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-white to-[#b45ecf] bg-clip-text text-transparent">
-                  360airo
-                </h3>
-                <p className="text-[#b45ecf] text-xs font-semibold">AI-Powered Prospecting</p>
-              </div>
-            </motion.div>
 
-            <p className="text-white/70 text-sm leading-relaxed">
-              Transform your sales pipeline with intelligent prospect management and AI-driven outreach.
-            </p>
-
-            {/* Trust Indicators */}
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2 text-white/60">
-                <Shield className="h-3 w-3 text-[#b45ecf]" />
-                <span className="text-xs">SOC 2 Compliant</span>
-              </div>
-              <div className="flex items-center space-x-2 text-white/60">
-                <Sparkles className="h-3 w-3 text-[#b45ecf]" />
-                <span className="text-xs">99.9% Uptime</span>
+              {/* Social Links */}
+              <div className="flex space-x-3">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    whileHover={{ scale: 1.1, y: -1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-[#b45ecf] hover:border-[#b45ecf]/30 transition-all duration-300 group"
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <social.icon className="h-4 w-4" />
+                  </motion.a>
+                ))}
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="flex space-x-3">
-              {[
-                { icon: Twitter, href: "#", label: "Twitter" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Mail, href: "#", label: "Email" }
-              ].map((social, index) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  whileHover={{ scale: 1.1, y: -1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-[#b45ecf] hover:border-[#b45ecf]/30 transition-all duration-300 group"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <social.icon className="h-4 w-4" />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Product Links */}
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-white font-bold text-sm mb-4 flex items-center"
-            >
-              <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
-              Product
-            </motion.h4>
-            <ul className="space-y-2">
-              {[
-                { name: 'Features', path: '/features' },
-                { name: 'Pricing', path: '/pricing' },
-                { name: 'AI SDR', path: '/ai-sdr-page' },
-                { name: 'Integrations', path: '/airo-integrations' },
-              ].map((item, index) => (
-                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link 
-                    href={item.path} 
-                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
-                  >
-                    <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {item.name}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-white font-bold text-sm mb-4 flex items-center"
-            >
-              <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
-              Resources
-            </motion.h4>
-            <ul className="space-y-2">
-              {[
-                { name: 'Blog', path: '/blogs' },
-                { name: '360 Academy', path: '/360-academy' },
-                { name: 'Case Studies', path: '/airo-case-studies' },
-                { name: 'Community', path: '/community' },
-              ].map((item, index) => (
-                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link 
-                    href={item.path} 
-                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
-                  >
-                    <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {item.name}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company Links */}
-          <div>
-            <motion.h4
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="text-white font-bold text-sm mb-4 flex items-center"
-            >
-              <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
-              Company
-            </motion.h4>
-            <ul className="space-y-2">
-              {[
-                { name: 'Privacy Policy', path: '/Privacy-Policy-Page' },
-                { name: 'Anti-Spam Policy', path: '/anti-Spam-Policy' }
-              ].map((item, index) => (
-                <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                  <Link 
-                    href={item.path} 
-                    className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
-                  >
-                    <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
-                    {item.name}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="md:col-span-2 lg:col-span-1">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              className="bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/10 rounded-xl p-4 border border-[#b45ecf]/20"
-            >
-              <h4 className="text-white font-bold text-sm mb-2">Ready to Transform?</h4>
-              <p className="text-white/60 text-xs mb-3">
-                Start your journey with 360airo today.
-              </p>
-              <motion.button
-                onClick={handleGetStarted}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold text-xs"
+            {/* Product Links */}
+            <div>
+              <motion.h4
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-white font-bold text-sm mb-4 flex items-center"
               >
-                Get Started
-              </motion.button>
-            </motion.div>
+                <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
+                Product
+              </motion.h4>
+              <ul className="space-y-2">
+                {footerLinks[0].links.map((item, index) => (
+                  <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                    <Link 
+                      href={item.path} 
+                      className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                    >
+                      <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
+                      {item.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources Links */}
+            <div>
+              <motion.h4
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-white font-bold text-sm mb-4 flex items-center"
+              >
+                <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
+                Resources
+              </motion.h4>
+              <ul className="space-y-2">
+                {footerLinks[1].links.map((item, index) => (
+                  <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                    <Link 
+                      href={item.path} 
+                      className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                    >
+                      <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
+                      {item.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company Links */}
+            <div>
+              <motion.h4
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                className="text-white font-bold text-sm mb-4 flex items-center"
+              >
+                <span className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full mr-2"></span>
+                Company
+              </motion.h4>
+              <ul className="space-y-2">
+                {footerLinks[2].links.map((item, index) => (
+                  <motion.li key={item.name} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
+                    <Link 
+                      href={item.path} 
+                      className="text-white/70 hover:text-[#b45ecf] transition-all duration-300 group flex items-center text-xs"
+                    >
+                      <ArrowRight className="h-2 w-2 mr-1 opacity-0 group-hover:opacity-100 transform -translate-x-1 group-hover:translate-x-0 transition-all" />
+                      {item.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact CTA */}
+            <div className="md:col-span-2 lg:col-span-1">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                className="bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/10 rounded-xl p-4 border border-[#b45ecf]/20"
+              >
+                <h4 className="text-white font-bold text-sm mb-2">Ready to Transform?</h4>
+                <p className="text-white/60 text-xs mb-3">
+                  Start your journey with 360airo today.
+                </p>
+                <motion.button
+                  onClick={handleGetStarted}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold text-xs"
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
+            </div>
           </div>
         </div>
 

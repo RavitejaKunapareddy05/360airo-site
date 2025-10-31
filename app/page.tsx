@@ -262,7 +262,7 @@ export default function Home() {
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-hidden">
         <Navbar />
 
-        {/* HERO SECTION - Responsive */}
+        {/* HERO SECTION - Mobile first layout */}
         <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 lg:pt-0">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
@@ -314,8 +314,8 @@ export default function Home() {
             className="max-w-7xl mx-auto relative z-10 w-full"
           >
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh] lg:min-h-screen py-12 lg:py-20">
-              {/* LEFT CONTENT - Responsive text sizing */}
-              <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+              {/* LEFT CONTENT - Always first on mobile */}
+              <div className="space-y-6 lg:space-y-8 order-1">
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -486,12 +486,12 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* RIGHT VISUAL - Responsive dashboard */}
+              {/* RIGHT VISUAL - Always second on mobile */}
               <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6, duration: 0.9 }}
-                className="relative flex items-center justify-center h-full order-1 lg:order-2 mb-8 lg:mb-0"
+                className="relative flex items-center justify-center h-full order-2 mb-8 lg:mb-0"
               >
                 {/* Central Command Hub */}
                 <div className="relative scale-90 sm:scale-100">

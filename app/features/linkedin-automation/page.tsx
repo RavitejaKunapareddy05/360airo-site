@@ -481,9 +481,11 @@ const HeroSection = () => {
         transition={{ duration: 1.2 }}
         className="max-w-7xl mx-auto relative z-10 w-full"
       >
-        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center min-h-screen py-16 sm:py-20">
-          {/* LEFT CONTENT */}
-          <div className="space-y-6 sm:space-y-8">
+        {/* MOBILE: Content first, then animations */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 sm:gap-16 items-center min-h-screen py-16 sm:py-20">
+          
+          {/* CONTENT COLUMN - Always first on mobile */}
+          <div className="space-y-6 sm:space-y-8 order-1">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -620,12 +622,12 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* RIGHT - COMPACT VERTICAL PROGRESS TIMELINE */}
+          {/* ANIMATIONS COLUMN - Comes after content on mobile */}
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6, duration: 0.9 }}
-            className="relative flex items-center justify-center h-full"
+            className="relative flex items-center justify-center h-full order-2 lg:order-2 mt-8 lg:mt-0"
           >
             <div className="relative w-full max-w-xs sm:max-w-sm">
               {/* Timeline Container */}

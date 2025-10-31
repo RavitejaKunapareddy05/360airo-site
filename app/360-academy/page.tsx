@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Footer } from '@/components/footer';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -44,8 +44,25 @@ export default function Academy() {
     offset: ["start start", "end end"]
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.9]);
+
+  // Handle button redirects
+  const handleRedirect = () => {
+    window.open('https://app.360airo.com/', '_blank');
+  };
 
   const curriculum = [
     {
@@ -226,37 +243,37 @@ export default function Academy() {
     { number: "2.5x", label: "More Qualified Leads", icon: Target }
   ];
 
-  // Animation variants
+  // Mobile-optimized animation variants
   const fadeInUp = {
-    initial: { y: 60, opacity: 0 },
+    initial: { y: isMobile ? 40 : 60, opacity: 0 },
     animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: isMobile ? 0.6 : 0.8, ease: "easeOut" }
   };
 
   const staggerContainer = {
     animate: {
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: isMobile ? 0.1 : 0.2
       }
     }
   };
 
   const scaleIn = {
-    initial: { scale: 0.9, opacity: 0 },
+    initial: { scale: isMobile ? 0.95 : 0.9, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
-    transition: { duration: 0.6, ease: "easeOut" }
+    transition: { duration: isMobile ? 0.5 : 0.6, ease: "easeOut" }
   };
 
   const slideInLeft = {
-    initial: { x: -100, opacity: 0 },
+    initial: { x: isMobile ? -50 : -100, opacity: 0 },
     animate: { x: 0, opacity: 1 },
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: isMobile ? 0.6 : 0.8, ease: "easeOut" }
   };
 
   const slideInRight = {
-    initial: { x: 100, opacity: 0 },
+    initial: { x: isMobile ? 50 : 100, opacity: 0 },
     animate: { x: 0, opacity: 1 },
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: { duration: isMobile ? 0.6 : 0.8, ease: "easeOut" }
   };
 
   return (
@@ -267,12 +284,12 @@ export default function Academy() {
         {/* Large animated orbs - hidden on mobile */}
         <motion.div
           animate={{ 
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1]
+            x: isMobile ? [0, 40, 0] : [0, 100, 0],
+            y: isMobile ? [0, -30, 0] : [0, -50, 0],
+            scale: isMobile ? [1, 1.1, 1] : [1, 1.2, 1]
           }}
           transition={{ 
-            duration: 20,
+            duration: isMobile ? 15 : 20,
             repeat: Infinity,
             ease: "easeInOut"
           }}
@@ -280,12 +297,12 @@ export default function Academy() {
         />
         <motion.div
           animate={{ 
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 1.3, 1]
+            x: isMobile ? [0, -40, 0] : [0, -80, 0],
+            y: isMobile ? [0, 40, 0] : [0, 60, 0],
+            scale: isMobile ? [1, 1.2, 1] : [1, 1.3, 1]
           }}
           transition={{ 
-            duration: 25,
+            duration: isMobile ? 18 : 25,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2
@@ -294,12 +311,12 @@ export default function Academy() {
         />
         <motion.div
           animate={{ 
-            x: [0, 60, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1]
+            x: isMobile ? [0, 30, 0] : [0, 60, 0],
+            y: isMobile ? [0, -20, 0] : [0, -30, 0],
+            scale: isMobile ? [1, 1.05, 1] : [1, 1.1, 1]
           }}
           transition={{ 
-            duration: 15,
+            duration: isMobile ? 12 : 15,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1
@@ -310,47 +327,47 @@ export default function Academy() {
         {/* Mobile-optimized smaller orbs */}
         <motion.div
           animate={{ 
-            x: [0, 50, 0],
-            y: [0, -30, 0],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ 
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="md:hidden absolute top-20 left-10 w-32 h-32 bg-[#b45ecf]/10 rounded-full blur-xl"
+        />
+        <motion.div
+          animate={{ 
+            x: [0, -25, 0],
+            y: [0, 25, 0],
             scale: [1, 1.1, 1]
           }}
           transition={{ 
             duration: 15,
             repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="md:hidden absolute top-20 left-10 w-48 h-48 bg-[#b45ecf]/10 rounded-full blur-2xl"
-        />
-        <motion.div
-          animate={{ 
-            x: [0, -40, 0],
-            y: [0, 40, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ 
-            duration: 18,
-            repeat: Infinity,
             ease: "easeInOut",
             delay: 1
           }}
-          className="md:hidden absolute bottom-20 right-10 w-40 h-40 bg-[#480056]/20 rounded-full blur-2xl"
+          className="md:hidden absolute bottom-20 right-10 w-28 h-28 bg-[#480056]/20 rounded-full blur-xl"
         />
         
         {/* Floating particles - optimized for mobile */}
         <div className="absolute inset-0">
-          {[...Array(12)].map((_, i) => (
+          {[...Array(isMobile ? 8 : 12)].map((_, i) => (
             <motion.div
               key={i}
               animate={{
-                y: [0, -80, 0],
-                x: [0, Math.random() * 30 - 15, 0],
-                opacity: [0, 1, 0],
+                y: isMobile ? [0, -40, 0] : [0, -80, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+                opacity: [0, 0.8, 0],
                 scale: [0, 1, 0]
               }}
               transition={{
-                duration: 3 + Math.random() * 2,
+                duration: isMobile ? 2 + Math.random() : 3 + Math.random() * 2,
                 repeat: Infinity,
-                delay: Math.random() * 4,
+                delay: Math.random() * 3,
                 ease: "easeInOut"
               }}
               className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-[#b45ecf]/30 rounded-full"
@@ -365,68 +382,68 @@ export default function Academy() {
         {/* Animated grid lines */}
         <motion.div
           animate={{
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.2, 0.4, 0.2],
           }}
           transition={{
-            duration: 4,
+            duration: isMobile ? 3 : 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px] md:bg-[size:60px_60px]"
+          className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px] md:bg-[size:60px_60px]"
         />
 
         {/* Floating shapes */}
         <motion.div
           animate={{
-            y: [0, -20, 0],
-            rotate: [0, 180, 360],
+            y: isMobile ? [0, -10, 0] : [0, -20, 0],
+            rotate: [0, 90, 180, 270, 360],
           }}
           transition={{
-            duration: 8,
+            duration: isMobile ? 6 : 8,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-1/4 right-1/4 w-8 h-8 border border-[#b45ecf]/30 rounded-full hidden md:block"
+          className="absolute top-1/4 right-1/4 w-6 h-6 md:w-8 md:h-8 border border-[#b45ecf]/30 rounded-full hidden md:block"
         />
         <motion.div
           animate={{
-            y: [0, 15, 0],
-            rotate: [360, 180, 0],
+            y: isMobile ? [0, 8, 0] : [0, 15, 0],
+            rotate: [360, 270, 180, 90, 0],
           }}
           transition={{
-            duration: 6,
+            duration: isMobile ? 4 : 6,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1
           }}
-          className="absolute bottom-1/3 left-1/4 w-6 h-6 border border-[#480056]/40 rounded-full hidden md:block"
+          className="absolute bottom-1/3 left-1/4 w-4 h-4 md:w-6 md:h-6 border border-[#480056]/40 rounded-full hidden md:block"
         />
 
         {/* Mobile-only floating elements */}
         <motion.div
           animate={{
-            y: [0, -10, 0],
-            scale: [1, 1.2, 1],
+            y: [0, -8, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="md:hidden absolute top-40 right-8 w-3 h-3 bg-[#b45ecf]/20 rounded-full"
+        />
+        <motion.div
+          animate={{
+            y: [0, 6, 0],
+            scale: [1.1, 1, 1.1],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="md:hidden absolute top-40 right-8 w-4 h-4 bg-[#b45ecf]/20 rounded-full"
-        />
-        <motion.div
-          animate={{
-            y: [0, 8, 0],
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
             ease: "easeInOut",
             delay: 2
           }}
-          className="md:hidden absolute bottom-40 left-6 w-3 h-3 bg-[#480056]/30 rounded-full"
+          className="md:hidden absolute bottom-40 left-6 w-2.5 h-2.5 bg-[#480056]/30 rounded-full"
         />
       </div>
 
@@ -490,6 +507,7 @@ export default function Academy() {
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Button 
+                onClick={handleRedirect}
                 size="lg" 
                 className="bg-[#b45ecf] hover:bg-[#a34dbe] text-white hover:shadow-xl md:hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group border-0 w-full sm:w-auto"
               >
@@ -505,6 +523,7 @@ export default function Academy() {
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Button 
+                onClick={handleRedirect}
                 variant="outline"
                 size="lg" 
                 className="border-white text-white hover:bg-white/10 hover:border-white/30 text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-full font-semibold backdrop-blur-sm transition-all duration-300 group w-full sm:w-auto"
@@ -523,7 +542,7 @@ export default function Academy() {
           <motion.div
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: isMobile ? "-20px" : "-50px" }}
             variants={fadeInUp}
             className="text-center mb-12 md:mb-16"
           >
@@ -544,7 +563,7 @@ export default function Academy() {
               className="space-y-4 md:space-y-6"
             >
               <motion.div
-                whileHover={{ scale: 1.02, y: -5 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -5 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#b45ecf]/10 border border-[#b45ecf]/20 backdrop-blur-sm hover:border-[#b45ecf]/40 transition-all duration-500"
               >
                 <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">The Outreach Challenge</h3>
@@ -554,7 +573,7 @@ export default function Academy() {
               </motion.div>
               
               <motion.div
-                whileHover={{ scale: 1.02, y: -5 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -5 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#480056]/20 border border-[#480056]/30 backdrop-blur-sm hover:border-[#480056]/50 transition-all duration-500"
               >
                 <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">The Academy Solution</h3>
@@ -564,7 +583,7 @@ export default function Academy() {
               </motion.div>
 
               <motion.div
-                whileHover={{ scale: 1.02, y: -5 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -5 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#19001d]/50 border border-[#19001d]/60 backdrop-blur-sm hover:border-[#19001d]/80 transition-all duration-500"
               >
                 <h3 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">Your Learning Goal</h3>
@@ -588,7 +607,7 @@ export default function Academy() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                    whileHover={{ scale: 1.05, y: -5 }}
+                    whileHover={{ scale: 1.05, y: isMobile ? -3 : -5 }}
                     className="bg-white/5 rounded-xl md:rounded-2xl p-4 md:p-6 text-center backdrop-blur-sm border border-white/10 hover:border-[#b45ecf]/40 transition-all duration-300"
                   >
                     <metric.icon className="w-6 h-6 md:w-8 md:h-8 text-[#b45ecf] mb-2 md:mb-3 mx-auto" />
@@ -631,7 +650,7 @@ export default function Academy() {
               <motion.div
                 key={module.module}
                 variants={scaleIn}
-                whileHover={{ scale: 1.03, y: -5 }}
+                whileHover={{ scale: 1.03, y: isMobile ? -3 : -5 }}
                 className="bg-white/5 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 hover:bg-white/10 transition-all duration-500 group border border-white/10 hover:border-[#b45ecf]/40"
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
@@ -711,7 +730,7 @@ export default function Academy() {
               <motion.div
                 key={feature.title}
                 variants={scaleIn}
-                whileHover={{ scale: 1.03, y: -3 }}
+                whileHover={{ scale: 1.03, y: isMobile ? -2 : -3 }}
                 className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl p-6 md:p-8 text-center hover:bg-white/15 hover:border-[#b45ecf]/40 transition-all duration-500 group"
               >
                 <feature.icon className={`w-8 h-8 md:w-12 md:h-12 ${feature.color} mb-3 md:mb-4 mx-auto group-hover:scale-110 transition-transform`} />
@@ -753,7 +772,7 @@ export default function Academy() {
               <motion.div
                 key={audience.group}
                 variants={scaleIn}
-                whileHover={{ scale: 1.03, y: -3 }}
+                whileHover={{ scale: 1.03, y: isMobile ? -2 : -3 }}
                 className="bg-white/5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 text-center hover:bg-white/10 transition-all duration-500 group border border-white/10 hover:border-[#b45ecf]/40"
               >
                 <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br ${audience.gradient} rounded-xl md:rounded-2xl flex items-center justify-center text-white mb-4 md:mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}>
@@ -814,7 +833,7 @@ export default function Academy() {
               <motion.div
                 key={outcome.outcome}
                 variants={scaleIn}
-                whileHover={{ scale: 1.03, y: -3 }}
+                whileHover={{ scale: 1.03, y: isMobile ? -2 : -3 }}
                 className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl p-6 md:p-8 hover:bg-white/15 hover:border-[#b45ecf]/40 transition-all duration-500 group"
               >
                 <outcome.icon className="w-8 h-8 md:w-10 md:h-10 text-[#b45ecf] mb-3 md:mb-4 group-hover:scale-110 transition-transform" />
@@ -850,7 +869,7 @@ export default function Academy() {
               className="space-y-4 md:space-y-6"
             >
               <motion.div
-                whileHover={{ scale: 1.02, y: -3 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -3 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#b45ecf]/10 border border-[#b45ecf]/20 backdrop-blur-sm hover:border-[#b45ecf]/40 transition-all duration-500"
               >
                 <Zap className="w-6 h-6 md:w-8 md:h-8 text-[#b45ecf] mb-2 md:mb-3" />
@@ -861,7 +880,7 @@ export default function Academy() {
               </motion.div>
               
               <motion.div
-                whileHover={{ scale: 1.02, y: -3 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -3 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#480056]/20 border border-[#480056]/30 backdrop-blur-sm hover:border-[#480056]/50 transition-all duration-500"
               >
                 <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-[#480056] mb-2 md:mb-3" />
@@ -880,7 +899,7 @@ export default function Academy() {
               className="space-y-4 md:space-y-6"
             >
               <motion.div
-                whileHover={{ scale: 1.02, y: -3 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -3 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-[#19001d]/50 border border-[#19001d]/60 backdrop-blur-sm hover:border-[#19001d]/80 transition-all duration-500"
               >
                 <Cpu className="w-6 h-6 md:w-8 md:h-8 text-[#19001d] mb-2 md:mb-3" />
@@ -891,7 +910,7 @@ export default function Academy() {
               </motion.div>
               
               <motion.div
-                whileHover={{ scale: 1.02, y: -3 }}
+                whileHover={{ scale: 1.02, y: isMobile ? -2 : -3 }}
                 className="p-4 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/20 border border-[#b45ecf]/20 backdrop-blur-sm hover:border-[#b45ecf]/40 transition-all duration-500"
               >
                 <Rocket className="w-6 h-6 md:w-8 md:h-8 text-[#b45ecf] mb-2 md:mb-3" />
@@ -918,11 +937,11 @@ export default function Academy() {
           >
             <motion.div
               animate={{ 
-                scale: [1, 1.05, 1],
-                rotate: [0, 5, 0, -5, 0]
+                scale: [1, 1.03, 1],
+                rotate: [0, 3, 0, -3, 0]
               }}
               transition={{ 
-                duration: 6,
+                duration: isMobile ? 4 : 6,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
@@ -944,6 +963,7 @@ export default function Academy() {
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Button 
+                onClick={handleRedirect}
                 size="lg" 
                 className="bg-[#b45ecf] hover:bg-[#a34dbe] text-white hover:shadow-xl md:hover:shadow-2xl hover:shadow-[#b45ecf]/25 text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-full font-semibold shadow-lg transition-all duration-300 group border-0 w-full sm:w-auto"
               >
@@ -968,4 +988,4 @@ export default function Academy() {
       <Footer />
     </div>
   );
-} 
+}

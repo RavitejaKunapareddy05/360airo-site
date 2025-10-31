@@ -453,7 +453,7 @@ export default function EmailSequencesPage() {
     <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
       <Navbar />
 
-      {/* Hero Section - Mobile Optimized */}
+      {/* Hero Section - Mobile Optimized with Content First */}
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 overflow-hidden">
         {/* Animated Background - Mobile Optimized */}
         <div className="absolute inset-0 overflow-hidden">
@@ -545,10 +545,11 @@ export default function EmailSequencesPage() {
 
         {/* Main Content Container */}
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* MOBILE: Content first, then animations */}
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column - Text Content - Mobile Optimized */}
-            <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+            {/* CONTENT COLUMN - Always first on mobile */}
+            <div className="space-y-6 lg:space-y-8 order-1">
               
               {/* Badge */}
               <motion.div
@@ -684,8 +685,8 @@ export default function EmailSequencesPage() {
               </motion.div>
             </div>
 
-            {/* Right Column - Visual Demo - Mobile Optimized */}
-            <div className="relative order-1 lg:order-2 mb-6 lg:mb-0">
+            {/* ANIMATIONS COLUMN - Comes after content on mobile */}
+            <div className="relative order-2 lg:order-2 mt-8 lg:mt-0">
               
               {/* Main Card */}
               <motion.div
@@ -927,5 +928,5 @@ export default function EmailSequencesPage() {
 
       <Footer />
     </div>
-  );
+  ); 
 }

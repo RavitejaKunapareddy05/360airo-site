@@ -731,20 +731,20 @@ export default function ReferralProgramPage() {
     <div ref={containerRef} className="min-h-screen bg-[#19001d] overflow-hidden">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Hero Section - Mobile First Layout */}
+      <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 lg:pt-0">
         <AnimatedGrid />
         <FloatingParticles />
         
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh] lg:min-h-screen py-12 lg:py-20">
             
-            {/* Left Content */}
+            {/* Left Content - Always first on mobile */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              className="relative space-y-6 lg:space-y-8"
+              className="relative space-y-6 lg:space-y-8 order-1"
             >
               {/* Animated Badge */}
               <motion.div
@@ -777,7 +777,7 @@ export default function ReferralProgramPage() {
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="space-y-4 lg:space-y-6"
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight">
                   <motion.span
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -838,7 +838,7 @@ export default function ReferralProgramPage() {
                 >
                   <Button 
                     size="lg" 
-                    className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold rounded-2xl shadow-2xl border-0"
+                    className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-6 py-3 md:px-8 md:py-4 text-base md:text-lg font-bold rounded-2xl shadow-2xl border-0 w-full lg:w-auto"
                     onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
                     <motion.span
@@ -852,7 +852,7 @@ export default function ReferralProgramPage() {
                       }}
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12"
                     />
-                    <span className="relative z-10 flex items-center">
+                    <span className="relative z-10 flex items-center justify-center lg:justify-start">
                       Get Your Referral Link
                       <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-5 md:w-5" />
                     </span>
@@ -861,12 +861,12 @@ export default function ReferralProgramPage() {
               </motion.div>
             </motion.div>
 
-            {/* Right Content - Orbital Animation */}
+            {/* Right Content - Always second on mobile */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative order-first lg:order-last mb-8 lg:mb-0"
+              className="relative order-2 mb-8 lg:mb-0"
             >
               <OrbitalAnimation />
             </motion.div>
@@ -1115,7 +1115,7 @@ export default function ReferralProgramPage() {
               >
                 <Button 
                   size="lg" 
-                  className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-bold rounded-2xl shadow-2xl border-0"
+                  className="relative overflow-hidden bg-gradient-to-r from-[#b45ecf] to-[#480056] hover:from-[#b45ecf] hover:to-[#480056] px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-bold rounded-2xl shadow-2xl border-0 w-full lg:w-auto"
                   onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
                   <motion.span
@@ -1129,7 +1129,7 @@ export default function ReferralProgramPage() {
                     }}
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12"
                   />
-                  <span className="relative z-10 flex items-center">
+                  <span className="relative z-10 flex items-center justify-center lg:justify-start">
                     Start Referring Today — It Only Takes a Minute
                     <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-6 md:w-6" />
                   </span>

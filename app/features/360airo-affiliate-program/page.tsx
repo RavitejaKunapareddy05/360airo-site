@@ -729,7 +729,7 @@ export default function AffiliateProgramPage() {
       >
         <Navbar />
 
-        {/* Enhanced Hero Section */}
+        {/* Enhanced Hero Section - Mobile First Layout */}
         <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20 lg:pt-0">
           <GeometricPattern />
           <HeroBackgroundAnimation />
@@ -743,12 +743,12 @@ export default function AffiliateProgramPage() {
           >
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-[80vh] lg:min-h-screen py-12 lg:py-20">
               
-              {/* Left Content with Enhanced Animations */}
+              {/* Left Content - Always first on mobile */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative space-y-6 lg:space-y-8 order-2 lg:order-1"
+                className="relative space-y-6 lg:space-y-8 order-1"
               >
                 {/* Animated Badge */}
                 <motion.div
@@ -864,12 +864,12 @@ export default function AffiliateProgramPage() {
                 </motion.div>
               </motion.div>
 
-              {/* Right Content - Enhanced Animation */}
+              {/* Right Content - Always second on mobile */}
               <motion.div
                 initial={{ opacity: 0, x: 50, scale: 0.8 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 transition={{ duration: 1.2, delay: 0.3, type: "spring" }}
-                className="relative order-1 lg:order-2 mb-8 lg:mb-0"
+                className="relative order-2 mb-8 lg:mb-0"
               >
                 <EnhancedFloatingCardsAnimation />
                 
