@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 25 100% 5%;
+    --foreground: 0 0% 100%;
+    --card: 25 100% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 25 100% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 291 46% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 291 100% 17%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 291 50% 20%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 291 46% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 291 50% 20%;
+    --input: 291 50% 20%;
+    --ring: 291 46% 58%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#19001d] text-foreground;
+    background: linear-gradient(135deg, #19001d 0%, #480056 50%, #19001d 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #b45ecf 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-gradient {
+  background: linear-gradient(135deg, rgba(180, 94, 207, 0.1) 0%, rgba(72, 0, 86, 0.3) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(180, 94, 207, 0.2);
+}
+
+.glow-effect {
+  box-shadow: 0 0 40px rgba(180, 94, 207, 0.3);
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
