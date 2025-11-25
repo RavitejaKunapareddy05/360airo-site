@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Head from 'next/head';
 
 import {
   Calendar,
@@ -435,6 +436,103 @@ const PulsingSection = ({ children, className = "" }: { children: React.ReactNod
   );
 };
 
+// Dashboard Mock Component
+const DashboardMock = () => {
+  const stats = [
+    { label: "Emails Sent", value: "2,847", change: "+12%" },
+    { label: "Reply Rate", value: "24.3%", change: "+5.2%" },
+    { label: "Meetings Booked", value: "89", change: "+18%" },
+    { label: "Open Rate", value: "68.7%", change: "+3.1%" }
+  ];
+
+  const activities = [
+    { time: "2 min ago", action: "Email sequence started for TechCorp", status: "active" },
+    { time: "5 min ago", action: "LinkedIn connection request sent", status: "sent" },
+    { time: "12 min ago", action: "Warmup completed for sales@", status: "completed" },
+    { time: "25 min ago", action: "New lead added from website", status: "new" }
+  ];
+
+  return (
+    <div className="bg-[#1A1A1A] rounded-2xl p-6 border-2 shadow-xl border-purple-500/30">
+      {/* Dashboard Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center space-x-2">
+          <div className="w-3 h-3 rounded-full bg-red-500"></div>
+          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div className="text-white font-semibold text-lg">360Airo Demo Dashboard</div>
+        <div className="w-6"></div>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-2 gap-4 mb-6">
+        {stats.map((stat, index) => (
+          <motion.div
+            key={stat.label}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.1 }}
+            className="bg-[#0A0A0A] rounded-xl p-4 border border-gray-800"
+          >
+            <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+            <div className="flex items-center justify-between">
+              <div className="text-gray-400 text-sm">{stat.label}</div>
+              <div className="text-green-400 text-sm font-semibold">{stat.change}</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Features Grid */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        {["Email Warmup", "AI Automation", "LinkedIn"].map((feature, index) => (
+          <motion.div
+            key={feature}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 + index * 0.1 }}
+            className="bg-[#0A0A0A] rounded-lg p-3 text-center border border-gray-800"
+          >
+            <div className="text-purple-400 text-xs font-semibold">{feature}</div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Recent Activity */}
+      <div className="bg-[#0A0A0A] rounded-xl p-4 border border-gray-800">
+        <div className="text-white font-semibold mb-3">Recent Activity</div>
+        <div className="space-y-2">
+          {activities.map((activity, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8 + index * 0.1 }}
+              className="flex items-center justify-between text-sm"
+            >
+              <div className="text-gray-300">{activity.action}</div>
+              <div className="text-gray-500 text-xs">{activity.time}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2 }}
+        className="mt-6"
+      >
+        <div className="bg-purple-600 rounded-lg p-3 text-center text-white font-semibold text-sm">
+          Book Your Live Demo Today!
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 // Main Demo Page Component
 export default function DemoPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -447,121 +545,462 @@ export default function DemoPage() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
-      {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/experience-360airo-in-action" />
-      
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <FloatingDemoElements />
+    <>
+      <Head>
+        <title>Discover How 360Airo's Smart Outreach Transforms Results</title>
+        <meta 
+          name="description" 
+          content="See how our powerful AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." 
+        />
+        <meta 
+          name="keywords" 
+          content="360Airo demo, AI outreach platform, email automation demo, smart outreach, sales automation, marketing automation, LinkedIn outreach, email warmup" 
+        />
         
-        <motion.div 
-          className="max-w-7xl mx-auto w-full relative z-10"
-          style={{
-            scale: headerScale,
-            opacity: headerOpacity
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/experience-360airo-in-action" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content=" Discover How 360Airo's Smart Outreach Transforms Results" />
+        <meta property="og:description" content="See how our powerful AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." />
+        <meta property="og:url" content="https://360airo.com/features/experience-360airo-in-action" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-demo-page.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Discover How 360Airo's Smart Outreach Transforms Results" />
+        <meta name="twitter:description" content="See how our AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-demo-page.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#b45ecf" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Demo Experience",
+              "description": "See how our powerful AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results.",
+              "url": "https://360airo.com/features/experience-360airo-in-action",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              },
+              "featureList": [
+                "Live interactive demo",
+                "AI-powered outreach platform",
+                "Email automation",
+                "LinkedIn outreach",
+                "Real-time analytics",
+                "Prospect CRM"
+              ]
+            })
           }}
-        >
-          {/* MOBILE: Content first, then animation */}
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-16 lg:py-20">
-            
-            {/* CONTENT COLUMN - Always first on mobile */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              className="relative space-y-6 lg:space-y-8 order-1"
-            >
-              {/* Badge */}
+        />
+      </Head>
+
+      {/* Hidden link for SEO */}
+      <div className="hidden">
+        <a rel="canonical" href="https://360airo.com/features/experience-360airo-in-action">360Airo Demo Experience</a>
+      </div>
+
+      <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
+        <Navbar />
+
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <FloatingDemoElements />
+          
+          <motion.div 
+            className="max-w-7xl mx-auto w-full relative z-10"
+            style={{
+              scale: headerScale,
+              opacity: headerOpacity
+            }}
+          >
+            {/* MOBILE: Content first, then animation */}
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-16 lg:py-20">
+              
+              {/* CONTENT COLUMN - Always first on mobile */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="inline-block"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1 }}
+                className="relative space-y-6 lg:space-y-8 order-1"
               >
-                <div 
-                  className="px-4 lg:px-6 py-2 lg:py-3 rounded-full shadow-2xl border-2 backdrop-blur-sm"
-                  style={{ 
-                    background: COLORS.purpleLight,
-                    borderColor: COLORS.purpleLight
-                  }}
+                {/* Badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                  className="inline-block"
                 >
-                  <span className="text-white font-bold text-xs lg:text-sm uppercase tracking-wider flex items-center">
-                    <Eye className="h-3 w-3 lg:h-4 lg:w-4 mr-2" />
-                    Live Interactive Demo
-                  </span>
-                </div>
-              </motion.div>
+                  <div 
+                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full shadow-2xl border-2 backdrop-blur-sm"
+                    style={{ 
+                      background: COLORS.purpleLight,
+                      borderColor: COLORS.purpleLight
+                    }}
+                  >
+                    <span className="text-white font-bold text-xs lg:text-sm uppercase tracking-wider flex items-center">
+                      <Eye className="h-3 w-3 lg:h-4 lg:w-4 mr-2" />
+                      Live Interactive Demo
+                    </span>
+                  </div>
+                </motion.div>
 
-              {/* Main Heading */}
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="space-y-4 lg:space-y-6"
-              >
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight">
-                  <motion.span
-                    initial={{ opacity: 0, x: -40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 }}
-                    className="block"
-                  >
-                    Experience
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, x: 40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.8 }}
-                    className="block"
-                    style={{ color: COLORS.purpleLight }}
-                  >
-                    360Airo
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1 }}
-                    className="block"
-                    style={{ color: COLORS.purpleDark }}
-                  >
-                    In Action
-                  </motion.span>
-                </h1>
+                {/* Main Heading */}
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="space-y-4 lg:space-y-6"
+                >
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight">
+                    <motion.span
+                      initial={{ opacity: 0, x: -40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6 }}
+                      className="block"
+                    >
+                      Experience
+                    </motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.8 }}
+                      className="block"
+                      style={{ color: COLORS.purpleLight }}
+                    >
+                      360Airo
+                    </motion.span>
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1 }}
+                      className="block"
+                      style={{ color: COLORS.purpleDark }}
+                    >
+                      In Action
+                    </motion.span>
+                  </h1>
 
-                <motion.p
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2 }}
+                    className="text-lg sm:text-xl lg:text-2xl text-white/80 font-light leading-relaxed"
+                  >
+                    See How Smart Outreach Really Works
+                  </motion.p>
+                </motion.div>
+
+                {/* Description */}
+                <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="text-lg sm:text-xl lg:text-2xl text-white/80 font-light leading-relaxed"
+                  transition={{ delay: 1.4, duration: 0.7 }}
+                  className="space-y-3 lg:space-y-4 max-w-xl"
                 >
-                  See How Smart Outreach Really Works
-                </motion.p>
+                  <p className="text-base lg:text-lg text-white/70 leading-relaxed">
+                    <span className="text-white font-semibold">You've read the features — now see the magic happen.</span>{' '}
+                    360Airo's live demo gives you a front-row seat to how our AI-powered outreach platform helps teams build better connections, automate engagement, and scale results.
+                  </p>
+                  <p className="text-base lg:text-lg text-white/70 leading-relaxed">
+                    Whether you're in sales, marketing, or business development, the 360Airo demo walks you through everything — from email warmup to AI automation, LinkedIn outreach, prospect CRM, and performance analytics — all in one unified interface.
+                  </p>
+                </motion.div>
+
+                {/* CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6, duration: 0.6 }}
+                  className="pt-4 lg:pt-8"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      className="px-6 py-3 lg:px-8 lg:py-4 text-base lg:text-lg font-bold rounded-xl lg:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full lg:w-auto"
+                      style={{ background: COLORS.purpleLight }}
+                      onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                    >
+                      <motion.span
+                        animate={{
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                        }}
+                        className="absolute inset-0 bg-white/20 rounded-xl lg:rounded-2xl"
+                      />
+                      <span className="relative z-10 flex items-center justify-center">
+                        <Play className="mr-2 lg:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
+                        Book Your Live Demo
+                        <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Button>
+                  </motion.div>
+                </motion.div>
               </motion.div>
 
-              {/* Description */}
+              {/* ANIMATION COLUMN - Always second on mobile */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4, duration: 0.7 }}
-                className="space-y-3 lg:space-y-4 max-w-xl"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="relative order-2 mt-8 lg:mt-0"
               >
-                <p className="text-base lg:text-lg text-white/70 leading-relaxed">
-                  <span className="text-white font-semibold">You've read the features — now see the magic happen.</span>{' '}
-                  360Airo's live demo gives you a front-row seat to how our AI-powered outreach platform helps teams build better connections, automate engagement, and scale results.
-                </p>
-                <p className="text-base lg:text-lg text-white/70 leading-relaxed">
-                  Whether you're in sales, marketing, or business development, the 360Airo demo walks you through everything — from email warmup to AI automation, LinkedIn outreach, prospect CRM, and performance analytics — all in one unified interface.
+                <motion.div
+                  animate={{
+                    y: [0, -15, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut"
+                  }}
+                  className="relative"
+                >
+                  <DashboardMock />
+                </motion.div>
+
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Number.POSITIVE_INFINITY,
+                  }}
+                  className="absolute -top-2 -right-2 lg:-top-4 lg:-right-4 w-4 h-4 lg:w-8 lg:h-8 rounded-full shadow-lg"
+                  style={{ background: COLORS.purpleLight }}
+                ></motion.div>
+                
+                <motion.div
+                  animate={{
+                    y: [0, 15, 0],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Number.POSITIVE_INFINITY,
+                    delay: 2,
+                  }}
+                  className="absolute -bottom-2 -left-2 lg:-bottom-4 lg:-left-4 w-3 h-3 lg:w-6 lg:h-6 rounded-full shadow-lg"
+                  style={{ background: COLORS.purpleDark }}
+                ></motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* What You'll Discover Section */}
+        <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-8 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
+              >
+                What You'll Discover in the Demo
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                Our product specialists will guide you through a hands-on experience of how 360Airo simplifies outreach while improving deliverability and conversions.
+              </motion.p>
+            </motion.div>
+
+            <DemoFeaturesGrid />
+          </div>
+        </PulsingSection>
+
+        {/* Who the Demo Is For Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <FloatingDemoElements />
+          <div className="max-w-6xl mx-auto relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-8 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 lg:mb-6"
+                style={{ color: COLORS.purpleLight }}
+              >
+                Who the Demo Is For
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                The 360Airo product demo is built for anyone who wants to transform the way they connect, engage, and convert.
+              </motion.p>
+            </motion.div>
+
+            <TargetAudience />
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-8 lg:mt-12 text-center"
+            >
+              <p className="text-white text-lg lg:text-xl font-bold">
+                If outreach plays any role in your business, this demo is your starting point for smarter results.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Book Demo Section */}
+        <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-8 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
+              >
+                Why Book a 360Airo Demo
+              </motion.h2>
+            </motion.div>
+
+            <DemoBenefits />
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="mt-8 lg:mt-12 text-center"
+            >
+              <p className="text-white/80 text-base lg:text-lg leading-relaxed max-w-3xl mx-auto">
+                See how easy it is to automate outreach, track performance, and scale engagement — all without losing the human touch.
+              </p>
+            </motion.div>
+          </div>
+        </PulsingSection>
+
+        {/* Schedule Steps Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-8 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 lg:mb-6"
+                style={{ color: COLORS.purpleLight }}
+              >
+                Schedule Your Demo in 3 Easy Steps
+              </motion.h2>
+            </motion.div>
+
+            <DemoSteps />
+
+            {/* Free Trial Note */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-12 lg:mt-20 text-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="inline-flex items-center space-x-3 lg:space-x-5 bg-[#1A1A1A] rounded-xl lg:rounded-2xl px-6 lg:px-10 py-3 lg:py-4 border-2"
+                style={{ borderColor: COLORS.purpleLight }}
+              >
+                <Gift className="h-4 w-4 lg:h-6 lg:w-6" style={{ color: COLORS.purpleLight }} />
+                <p className="text-white text-sm lg:text-lg font-semibold">
+                  Free trial access post-demo to explore on your own
                 </p>
               </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-              {/* CTA Button */}
+        {/* Final CTA Section */}
+        <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6 lg:space-y-8"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
+              >
+                See the Future of Outreach, Live
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-base lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
+              >
+                Don't just imagine smarter outreach — experience it. Book your 360Airo live demo today and discover how AI can make your communication faster, more personal, and infinitely scalable.
+              </motion.p>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6, duration: 0.6 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
                 className="pt-4 lg:pt-8"
               >
                 <motion.div
@@ -571,7 +1010,7 @@ export default function DemoPage() {
                 >
                   <Button 
                     size="lg" 
-                    className="px-6 py-3 lg:px-8 lg:py-4 text-base lg:text-lg font-bold rounded-xl lg:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full lg:w-auto"
+                    className="px-6 py-3 lg:px-12 lg:py-6 text-base lg:text-xl font-bold rounded-xl lg:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full lg:w-auto"
                     style={{ background: COLORS.purpleLight }}
                     onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
@@ -583,322 +1022,22 @@ export default function DemoPage() {
                         duration: 2,
                         repeat: Number.POSITIVE_INFINITY,
                       }}
-                      className="absolute inset-0 bg-white/20 rounded-xl lg:rounded-2xl"
+                      className="absolute inset-0 bg-white/30 rounded-xl lg:rounded-2xl"
                     />
                     <span className="relative z-10 flex items-center justify-center">
-                      <Play className="mr-2 lg:mr-3 h-4 w-4 lg:h-5 lg:w-5" />
-                      Book Your Live Demo
-                      <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                      <Calendar className="mr-2 lg:mr-3 h-4 w-4 lg:h-6 lg:w-6" />
+                      Book Your Demo Now
+                      <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
                     </span>
                   </Button>
                 </motion.div>
               </motion.div>
             </motion.div>
-
-            {/* ANIMATION COLUMN - Always second on mobile */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="relative order-2 mt-8 lg:mt-0"
-            >
-              <motion.div
-                animate={{
-                  y: [0, -15, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut"
-                }}
-                className="bg-[#1A1A1A] rounded-xl lg:rounded-3xl p-4 lg:p-8 border-2 shadow-xl"
-                style={{ borderColor: COLORS.purpleLight }}
-              >
-                <div className="space-y-3 lg:space-y-4">
-                  {/* Mock Dashboard Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 lg:space-x-3">
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-red-500"></div>
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-yellow-500"></div>
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 rounded-full bg-green-500"></div>
-                    </div>
-                    <div className="text-white text-xs lg:text-sm font-medium">360Airo Dashboard</div>
-                    <div className="w-4 lg:w-6"></div>
-                  </div>
-                  
-                  {/* Mock Content */}
-                  <div className="grid grid-cols-2 gap-2 lg:gap-4">
-                    <motion.div
-                      animate={{ opacity: [0.7, 1, 0.7] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                      className="h-12 lg:h-20 rounded-lg lg:rounded-xl"
-                      style={{ background: COLORS.purpleLight }}
-                    ></motion.div>
-                    <motion.div
-                      animate={{ opacity: [1, 0.7, 1] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }}
-                      className="h-12 lg:h-20 rounded-lg lg:rounded-xl"
-                      style={{ background: COLORS.purpleDark }}
-                    ></motion.div>
-                    <motion.div
-                      animate={{ opacity: [0.8, 1, 0.8] }}
-                      transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
-                      className="col-span-2 h-16 lg:h-24 rounded-lg lg:rounded-xl"
-                      style={{ background: COLORS.purpleDarker }}
-                    ></motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Floating Elements */}
-              <motion.div
-                animate={{
-                  y: [0, -20, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Number.POSITIVE_INFINITY,
-                }}
-                className="absolute -top-2 -right-2 lg:-top-4 lg:-right-4 w-4 h-4 lg:w-8 lg:h-8 rounded-full shadow-lg"
-                style={{ background: COLORS.purpleLight }}
-              ></motion.div>
-              
-              <motion.div
-                animate={{
-                  y: [0, 15, 0],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: 2,
-                }}
-                className="absolute -bottom-2 -left-2 lg:-bottom-4 lg:-left-4 w-3 h-3 lg:w-6 lg:h-6 rounded-full shadow-lg"
-                style={{ background: COLORS.purpleDark }}
-              ></motion.div>
-            </motion.div>
           </div>
-        </motion.div>
-      </section>
+        </PulsingSection>
 
-      {/* What You'll Discover Section */}
-      <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
-            >
-              What You'll Discover in the Demo
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              Our product specialists will guide you through a hands-on experience of how 360Airo simplifies outreach while improving deliverability and conversions.
-            </motion.p>
-          </motion.div>
-
-          <DemoFeaturesGrid />
-        </div>
-      </PulsingSection>
-
-      {/* Who the Demo Is For Section */}
-      <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <FloatingDemoElements />
-        <div className="max-w-6xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 lg:mb-6"
-              style={{ color: COLORS.purpleLight }}
-            >
-              Who the Demo Is For
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              The 360Airo product demo is built for anyone who wants to transform the way they connect, engage, and convert.
-            </motion.p>
-          </motion.div>
-
-          <TargetAudience />
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-8 lg:mt-12 text-center"
-          >
-            <p className="text-white text-lg lg:text-xl font-bold">
-              If outreach plays any role in your business, this demo is your starting point for smarter results.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Why Book Demo Section */}
-      <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
-            >
-              Why Book a 360Airo Demo
-            </motion.h2>
-          </motion.div>
-
-          <DemoBenefits />
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="mt-8 lg:mt-12 text-center"
-          >
-            <p className="text-white/80 text-base lg:text-lg leading-relaxed max-w-3xl mx-auto">
-              See how easy it is to automate outreach, track performance, and scale engagement — all without losing the human touch.
-            </p>
-          </motion.div>
-        </div>
-      </PulsingSection>
-
-      {/* Schedule Steps Section */}
-      <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-8 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 lg:mb-6"
-              style={{ color: COLORS.purpleDark }}
-            >
-              Schedule Your Demo in 3 Easy Steps
-            </motion.h2>
-          </motion.div>
-
-          <DemoSteps />
-
-          {/* Free Trial Note */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-12 lg:mt-20 text-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="inline-flex items-center space-x-3 lg:space-x-5 bg-[#1A1A1A] rounded-xl lg:rounded-2xl px-6 lg:px-10 py-3 lg:py-4 border-2"
-              style={{ borderColor: COLORS.purpleLight }}
-            >
-              <Gift className="h-4 w-4 lg:h-6 lg:w-6" style={{ color: COLORS.purpleLight }} />
-              <p className="text-white text-sm lg:text-lg font-semibold">
-                Free trial access post-demo to explore on your own
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <PulsingSection className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A]">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 lg:space-y-8"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 lg:mb-6"
-            >
-              See the Future of Outreach, Live
-            </motion.h2>
-            
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-base lg:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto"
-            >
-              Don't just imagine smarter outreach — experience it. Book your 360Airo live demo today and discover how AI can make your communication faster, more personal, and infinitely scalable.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="pt-4 lg:pt-8"
-            >
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button 
-                  size="lg" 
-                  className="px-6 py-3 lg:px-12 lg:py-6 text-base lg:text-xl font-bold rounded-xl lg:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full lg:w-auto"
-                  style={{ background: COLORS.purpleLight }}
-                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
-                >
-                  <motion.span
-                    animate={{
-                      scale: [1, 1.1, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Number.POSITIVE_INFINITY,
-                    }}
-                    className="absolute inset-0 bg-white/30 rounded-xl lg:rounded-2xl"
-                  />
-                  <span className="relative z-10 flex items-center justify-center">
-                    <Calendar className="mr-2 lg:mr-3 h-4 w-4 lg:h-6 lg:w-6" />
-                    Book Your Demo Now
-                    <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </PulsingSection>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
