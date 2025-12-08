@@ -109,6 +109,14 @@ const freeTools = [
     color: 'from-cyan-500 to-blue-400',
     tag: 'Free'
   },
+  { 
+    name: 'Lead Conversion Platform', 
+    href: '/free-tools/lead-conversion-platform',
+    description: 'Identify anonymous visitors, enrich leads, and route to sales teams',
+    icon: TrendingUp,
+    color: 'from-purple-600 to-indigo-500',
+    tag: 'Free'
+  },
 ];
 
 const features = [

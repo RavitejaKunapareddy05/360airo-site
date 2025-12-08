@@ -9,13 +9,14 @@
  * <script>
  *   window.AIRO_CONFIG = {
  *     apiKey: 'your-api-key-here',
- *     trackingEndpoint: 'http://localhost:3000/api/leads/track',
  *     accountId: 'your-account-id'
+ *     // trackingEndpoint is auto-detected from current domain
  *   };
  * </script>
- * <script src="http://localhost:3000/360airo-tracker.js"></script>
+ * <script src="/360airo-tracker.js"></script>
  * 
  * That's it! All visitors will be tracked automatically.
+ * Endpoints will be auto-detected: /api/leads/track
  * ============================================================
  */
 
@@ -25,7 +26,12 @@
   const Airo360Tracker = {
     config: {
       apiKey: window.AIRO_CONFIG?.apiKey || null,
-      trackingEndpoint: window.AIRO_CONFIG?.trackingEndpoint || '/api/leads/track',
+      trackingEndpoint: window.AIRO_CONFIG?.trackingEndpoint || (() => {
+        // Auto-detect tracking endpoint - works on both localhost and live
+        const protocol = window.location.protocol; // https: or http:
+        const host = window.location.host; // domain.com or localhost:3000
+        return `${protocol}//${host}/api/leads/track`;
+      })(),
       accountId: window.AIRO_CONFIG?.accountId || null,
       batchSize: 5,
       flushInterval: 30000,

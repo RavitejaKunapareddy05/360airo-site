@@ -115,6 +115,38 @@ function smtpExchange(host: string, email: string, timeout = 5000): Promise<{sta
   });
 }
 
+/**
+ * Fallback verification using external API for production
+ */
+async function verifyEmailViaAPI(email: string): Promise<VerificationResult> {
+  const startTime = Date.now();
+
+  try {
+    // Using a free email verification API as fallback
+    const response = await fetch(`https://api.hunter.io/v2/email-verifier?email=${encodeURIComponent(email)}&domain=${email.split('@')[1]}`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const result = data.result || 'unknown';
+      
+      return {
+        email,
+        status: result === 'deliverable' ? 'valid' : result === 'undeliverable' ? 'invalid' : 'unknown',
+        reason: `API verification: ${result}`,
+        verificationTime: Date.now() - startTime
+      };
+    } else {
+      throw new Error('API verification failed');
+    }
+  } catch (err) {
+    // Fall back to basic DNS + format validation
+    return null as any;
+  }
+}
+
 async function verifyEmail(email: string): Promise<VerificationResult> {
   const startTime = Date.now();
 
@@ -134,6 +166,12 @@ async function verifyEmail(email: string): Promise<VerificationResult> {
   try {
     mxRecords = await resolveMx(domain);
   } catch (err: any) {
+    // If DNS fails on production, try external API
+    if (process.env.NODE_ENV === 'production') {
+      const apiResult = await verifyEmailViaAPI(email);
+      if (apiResult) return apiResult;
+    }
+    
     return {
       email,
       status: 'unknown',
@@ -173,6 +211,12 @@ async function verifyEmail(email: string): Promise<VerificationResult> {
     } catch (err: any) {
       // continue to next MX
     }
+  }
+
+  // Production fallback: use external API
+  if (process.env.NODE_ENV === 'production') {
+    const apiResult = await verifyEmailViaAPI(email);
+    if (apiResult) return apiResult;
   }
 
   return {
