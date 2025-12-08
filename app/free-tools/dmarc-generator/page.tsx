@@ -72,18 +72,18 @@ export default function DMARCGeneratorPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-white font-semibold mb-3">Policy</label>
-                <select value={policy} onChange={(e) => setPolicy(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white">
-                  <option value="none">none - Monitor only</option>
-                  <option value="quarantine">quarantine - Quarantine failures</option>
-                  <option value="reject">reject - Reject failures</option>
+                <select value={policy} onChange={(e) => setPolicy(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer">
+                  <option value="none" className="bg-[#1a0b2e] text-white">none - Monitor only</option>
+                  <option value="quarantine" className="bg-[#1a0b2e] text-white">quarantine - Quarantine failures</option>
+                  <option value="reject" className="bg-[#1a0b2e] text-white">reject - Reject failures</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-white font-semibold mb-3">Alignment</label>
-                <select value={alignment} onChange={(e) => setAlignment(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white">
-                  <option value="relaxed">relaxed - More lenient</option>
-                  <option value="strict">strict - Strict alignment</option>
+                <select value={alignment} onChange={(e) => setAlignment(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer">
+                  <option value="relaxed" className="bg-[#1a0b2e] text-white">relaxed - More lenient</option>
+                  <option value="strict" className="bg-[#1a0b2e] text-white">strict - Strict alignment</option>
                 </select>
               </div>
             </div>

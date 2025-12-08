@@ -225,8 +225,8 @@
 <code>&lt;script&gt;
   window.AIRO_CONFIG = {
     apiKey: 'your-api-key',
-    trackingEndpoint: 'http://localhost:3000/api/leads/track',
     accountId: 'your-account-id'
+    // Endpoint auto-detects from your domain
   };
 &lt;/script&gt;</code>
                     </div>
@@ -240,7 +240,7 @@
                     <h3>Add Tracker Script</h3>
                     <p>Paste this before the closing &lt;/body&gt; tag:</p>
                     <div class="code-block">
-<code>&lt;script src="http://localhost:3000/360airo-tracker.js"&gt;&lt;/script&gt;</code>
+<code>&lt;script src="/360airo-tracker.js"&gt;&lt;/script&gt;</code>
                     </div>
                     <button class="copy-btn" onclick="copyToClipboard(document.querySelectorAll('.code-block')[1])">📋 Copy</button>
                 </div>
@@ -261,13 +261,13 @@
 &lt;script&gt;
   window.AIRO_CONFIG = {
     apiKey: 'your-api-key',
-    trackingEndpoint: 'http://localhost:3000/api/leads/track',
     accountId: 'your-account-id'
+    // Endpoint auto-detects from your domain
   };
 &lt;/script&gt;
 
 &lt;!-- 360AIRO Tracker Script --&gt;
-&lt;script src="http://localhost:3000/360airo-tracker.js"&gt;&lt;/script&gt;</code>
+&lt;script src="/360airo-tracker.js"&gt;&lt;/script&gt;</code>
             </div>
             <button class="copy-btn" onclick="copyToClipboard(document.querySelectorAll('.code-block')[2])">📋 Copy All</button>
 
@@ -460,7 +460,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
             <h3>Lead Dashboard</h3>
             <p>Access your complete lead dashboard at:</p>
             <div class="highlight">
-                <strong>🔗 <a href="http://localhost:3000/free-tools/lead-conversion-platform" style="color: #d67bff; text-decoration: none;">http://localhost:3000/free-tools/lead-conversion-platform</a></strong>
+                <strong>🔗 <a href="https://360airo.com/free-tools/lead-conversion-platform" style="color: #d67bff; text-decoration: none;">https://360airo.com/free-tools/lead-conversion-platform</a></strong>
             </div>
 
             <h3>Features:</h3>
@@ -544,7 +544,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 
         <footer>
             <p>360AIRO Lead Tracker v2.0 | Build more, track better</p>
-            <p style="margin-top: 10px; color: #666;">Questions? Visit your dashboard at http://localhost:3000/free-tools/lead-conversion-platform</p>
+            <p style="margin-top: 10px; color: #666;">Questions? Visit your dashboard at https://360airo.com/free-tools/lead-conversion-platform</p>
         </footer>
     </div>
 
