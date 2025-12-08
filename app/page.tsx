@@ -3,12 +3,13 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, Zap, Target, BarChart3, Mail, Brain, Shield, Users, Star, Play, Quote, Phone, Linkedin, Database, TrendingUp, Clock, Globe, Calendar, Sparkles, Bot, CheckCircle2, Send, MessageCircle, Eye } from 'lucide-react';
+import { ArrowRight, Zap, Target, BarChart3, Mail, Brain, Shield, Users, Star, Play, Quote, Phone, Linkedin, Database, TrendingUp, Clock, Globe, Calendar, Sparkles, Bot, CheckCircle2, Send, MessageCircle, Eye, PenTool } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow */
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -283,8 +284,6 @@ export default function Home() {
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-hidden">
-          {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com" />
         <Navbar />
 
         {/* HERO SECTION - Mobile first layout */}
@@ -1017,6 +1016,115 @@ export default function Home() {
                 </GlowCard>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* Free Tools Section with Scrollable Features */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={containerVariants} className="max-w-6xl mx-auto">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2">
+                <span className="text-[#b45ecf] font-semibold text-sm tracking-wider uppercase">Free Email Tools Collection</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+                Powerful tools to boost your campaigns
+              </h2>
+              <SectionDivider />
+              <p className="text-base lg:text-lg text-white/80 max-w-2xl mx-auto">
+                Access our complete suite of free email tools designed to help you test, verify, and optimize.
+              </p>
+            </motion.div>
+
+            <div className="relative">
+              <div className="free-tools-scroll overflow-y-auto max-h-[600px] pr-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-6 pb-4">
+                  {[
+                    {
+                      icon: Mail,
+                      title: 'Email Verifier',
+                      description: 'Verify email addresses instantly with our high-accuracy validation tool that checks syntax, domain, and mailbox existence.',
+                      color: 'from-blue-500 to-cyan-400',
+                      href: '/free-tools/email-verifier'
+                    },
+                    {
+                      icon: BarChart3,
+                      title: 'Mailbox Calculator',
+                      description: 'Calculate optimal sending limits and inbox rotation schedules to maintain high deliverability rates.',
+                      color: 'from-green-500 to-emerald-400',
+                      href: '/free-tools/mailbox-calculator'
+                    },
+                    {
+                      icon: Shield,
+                      title: 'DMARC Generator',
+                      description: 'Create DMARC records to protect your domain from email spoofing and phishing attacks.',
+                      color: 'from-indigo-500 to-purple-400',
+                      href: '/free-tools/dmarc-generator'
+                    },
+                    {
+                      icon: Zap,
+                      title: 'SPF Generator',
+                      description: 'Generate SPF records to authorize legitimate email senders and prevent spam flagging.',
+                      color: 'from-yellow-500 to-orange-400',
+                      href: '/free-tools/spf-generator'
+                    },
+                    {
+                      icon: Sparkles,
+                      title: 'Email Pitch Generator',
+                      description: 'Generate compelling email pitches using AI-powered templates that convert.',
+                      color: 'from-pink-500 to-rose-400',
+                      href: '/free-tools/email-pitch-generator'
+                    },
+                    {
+                      icon: PenTool,
+                      title: 'Email Signature Builder',
+                      description: 'Create professional email signatures with custom branding, links, and contact information.',
+                      color: 'from-teal-500 to-cyan-400',
+                      href: '/free-tools/email-signature-builder'
+                    },
+                  ].map((tool, index) => (
+                    <GlowCard key={index} className="group cursor-pointer rounded-2xl flex-shrink-0 w-[300px] lg:w-[320px]">
+                      <Link href={tool.href}>
+                        <Card className="relative bg-white/5 backdrop-blur-sm p-5 lg:p-6 h-full border border-white/10 rounded-2xl transition-all duration-500 group-hover:bg-white/8 group-hover:border-[#b45ecf]/30 group-hover:scale-105">
+                          <div className="relative z-10 h-full flex flex-col">
+                            <motion.div
+                              className={`bg-gradient-to-r ${tool.color} w-12 h-12 lg:w-14 lg:h-14 rounded-xl flex items-center justify-center mb-3 lg:mb-4`}
+                              whileHover={{ rotate: [0, -15, 15, 0], scale: 1.15 }}
+                              transition={{ duration: 0.5 }}
+                            >
+                              <tool.icon className="h-6 w-6 lg:h-7 lg:w-7 text-white" />
+                            </motion.div>
+                            <h3 className="text-base lg:text-lg font-semibold text-white mb-2 lg:mb-3 transition-colors group-hover:text-[#d67bff]">{tool.title}</h3>
+                            <motion.div
+                              className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-3 lg:mb-4"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: '100%' }}
+                              viewport={{ once: true }}
+                              transition={{ delay: index * 0.08, duration: 0.6 }}
+                            />
+                            <p className="text-white/80 text-sm leading-relaxed flex-grow mb-4">{tool.description}</p>
+                            <div className="flex items-center gap-2 text-[#b45ecf] group-hover:text-[#d67bff] transition-colors mt-auto text-sm font-medium">
+                              <span>Access Tool</span>
+                              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                          </div>
+                        </Card>
+                      </Link>
+                    </GlowCard>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <motion.div variants={itemVariants} className="text-center mt-8 lg:mt-12">
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-[#b45ecf] to-[#d67bff] hover:from-[#a34dbf] hover:to-[#c56aef] text-white font-semibold px-8 py-6 rounded-xl transition-all hover:shadow-lg hover:shadow-[#b45ecf]/25"
+                onClick={() => window.location.href = '/free-tools'}
+              >
+                Explore All 10 Tools
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
           </motion.div>
         </section>
 

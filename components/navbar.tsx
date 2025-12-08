@@ -30,8 +30,86 @@ import {
   PlayCircle,
   CreditCard,
   Share2,
-  Database
+  Database,
+  Calculator as CalcIcon,
+  PenTool,
+  CheckSquare
 } from 'lucide-react';
+
+const freeTools = [
+  { 
+    name: 'Email Verifier', 
+    href: '/free-tools/email-verifier',
+    description: 'Verify email addresses and reduce bounce rates instantly',
+    icon: Mail,
+    color: 'from-blue-500 to-cyan-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Mailbox Calculator', 
+    href: '/free-tools/mailbox-calculator',
+    description: 'Calculate optimal mailbox warming and sending limits',
+    icon: CalcIcon,
+    color: 'from-green-500 to-emerald-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'DMARC Generator', 
+    href: '/free-tools/dmarc-generator',
+    description: 'Generate DMARC records to protect your email domain',
+    icon: Shield,
+    color: 'from-purple-500 to-pink-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'SPF Generator', 
+    href: '/free-tools/spf-generator',
+    description: 'Create SPF records for better email authentication',
+    icon: Zap,
+    color: 'from-orange-500 to-red-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Email Pitch Generator', 
+    href: '/free-tools/email-pitch-generator',
+    description: 'Generate compelling email pitches with AI assistance',
+    icon: Sparkles,
+    color: 'from-amber-500 to-orange-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Email Signature Builder', 
+    href: '/free-tools/email-signature-builder',
+    description: 'Create professional email signatures without coding',
+    icon: PenTool,
+    color: 'from-indigo-500 to-blue-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Email Sequencer', 
+    href: '/free-tools/email-sequencer',
+    description: 'Generate complete email sequences with personalization',
+    icon: Workflow,
+    color: 'from-purple-500 to-indigo-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Email Template Analyzer', 
+    href: '/free-tools/email-template-analyzer',
+    description: 'Analyze emails for spam words and deliverability issues',
+    icon: CheckSquare,
+    color: 'from-orange-500 to-red-400',
+    tag: 'Free'
+  },
+  { 
+    name: 'Email Deliverability Test', 
+    href: '/free-tools/email-deliverability-test',
+    description: 'Test email deliverability with SMTP validation',
+    icon: Globe,
+    color: 'from-cyan-500 to-blue-400',
+    tag: 'Free'
+  },
+];
 
 const features = [
   { 
@@ -168,10 +246,14 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [freeToolsOpen, setFreeToolsOpen] = useState(false);
   const [mobileFeaturesOpen, setMobileFeaturesOpen] = useState(false);
+  const [mobileFreeToolsOpen, setMobileFreeToolsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('/');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const freeToolsRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileFreeToolsRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -216,6 +298,11 @@ export function Navbar() {
   const toggleMobileFeatures = useCallback(() => {
     setMobileFeaturesOpen(!mobileFeaturesOpen);
   }, [mobileFeaturesOpen]);
+
+  // Handle mobile free tools toggle
+  const toggleMobileFreeTools = useCallback(() => {
+    setMobileFreeToolsOpen(!mobileFreeToolsOpen);
+  }, [mobileFreeToolsOpen]);
 
   // Handle Features click - navigate and close dropdown
   const handleFeaturesClick = useCallback((e: React.MouseEvent) => {
@@ -469,6 +556,126 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
+              {/* Free Tools Dropdown */}
+              <div 
+                ref={freeToolsRef}
+                className="relative"
+                onMouseEnter={() => {
+                  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                  setFreeToolsOpen(true);
+                  hideDropdown();
+                }}
+                onMouseLeave={() => {
+                  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                  timeoutRef.current = setTimeout(() => {
+                    setFreeToolsOpen(false);
+                  }, 150);
+                }}
+              >
+                <Link
+                  href="/free-tools"
+                  className="flex items-center space-x-1 px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 group relative"
+                >
+                  <span>Free Tools</span>
+                  <motion.div
+                    animate={{ rotate: freeToolsOpen ? 180 : 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    className="group-hover:text-[#A855F7] transition-colors duration-200"
+                  >
+                    <ChevronDown className="h-5 w-4" />
+                  </motion.div>
+                  
+                  {freeToolsOpen && (
+                    <motion.div
+                      layoutId="navbar-underline-freetools"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] rounded-full"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </Link>
+
+                {/* Free Tools Dropdown */}
+                <AnimatePresence>
+                  {freeToolsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }}
+                      onMouseEnter={() => {
+                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                        setFreeToolsOpen(true);
+                      }}
+                      onMouseLeave={() => {
+                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                        timeoutRef.current = setTimeout(() => {
+                          setFreeToolsOpen(false);
+                        }, 150);
+                      }}
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[500px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
+                      style={{ 
+                        background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
+                      
+                      <div className="relative p-6">
+                        <div className="grid grid-cols-2 gap-2">
+                          {freeTools.map((tool, index) => (
+                            <motion.div
+                              key={tool.name}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ 
+                                delay: index * 0.05,
+                                duration: 0.25,
+                                ease: 'easeOut'
+                              }}
+                            >
+                              <Link
+                                href={tool.href}
+                                className="block p-4 rounded-xl transition-all duration-200 border border-transparent hover:bg-white/10 hover:border-[#8B5CF6]/30 group/card"
+                                onClick={() => setFreeToolsOpen(false)}
+                              >
+                                <div className="flex items-start space-x-3">
+                                  <motion.div 
+                                    className={`w-10 h-10 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center flex-shrink-0`}
+                                    whileHover={{ scale: 1.05, rotate: 2 }}
+                                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                                  >
+                                    <tool.icon className="h-5 w-5 text-white" />
+                                  </motion.div>
+                                  
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center space-x-2 mb-1">
+                                      <h4 className="font-semibold text-white text-sm group-hover/card:text-[#A855F7] transition-colors duration-200">
+                                        {tool.name}
+                                      </h4>
+                                      {tool.tag && (
+                                        <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-500/20 text-green-400 border border-green-500/30">
+                                          {tool.tag}
+                                        </span>
+                                      )}
+                                    </div>
+                                    <p className="text-xs text-white/70 group-hover/card:text-white/90 transition-colors duration-200 line-clamp-2">
+                                      {tool.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <NavLink 
                 href="/pricing" 
                 label="Pricing" 
@@ -614,6 +821,70 @@ export function Navbar() {
                                     )}
                                   </div>
                                   <div className="text-xs text-white/50 line-clamp-1">{feature.description}</div>
+                                </div>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Mobile Free Tools Dropdown */}
+                <div ref={mobileFreeToolsRef} className="space-y-2">
+                  <button
+                    onClick={toggleMobileFreeTools}
+                    className="flex items-center justify-between w-full px-4 py-3 text-white font-semibold hover:bg-white/10 rounded-xl transition-all duration-300"
+                  >
+                    <span>Free Tools</span>
+                    <motion.div
+                      animate={{ rotate: mobileFreeToolsOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                    </motion.div>
+                  </button>
+
+                  {/* Mobile Free Tools Dropdown Content */}
+                  <AnimatePresence>
+                    {mobileFreeToolsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="space-y-2 ml-4 border-l border-[#8B5CF6]/20 pl-4">
+                          {freeTools.map((tool, index) => (
+                            <motion.div
+                              key={tool.name}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: index * 0.03, duration: 0.2 }}
+                            >
+                              <Link
+                                href={tool.href}
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setMobileFreeToolsOpen(false);
+                                }}
+                                className="flex items-center space-x-3 px-3 py-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300 group"
+                              >
+                                <div className={`w-8 h-8 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
+                                  <tool.icon className="h-4 w-4 text-white" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center space-x-2">
+                                    <div className="font-medium text-sm">{tool.name}</div>
+                                    {tool.tag && (
+                                      <span className="text-xs px-1.5 py-0.5 bg-green-500/20 text-green-400 rounded-full border border-green-500/30 flex-shrink-0">
+                                        {tool.tag}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="text-xs text-white/50 line-clamp-1">{tool.description}</div>
                                 </div>
                               </Link>
                             </motion.div>
