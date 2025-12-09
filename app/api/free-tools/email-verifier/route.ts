@@ -18,100 +18,62 @@ function isBlacklistedMx(mxHost: string): boolean {
   return BLACKLIST_MX.includes(mxHost.toLowerCase());
 }
 
-function smtpExchange(host: string, email: string, timeout = 5000): Promise<{status: string; reason: string; verificationTime: number}> {
+function smtpVerifyEmail(mxHost: string, email: string, timeout = 5000): Promise<boolean | null> {
   return new Promise((resolve) => {
     const socket = new net.Socket();
-    let dataBuffer = '';
+    let buffer = '';
     let stage = 0;
     let finished = false;
-    const start = Date.now();
+    let timeoutHandle: NodeJS.Timeout | null = null;
 
-    function done(statusObj: {status: string; reason: string}) {
+    const cleanup = (result: boolean | null) => {
       if (finished) return;
       finished = true;
-      try { socket.destroy(); } catch (e) {}
-      resolve({
-        ...statusObj,
-        verificationTime: Date.now() - start
-      });
-    }
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+      try {
+        socket.destroy();
+      } catch (e) {}
+      resolve(result);
+    };
 
-    const cleanupAndUnknown = (reason: string) => done({ status: 'unknown', reason });
+    timeoutHandle = setTimeout(() => cleanup(null), timeout); // null = timeout, try next MX or fallback
 
-    socket.setTimeout(timeout, () => {
-      cleanupAndUnknown('SMTP connection timed out');
+    socket.on('error', () => cleanup(null)); // null = error, try fallback
+    socket.on('close', () => {
+      if (!finished) cleanup(null);
     });
 
-    socket.on('error', (err) => {
-      cleanupAndUnknown(`SMTP connection error: ${err.message}`);
-    });
-
-    socket.connect(25, host, () => {
-      // connected, wait for greeting
+    socket.connect(25, mxHost, () => {
+      // Connected, waiting for greeting
     });
 
     socket.on('data', (chunk) => {
-      dataBuffer += chunk.toString();
-      const lines = dataBuffer.split(/\r\n/).filter(Boolean);
+      if (finished) return;
+      buffer += chunk.toString();
+      const lines = buffer.split('\r\n').filter(Boolean);
       const lastLine = lines[lines.length - 1];
-      if (!lastLine) return;
+      if (!lastLine || lastLine.length < 3) return;
 
       const code = parseInt(lastLine.slice(0, 3), 10);
       if (isNaN(code)) return;
 
-      if (stage === 0) {
-        if (code >= 200 && code < 400) {
-          socket.write(`HELO example.com\r\n`);
-          stage = 1;
-          dataBuffer = '';
-          return;
-        } else {
-          return cleanupAndUnknown(`Unexpected greeting code ${code}`);
-        }
-      }
-
-      if (stage === 1) {
-        if (code >= 200 && code < 400) {
-          socket.write(`MAIL FROM:<no-reply@example.com>\r\n`);
-          stage = 2;
-          dataBuffer = '';
-          return;
-        } else {
-          return cleanupAndUnknown(`HELO rejected with ${code}`);
-        }
-      }
-
-      if (stage === 2) {
-        if (code >= 200 && code < 400) {
-          socket.write(`RCPT TO:<${email}>\r\n`);
-          stage = 3;
-          dataBuffer = '';
-          return;
-        } else {
-          return done({ status: 'unknown', reason: `MAIL FROM rejected ${code}` });
-        }
-      }
-
-      if (stage === 3) {
-        if (code >= 200 && code < 300) {
-          socket.write(`QUIT\r\n`);
-          return done({ status: 'valid', reason: `SMTP RCPT accepted (${code})` });
-        } else if (code >= 400 && code < 500) {
-          socket.write(`QUIT\r\n`);
-          return done({ status: 'unknown', reason: `Temporary SMTP failure: ${code}` });
-        } else if (code >= 500) {
-          socket.write(`QUIT\r\n`);
-          return done({ status: 'invalid', reason: `SMTP rejected RCPT: ${code}` });
-        } else {
-          socket.write(`QUIT\r\n`);
-          return done({ status: 'unknown', reason: `Unexpected RCPT response: ${code}` });
-        }
+      if (stage === 0 && code >= 200 && code < 400) {
+        socket.write(`HELO example.com\r\n`);
+        stage = 1;
+        buffer = '';
+      } else if (stage === 1 && code >= 200 && code < 400) {
+        socket.write(`MAIL FROM:<test@example.com>\r\n`);
+        stage = 2;
+        buffer = '';
+      } else if (stage === 2 && code >= 200 && code < 400) {
+        socket.write(`RCPT TO:<${email}>\r\n`);
+        stage = 3;
+        buffer = '';
+      } else if (stage === 3) {
+        socket.write(`QUIT\r\n`);
+        cleanup(code === 250 || code === 251);
       }
     });
-
-    setTimeout(() => {
-      if (!finished) cleanupAndUnknown('No SMTP response within allowed time');
-    }, timeout + 200);
   });
 }
 
@@ -150,32 +112,89 @@ async function verifyEmailViaAPI(email: string): Promise<VerificationResult | nu
 async function verifyEmail(email: string): Promise<VerificationResult> {
   const startTime = Date.now();
 
-  const simpleEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!simpleEmailRegex.test(email)) {
+  // Basic format check - just ensure it has @ and domain
+  if (!email.includes('@')) {
     return {
       email,
       status: 'invalid',
-      reason: 'Invalid email format',
+      reason: 'Missing @ symbol',
       verificationTime: Date.now() - startTime
     };
   }
 
-  const domain = email.split('@')[1].toLowerCase();
-
-  let mxRecords;
-  try {
-    mxRecords = await resolveMx(domain);
-  } catch (err: any) {
-    // If DNS fails on production, try external API
-    if (process.env.NODE_ENV === 'production') {
-      const apiResult = await verifyEmailViaAPI(email);
-      if (apiResult) return apiResult;
-    }
-    
+  const [localPart, domain] = email.split('@');
+  
+  // Check if both parts exist
+  if (!localPart || !domain) {
     return {
       email,
-      status: 'unknown',
-      reason: `DNS MX lookup failed: ${err.code || err.message}`,
+      status: 'invalid',
+      reason: 'Invalid email structure',
+      verificationTime: Date.now() - startTime
+    };
+  }
+
+  const lowerDomain = domain.toLowerCase();
+
+  // Check for common fake/test domains
+  const fakeDomains = [
+    'test.com', 'example.com', 'example.org', 'example.net', 'example.info',
+    'localhost', 'invalid', 'domain.com', 'sample.com', 'test.net',
+    '127.0.0.1', 'localhost.com', 'demo.com', 'temp.com', 'test.org'
+  ];
+  if (fakeDomains.includes(lowerDomain)) {
+    return {
+      email,
+      status: 'invalid',
+      reason: 'Test/example domain detected',
+      verificationTime: Date.now() - startTime
+    };
+  }
+
+  // Check for disposable email domains
+  const disposableDomains = [
+    'tempmail.com', 'guerrillamail.com', '10minutemail.com', 'throwaway.email',
+    'mailinator.com', 'maildrop.cc', 'sharklasers.com', 'yopmail.com',
+    'temp-mail.org', 'fakeinbox.com', 'spam4.me', 'tempmail.us'
+  ];
+  if (disposableDomains.includes(lowerDomain)) {
+    return {
+      email,
+      status: 'invalid',
+      reason: 'Disposable/temporary email detected',
+      verificationTime: Date.now() - startTime
+    };
+  }
+
+  // DNS MX record lookup
+  let mxRecords;
+  try {
+    mxRecords = await resolveMx(lowerDomain);
+  } catch (err: any) {
+    const code = err.code || err.message;
+    
+    if (code === 'ENOTFOUND' || code === 'ENODATA') {
+      return {
+        email,
+        status: 'invalid',
+        reason: 'Domain does not exist',
+        verificationTime: Date.now() - startTime
+      };
+    }
+    
+    if (code === 'ESERVFAIL') {
+      return {
+        email,
+        status: 'unknown',
+        reason: 'DNS server error - unable to verify',
+        verificationTime: Date.now() - startTime
+      };
+    }
+
+    return {
+      email,
+      status: 'invalid',
+      reason: 'Domain verification failed',
       verificationTime: Date.now() - startTime
     };
   }
@@ -184,51 +203,70 @@ async function verifyEmail(email: string): Promise<VerificationResult> {
     return {
       email,
       status: 'invalid',
-      reason: 'No MX records found - domain cannot receive emails',
+      reason: 'No mail servers found for domain',
       verificationTime: Date.now() - startTime
     };
   }
 
-  mxRecords.sort((a: any, b: any) => a.priority - b.priority);
-
-  // On production: DNS verification is sufficient
-  if (process.env.NODE_ENV === 'production') {
+  // Verify at least one MX record is not blacklisted
+  const validMxRecords = mxRecords.filter((mx: any) => !isBlacklistedMx(mx.exchange));
+  if (validMxRecords.length === 0) {
     return {
       email,
-      status: 'valid',
-      reason: 'Valid - MX records found (DNS verified)',
+      status: 'invalid',
+      reason: 'Domain MX records are invalid',
       verificationTime: Date.now() - startTime
     };
   }
 
-  // On local/dev: Try SMTP for detailed verification
-  for (const mx of mxRecords) {
-    const host = mx.exchange.toLowerCase();
-
-    if (isBlacklistedMx(host)) {
-      continue;
-    }
-
+  // Sort by priority and try SMTP verification on primary MX server
+  validMxRecords.sort((a: any, b: any) => (a.priority || 0) - (b.priority || 0));
+  
+  let smtpAttempted = false;
+  for (let i = 0; i < Math.min(2, validMxRecords.length); i++) {
     try {
-      const res = await smtpExchange(host, email, 3000);
-      if (res && (res.status === 'valid' || res.status === 'invalid')) {
+      smtpAttempted = true;
+      const verified = await smtpVerifyEmail(validMxRecords[i].exchange, email, 5000);
+      
+      if (verified === true) {
+        // Email verified
         return {
           email,
-          status: res.status as 'valid' | 'invalid',
-          reason: res.reason,
-          verificationTime: res.verificationTime
+          status: 'valid',
+          reason: `Email exists - verified via SMTP`,
+          verificationTime: Date.now() - startTime
+        };
+      } else if (verified === false) {
+        // Email rejected by SMTP
+        return {
+          email,
+          status: 'invalid',
+          reason: 'Email address does not exist',
+          verificationTime: Date.now() - startTime
         };
       }
-    } catch (err: any) {
-      // continue to next MX
+      // If null, SMTP timed out or errored - try next MX or fallback to DNS
+    } catch (err) {
+      continue;
     }
   }
 
-  // Fallback if SMTP doesn't work
+  // If SMTP times out or fails for all MX servers, fall back to DNS verification
+  // Domain has valid MX records, but SMTP verification failed
+  if (smtpAttempted) {
+    return {
+      email,
+      status: 'unknown',
+      reason: 'SMTP verification failed (DNS verified)',
+      verificationTime: Date.now() - startTime
+    };
+  }
+
+  // Fallback: Domain is valid
   return {
     email,
     status: 'valid',
-    reason: 'Valid - MX records found (SMTP unavailable)',
+    reason: 'Valid - domain has active mail servers',
     verificationTime: Date.now() - startTime
   };
 }
@@ -252,15 +290,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const results: VerificationResult[] = [];
+    // Stream results as they complete
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          controller.enqueue('[\n');
+          let first = true;
 
-    // Process emails sequentially to avoid too many concurrent connections
-    for (const email of emails) {
-      const result = await verifyEmail(email.toLowerCase().trim());
-      results.push(result);
-    }
+          for (const email of emails) {
+            const result = await verifyEmail(email.toLowerCase().trim());
+            
+            if (!first) {
+              controller.enqueue(',\n');
+            }
+            controller.enqueue(JSON.stringify(result));
+            first = false;
+          }
 
-    return NextResponse.json({ results });
+          controller.enqueue('\n]');
+          controller.close();
+        } catch (error: any) {
+          console.error('Stream error:', error);
+          controller.close();
+        }
+      }
+    });
+
+    return new NextResponse(stream, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Transfer-Encoding': 'chunked'
+      }
+    });
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || 'Verification failed' },

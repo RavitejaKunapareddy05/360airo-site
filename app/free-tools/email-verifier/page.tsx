@@ -53,8 +53,73 @@ export default function EmailVerifierPage() {
         throw new Error(await response.text());
       }
 
-      const data = await response.json();
-      setResults(data.results);
+      // Parse streaming JSON array
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      if (!reader) throw new Error('No response body');
+
+      let fullText = '';
+      const resultsArray: VerificationResult[] = [];
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        fullText += decoder.decode(value, { stream: true });
+
+        // Try to extract complete JSON objects
+        let lastValidIndex = 0;
+        let depth = 0;
+        let inString = false;
+        let escaped = false;
+        let objectStart = -1;
+
+        for (let i = 0; i < fullText.length; i++) {
+          const char = fullText[i];
+
+          if (escaped) {
+            escaped = false;
+            continue;
+          }
+
+          if (char === '\\') {
+            escaped = true;
+            continue;
+          }
+
+          if (char === '"') {
+            inString = !inString;
+            continue;
+          }
+
+          if (inString) continue;
+
+          if (char === '{') {
+            if (depth === 0) objectStart = i;
+            depth++;
+          } else if (char === '}') {
+            depth--;
+            if (depth === 0 && objectStart >= 0) {
+              const jsonStr = fullText.substring(objectStart, i + 1);
+              try {
+                const result: VerificationResult = JSON.parse(jsonStr);
+                resultsArray.push(result);
+                setResults([...resultsArray]);
+                setProgress(Math.round((resultsArray.length / emailList.length) * 100));
+                lastValidIndex = i + 1;
+              } catch (e) {
+                // Parse error, continue
+              }
+              objectStart = -1;
+            }
+          }
+        }
+
+        // Keep unparsed data for next iteration
+        fullText = fullText.substring(lastValidIndex);
+      }
+
+      // Ensure progress is at 100%
       setProgress(100);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Verification failed');
@@ -77,8 +142,8 @@ export default function EmailVerifierPage() {
 
   const downloadResults = () => {
     const csv = [
-      'Email,Status,Reason,Verification Time (ms)',
-      ...results.map(r => `${r.email},${r.status},${r.reason},${r.verificationTime}`)
+      'Email,Status',
+      ...results.map(r => `${r.email},${r.status}`)
     ].join('\n');
 
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -168,20 +233,26 @@ export default function EmailVerifierPage() {
             </div>
 
             {/* Progress */}
-            {loading && (
+            {(loading || progress > 0) && (
               <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex-1">
-                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        animate={{ width: `${progress}%` }}
-                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400"
-                        transition={{ duration: 0.3 }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-white/70 text-sm">{progress}%</span>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-white/70 text-sm">
+                    {loading ? 'Verifying emails...' : 'Verification complete'}
+                  </span>
+                  <span className="text-white font-semibold">{progress}%</span>
                 </div>
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    animate={{ width: `${progress}%` }}
+                    className="h-full bg-gradient-to-r from-blue-500 to-cyan-400"
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+                {loading && (
+                  <p className="text-white/50 text-xs mt-3">
+                    Verified: {results.length} email(s)
+                  </p>
+                )}
               </div>
             )}
           </motion.div>
@@ -242,8 +313,6 @@ export default function EmailVerifierPage() {
                   <tr className="border-b border-white/10">
                     <th className="text-left py-3 px-4 text-white/70">Email</th>
                     <th className="text-left py-3 px-4 text-white/70">Status</th>
-                    <th className="text-left py-3 px-4 text-white/70">Reason</th>
-                    <th className="text-left py-3 px-4 text-white/70">Time (ms)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -259,8 +328,6 @@ export default function EmailVerifierPage() {
                           {result.status}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-white/70">{result.reason}</td>
-                      <td className="py-3 px-4 text-white/70">{result.verificationTime}</td>
                     </tr>
                   ))}
                 </tbody>
