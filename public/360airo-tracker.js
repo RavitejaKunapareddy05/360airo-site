@@ -28,8 +28,7 @@
       apiKey: window.AIRO_CONFIG?.apiKey || null,
       trackingEndpoint: window.AIRO_CONFIG?.trackingEndpoint || (() => {
         // Auto-detect tracking endpoint - works on both localhost and live
-        const protocol = window.location.protocol; // https: or http:
-        const host = window.location.host; // domain.com or localhost:3000
+        const { protocol, host } = window.location; // https: or http:, domain.com or localhost:3000
         return `${protocol}//${host}/api/leads/track`;
       })(),
       accountId: window.AIRO_CONFIG?.accountId || null,

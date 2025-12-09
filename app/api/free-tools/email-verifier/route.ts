@@ -20,18 +20,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Call Netlify function for SMTP verification
-    const NETLIFY_URL = process.env.NETLIFY_FUNCTION_URL || 'https://360airo.netlify.app/.netlify/functions/verify-email';
+    // Use deployed Netlify URL
+    const NETLIFY_URL = 'https://360airo.netlify.app/.netlify/functions/verify-email';
 
     let body_text = '[\n';
     let first = true;
 
     for (const email of emails) {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        
         const response = await fetch(NETLIFY_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email.toLowerCase().trim() }),
+          signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
           throw new Error(`Netlify function error: ${response.statusText}`);
@@ -50,6 +57,7 @@ export async function POST(request: NextRequest) {
         });
         first = false;
       } catch (err) {
+        console.error(`Error verifying ${email}:`, err);
         if (!first) {
           body_text += ',\n';
         }

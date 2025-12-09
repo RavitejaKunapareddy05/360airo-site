@@ -143,8 +143,9 @@ export default async (req: any) => {
       };
     }
 
-    // Check if running on localhost/development (no SMTP port 25)
-    const isLocalhost = !process.env.URL || process.env.URL.includes('localhost') || process.env.NETLIFY !== 'true';
+    // Check if running locally (localhost only, not when called from Vercel)
+    const isLocalhost = process.env.NODE_ENV === 'development' && 
+                       (!process.env.URL || process.env.URL.includes('localhost'));
     
     if (isLocalhost) {
       // On localhost: Domain exists = valid (can't verify SMTP without port 25)
