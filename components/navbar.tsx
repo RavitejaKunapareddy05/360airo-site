@@ -623,7 +623,7 @@ export function Navbar() {
                           setFreeToolsOpen(false);
                         }, 150);
                       }}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[500px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[800px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
                       style={{ 
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
@@ -631,45 +631,48 @@ export function Navbar() {
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
                       
-                      <div className="relative p-6">
-                        <div className="grid grid-cols-2 gap-2">
+                      {/* Scrollable Container */}
+                      <div className="free-tools-dropdown relative overflow-y-auto p-6 max-h-[400px]" style={{
+                        scrollBehavior: 'smooth'
+                      }}>
+                        <div className="grid grid-cols-3 gap-4">
                           {freeTools.map((tool, index) => (
                             <motion.div
                               key={tool.name}
                               initial={{ opacity: 0, y: 8 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ 
-                                delay: index * 0.05,
+                                delay: index * 0.03,
                                 duration: 0.25,
                                 ease: 'easeOut'
                               }}
                             >
                               <Link
                                 href={tool.href}
-                                className="block p-4 rounded-xl transition-all duration-200 border border-transparent hover:bg-white/10 hover:border-[#8B5CF6]/30 group/card"
+                                className="block h-full rounded-xl transition-all duration-300 border border-white/10 hover:border-[#8B5CF6]/50 group/card bg-white/5 hover:bg-white/10 hover:scale-105"
                                 onClick={() => setFreeToolsOpen(false)}
                               >
-                                <div className="flex items-start space-x-3">
+                                <div className="flex flex-col items-center justify-center h-full p-4 text-center space-y-3">
                                   <motion.div 
-                                    className={`w-10 h-10 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center flex-shrink-0`}
-                                    whileHover={{ scale: 1.05, rotate: 2 }}
+                                    className={`w-12 h-12 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center`}
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                                   >
-                                    <tool.icon className="h-5 w-5 text-white" />
+                                    <tool.icon className="h-6 w-6 text-white" />
                                   </motion.div>
                                   
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center space-x-2 mb-1">
-                                      <h4 className="font-semibold text-white text-sm group-hover/card:text-[#A855F7] transition-colors duration-200">
+                                  <div className="flex-1 flex flex-col justify-center">
+                                    <div className="flex items-center justify-center space-x-1 mb-1 flex-wrap">
+                                      <h4 className="font-semibold text-white text-xs group-hover/card:text-[#A855F7] transition-colors duration-200">
                                         {tool.name}
                                       </h4>
-                                      {tool.tag && (
-                                        <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-500/20 text-green-400 border border-green-500/30">
-                                          {tool.tag}
-                                        </span>
-                                      )}
                                     </div>
-                                    <p className="text-xs text-white/70 group-hover/card:text-white/90 transition-colors duration-200 line-clamp-2">
+                                    {tool.tag && (
+                                      <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-500/20 text-green-400 border border-green-500/30 inline-block mx-auto">
+                                        {tool.tag}
+                                      </span>
+                                    )}
+                                    <p className="text-xs text-white/60 group-hover/card:text-white/80 transition-colors duration-200 line-clamp-2 mt-2">
                                       {tool.description}
                                     </p>
                                   </div>
@@ -679,6 +682,24 @@ export function Navbar() {
                           ))}
                         </div>
                       </div>
+
+                      {/* Custom Scrollbar Styles */}
+                      <style jsx global>{`
+                        .free-tools-dropdown::-webkit-scrollbar {
+                          width: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-track {
+                          background: rgba(20, 10, 40, 0.3);
+                          border-radius: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-thumb {
+                          background: rgba(139, 92, 246, 0.5);
+                          border-radius: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-thumb:hover {
+                          background: rgba(139, 92, 246, 0.8);
+                        }
+                      `}</style>
                     </motion.div>
                   )}
                 </AnimatePresence>
