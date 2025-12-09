@@ -362,8 +362,6 @@ export default function LeadConversionToolPage() {
             </p>
             <a
               href="/INTEGRATION_GUIDE.html"
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-xl hover:from-purple-700 hover:to-pink-700 transition transform hover:scale-105"
             >
               <Mail className="w-5 h-5" />

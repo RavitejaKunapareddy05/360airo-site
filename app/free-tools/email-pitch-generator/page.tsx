@@ -21,23 +21,30 @@ export default function EmailPitchGeneratorPage() {
     }
 
     setLoading(true);
-    // Simulate API call - in production, this would call an AI service
-    setTimeout(() => {
-      const pitch = `Hi ${recipientName},
+    try {
+      const response = await fetch('/api/free-tools/email-pitch-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          recipientName,
+          companyName,
+          productService,
+          uniqueValue,
+        }),
+      });
 
-I came across ${companyName} and was impressed by your work in the space.
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to generate pitch');
+      }
 
-I thought you might find value in ${productService}. What makes us different is ${uniqueValue}.
-
-We've helped similar companies increase their efficiency and save time on repetitive tasks.
-
-Would you be open to a quick 15-minute call to see if this could be a fit for ${companyName}?
-
-Best regards`;
-
-      setGeneratedPitch(pitch);
+      const data = await response.json();
+      setGeneratedPitch(data.pitch);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Failed to generate pitch');
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const copyToClipboard = () => {

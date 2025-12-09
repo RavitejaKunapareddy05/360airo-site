@@ -5,7 +5,23 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, PenTool, Image as ImageIcon } from 'lucide-react';
 
-const signatureTemplates = {
+interface SignatureTemplate {
+  name: string;
+  description: string;
+}
+
+interface SignatureFormData {
+  fullName: string;
+  jobTitle: string;
+  company: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  template: string;
+  logoUrl?: string;
+}
+
+const signatureTemplates: Record<string, SignatureTemplate> = {
   classic: {
     name: 'Classic',
     description: 'Simple and professional'
@@ -28,6 +44,18 @@ const signatureTemplates = {
   }
 };
 
+interface GenerateSignatureRequest {
+  fullName: string;
+  jobTitle: string;
+  company: string;
+  email: string;
+  phone?: string;
+  website?: string;
+  style: string;
+  logoUrl?: string;
+  logoSize?: number;
+}
+
 export default function EmailSignatureBuilderPage() {
   const [fullName, setFullName] = useState('');
   const [jobTitle, setJobTitle] = useState('');
@@ -42,140 +70,88 @@ export default function EmailSignatureBuilderPage() {
   const [template, setTemplate] = useState<keyof typeof signatureTemplates>('classic');
   const [logoUrl, setLogoUrl] = useState('');
   const [logoSize, setLogoSize] = useState(80);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [logoInputType, setLogoInputType] = useState<'url' | 'upload'>('upload');
 
-  const generateSignature = () => {
-    if (!fullName) {
-      alert('Please enter your name');
+  const generateSignature = async () => {
+    if (!fullName || !jobTitle || !company || !email) {
+      alert('Please fill in all required fields');
       return;
     }
 
-    let sig = '';
+    setLoading(true);
+    setError('');
+    try {
+      const payload: GenerateSignatureRequest = {
+        fullName,
+        jobTitle,
+        company,
+        email,
+        phone: phone || undefined,
+        website: website || undefined,
+        style: template,
+        logoUrl: logoUrl || undefined,
+        logoSize: logoUrl ? logoSize : undefined,
+      };
 
-    if (template === 'classic') {
-      // CLASSIC: Traditional elegance with subtle gradient background
-      sig = `<div style="font-family: Georgia, serif; max-width: 550px; margin: 20px 0; padding: 20px 0;">
-  <div style="display: flex; gap: 20px; align-items: flex-start;">
-    ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-width: ${logoSize}px; max-height: 80px; border-radius: 2px;" />` : ''}
-    <div style="flex: 1; border-left: 3px solid #333;">
-      <div style="padding-left: 15px;">
-        <p style="margin: 0 0 4px 0; font-size: 18px; font-weight: bold; color: #000; font-family: Georgia, serif;">${fullName}</p>
-        ${jobTitle ? `<p style="margin: 0 0 1px 0; font-size: 12px; color: #666; font-family: Georgia, serif; font-style: italic;">${jobTitle}</p>` : ''}
-        ${company ? `<p style="margin: 0 0 12px 0; font-size: 11px; color: #777; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;">${company}</p>` : ''}
-        <div style="margin-top: 12px; font-size: 11px; line-height: 1.8; color: #555; display: flex; flex-direction: column; gap: 3px;">
-          ${email ? `<div><a href="mailto:${email}" style="color: #000; text-decoration: none; font-weight: 500;">${email}</a></div>` : ''}
-          ${phone ? `<div>${phone}</div>` : ''}
-          ${website && showLinks ? `<div><a href="${website}" style="color: #000; text-decoration: none; font-weight: 500;" target="_blank">${website.replace(/^https?:\/\//, '')}</a></div>` : ''}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
-    } else if (template === 'modern') {
-      // MODERN: Clean contemporary design with accent border
-      sig = `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 20px 0;">
-  <div style="padding: 18px 0; border-top: 2px solid ${color}; border-bottom: 2px solid ${color};">
-    <div style="display: flex; gap: 18px; align-items: flex-start;">
-      ${logoUrl ? `<img src="${logoUrl}" alt="Logo" style="max-width: ${logoSize}px; max-height: 75px; border-radius: 3px; flex-shrink: 0;" />` : ''}
-      <div style="flex: 1;">
-        <p style="margin: 0 0 2px 0; font-size: 16px; font-weight: 700; color: #000; letter-spacing: -0.3px;">${fullName}</p>
-        ${jobTitle ? `<p style="margin: 0 0 1px 0; font-size: 11px; color: ${color}; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">${jobTitle}</p>` : ''}
-        ${company ? `<p style="margin: 0 0 10px 0; font-size: 11px; color: #888; font-weight: 500;">${company}</p>` : ''}
-        <div style="font-size: 11px; line-height: 1.7; color: #555; display: flex; flex-direction: column; gap: 2px;">
-          ${email ? `<div><a href="mailto:${email}" style="color: #000; text-decoration: none; font-weight: 500;">${email}</a></div>` : ''}
-          ${phone ? `<div>${phone}</div>` : ''}
-          ${website && showLinks ? `<div><a href="${website}" style="color: #000; text-decoration: none; font-weight: 500;" target="_blank">${website.replace(/^https?:\/\//, '')}</a></div>` : ''}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
-    } else if (template === 'minimalist') {
-      // MINIMALIST: Ultra-clean, text-only, no color
-      sig = `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 480px; margin: 20px 0; color: #1a1a1a;">
-  <div>
-    ${logoUrl ? `<div style="margin-bottom: 12px;"><img src="${logoUrl}" alt="Logo" style="max-width: ${logoSize}px; max-height: 60px; display: block;" /></div>` : ''}
-    <p style="margin: 0; font-size: 15px; font-weight: 600; color: #000; line-height: 1.4;">${fullName}</p>
-    ${jobTitle ? `<p style="margin: 4px 0 0 0; font-size: 11px; color: #888;">${jobTitle}</p>` : ''}
-    ${company ? `<p style="margin: 2px 0 10px 0; font-size: 11px; color: #999;">${company}</p>` : ''}
-    <div style="font-size: 11px; line-height: 1.6; color: #666; display: flex; flex-direction: column; gap: 1px;">
-      ${email ? `<div><a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a></div>` : ''}
-      ${phone ? `<div>${phone}</div>` : ''}
-      ${website && showLinks ? `<div><a href="${website}" style="color: #000; text-decoration: none;" target="_blank">${website.replace(/^https?:\/\//, '')}</a></div>` : ''}
-    </div>
-  </div>
-</div>`;
-    } else if (template === 'corporate') {
-      // CORPORATE: Professional table layout with background
-      sig = `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 20px 0; background: #f5f5f5; padding: 20px; border-radius: 0; border: 1px solid #ddd;">
-  <div style="display: flex; gap: 16px;">
-    ${logoUrl ? `<div style="flex-shrink: 0;"><img src="${logoUrl}" alt="Logo" style="max-width: ${logoSize}px; max-height: 80px; display: block; border-radius: 2px;" /></div>` : ''}
-    <div style="flex: 1;">
-      <table style="width: 100%; border-collapse: collapse;">
-        <tr>
-          <td style="padding: 0; vertical-align: top;">
-            <p style="margin: 0 0 3px 0; font-size: 15px; font-weight: 700; color: #000;">${fullName}</p>
-            ${jobTitle ? `<p style="margin: 0 0 1px 0; font-size: 11px; color: ${color}; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">${jobTitle}</p>` : ''}
-            ${company ? `<p style="margin: 0 0 8px 0; font-size: 11px; color: #666; font-weight: 500;">${company}</p>` : ''}
-          </td>
-        </tr>
-      </table>
-      <div style="border-top: 1px solid #ddd; padding-top: 8px; font-size: 11px; line-height: 1.6; color: #555;">
-        ${email ? `<div style="margin-bottom: 2px;"><span style="color: ${color}; font-weight: 600;">E:</span> <a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a></div>` : ''}
-        ${phone ? `<div style="margin-bottom: 2px;"><span style="color: ${color}; font-weight: 600;">T:</span> ${phone}</div>` : ''}
-        ${website && showLinks ? `<div><span style="color: ${color}; font-weight: 600;">W:</span> <a href="${website}" style="color: #000; text-decoration: none;" target="_blank">${website.replace(/^https?:\/\//, '')}</a></div>` : ''}
-      </div>
-    </div>
-  </div>
-</div>`;
-    } else if (template === 'creative') {
-      // CREATIVE: Bold, modern with gradient and decorative elements
-      sig = `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 580px; margin: 20px 0;">
-  <div style="background: linear-gradient(135deg, ${color}E6 0%, ${adjustColor(color, -20)}E6 100%); padding: 28px; border-radius: 12px; color: white; position: relative; overflow: hidden;">
-    <div style="position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; background: rgba(255,255,255,0.08); border-radius: 50%;"></div>
-    <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.06); border-radius: 50%;"></div>
-    <div style="position: relative; z-index: 1;">
-      ${logoUrl ? `<div style="margin-bottom: 16px; background: rgba(255,255,255,0.12); padding: 10px; border-radius: 6px; width: fit-content; backdrop-filter: blur(5px);"><img src="${logoUrl}" alt="Logo" style="max-width: ${logoSize}px; max-height: 80px; display: block; border-radius: 3px;" /></div>` : ''}
-      <p style="margin: 0 0 6px 0; font-size: 21px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2;">${fullName}</p>
-      ${jobTitle ? `<p style="margin: 0 0 2px 0; font-size: 12px; opacity: 0.95; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">${jobTitle}</p>` : ''}
-      ${company ? `<p style="margin: 0 0 16px 0; font-size: 12px; opacity: 0.92; font-weight: 500;">${company}</p>` : ''}
-      <div style="background: rgba(255,255,255,0.15); padding: 12px 14px; border-radius: 6px; font-size: 12px; line-height: 1.8; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px);">
-        ${email ? `<div><a href="mailto:${email}" style="color: white; text-decoration: none; font-weight: 500;">📧 ${email}</a></div>` : ''}
-        ${phone ? `<div><a href="tel:${phone}" style="color: white; text-decoration: none; font-weight: 500;">📞 ${phone}</a></div>` : ''}
-        ${website && showLinks ? `<div><a href="${website}" style="color: white; text-decoration: none; font-weight: 500;" target="_blank">🌐 ${website.replace(/^https?:\/\//, '')}</a></div>` : ''}
-      </div>
-    </div>
-  </div>
-</div>`;
+      console.log('📧 Sending signature request with logo:', logoUrl ? `${logoUrl.substring(0, 50)}...` : 'none');
+
+      const response = await fetch('/api/free-tools/email-signature-builder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const data = await response.json() as { error?: string };
+        throw new Error(data.error || 'Failed to generate signature');
+      }
+
+      const data = await response.json() as { html: string };
+      console.log('✅ Signature generated:', data.html.substring(0, 100));
+      setSignature(data.html);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate signature';
+      setError(errorMessage);
+      alert(errorMessage);
+    } finally {
+      setLoading(false);
     }
-
-    setSignature(sig);
-  };
-
-  const adjustColor = (hexColor: string, percent: number) => {
-    const num = parseInt(hexColor.replace('#', ''), 16);
-    const amt = Math.round(2.55 * percent);
-    const R = Math.max(0, Math.min(255, (num >> 16) + amt));
-    const G = Math.max(0, Math.min(255, (num >> 8 & 0x00FF) + amt));
-    const B = Math.max(0, Math.min(255, (num & 0x0000FF) + amt));
-    return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B)
-      .toString(16).slice(1);
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Check file size (max 500KB for email safety)
+    if (file.size > 500000) {
+      setError('Logo file is too large. Please use an image under 500KB.');
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (event) => {
-      setLogoUrl(event.target?.result as string);
+      const result = event.target?.result;
+      if (typeof result === 'string') {
+        setLogoUrl(result);
+        setError('');
+      }
+    };
+    reader.onerror = () => {
+      setError('Failed to read the image file');
     };
     reader.readAsDataURL(file);
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(signature);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(signature);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err);
+    }
   };
 
   const downloadSignature = () => {
@@ -234,23 +210,67 @@ export default function EmailSignatureBuilderPage() {
             {/* Logo Upload */}
             <div className="mb-6">
               <label className="block text-white font-semibold mb-2 text-sm">Company Logo (Optional)</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleLogoUpload}
-                className="hidden"
-                id="logo-upload"
-              />
-              <label htmlFor="logo-upload" className="block w-full">
-                <div className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 cursor-pointer rounded-lg p-2.5 flex items-center justify-center gap-2 transition-colors">
-                  <ImageIcon className="w-4 h-4" />
-                  Upload Logo
+              
+              <div className="flex gap-2 mb-3">
+                <Button
+                  onClick={() => setLogoInputType('upload')}
+                  className={`flex-1 text-sm ${
+                    logoInputType === 'upload'
+                      ? 'bg-gradient-to-r from-teal-500 to-cyan-400 text-white'
+                      : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                  }`}
+                >
+                  Upload File
+                </Button>
+                <Button
+                  onClick={() => setLogoInputType('url')}
+                  className={`flex-1 text-sm ${
+                    logoInputType === 'url'
+                      ? 'bg-gradient-to-r from-teal-500 to-cyan-400 text-white'
+                      : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                  }`}
+                >
+                  Use URL
+                </Button>
+              </div>
+
+              {logoInputType === 'upload' ? (
+                <div>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    className="hidden"
+                    id="logo-upload"
+                  />
+                  <label htmlFor="logo-upload" className="block w-full">
+                    <div className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 cursor-pointer rounded-lg p-2.5 flex items-center justify-center gap-2 transition-colors">
+                      <ImageIcon className="w-4 h-4" />
+                      Choose Image
+                    </div>
+                  </label>
+                  <p className="text-white/50 text-xs mt-2">Max file size: 500KB</p>
                 </div>
-              </label>
+              ) : (
+                <input
+                  type="url"
+                  placeholder="https://example.com/logo.png"
+                  value={logoUrl}
+                  onChange={(e) => setLogoUrl(e.target.value)}
+                  className="w-full bg-white/5 border border-white/20 rounded-lg p-2.5 text-white placeholder-white/30 text-sm"
+                />
+              )}
+
               {logoUrl && (
                 <>
-                  <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/20">
-                    <img src={logoUrl} alt="Logo Preview" className="max-w-full h-auto" style={{ maxHeight: `${logoSize}px` }} />
+                  <div className="mt-3 p-3 bg-white/5 rounded-lg border border-white/20 flex items-center justify-center min-h-24">
+                    <img 
+                      src={logoUrl} 
+                      alt="Logo Preview" 
+                      className="max-w-full h-auto" 
+                      style={{ maxHeight: `${logoSize}px` }} 
+                      onError={() => setError('Logo could not be loaded')} 
+                    />
                   </div>
                   <label className="block text-white font-semibold mb-2 text-sm mt-3">Logo Size: {logoSize}px</label>
                   <input
@@ -261,6 +281,15 @@ export default function EmailSignatureBuilderPage() {
                     onChange={(e) => setLogoSize(Number(e.target.value))}
                     className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
                   />
+                  <Button
+                    onClick={() => {
+                      setLogoUrl('');
+                      setError('');
+                    }}
+                    className="w-full mt-2 bg-white/10 hover:bg-white/20 text-white text-sm"
+                  >
+                    Remove Logo
+                  </Button>
                 </>
               )}
             </div>
@@ -356,9 +385,19 @@ export default function EmailSignatureBuilderPage() {
                 <span className="text-white text-sm">Show clickable links</span>
               </label>
 
-              <Button onClick={generateSignature} className="w-full bg-gradient-to-r from-teal-500 to-cyan-400 hover:shadow-lg text-white font-semibold">
-                Generate Signature
+              <Button 
+                onClick={generateSignature} 
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-teal-500 to-cyan-400 hover:shadow-lg text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Generating...' : 'Generate Signature'}
               </Button>
+              
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-200 text-sm">
+                  {error}
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -366,25 +405,86 @@ export default function EmailSignatureBuilderPage() {
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
             {signature && (
               <>
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
-                  <h3 className="text-lg font-bold text-white mb-4">Preview</h3>
-                  <div className="bg-white rounded-lg p-6" dangerouslySetInnerHTML={{ __html: signature }} />
+                {/* Email Client Preview */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl overflow-hidden">
+                  <h3 className="text-lg font-bold text-white mb-4">How It Looks in Email</h3>
+                  
+                  {/* Realistic Gmail-like Container */}
+                  <div className="bg-white rounded-lg shadow-2xl overflow-hidden" style={{ maxWidth: '600px' }}>
+                    {/* Gmail Header */}
+                    <div className="bg-gray-100 border-b border-gray-300 px-6 py-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <span className="text-gray-700 font-semibold text-sm min-w-12">To:</span>
+                          <input 
+                            type="text" 
+                            placeholder="recipient@example.com" 
+                            className="flex-1 text-sm text-gray-800 bg-white border border-gray-300 rounded px-3 py-2 outline-none" 
+                          />
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-gray-700 font-semibold text-sm min-w-12">Subject:</span>
+                          <input 
+                            type="text" 
+                            placeholder="Enter your subject" 
+                            className="flex-1 text-sm text-gray-800 bg-white border border-gray-300 rounded px-3 py-2 outline-none" 
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Email Body */}
+                    <div className="bg-white p-6 min-h-96 max-h-96 overflow-y-auto">
+                      {/* Sample email content */}
+                      <div className="text-gray-800 text-sm leading-relaxed mb-6">
+                        <p className="mb-3">Hi there,</p>
+                        <p className="mb-3">This is a sample email showing how your professional signature will look.</p>
+                        <p className="mb-6">Best regards,</p>
+                      </div>
+
+                      {/* Signature divider */}
+                      <div className="border-t border-gray-300 pt-4 mt-4">
+                        {/* Signature HTML rendered */}
+                        <div className="text-gray-900" dangerouslySetInnerHTML={{ __html: signature }} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">
-                  <h3 className="text-lg font-bold text-white mb-4">HTML Code</h3>
-                  <div className="bg-black/30 rounded-lg p-4 max-h-48 overflow-y-auto border border-white/10 mb-4">
-                    <pre className="text-white/70 text-xs whitespace-pre-wrap break-words">{signature}</pre>
+                {/* HTML Code Section */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-white">HTML Code</h3>
+                    <span className="text-white/50 text-xs">Copy to use in email clients</span>
+                  </div>
+                  <div className="bg-black/40 rounded-lg p-4 max-h-48 overflow-y-auto border border-white/10 mb-4">
+                    <pre className="text-white/80 text-xs whitespace-pre-wrap break-words font-mono leading-relaxed">{signature}</pre>
                   </div>
                   <div className="flex gap-3">
-                    <Button onClick={copyToClipboard} className="flex-1 bg-white/10 hover:bg-white/20 text-white text-sm">
+                    <Button 
+                      onClick={copyToClipboard} 
+                      className="flex-1 bg-white/10 hover:bg-white/20 text-white text-sm transition-all"
+                    >
                       <Copy className="w-4 h-4 mr-2" />
-                      {copied ? 'Copied!' : 'Copy Code'}
+                      {copied ? 'Copied to Clipboard!' : 'Copy Code'}
                     </Button>
-                    <Button onClick={downloadSignature} className="flex-1 bg-teal-500 hover:bg-teal-600 text-white text-sm">
+                    <Button 
+                      onClick={downloadSignature} 
+                      className="flex-1 bg-teal-500 hover:bg-teal-600 text-white text-sm transition-all"
+                    >
                       <Download className="w-4 h-4 mr-2" />
-                      Download
+                      Download HTML
                     </Button>
+                  </div>
+                </div>
+
+                {/* Instructions */}
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-xl">
+                  <h4 className="text-sm font-bold text-white mb-3">How to Use</h4>
+                  <div className="text-white/70 text-xs space-y-2">
+                    <p><span className="text-teal-400 font-semibold">Gmail:</span> Settings → Signature → Paste the HTML</p>
+                    <p><span className="text-teal-400 font-semibold">Outlook:</span> File → Options → Mail → Signatures → Paste the HTML</p>
+                    <p><span className="text-teal-400 font-semibold">Apple Mail:</span> Preferences → Signatures → Edit → Paste the HTML</p>
                   </div>
                 </div>
               </>

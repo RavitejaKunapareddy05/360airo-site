@@ -5,22 +5,47 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, FileText } from 'lucide-react';
 
-const templates = [
-  { name: 'Blank', html: '' },
-  { name: 'Welcome Email', html: '<h1>Welcome!</h1><p>Thanks for joining us.</p>' },
-  { name: 'Newsletter', html: '<h1>Newsletter</h1><p>This month\'s highlights:</p><ul><li>Update 1</li><li>Update 2</li></ul>' },
-  { name: 'Promotional', html: '<h1>Special Offer!</h1><p>Limited time deal:</p><p style="font-size: 24px; color: red;">50% OFF</p>' },
-  { name: 'Transactional', html: '<h1>Order Confirmation</h1><p>Order #12345</p><p>Thank you for your purchase!</p>' }
-];
-
 export default function EmailTemplateBuilderPage() {
   const [htmlContent, setHtmlContent] = useState('');
   const [preview, setPreview] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [templateType, setTemplateType] = useState('Welcome');
+  const [purpose, setPurpose] = useState('');
+  const [error, setError] = useState('');
 
-  const loadTemplate = (name: string) => {
-    const template = templates.find(t => t.name === name);
-    if (template) setHtmlContent(template.html);
+  const templateTypes = ['Welcome', 'Newsletter', 'Promotional', 'Transactional', 'Custom'];
+
+  const generateTemplate = async () => {
+    if (!templateType || !purpose) {
+      setError('Please select template type and describe its purpose');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch('/api/free-tools/email-template-builder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          templateType,
+          purpose,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to generate template');
+      }
+
+      const data = await response.json();
+      setHtmlContent(data.html);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate template');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const copyToClipboard = () => {
@@ -59,45 +84,70 @@ export default function EmailTemplateBuilderPage() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl mb-8">
           <div className="space-y-4">
             <div>
-              <label className="block text-white font-semibold mb-3">Quick Templates</label>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                {templates.map((template) => (
-                  <Button
-                    key={template.name}
-                    onClick={() => loadTemplate(template.name)}
-                    className="bg-white/10 hover:bg-white/20 text-white text-sm"
-                  >
-                    {template.name}
-                  </Button>
+              <label className="block text-white font-semibold mb-3">Template Type</label>
+              <select
+                value={templateType}
+                onChange={(e) => setTemplateType(e.target.value)}
+                className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white"
+              >
+                {templateTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
 
             <div>
-              <label className="block text-white font-semibold mb-3">HTML Content</label>
+              <label className="block text-white font-semibold mb-3">Describe the Purpose</label>
               <textarea
-                value={htmlContent}
-                onChange={(e) => setHtmlContent(e.target.value)}
-                placeholder="Enter HTML code for your email template..."
-                className="w-full bg-white/5 border border-white/20 rounded-lg p-4 text-white placeholder-white/30 min-h-64 font-mono text-sm"
+                value={purpose}
+                onChange={(e) => setPurpose(e.target.value)}
+                placeholder="E.g., 'Welcome new users to our SaaS product' or 'Monthly product updates newsletter'"
+                className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white placeholder-white/30 min-h-24"
               />
             </div>
 
-            <div className="flex gap-3">
-              <Button onClick={() => setPreview(!preview)} className="flex-1 bg-violet-500 hover:bg-violet-600 text-white">
-                {preview ? 'Hide Preview' : 'Show Preview'}
-              </Button>
-              <Button onClick={copyToClipboard} className="flex-1 bg-white/10 hover:bg-white/20 text-white">
-                <Copy className="w-4 h-4 mr-2" />
-                {copied ? 'Copied!' : 'Copy Code'}
-              </Button>
-              <Button onClick={downloadTemplate} className="flex-1 bg-white/10 hover:bg-white/20 text-white">
-                <Download className="w-4 h-4 mr-2" />
-                Download
-              </Button>
-            </div>
+            {error && <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm">{error}</div>}
+
+            <Button
+              onClick={generateTemplate}
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-violet-500 to-purple-600 hover:shadow-lg text-white font-semibold"
+            >
+              {loading ? 'Generating...' : 'Generate Template with AI'}
+            </Button>
           </div>
         </motion.div>
+
+        {htmlContent && (
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl mb-8">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-white font-semibold mb-3">HTML Content (Edit as needed)</label>
+                <textarea
+                  value={htmlContent}
+                  onChange={(e) => setHtmlContent(e.target.value)}
+                  className="w-full bg-white/5 border border-white/20 rounded-lg p-4 text-white min-h-64 font-mono text-sm"
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <Button onClick={() => setPreview(!preview)} className="flex-1 bg-violet-500 hover:bg-violet-600 text-white">
+                  {preview ? 'Hide Preview' : 'Show Preview'}
+                </Button>
+                <Button onClick={copyToClipboard} className="flex-1 bg-white/10 hover:bg-white/20 text-white">
+                  <Copy className="w-4 h-4 mr-2" />
+                  {copied ? 'Copied!' : 'Copy Code'}
+                </Button>
+                <Button onClick={downloadTemplate} className="flex-1 bg-white/10 hover:bg-white/20 text-white">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {preview && htmlContent && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl">

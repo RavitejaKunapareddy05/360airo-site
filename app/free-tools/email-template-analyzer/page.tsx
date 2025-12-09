@@ -632,53 +632,53 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
-          <div className="inline-block p-4 bg-blue-100 rounded-full mb-6">
-            <Mail className="w-8 h-8 text-blue-600" />
+          <div className="inline-block p-4 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full mb-6">
+            <Mail className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-3">
             Email Template Analyzer
           </h1>
-          <p className="text-gray-600 text-lg">
+          <p className="text-white/60 text-lg">
             Check your email for deliverability issues and get AI-powered improvement suggestions
           </p>
         </div>
 
         {/* Info Section - Features */}
         <div className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg p-6 shadow border border-gray-100">
+          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-6">
             <div className="text-3xl mb-3">🎯</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Spam Detection</h3>
-            <p className="text-sm text-gray-600">Identifies spammy words and phrases that hurt deliverability</p>
+            <h3 className="font-semibold text-white mb-2">Spam Detection</h3>
+            <p className="text-sm text-white/60">Identifies spammy words and phrases that hurt deliverability</p>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow border border-gray-100">
+          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-6">
             <div className="text-3xl mb-3">👤</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Personalization</h3>
-            <p className="text-sm text-gray-600">Detects personalization tokens like {`{{first_name}}`}</p>
+            <h3 className="font-semibold text-white mb-2">Personalization</h3>
+            <p className="text-sm text-white/60">Detects personalization tokens like {`{{first_name}}`}</p>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow border border-gray-100">
+          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-6">
             <div className="text-3xl mb-3">💡</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Smart Suggestions</h3>
-            <p className="text-sm text-gray-600">Get actionable recommendations to improve your email</p>
+            <h3 className="font-semibold text-white mb-2">Smart Suggestions</h3>
+            <p className="text-sm text-white/60">Get actionable recommendations to improve your email</p>
           </div>
         </div>
 
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Panel - Editor */}
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 text-white">
+          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl overflow-hidden">
+            <div className="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 border-b border-white/10 p-6 text-white">
               <h2 className="text-xl font-bold">Email Template</h2>
-              <p className="text-blue-100 text-sm mt-1">Paste your email or compose here</p>
+              <p className="text-white/60 text-sm mt-1">Paste your email or compose here</p>
             </div>
 
             <div className="p-6 space-y-4">
               {/* From Name */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white/70 mb-2">
                   From Name (Optional)
                 </label>
                 <input
@@ -686,13 +686,13 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
                   value={fromName}
                   onChange={(e) => setFromName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors text-gray-900 placeholder-gray-400 bg-white"
+                  className="w-full px-4 py-2 rounded-lg border-2 border-white/10 focus:border-cyan-500 focus:outline-none transition-colors text-white placeholder-white/40 bg-white/5"
                 />
               </div>
 
               {/* Subject (Optional - will auto-detect from email) */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white/70 mb-2">
                   Subject (Optional - auto-detects from email)
                 </label>
                 <input
@@ -700,20 +700,20 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="Email subject line"
-                  className="w-full px-4 py-2 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors text-gray-900 placeholder-gray-400 bg-white"
+                  className="w-full px-4 py-2 rounded-lg border-2 border-white/10 focus:border-cyan-500 focus:outline-none transition-colors text-white placeholder-white/40 bg-white/5"
                 />
               </div>
 
               {/* Email Content */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-white/70 mb-2">
                   Email Content
                 </label>
                 <textarea
                   value={emailContent}
                   onChange={(e) => setEmailContent(e.target.value)}
                   placeholder="Paste your email here... Format: Subject: ... (blank line) Body"
-                  className="w-full h-80 px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors text-gray-900 placeholder-gray-400 bg-white resize-none"
+                  className="w-full h-80 px-4 py-3 rounded-lg border-2 border-white/10 focus:border-cyan-500 focus:outline-none transition-colors text-white placeholder-white/40 bg-white/5 resize-none"
                 />
               </div>
 
@@ -721,7 +721,7 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
               <Button
                 onClick={analyzeEmail}
                 disabled={!emailContent.trim() || loading}
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:opacity-50 flex items-center justify-center gap-2 text-white"
               >
                 <Zap className="w-4 h-4" />
                 {loading ? 'Analyzing...' : 'Analyze Email'}
@@ -812,80 +812,80 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
 
                 {/* Metrics Grid */}
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-white rounded-lg shadow p-4 border border-gray-100">
-                    <div className="text-xs text-gray-600 font-semibold mb-1">Subject Length</div>
-                    <div className="text-2xl font-bold text-gray-900">{analysis.subjectLength}</div>
-                    <div className="text-xs text-gray-500 mt-1">chars</div>
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-4">
+                    <div className="text-xs text-white/60 font-semibold mb-1">Subject Length</div>
+                    <div className="text-2xl font-bold text-white">{analysis.subjectLength}</div>
+                    <div className="text-xs text-white/40 mt-1">chars</div>
                   </div>
-                  <div className="bg-white rounded-lg shadow p-4 border border-gray-100">
-                    <div className="text-xs text-gray-600 font-semibold mb-1">Word Count</div>
-                    <div className="text-2xl font-bold text-gray-900">{analysis.wordCount}</div>
-                    <div className="text-xs text-gray-500 mt-1">words</div>
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-4">
+                    <div className="text-xs text-white/60 font-semibold mb-1">Word Count</div>
+                    <div className="text-2xl font-bold text-white">{analysis.wordCount}</div>
+                    <div className="text-xs text-white/40 mt-1">words</div>
                   </div>
-                  <div className="bg-white rounded-lg shadow p-4 border border-gray-100">
-                    <div className="text-xs text-gray-600 font-semibold mb-1">Reading Time</div>
-                    <div className="text-2xl font-bold text-gray-900">{analysis.readingTimeSeconds}s</div>
-                    <div className="text-xs text-gray-500 mt-1">seconds</div>
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-4">
+                    <div className="text-xs text-white/60 font-semibold mb-1">Reading Time</div>
+                    <div className="text-2xl font-bold text-white">{analysis.readingTimeSeconds}s</div>
+                    <div className="text-xs text-white/40 mt-1">seconds</div>
                   </div>
-                  <div className="bg-white rounded-lg shadow p-4 border border-gray-100">
-                    <div className="text-xs text-gray-600 font-semibold mb-1">Links</div>
-                    <div className="text-2xl font-bold text-gray-900">{analysis.linkCount}</div>
-                    <div className="text-xs text-gray-500 mt-1">detected</div>
+                  <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg p-4">
+                    <div className="text-xs text-white/60 font-semibold mb-1">Links</div>
+                    <div className="text-2xl font-bold text-white">{analysis.linkCount}</div>
+                    <div className="text-xs text-white/40 mt-1">detected</div>
                   </div>
                 </div>
 
                 {/* Spam Words */}
-                <div className="bg-red-50 rounded-lg p-4 border border-red-200">
+                <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
                   <div className="flex items-center gap-2 mb-3">
-                    <AlertCircle className="w-5 h-5 text-red-600" />
-                    <h4 className="font-semibold text-red-900">Spam Words Detected</h4>
+                    <AlertCircle className="w-5 h-5 text-red-400" />
+                    <h4 className="font-semibold text-red-300">Spam Words Detected</h4>
                   </div>
                   {analysis.spamWords.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {analysis.spamWords.map((word) => (
                         <span
                           key={word}
-                          className="bg-red-200 text-red-900 px-3 py-1 rounded-full text-sm font-medium"
+                          className="bg-red-500/20 text-red-300 px-3 py-1 rounded-full text-sm font-medium border border-red-500/30"
                         >
                           {word}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-red-700">✓ No spam words detected - great job!</p>
+                    <p className="text-sm text-red-300">✓ No spam words detected - great job!</p>
                   )}
                 </div>
 
                 {/* Personalization Tokens */}
-                <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                <div className="bg-emerald-500/10 rounded-lg p-4 border border-emerald-500/30">
                   <div className="flex items-center gap-2 mb-3">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <h4 className="font-semibold text-green-900">Personalization Found</h4>
+                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <h4 className="font-semibold text-emerald-300">Personalization Found</h4>
                   </div>
                   {analysis.personalizationTokens.length > 0 ? (
                     <div className="flex flex-wrap gap-2">
                       {analysis.personalizationTokens.map((token) => (
                         <span
                           key={token}
-                          className="bg-green-200 text-green-900 px-3 py-1 rounded-full text-sm font-medium"
+                          className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm font-medium border border-emerald-500/30"
                         >
                           {token}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-green-700">Add personalization tokens like {`{{first_name}}`} to improve engagement</p>
+                    <p className="text-sm text-emerald-300">Add personalization tokens like {`{{first_name}}`} to improve engagement</p>
                   )}
                 </div>
 
                 {/* Recommendations - Hide if phishing */}
                 {!analysis.isPhishing && (
-                <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-                  <h4 className="font-semibold text-blue-900 mb-3">📋 Recommendations</h4>
+                <div className="bg-cyan-500/10 rounded-lg p-4 border border-cyan-500/30">
+                  <h4 className="font-semibold text-cyan-300 mb-3">📋 Recommendations</h4>
                   <ul className="space-y-2">
                     {analysis.recommendations.map((rec, idx) => (
-                      <li key={idx} className="text-sm text-blue-800 flex items-start gap-2">
-                        <span className="text-blue-600 font-bold mt-0.5">•</span>
+                      <li key={idx} className="text-sm text-cyan-200 flex items-start gap-2">
+                        <span className="text-cyan-400 font-bold mt-0.5">•</span>
                         <span>{rec}</span>
                       </li>
                     ))}
@@ -895,41 +895,41 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
 
                 {/* Improved Email Preview - Only show if NOT phishing */}
                 {!analysis.isPhishing && (
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 border-2 border-green-300">
+                <div className="bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-lg p-4 border-2 border-emerald-500/30">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="text-2xl">✨</span>
-                    <h4 className="font-bold text-green-900">Smart Suggestions - Remodeled Email</h4>
+                    <h4 className="font-bold text-emerald-300">Smart Suggestions - Remodeled Email</h4>
                   </div>
                   
-                  <div className="bg-white rounded-lg p-4 mb-4 border border-green-200">
+                  <div className="bg-white/5 rounded-lg p-4 mb-4 border border-white/10">
                     <div className="mb-3">
-                      <label className="text-xs font-bold text-gray-600 uppercase tracking-wide">Improved Subject</label>
-                      <p className="text-sm font-semibold text-gray-900 mt-1 p-2 bg-green-50 rounded border-l-4 border-green-500">
+                      <label className="text-xs font-bold text-white/60 uppercase tracking-wide">Improved Subject</label>
+                      <p className="text-sm font-semibold text-white mt-1 p-2 bg-white/5 rounded border-l-4 border-emerald-500">
                         {analysis.improvedSubject}
                       </p>
                     </div>
                     
                     <div>
-                      <label className="text-xs font-bold text-gray-600 uppercase tracking-wide">Improved Body</label>
-                      <p className="text-sm text-gray-800 mt-1 p-3 bg-green-50 rounded whitespace-pre-wrap border-l-4 border-green-500 font-mono text-xs leading-relaxed">
+                      <label className="text-xs font-bold text-white/60 uppercase tracking-wide">Improved Body</label>
+                      <p className="text-sm text-white/80 mt-1 p-3 bg-white/5 rounded whitespace-pre-wrap border-l-4 border-emerald-500 font-mono text-xs leading-relaxed">
                         {analysis.improvedBody}
                       </p>
                     </div>
                   </div>
 
-                  <div className="bg-green-100 rounded-lg p-3 border border-green-400">
+                  <div className="bg-emerald-500/20 rounded-lg p-3 border border-emerald-500/50">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-green-900">Expected Score (Remodeled):</span>
+                      <span className="font-bold text-emerald-300">Expected Score (Remodeled):</span>
                       <div className="flex items-center gap-2">
-                        <span className="text-2xl font-bold text-green-700">{analysis.improvedScore || 0}/10</span>
+                        <span className="text-2xl font-bold text-emerald-300">{analysis.improvedScore || 0}/10</span>
                         {(analysis.improvedScore || 0) >= 6 ? (
-                          <span className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">✓ PASS</span>
+                          <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-bold">✓ PASS</span>
                         ) : (
-                          <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">⚠ REVIEW</span>
+                          <span className="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-bold">⚠ REVIEW</span>
                         )}
                       </div>
                     </div>
-                    <p className="text-xs text-green-800">
+                    <p className="text-xs text-emerald-200/80">
                       {(analysis.improvedScore || 0) >= 6 
                         ? '✓ Premium quality: No spelling/grammar errors, perfect email format, professional structure.'
                         : '⚠ Quality check: Please review for spelling, grammar, and email formatting standards.'}
@@ -941,18 +941,17 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
                 {/* Copy Button */}
                 <Button
                   onClick={handleCopyAnalysis}
-                  variant="outline"
-                  className="w-full flex items-center justify-center gap-2 hover:bg-gray-50"
+                  className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20"
                 >
                   <Copy className="w-4 h-4" />
                   Copy Analysis
                 </Button>
               </>
             ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 text-center h-96 flex flex-col items-center justify-center">
-                <Mail className="w-12 h-12 text-gray-300 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">No Analysis Yet</h3>
-                <p className="text-gray-600">Paste your email and click "Analyze Email" to get started</p>
+              <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-8 text-center h-96 flex flex-col items-center justify-center">
+                <Mail className="w-12 h-12 text-white/30 mb-4" />
+                <h3 className="text-lg font-semibold text-white mb-2">No Analysis Yet</h3>
+                <p className="text-white/60">Paste your email and click "Analyze Email" to get started</p>
               </div>
             )}
           </div>
