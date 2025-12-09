@@ -1,4 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
+import dns from 'dns';
+import { promisify } from 'util';
+
+const resolveMx = promisify(dns.resolveMx);
+
+// Simple DNS-based email validation (works on Vercel)
+async function verifyEmailDNS(email: string): Promise<{ status: 'valid' | 'invalid' | 'unknown'; reason: string }> {
+  const domain = email.split('@')[1];
+  
+  if (!domain) {
+    return { status: 'invalid', reason: 'Invalid email format' };
+  }
+
+  try {
+    const mxRecords = await resolveMx(domain);
+    if (mxRecords && mxRecords.length > 0) {
+      return { status: 'valid', reason: 'Domain verified via DNS' };
+    }
+    return { status: 'invalid', reason: 'Domain does not exist' };
+  } catch (err) {
+    return { status: 'invalid', reason: 'Domain does not exist' };
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,40 +42,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Call Netlify function for SMTP verification
-    // Use deployed Netlify URL
-    const NETLIFY_URL = 'https://360airo.netlify.app/.netlify/functions/verify-email';
-
     let body_text = '[\n';
     let first = true;
 
     for (const email of emails) {
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        const trimmedEmail = email.toLowerCase().trim();
         
-        const response = await fetch(NETLIFY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email.toLowerCase().trim() }),
-          signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error(`Netlify function error: ${response.statusText}`);
-        }
-
-        const result = await response.json();
+        // Use DNS validation (works on Vercel without port 25)
+        const result = await verifyEmailDNS(trimmedEmail);
 
         if (!first) {
           body_text += ',\n';
         }
         body_text += JSON.stringify({
-          email,
-          status: result.status || 'unknown',
-          reason: result.reason || 'Verification failed',
+          email: trimmedEmail,
+          status: result.status,
+          reason: result.reason,
           verificationTime: 0
         });
         first = false;
