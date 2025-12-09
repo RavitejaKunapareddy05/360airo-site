@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Mail, CheckCircle, XCircle, Clock, Download, Upload } from 'lucide-react';
-import Link from 'next/link';
 
 interface VerificationResult {
   email: string;
@@ -344,9 +343,6 @@ export default function EmailVerifierPage() {
           className="mt-16 text-center text-white/50 text-sm"
         >
           <p>Part of 360airo Free Tools</p>
-          <Link href="/free-tools" className="text-blue-400 hover:text-blue-300 transition-colors">
-            ← Back to Free Tools
-          </Link>
         </motion.div>
       </div>
     </div>

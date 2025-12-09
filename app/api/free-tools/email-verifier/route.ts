@@ -1,4 +1,103 @@
 import { NextRequest, NextResponse } from 'next/server';
+import dns from 'dns';
+import { promisify } from 'util';
+import net from 'net';
+
+const resolveMx = promisify(dns.resolveMx);
+
+function smtpVerifyEmail(mxHost: string, email: string, timeout = 5000): Promise<boolean | null> {
+  return new Promise((resolve) => {
+    const socket = new net.Socket();
+    let buffer = '';
+    let stage = 0;
+    let finished = false;
+    let timeoutHandle: NodeJS.Timeout | null = null;
+
+    const cleanup = (result: boolean | null) => {
+      if (finished) return;
+      finished = true;
+      if (timeoutHandle) clearTimeout(timeoutHandle);
+      try {
+        socket.destroy();
+      } catch (e) {}
+      resolve(result);
+    };
+
+    timeoutHandle = setTimeout(() => cleanup(null), timeout);
+    socket.on('error', () => cleanup(null));
+    socket.on('close', () => {
+      if (!finished) cleanup(null);
+    });
+
+    socket.connect(25, mxHost, () => {});
+
+    socket.on('data', (chunk: Buffer) => {
+      if (finished) return;
+      buffer += chunk.toString();
+      const lines = buffer.split('\r\n').filter(Boolean);
+      const lastLine = lines[lines.length - 1];
+      if (!lastLine || lastLine.length < 3) return;
+
+      const code = parseInt(lastLine.slice(0, 3), 10);
+      if (isNaN(code)) return;
+
+      if (stage === 0 && code >= 200 && code < 400) {
+        socket.write(`HELO mail.example.com\r\n`);
+        stage = 1;
+        buffer = '';
+      } else if (stage === 1 && code >= 200 && code < 400) {
+        socket.write(`MAIL FROM:<check@example.com>\r\n`);
+        stage = 2;
+        buffer = '';
+      } else if (stage === 2 && code >= 200 && code < 400) {
+        socket.write(`RCPT TO:<${email}>\r\n`);
+        stage = 3;
+        buffer = '';
+      } else if (stage === 3) {
+        if (code === 250 || code === 251) {
+          cleanup(true);
+        } else if (code >= 550 && code < 560) {
+          cleanup(false);
+        } else {
+          cleanup(null);
+        }
+      }
+    });
+  });
+}
+
+async function verifyEmail(email: string): Promise<{ status: string; reason: string }> {
+  email = email.toLowerCase().trim();
+  const domain = email.split('@')[1];
+
+  if (!domain) {
+    return { status: 'invalid', reason: 'Invalid email format' };
+  }
+
+  let mxRecords: any;
+  try {
+    mxRecords = await resolveMx(domain);
+  } catch (err) {
+    return { status: 'invalid', reason: 'Domain does not exist' };
+  }
+
+  if (!mxRecords || mxRecords.length === 0) {
+    return { status: 'invalid', reason: 'No mail servers found' };
+  }
+
+  // Try SMTP on up to 2 MX servers with longer timeout
+  for (let i = 0; i < Math.min(2, mxRecords.length); i++) {
+    const result = await smtpVerifyEmail(mxRecords[i].exchange, email, 5000);
+
+    if (result === true) {
+      return { status: 'valid', reason: 'Email verified via SMTP' };
+    } else if (result === false) {
+      return { status: 'invalid', reason: 'Email does not exist' };
+    }
+  }
+
+  return { status: 'unknown', reason: 'Domain exists but SMTP verification failed' };
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,29 +118,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Call Netlify function (has port 25 access)
-    const NETLIFY_URL = 'https://360airo.netlify.app/.netlify/functions/verify-email';
-
     let body_text = '[\n';
     let first = true;
 
     for (const email of emails) {
       try {
-        const response = await fetch(NETLIFY_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email.toLowerCase().trim() })
-        });
-
-        const result = await response.json();
-
+        const result = await verifyEmail(email);
+        
         if (!first) {
           body_text += ',\n';
         }
         body_text += JSON.stringify({
           email,
-          status: result.status || 'unknown',
-          reason: result.reason || 'Verification failed',
+          status: result.status,
+          reason: result.reason,
           verificationTime: 0
         });
         first = false;
