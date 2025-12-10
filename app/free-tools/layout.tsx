@@ -13,27 +13,26 @@ function FreeToolsLayoutContent({
 }: {
   children: React.ReactNode;
 }) {
-  const { isVerified } = useToolAuth();
+  const { isVerified, isHydrated } = useToolAuth();
   const pathname = usePathname();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   // Check if current path is the main /free-tools page
   const isMainPage = pathname === '/free-tools' || pathname === '/free-tools/';
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isMounted && !isVerified) {
+    // Only show modal after hydration is complete and user is not verified
+    if (isHydrated && !isVerified) {
       setShowLoginModal(true);
     } else {
       setShowLoginModal(false);
     }
-  }, [isVerified, isMounted]);
+  }, [isVerified, isHydrated]);
 
-  if (!isMounted) return children;
+  // Don't render until hydration is complete
+  if (!isHydrated) {
+    return children;
+  }
 
   return (
     <div>

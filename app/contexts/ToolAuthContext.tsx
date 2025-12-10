@@ -11,6 +11,7 @@ interface ToolAuthContextType {
   setApiKey: (key: string) => void;
   clearApiKey: () => void;
   isApiKeyConfigured: boolean;
+  isHydrated: boolean;
 }
 
 const ToolAuthContext = createContext<ToolAuthContextType | undefined>(undefined);
@@ -103,6 +104,7 @@ export function ToolAuthProvider({ children }: { children: ReactNode }) {
     setApiKey: handleSetApiKey,
     clearApiKey: handleClearApiKey,
     isApiKeyConfigured: !!apiKey,
+    isHydrated,
   };
 
   return (
