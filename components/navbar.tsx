@@ -623,19 +623,19 @@ export function Navbar() {
                           setFreeToolsOpen(false);
                         }, 150);
                       }}
-                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[800px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-2xl shadow-2xl overflow-hidden z-[100]"
+                      className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-xl shadow-2xl overflow-hidden z-[100]"
                       style={{ 
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
                       }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-xl pointer-events-none" />
                       
                       {/* Scrollable Container */}
-                      <div className="free-tools-dropdown relative overflow-y-auto p-6 max-h-[400px]" style={{
+                      <div className="free-tools-dropdown relative overflow-y-auto p-3 max-h-[300px]" style={{
                         scrollBehavior: 'smooth'
                       }}>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-3 gap-2">
                           {freeTools.map((tool, index) => (
                             <motion.div
                               key={tool.name}
@@ -649,30 +649,30 @@ export function Navbar() {
                             >
                               <Link
                                 href={tool.href}
-                                className="block h-full rounded-xl transition-all duration-300 border border-white/10 hover:border-[#8B5CF6]/50 group/card bg-white/5 hover:bg-white/10 hover:scale-105"
+                                className="block h-full rounded-lg transition-all duration-300 border border-white/10 hover:border-[#8B5CF6]/50 group/card bg-white/5 hover:bg-white/10 hover:scale-105"
                                 onClick={() => setFreeToolsOpen(false)}
                               >
-                                <div className="flex flex-col items-center justify-center h-full p-4 text-center space-y-3">
+                                <div className="flex flex-col items-center justify-center h-full p-2 text-center space-y-1.5">
                                   <motion.div 
-                                    className={`w-12 h-12 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center`}
+                                    className={`w-10 h-10 bg-gradient-to-br ${tool.color} rounded-lg flex items-center justify-center`}
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                                   >
-                                    <tool.icon className="h-6 w-6 text-white" />
+                                    <tool.icon className="h-5 w-5 text-white" />
                                   </motion.div>
                                   
                                   <div className="flex-1 flex flex-col justify-center">
-                                    <div className="flex items-center justify-center space-x-1 mb-1 flex-wrap">
+                                    <div className="flex items-center justify-center space-x-1 mb-0.5 flex-wrap">
                                       <h4 className="font-semibold text-white text-xs group-hover/card:text-[#A855F7] transition-colors duration-200">
                                         {tool.name}
                                       </h4>
                                     </div>
                                     {tool.tag && (
-                                      <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-green-500/20 text-green-400 border border-green-500/30 inline-block mx-auto">
+                                      <span className="text-xs px-1.5 py-0.5 rounded-full font-medium bg-green-500/20 text-green-400 border border-green-500/30 inline-block mx-auto">
                                         {tool.tag}
                                       </span>
                                     )}
-                                    <p className="text-xs text-white/60 group-hover/card:text-white/80 transition-colors duration-200 line-clamp-2 mt-2">
+                                    <p className="text-xs text-white/60 group-hover/card:text-white/80 transition-colors duration-200 line-clamp-2 mt-1">
                                       {tool.description}
                                     </p>
                                   </div>
