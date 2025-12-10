@@ -91,7 +91,9 @@ export function ToolAuthProvider({ children }: { children: ReactNode }) {
   const handleLogout = () => {
     setVerifiedEmailState(null);
     if (typeof window !== 'undefined') {
+      // Clear session storage but keep lastUsedEmail in localStorage for auto-login
       sessionStorage.removeItem('toolVerifiedEmail');
+      // NOTE: We intentionally do NOT remove lastUsedEmail so users can auto-verify on next visit
     }
   };
 
