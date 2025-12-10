@@ -98,33 +98,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let body_text = '[\n';
-    let first = true;
-
-    for (const email of emails) {
+    // Process emails in parallel with concurrency limit
+    const CONCURRENCY_LIMIT = 5;
+    const results: any[] = [];
+    
+    const verifyEmailWithLimit = async (email: string) => {
       try {
         const trimmedEmail = email.toLowerCase().trim();
         const startTime = Date.now();
 
         // Step 1: Format validation
         if (!validateEmailFormat(trimmedEmail)) {
-          if (!first) body_text += ',\n';
-          body_text += JSON.stringify({
+          return {
             email: trimmedEmail,
             status: 'invalid',
             reason: 'Invalid email format',
             verificationTime: Date.now() - startTime,
             verificationMethod: 'format-check',
-          });
-          first = false;
-          continue;
+          };
         }
 
         // Step 2: Verify via MailTester API with backend key
         const result = await verifyEmailViaMailTester(trimmedEmail);
         
-        if (!first) body_text += ',\n';
-        body_text += JSON.stringify({
+        return {
           email: trimmedEmail,
           status: result.status,
           reason: result.reason,
@@ -133,26 +130,43 @@ export async function POST(request: NextRequest) {
           domain: result.domain,
           verificationTime: Date.now() - startTime,
           verificationMethod: 'mailtester-api',
-        });
-        first = false;
+        };
 
       } catch (err) {
         console.error(`Error verifying ${email}:`, err);
-        if (!first) body_text += ',\n';
-        body_text += JSON.stringify({
+        return {
           email,
           status: 'unknown',
           reason: err instanceof Error ? err.message : 'Verification service error',
           verificationTime: 0,
           verificationMethod: 'error',
-        });
-        first = false;
+        };
       }
-    }
+    };
 
-    body_text += '\n]';
+    // Process with concurrency control
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream({
+      async start(controller) {
+        controller.enqueue(encoder.encode('[\n'));
+        
+        for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
+          const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
+          const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
+          
+          for (const result of batchResults) {
+            const jsonStr = JSON.stringify(result);
+            controller.enqueue(encoder.encode((results.length > 0 ? ',' : '') + jsonStr + '\n'));
+            results.push(result);
+          }
+        }
+        
+        controller.enqueue(encoder.encode(']'));
+        controller.close();
+      }
+    });
 
-    return new NextResponse(body_text, {
+    return new NextResponse(stream, {
       headers: {
         'Content-Type': 'application/json',
       }
