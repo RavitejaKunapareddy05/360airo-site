@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
     // Normalize email to lowercase for consistency
     const normalizedEmail = email.toLowerCase().trim();
     console.log(`📧 [GLOBAL VERIFY] Checking OTP for ${normalizedEmail}`);
+    console.log(`📧 [GLOBAL VERIFY] OTP Store size: ${otpStore.size}, Keys: ${Array.from(otpStore.keys()).join(', ')}`);
 
     const storedData = otpStore.get(normalizedEmail);
 

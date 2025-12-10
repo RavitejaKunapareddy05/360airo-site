@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
     });
 
     console.log(`📧 [GLOBAL OTP] Generated OTP for ${normalizedEmail}: ${otp}`);
+    console.log(`📧 [GLOBAL OTP] OTP stored in memory. Store size: ${otpStore.size}, Keys: ${Array.from(otpStore.keys()).join(', ')}`);
 
     try {
       await transporter.sendMail({

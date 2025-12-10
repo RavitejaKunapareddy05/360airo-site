@@ -41,6 +41,7 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
 
       if (checkData.verified) {
         // Email is already verified - grant access directly
+        console.log(`✅ Email already verified: ${normalizedEmail}`);
         setVerifiedEmail(normalizedEmail);
         setUserEmail('');
         setOtp('');
@@ -50,6 +51,7 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
       }
 
       // Email not verified - proceed with OTP
+      console.log(`📧 Sending OTP to: ${normalizedEmail}`);
       const response = await fetch('/api/free-tools/auth/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -91,12 +93,18 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
       const data = await response.json();
 
       if (response.ok) {
+        // Successfully verified - update context and close modal
+        console.log(`✅ OTP Verified successfully for ${normalizedEmail}`);
         setVerifiedEmail(normalizedEmail);
+        // Clear form state
         setUserEmail('');
         setOtp('');
         setOtpStep('email');
+        setOtpError('');
+        // Close modal via callback
         onClose?.();
       } else {
+        console.log(`❌ OTP Verification failed:`, data);
         setOtpError(data.error || 'Invalid OTP');
       }
     } catch (error) {
