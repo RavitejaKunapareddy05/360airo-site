@@ -20,26 +20,55 @@ export function ToolAuthProvider({ children }: { children: ReactNode }) {
   const [apiKey, setApiKeyState] = useState<string | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Load from localStorage on mount
+  // Load from localStorage and check backend on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedEmail = sessionStorage.getItem('toolVerifiedEmail');
-      const storedApiKey = localStorage.getItem('toolApiKey');
-      if (storedEmail) {
-        setVerifiedEmailState(storedEmail);
+    const checkVerification = async () => {
+      if (typeof window !== 'undefined') {
+        // First, try to load from sessionStorage (current session)
+        const storedEmail = sessionStorage.getItem('toolVerifiedEmail');
+        const storedApiKey = localStorage.getItem('toolApiKey');
+        
+        if (storedEmail) {
+          setVerifiedEmailState(storedEmail);
+        } else {
+          // If not in session storage, try to check if browser's saved email is verified on backend
+          // This helps when user closes browser and comes back
+          const savedEmail = localStorage.getItem('lastUsedEmail');
+          if (savedEmail) {
+            try {
+              const response = await fetch('/api/free-tools/auth/check-verified', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: savedEmail }),
+              });
+              
+              const data = await response.json();
+              if (data.verified) {
+                setVerifiedEmailState(savedEmail);
+                sessionStorage.setItem('toolVerifiedEmail', savedEmail);
+              }
+            } catch (error) {
+              console.error('Error checking verification status:', error);
+            }
+          }
+        }
+        
+        if (storedApiKey) {
+          setApiKeyState(storedApiKey);
+        }
       }
-      if (storedApiKey) {
-        setApiKeyState(storedApiKey);
-      }
-    }
-    setIsHydrated(true);
+      setIsHydrated(true);
+    };
+
+    checkVerification();
   }, []);
 
   const handleSetVerifiedEmail = (email: string) => {
     setVerifiedEmailState(email);
-    // Store in session storage
+    // Store in session storage and also save as "last used email" for persistence
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('toolVerifiedEmail', email);
+      localStorage.setItem('lastUsedEmail', email); // Save for next session
     }
   };
 
