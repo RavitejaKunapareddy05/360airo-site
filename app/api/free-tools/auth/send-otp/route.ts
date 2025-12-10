@@ -19,13 +19,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Normalize email to lowercase for consistency across all operations
+    const normalizedEmail = email.toLowerCase().trim();
+
     const smtpHost = process.env.SMTP_HOST || process.env.GMAIL_HOST || 'smtp.gmail.com';
     const smtpPort = parseInt(process.env.SMTP_PORT || process.env.GMAIL_PORT || '587');
     const smtpSecure = (process.env.SMTP_SECURE || process.env.GMAIL_SECURE || 'false') === 'true';
     const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
     const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
 
-    console.log(`📧 [GLOBAL OTP] Sending OTP to ${email}`);
+    console.log(`📧 [GLOBAL OTP] Sending OTP to ${normalizedEmail}`);
 
     if (!smtpUser || !smtpPass) {
       console.error('❌ [GLOBAL OTP] Missing SMTP credentials');
@@ -49,19 +52,19 @@ export async function POST(req: NextRequest) {
     const timestamp = Date.now();
     const expiresIn = 10 * 60 * 1000; // 10 minutes
 
-    // Store OTP in memory
-    otpStore.set(email, {
+    // Store OTP in memory with normalized email key
+    otpStore.set(normalizedEmail, {
       otp,
       timestamp,
       expires: timestamp + expiresIn,
     });
 
-    console.log(`📧 [GLOBAL OTP] Generated OTP for ${email}: ${otp}`);
+    console.log(`📧 [GLOBAL OTP] Generated OTP for ${normalizedEmail}: ${otp}`);
 
     try {
       await transporter.sendMail({
         from: smtpUser,
-        to: email,
+        to: normalizedEmail,
         subject: '🔐 360 Airo Free Tools - Your Verification Code',
         html: `
 <!DOCTYPE html>
@@ -109,7 +112,7 @@ export async function POST(req: NextRequest) {
         text: `Your verification code is: ${otp}\nValid for 10 minutes.`,
       });
 
-      console.log(`✅ [GLOBAL OTP] Email sent to ${email}`);
+      console.log(`✅ [GLOBAL OTP] Email sent to ${normalizedEmail}`);
       return NextResponse.json(
         { success: true, message: 'OTP sent successfully' },
         { status: 200 }
@@ -117,7 +120,7 @@ export async function POST(req: NextRequest) {
     } catch (emailError: any) {
       const errorMsg = emailError?.message || String(emailError);
       console.error(`❌ [GLOBAL OTP] Failed to send email:`, errorMsg);
-      otpStore.delete(email);
+      otpStore.delete(normalizedEmail);
       
       return NextResponse.json(
         { error: `Failed to send OTP: ${errorMsg}` },

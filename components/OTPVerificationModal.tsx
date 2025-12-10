@@ -27,18 +27,21 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
     setOtpError('');
 
     try {
+      // Normalize email for all operations
+      const normalizedEmail = userEmail.toLowerCase().trim();
+
       // First, check if email is already verified
       const checkResponse = await fetch('/api/free-tools/auth/check-verified', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail }),
+        body: JSON.stringify({ email: normalizedEmail }),
       });
 
       const checkData = await checkResponse.json();
 
       if (checkData.verified) {
         // Email is already verified - grant access directly
-        setVerifiedEmail(userEmail);
+        setVerifiedEmail(normalizedEmail);
         setUserEmail('');
         setOtp('');
         setOtpStep('email');
@@ -50,7 +53,7 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
       const response = await fetch('/api/free-tools/auth/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail }),
+        body: JSON.stringify({ email: normalizedEmail }),
       });
 
       const data = await response.json();
@@ -77,16 +80,18 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
     setOtpError('');
 
     try {
+      const normalizedEmail = userEmail.toLowerCase().trim();
+      
       const response = await fetch('/api/free-tools/auth/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: userEmail, otp }),
+        body: JSON.stringify({ email: normalizedEmail, otp }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setVerifiedEmail(userEmail);
+        setVerifiedEmail(normalizedEmail);
         setUserEmail('');
         setOtp('');
         setOtpStep('email');

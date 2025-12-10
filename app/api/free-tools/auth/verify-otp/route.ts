@@ -13,9 +13,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log(`📧 [GLOBAL VERIFY] Checking OTP for ${email}`);
+    // Normalize email to lowercase for consistency
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log(`📧 [GLOBAL VERIFY] Checking OTP for ${normalizedEmail}`);
 
-    const storedData = otpStore.get(email);
+    const storedData = otpStore.get(normalizedEmail);
 
     if (!storedData) {
       return NextResponse.json(
@@ -26,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     const now = Date.now();
     if (now > storedData.expires) {
-      otpStore.delete(email);
+      otpStore.delete(normalizedEmail);
       return NextResponse.json(
         { error: 'OTP has expired. Please request a new one.' },
         { status: 400 }
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
     const storedOtp = String(storedData.otp).trim();
 
     if (storedOtp !== receivedOtp) {
-      console.log(`❌ [GLOBAL VERIFY] Invalid OTP for ${email}`);
+      console.log(`❌ [GLOBAL VERIFY] Invalid OTP for ${normalizedEmail}`);
       return NextResponse.json(
         { error: 'Invalid OTP. Please try again.' },
         { status: 400 }
@@ -45,18 +47,18 @@ export async function POST(req: NextRequest) {
     }
 
     // OTP is valid
-    otpStore.delete(email);
+    otpStore.delete(normalizedEmail);
 
     // Save verified email to file
-    const saved = addVerifiedEmail(email);
+    const saved = addVerifiedEmail(normalizedEmail);
     if (!saved) {
-      console.warn(`⚠️ Failed to save verified email: ${email}`);
+      console.warn(`⚠️ Failed to save verified email: ${normalizedEmail}`);
     }
 
-    console.log(`✅ [GLOBAL VERIFY] Email verified: ${email}`);
+    console.log(`✅ [GLOBAL VERIFY] Email verified: ${normalizedEmail}`);
 
     return NextResponse.json(
-      { success: true, message: 'Email verified successfully', email },
+      { success: true, message: 'Email verified successfully', email: normalizedEmail },
       { status: 200 }
     );
   } catch (error) {
