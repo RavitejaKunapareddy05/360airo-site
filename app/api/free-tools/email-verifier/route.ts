@@ -100,7 +100,6 @@ export async function POST(request: NextRequest) {
 
     // Process emails in parallel with concurrency limit
     const CONCURRENCY_LIMIT = 5;
-    const results: any[] = [];
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
@@ -144,25 +143,33 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Process with concurrency control
+    // Process all emails in parallel batches
     const encoder = new TextEncoder();
+    let resultCount = 0;
+    
     const stream = new ReadableStream({
       async start(controller) {
-        controller.enqueue(encoder.encode('[\n'));
-        
-        for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
-          const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
-          const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
+        try {
+          controller.enqueue(encoder.encode('[\n'));
           
-          for (const result of batchResults) {
-            const jsonStr = JSON.stringify(result);
-            controller.enqueue(encoder.encode((results.length > 0 ? ',' : '') + jsonStr + '\n'));
-            results.push(result);
+          for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
+            const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
+            const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
+            
+            for (const result of batchResults) {
+              if (resultCount > 0) {
+                controller.enqueue(encoder.encode(',\n'));
+              }
+              controller.enqueue(encoder.encode(JSON.stringify(result)));
+              resultCount++;
+            }
           }
+          
+          controller.enqueue(encoder.encode('\n]'));
+          controller.close();
+        } catch (error) {
+          controller.error(error);
         }
-        
-        controller.enqueue(encoder.encode(']'));
-        controller.close();
       }
     });
 
