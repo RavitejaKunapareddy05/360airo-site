@@ -39,6 +39,8 @@ export async function POST(req: NextRequest) {
     const receivedOtp = String(otp).trim();
     const storedOtp = String(storedData.otp).trim();
 
+    console.log(`📧 [GLOBAL VERIFY] Comparing OTPs - Received: "${receivedOtp}" vs Stored: "${storedOtp}"`);
+
     if (storedOtp !== receivedOtp) {
       console.log(`❌ [GLOBAL VERIFY] Invalid OTP for ${normalizedEmail}`);
       return NextResponse.json(
