@@ -4,7 +4,6 @@ import { ToolAuthProvider } from '@/app/contexts/ToolAuthContext';
 import { ToolUserSidebar } from '@/components/ToolUserSidebar';
 import { OTPVerificationModal } from '@/components/OTPVerificationModal';
 import { useToolAuth } from '@/app/contexts/ToolAuthContext';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -15,19 +14,9 @@ function FreeToolsLayoutContent({
 }) {
   const { isVerified, isHydrated } = useToolAuth();
   const pathname = usePathname();
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   // Check if current path is the main /free-tools page
   const isMainPage = pathname === '/free-tools' || pathname === '/free-tools/';
-
-  useEffect(() => {
-    // Only show modal after hydration is complete and user is not verified
-    if (isHydrated && !isVerified) {
-      setShowLoginModal(true);
-    } else {
-      setShowLoginModal(false);
-    }
-  }, [isVerified, isHydrated]);
 
   // Don't render until hydration is complete
   if (!isHydrated) {
