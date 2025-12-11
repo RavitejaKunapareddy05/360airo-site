@@ -34,7 +34,17 @@ import {
   Mic,
   Volume2,
   Play,
-  Pause
+  Pause,
+  Mail,
+  MessageCircle,
+  Workflow,
+  Cpu,
+  Crown,
+  Shield,
+  Calendar,
+  GitBranch,
+  Phone,
+  SparklesIcon
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -767,35 +777,35 @@ export default function AIContentGenerationPage() {
   return (
     <>
       <Head>
-        <title>AI Content Generation | 360Airo - Generate High-Converting Email Content</title>
+        <title>AI Email Generator — Write Better Emails in Seconds | 360Airo</title>
         <meta 
           name="description" 
-          content="360Airo's AI content generation tool creates personalized, high-converting email content instantly. Generate cold emails, follow-ups, and outreach sequences with AI." 
+          content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." 
         />
         <meta 
           name="keywords" 
-          content="AI content generation, email content generator, AI email writing, cold email templates, outreach content, 360Airo AI" 
+          content="AI email generator, email generator AI, best AI email generator, email writer AI, AI email writing, generate emails, email content generation, 360Airo AI" 
         />
         
-        {/* Canonical URL - This tells search engines this is the original page */}
-        <link rel="canonical" href="https://360airo.com/app/features/ai-content-generation" />
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/ai-email-generator" />
         
-        {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="AI Content Generation | 360Airo - Generate High-Converting Email Content" />
-        <meta property="og:description" content="Generate personalized, high-impact email content instantly with 360Airo's AI content generation tool. Create cold emails, follow-ups, and outreach sequences." />
-        <meta property="og:url" content="https://360airo.com/app/features/ai-content-generation" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
+        <meta property="og:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." />
+        <meta property="og:url" content="https://360airo.com/features/ai-email-generator" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-ai-content-generation.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-ai-email-generator.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Content Generation | 360Airo" />
-        <meta name="twitter:description" content="Generate personalized, high-converting email content instantly with 360Airo's AI content generation tool." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-ai-content-generation.jpg" />
+        <meta name="twitter:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
+        <meta name="twitter:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-generator.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -811,9 +821,9 @@ export default function AIContentGenerationPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo AI Content Generation",
-              "description": "360Airo's AI content generation tool creates personalized, high-converting email content instantly. Generate cold emails, follow-ups, and outreach sequences with AI.",
-              "url": "https://360airo.com/app/features/ai-pitch-generation",
+              "name": "360Airo AI Email Generator",
+              "description": "Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals.",
+              "url": "https://360airo.com/features/ai-email-generator",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -823,22 +833,32 @@ export default function AIContentGenerationPage() {
                 "url": "https://app.360airo.com/",
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/OnlineOnly"
-              }
+              },
+              "featureList": [
+                "AI-powered email generation",
+                "Personalized message creation",
+                "Cold outreach optimization",
+                "Follow-up automation",
+                "LinkedIn message generation",
+                "A/B testing variations",
+                "Tone consistency",
+                "Grammar and readability correction"
+              ]
             })
           }}
         />
       </Head>
 
-      {/* Hidden link for SEO - helps search engines discover the URL */}
+      {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/app/features/ai-pitch-generation">360Airo AI Content Generation</a>
+        <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo AI Email Generator</a>
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
         <Navbar />
 
-        {/* HERO SECTION - Mobile optimized with content first */}
-        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* AI Email Generator Hero Section */}
+        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
               initial={{ opacity: 0 }}
@@ -893,9 +913,8 @@ export default function AIContentGenerationPage() {
             transition={{ duration: 0.8 }}
             className="max-w-7xl mx-auto relative z-10 w-full"
           >
-            {/* MOBILE: Content first, then animations */}
             <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
-              {/* LEFT CONTENT - Always first on mobile */}
+              {/* LEFT CONTENT - AI Email Generator Introduction */}
               <div className="space-y-6 lg:space-y-8 order-1">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -923,7 +942,7 @@ export default function AIContentGenerationPage() {
                       >
                         <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 text-[#A855F7]" />
                       </motion.div>
-                      <span>AI for Content Generation</span>
+                      <span>AI Email Generator — Write Better Emails in Seconds</span>
                     </span>
                   </div>
                 </motion.div>
@@ -941,7 +960,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.5, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Write Emails
+                      Craft Clear, Compelling,
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -949,7 +968,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.6, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      That Convert,
+                      and High-Performing
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, scale: 0.7 }}
@@ -957,7 +976,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-6xl"
                     >
-                      Effortlessly.
+                      Emails Instantly.
                     </motion.span>
                   </motion.h1>
 
@@ -982,17 +1001,10 @@ export default function AIContentGenerationPage() {
                   className="space-y-4 lg:space-y-5 max-w-xl"
                 >
                   <p className="text-base lg:text-lg text-white/90 leading-relaxed font-light">
-                    Generate Personalized, High-Impact Email Content{' '}
-                    <motion.span
-                      animate={{ color: ['#8B5CF6', '#A855F7', '#ffffff', '#8B5CF6'] }}
-                      transition={{ duration: 2.5, repeat: Infinity }}
-                      className="font-semibold"
-                    >
-                      Instantly
-                    </motion.span>
+                    360Airo's AI email generator helps you create polished, professional messages tailored to your prospects, your campaigns, and your goals. Whether you're drafting cold outreach, follow-ups, LinkedIn messages, or nurture flows, it delivers ready-to-send copy that boosts engagement and saves hours of manual writing.
                   </p>
                   <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                    Crafting engaging emails at scale can be time-consuming and inconsistent. 360Airo's AI content generation tool leverages intelligent automation to create personalized email copy, cold email sequences, and high-converting outreach content — all optimized for email deliverability and engagement.
+                    Build stronger outreach with messaging optimized for tone, clarity, and conversion — all from one intuitive workspace.
                   </p>
                 </motion.div>
 
@@ -1022,14 +1034,14 @@ export default function AIContentGenerationPage() {
                       size="lg" 
                       className="relative bg-transparent text-[#480056] w-full sm:w-auto px-6 py-4 lg:px-8 lg:py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl"
                     >
-                      <span>Start Generating AI-Powered Email Content</span>
+                      <span>Generate Better Emails Instantly →</span>
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>
                 </motion.div>
               </div>
 
-              {/* RIGHT - FLOATING AI EMAIL PREVIEW CARDS - Comes after content on mobile */}
+              {/* RIGHT - AI Email Generator Visual */}
               <motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 100, y: isMobile ? 30 : 0 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
@@ -1037,163 +1049,604 @@ export default function AIContentGenerationPage() {
                 className="relative flex items-center justify-center h-full order-2 mt-8 lg:mt-0 lg:order-2"
               >
                 <div className="relative w-full max-w-lg h-[500px] lg:h-[600px]">
-                  {/* Floating Email Preview Cards - Mobile optimized */}
-                  {heroEmailPreviews.map((email, index) => {
-                    const positions = isMobile ? [
-                      { top: '5%', left: '5%', rotate: -3 },
-                      { top: '10%', right: '5%', rotate: 4 },
-                      { bottom: '15%', left: '5%', rotate: -2 },
-                      { bottom: '10%', right: '5%', rotate: 3 }
-                    ] : [
-                      { top: '10%', left: '10%', rotate: -5 },
-                      { top: '15%', right: '5%', rotate: 8 },
-                      { bottom: '20%', left: '5%', rotate: -3 },
-                      { bottom: '15%', right: '10%', rotate: 6 }
-                    ];
+                  {/* AI Email Generator Demo Card */}
+                  <GlowCard className="cursor-pointer rounded-2xl w-full h-full">
+                    <div className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-xl rounded-2xl border border-white/20 p-6 lg:p-8 shadow-2xl h-full">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center space-x-3">
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                            className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#A855F7] rounded-xl flex items-center justify-center"
+                          >
+                            <Brain className="h-6 w-6 text-white" />
+                          </motion.div>
+                          <div>
+                            <h3 className="text-xl font-bold text-white">AI Email Generator</h3>
+                            <p className="text-sm text-white/60">Creating personalized emails</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                          <span className="text-xs text-green-400">Active</span>
+                        </div>
+                      </div>
 
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.8, rotate: positions[index].rotate }}
-                        animate={{ opacity: 1, scale: 1, rotate: positions[index].rotate }}
-                        transition={{ delay: email.delay, duration: 0.6, type: 'spring' }}
-                        className="absolute z-20"
-                        style={positions[index]}
-                        whileHover={{ 
-                          scale: isMobile ? 1.02 : 1.05, 
-                          rotate: 0, 
-                          zIndex: 30,
-                          transition: { duration: 0.2 }
-                        }}
-                      >
-                        <GlowCard className="cursor-pointer rounded-lg lg:rounded-xl">
-                          <div className="bg-gradient-to-br from-white/15 via-white/10 to-white/5 backdrop-blur-xl rounded-lg lg:rounded-xl border border-white/20 p-3 lg:p-4 shadow-2xl min-w-[200px] lg:min-w-[240px] max-w-[220px] lg:max-w-[280px]">
-                            <div className="flex items-center justify-between mb-2 lg:mb-3">
-                              <div className="flex items-center space-x-1 lg:space-x-2">
-                                <motion.div
-                                  animate={{ scale: [1, 1.1, 1] }}
-                                  transition={{ duration: 1.5, repeat: Infinity, delay: index * 0.4 }}
-                                  className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-[#A855F7] rounded-full"
-                                />
-                                <span className="text-xs font-semibold text-[#A855F7]">AI Generated</span>
-                              </div>
-                              <div className={`text-xs px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-full font-medium ${
-                                email.status === 'completed' 
-                                  ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                                  : email.status === 'generating'
-                                  ? 'bg-[#A855F7]/20 text-[#A855F7] border border-[#A855F7]/30'
-                                  : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-                              }`}>
-                                {email.status === 'completed' ? '✓' : email.status === 'generating' ? '●' : '○'}
-                              </div>
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="bg-white/5 rounded-lg p-3">
+                            <div className="text-xs text-white/60 mb-1">Email Type</div>
+                            <div className="text-sm text-white font-medium">Cold Outreach</div>
+                          </div>
+                          <div className="bg-white/5 rounded-lg p-3">
+                            <div className="text-xs text-white/60 mb-1">Tone</div>
+                            <div className="text-sm text-white font-medium">Professional</div>
+                          </div>
+                        </div>
+
+                        <div className="bg-white/5 rounded-lg p-4">
+                          <div className="text-xs text-white/60 mb-2">Generated Email Preview</div>
+                          <div className="space-y-3">
+                            <div className="text-sm text-white font-semibold">Subject: Partnership opportunity with [Company]</div>
+                            <div className="text-sm text-white/80 leading-relaxed">
+                              Hi [Name], I've been following your work in the AI space and was impressed by your recent achievements. Our AI email generator can help streamline your outreach efforts...
                             </div>
-
-                            <div className="mb-1 lg:mb-2">
-                              <div className="text-xs font-medium text-[#C084FC] bg-[#C084FC]/10 px-1.5 py-0.5 lg:px-2 lg:py-1 rounded-full inline-block">
-                                {email.type}
+                            <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                              <div className="text-xs text-white/60">Personalization: 94%</div>
+                              <div className="flex items-center space-x-2">
+                                <ThumbsUp className="h-4 w-4 text-green-400" />
+                                <span className="text-xs text-green-400">Ready to send</span>
                               </div>
-                            </div>
-
-                            <div className="space-y-1 lg:space-y-2">
-                              <div className="text-sm font-bold text-white leading-tight line-clamp-2">
-                                {email.subject}
-                              </div>
-                              <div className="text-xs text-white/70 leading-relaxed line-clamp-3">
-                                {email.preview}
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-2 lg:mt-3 pt-2 border-t border-white/10">
-                              <div className="flex items-center space-x-1 lg:space-x-2">
-                                <motion.div
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.9 }}
-                                  className="cursor-pointer"
-                                >
-                                  <Copy className="h-3 w-3 text-white/50 hover:text-white/70 transition-colors" />
-                                </motion.div>
-                                <motion.div
-                                  whileHover={{ scale: 1.05 }}
-                                  whileTap={{ scale: 0.9 }}
-                                  className="cursor-pointer"
-                                >
-                                  <Edit3 className="h-3 w-3 text-white/50 hover:text-white/70 transition-colors" />
-                                </motion.div>
-                              </div>
-                              <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="cursor-pointer"
-                              >
-                                <ThumbsUp className="h-3 w-3 text-white/50 hover:text-white/70 transition-colors" />
-                              </motion.div>
                             </div>
                           </div>
-                        </GlowCard>
-                      </motion.div>
-                    );
-                  })}
+                        </div>
 
-                  {/* Connection Lines - Mobile simplified */}
-                  {!isMobile && heroEmailPreviews.map((_, index) => (
-                    <motion.div
-                      key={`line-${index}`}
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: 0.3 }}
-                      transition={{ delay: 1.5 + index * 0.15, duration: 0.8 }}
-                      className="absolute inset-0 pointer-events-none"
-                    >
-                      <svg className="w-full h-full">
-                        <motion.path
-                          d={`M ${250} ${300} Q ${150 + index * 50} ${200 + index * 30} ${100 + index * 60} ${150 + index * 80}`}
-                          stroke="rgba(139,92,246,0.3)"
-                          strokeWidth="1"
-                          fill="none"
-                          strokeDasharray="5,5"
-                          animate={{
-                            strokeDashoffset: [0, -10],
-                          }}
-                          transition={{
-                            duration: 1.5,
-                            repeat: Infinity,
-                            ease: 'linear',
-                            delay: index * 0.4
-                          }}
-                        />
-                      </svg>
-                    </motion.div>
-                  ))}
-
-                  {/* Floating AI Particles - Mobile reduced */}
-                  {[...Array(isMobile ? 3 : 6)].map((_, i) => (
-                    <motion.div
-                      key={`ai-particle-${i}`}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{
-                        opacity: [0, 0.6, 0],
-                        scale: [0, 1, 0],
-                        x: [0, Math.cos(i * 60 * Math.PI / 180) * (isMobile ? 50 : 100)],
-                        y: [0, Math.sin(i * 60 * Math.PI / 180) * (isMobile ? 50 : 100)],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: 'easeOut'
-                      }}
-                      className="absolute w-1 h-1 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full blur-sm"
-                      style={{
-                        left: '50%',
-                        top: '50%',
-                        transform: 'translate(-50%, -50%)'
-                      }}
-                    />
-                  ))}
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                          <div className="bg-[#8B5CF6]/10 rounded-lg p-2">
+                            <div className="text-xs text-white/60">Time Saved</div>
+                            <div className="text-sm font-bold text-white">90%</div>
+                          </div>
+                          <div className="bg-[#A855F7]/10 rounded-lg p-2">
+                            <div className="text-xs text-white/60">Engagement</div>
+                            <div className="text-sm font-bold text-white">3x Higher</div>
+                          </div>
+                          <div className="bg-[#C084FC]/10 rounded-lg p-2">
+                            <div className="text-xs text-white/60">Quality</div>
+                            <div className="text-sm font-bold text-white">94/100</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </GlowCard>
                 </div>
               </motion.div>
             </div>
           </motion.div>
         </section>
+
+        {/* AI Email Generator Detailed Content Section */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+          <div className="max-w-6xl mx-auto">
+            {/* Generate Emails That Persuade */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 lg:mb-20"
+            >
+              <div className="space-y-4 lg:space-y-6 order-2 lg:order-1">
+                <motion.div
+                  className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <PenTool className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Generate Emails That Persuade
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  Writing outreach shouldn't slow you down. With 360Airo's email generator, you can create high-quality messages that feel personal, relevant, and aligned to each lead's context across your entire workflow.
+                </p>
+                
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-[#8B5CF6]/20 to-[#A855F7]/20 p-4 rounded-xl border border-[#8B5CF6]/30">
+                    <ul className="space-y-2 text-white/80 text-sm lg:text-base">
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Create first-touch cold emails with contextual relevance</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Write follow-ups that stay aligned to Email Sequences</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Craft LinkedIn messages that pair perfectly with LinkedIn Automation</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Generate variations for A/B testing campaigns</span>
+                      </li>
+                      <li className="flex items-start">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
+                        <span>Maintain tone consistency across your entire pipeline</span>
+                      </li>
+                    </ul>
+                    <p className="text-white font-medium text-sm lg:text-base mt-4">
+                      Your team sends better emails — faster — without compromising personalization or quality.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <GlowCard className="group cursor-pointer rounded-2xl order-1 lg:order-2" glowColor="rgba(139,92,246,0.4)">
+                <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#8B5CF6]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#8B5CF6]/50 group-hover:scale-105">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-white font-semibold text-lg">Email Generator Dashboard</div>
+                      <div className="text-white/60 text-sm">Real-time AI Generation</div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-white/5 p-4 rounded-lg">
+                        <div className="text-xs text-white/60 mb-2">Cold Emails</div>
+                        <div className="text-sm text-white font-semibold">Contextual Relevance</div>
+                        <div className="mt-2 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '94%' }}
+                            transition={{ duration: 1 }}
+                            className="h-full bg-[#8B5CF6] rounded-full"
+                          />
+                        </div>
+                      </div>
+                      <div className="bg-white/5 p-4 rounded-lg">
+                        <div className="text-xs text-white/60 mb-2">Follow-ups</div>
+                        <div className="text-sm text-white font-semibold">Sequence Alignment</div>
+                        <div className="mt-2 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '88%' }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className="h-full bg-[#A855F7] rounded-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {['LinkedIn Messages', 'A/B Testing', 'Tone Consistency'].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className={`w-2 h-2 rounded-full ${
+                              i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-pink-400'
+                            }`} />
+                            <span className="text-white text-sm">{item}</span>
+                          </div>
+                          <div className="text-white/40 text-sm">✓ Integrated</div>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 p-4 rounded-lg border border-[#8B5CF6]/20">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <Brain className="h-4 w-4 text-[#8B5CF6]" />
+                        <span className="text-white font-semibold text-sm">AI Analysis Complete</span>
+                      </div>
+                      <div className="text-white/80 text-sm">
+                        Ready to generate persuasive emails that convert at scale
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </GlowCard>
+            </motion.div>
+
+            {/* Smarter Writing with Email Generator AI */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 lg:mb-20"
+            >
+              <div className="lg:order-2 space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#A855F7] to-[#C084FC] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Brain className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Smarter Writing with Email Generator AI
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  360Airo enhances your writing with advanced email generator AI capabilities that analyze tone, structure, and recipient behavior.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Refine Clarity</div>
+                    <div className="text-white/60 text-xs">Simplify complex messaging</div>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Adapt Tone</div>
+                    <div className="text-white/60 text-xs">For sales, support, or professional communication</div>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Strengthen Personalization</div>
+                    <div className="text-white/60 text-xs">Using lead activity insights</div>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Correct Grammar</div>
+                    <div className="text-white/60 text-xs">Structure and readability instantly</div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#C084FC]/10 p-4 rounded-xl border border-[#A855F7]/20">
+                  <p className="text-white/80 text-sm lg:text-base">
+                    Perfect for SDRs, marketers, customer success teams, and founders who need polished emails without endless editing.
+                  </p>
+                </div>
+              </div>
+
+              <GlowCard className="group cursor-pointer rounded-2xl lg:order-1" glowColor="rgba(168,85,247,0.4)">
+                <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#A855F7]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#A855F7]/50 group-hover:scale-105">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-white font-semibold text-lg">AI Writing Assistant</div>
+                      <div className="text-white/60 text-sm">Real-time Optimization</div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="bg-white/5 p-4 rounded-lg">
+                        <div className="text-xs text-white/60 mb-2">Original Text</div>
+                        <div className="text-sm text-white/60 line-through">
+                          "We can help you with your email marketing needs"
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-center">
+                        <motion.div
+                          animate={{ rotate: 180 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-8 h-8 bg-gradient-to-r from-[#A855F7] to-[#C084FC] rounded-full flex items-center justify-center"
+                        >
+                          <ArrowRight className="h-4 w-4 text-white" />
+                        </motion.div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#C084FC]/10 p-4 rounded-lg border border-[#A855F7]/20">
+                        <div className="text-xs text-[#A855F7] mb-2">AI-Enhanced Version</div>
+                        <div className="text-sm text-white font-semibold">
+                          "Our AI email generator can increase your outreach engagement by 85% while saving 90% on content creation time"
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="space-y-1">
+                        <div className="text-xs text-white/60">Clarity</div>
+                        <div className="text-sm font-bold text-green-400">+42%</div>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="text-xs text-white/60">Tone Match</div>
+                        <div className="text-sm font-bold text-[#A855F7]">94%</div>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="text-xs text-white/60">Readability</div>
+                        <div className="text-sm font-bold text-yellow-400">A+</div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </GlowCard>
+            </motion.div>
+
+            {/* Scale Outreach with the Best AI Email Generator Tools */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 lg:mb-20"
+            >
+              <div className="space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Zap className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Scale Outreach with the Best AI Email Generator Tools
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  Whether you're reaching cold leads, nurturing warm contacts, or delivering onboarding messages, the system helps you produce consistent, effective communication at scale. Ideal for organizations looking for the best AI email generator to streamline their daily workflow.
+                </p>
+                
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="flex items-start">
+                      <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/80 text-sm">Improve deliverability through cleaner messaging paired with Email Warmup</span>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/80 text-sm">Strengthen multi-step campaigns with refined copy</span>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/80 text-sm">Ensure messaging consistency across teams</span>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/80 text-sm">Generate unlimited variations for testing and optimization</span>
+                    </div>
+                  </div>
+                  <p className="text-white font-medium text-sm mt-3">
+                    Every email becomes a high-performing asset in your outbound strategy.
+                  </p>
+                </div>
+              </div>
+
+              <GlowCard className="group cursor-pointer rounded-2xl" glowColor="rgba(192,132,252,0.4)">
+                <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#C084FC]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#C084FC]/50 group-hover:scale-105">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-white font-semibold text-lg">Scale Dashboard</div>
+                      <div className="text-white/60 text-sm">Unlimited Generation</div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {[
+                        { label: 'Cold Leads', value: 245, color: 'from-[#C084FC] to-purple-500' },
+                        { label: 'Warm Contacts', value: 128, color: 'from-purple-500 to-pink-500' },
+                        { label: 'Onboarding', value: 67, color: 'from-pink-500 to-[#C084FC]' },
+                        { label: 'Re-engagement', value: 89, color: 'from-[#C084FC] to-blue-500' },
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="space-y-2"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-white text-sm">{item.label}</span>
+                            <span className="text-white/60 text-sm">{item.value} emails</span>
+                          </div>
+                          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${Math.min(100, (item.value / 300) * 100)}%` }}
+                              transition={{ duration: 1, delay: i * 0.2 }}
+                              className={`h-full bg-gradient-to-r ${item.color} rounded-full`}
+                            />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-[#C084FC]/10 to-purple-500/10 p-4 rounded-lg border border-[#C084FC]/20">
+                      <div className="text-center">
+                        <div className="text-white font-semibold text-sm mb-1">Scale Unlimited</div>
+                        <div className="text-white/60 text-xs">Generate thousands of personalized emails</div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </GlowCard>
+            </motion.div>
+
+            {/* Professional Messaging in Every Scenario */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+            >
+              <div className="lg:order-2 space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <FileText className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Professional Messaging in Every Scenario
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  From sales to support, prospecting to retention, the email writer AI engine creates messages that feel crafted by experts — not templates.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="bg-white/5 p-3 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Cold outreach and introductions</div>
+                    <div className="text-white/60 text-xs">First-contact professional messages</div>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Follow-up reminders and nudges</div>
+                    <div className="text-white/60 text-xs">Gentle persistence that converts</div>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Meeting confirmations and scheduling</div>
+                    <div className="text-white/60 text-xs">Professional coordination emails</div>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-lg border border-white/10">
+                    <div className="text-white font-medium text-sm mb-1">Proposal messages</div>
+                    <div className="text-white/60 text-xs">Deal progression and negotiation</div>
+                  </div>
+                  <div className="bg-white/5 p-3 rounded-lg border border-white/10 md:col-span-2">
+                    <div className="text-white font-medium text-sm mb-1">Re-engagement messages for inactive leads</div>
+                    <div className="text-white/60 text-xs">Revive dormant conversations professionally</div>
+                  </div>
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#7C3AED]/10 p-4 rounded-xl border border-[#8B5CF6]/20">
+                  <p className="text-white font-semibold text-center text-sm lg:text-base">
+                    Fast, polished, professional — every time.
+                  </p>
+                </div>
+              </div>
+
+              <GlowCard className="group cursor-pointer rounded-2xl lg:order-1" glowColor="rgba(123,92,246,0.4)">
+                <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#7C3AED]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#7C3AED]/50 group-hover:scale-105">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-white font-semibold text-lg">Scenario Templates</div>
+                      <div className="text-white/60 text-sm">Professional Use Cases</div>
+                    </div>
+                    
+                    <div className="space-y-3">
+                      {[
+                        { scenario: 'Cold Outreach', status: 'active', icon: '📧' },
+                        { scenario: 'Follow-up Sequence', status: 'active', icon: '🔄' },
+                        { scenario: 'Meeting Scheduling', status: 'active', icon: '📅' },
+                        { scenario: 'Proposal Delivery', status: 'active', icon: '📄' },
+                        { scenario: 'Re-engagement', status: 'active', icon: '⚡' },
+                        { scenario: 'Onboarding', status: 'active', icon: '🚀' },
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 }}
+                          className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors"
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className="text-lg">{item.icon}</div>
+                            <div>
+                              <div className="text-white text-sm font-semibold">{item.scenario}</div>
+                              <div className="text-white/60 text-xs">Professional template</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <span className="text-green-400 text-xs">{item.status}</span>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-[#7C3AED]/10 to-[#8B5CF6]/10 p-4 rounded-lg border border-[#7C3AED]/20">
+                      <div className="text-center">
+                        <div className="text-white font-semibold text-sm mb-1">Ready for Every Scenario</div>
+                        <div className="text-white/60 text-xs">Professional templates for all business needs</div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </GlowCard>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Teams Choose 360Airo's AI Email Generator */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8 }}
+          className="relative py-12 lg:py-20"
+        >
+          <div className="max-w-4xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-12 lg:mb-16">
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-[#8B5CF6] to-[#A855F7] rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-2xl shadow-[#8B5CF6]/25"
+              >
+                <Award className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+              </motion.div>
+              <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 lg:mb-6">
+                Why Teams Choose 360Airo's <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#A855F7]">AI Email Generator</span>
+              </h3>
+            </div>
+
+            <div className="space-y-6 lg:space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-4 lg:p-6 border border-white/10 text-center"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                  {[
+                    "Consistent messaging across every campaign",
+                    "High-quality, professional copy produced instantly",
+                    "Seamless connection to LinkedIn Automation and LinkedIn flows",
+                    "Enhanced deliverability and engagement",
+                    "Designed for teams that need quality communication at scale",
+                    "Save hours of manual writing every week"
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 + index * 0.1 }}
+                      className="flex items-start"
+                    >
+                      <div className="w-5 h-5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
+                        <CheckCircle2 className="h-3 w-3 text-white" />
+                      </div>
+                      <span className="text-white/80 text-sm text-left">{item}</span>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 p-4 rounded-xl border border-[#8B5CF6]/20">
+                  <p className="text-white font-semibold text-lg lg:text-xl">
+                    With 360Airo, your outreach becomes faster, clearer, and far more persuasive — without the manual writing burden.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, type: "spring" }}
+                className="flex justify-center"
+              >
+                <motion.div 
+                  whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+                  whileTap={{ scale: 0.95 }} 
+                  className="group relative overflow-hidden rounded-xl"
+                  onClick={handleCTAClick}
+                >
+                  <Button 
+                    size="lg" 
+                    className="relative bg-white text-[#480056] hover:bg-white/90 px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300"
+                  >
+                    Generate Better Emails Instantly →
+                    <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* AUTOMATED AI INTERFACE SHOWCASE SECTION - Mobile optimized */}
         <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
@@ -1229,7 +1682,7 @@ export default function AIContentGenerationPage() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <SectionDivider />
+                <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               </motion.div>
             </motion.div>
 
@@ -1254,7 +1707,7 @@ export default function AIContentGenerationPage() {
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 Our AI analyzes your audience, campaign goals, and past performance
               </h2>
-              <SectionDivider />
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <div className="text-left space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed">
                 <p>
                   Our AI analyzes your audience, campaign goals, and past performance to produce tailored messages that resonate. Whether it's subject lines, follow-ups, or drip sequences, 360Airo ensures every email is optimized for open rates, click-through rates, and responses.
@@ -1283,7 +1736,7 @@ export default function AIContentGenerationPage() {
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 Generate Multiple <span className="text-[#8B5CF6]">Content Types</span> Instantly
               </h2>
-              <SectionDivider />
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 From cold outreach to follow-up sequences, our AI generates the exact content you need for every stage of your email campaign.
               </p>
@@ -1338,7 +1791,7 @@ export default function AIContentGenerationPage() {
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 AI That Gets <span className="text-[#8B5CF6]">Smarter Over Time</span>
               </h2>
-              <SectionDivider />
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 360Airo doesn't just generate content — it helps improve it with analytics-backed recommendations and continuous learning.
               </p>
@@ -1398,7 +1851,7 @@ export default function AIContentGenerationPage() {
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 Transform Your Email <span className="text-[#8B5CF6]">Content Strategy</span>
               </h2>
-              <SectionDivider />
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 With AI-driven suggestions, your email content creation becomes faster, smarter, and more impactful, freeing your team to focus on strategy instead of drafting.
               </p>
@@ -1492,14 +1945,14 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Seamless Integration with Campaigns</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Ready to Transform Your Email Outreach?</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl md:text-5xl font-bold text-white">
-                Generated content is instantly ready to be deployed in your email outreach campaigns.
+                Generate Better Emails Instantly with AI
               </h2>
-              <SectionDivider variant="gradient" />
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6 lg:mb-8" style={{ maxWidth: '120px' }} />
               <p className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
-                Combined with email warmup and annual campaign planning, AI-generated copy ensures every email is relevant, professional, and delivers measurable results.
+                Start creating high-performing, personalized emails in seconds. Join thousands of teams using 360Airo's AI Email Generator to streamline their outreach and boost engagement.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
                 <motion.div 
@@ -1513,7 +1966,7 @@ export default function AIContentGenerationPage() {
                     size="lg" 
                     className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-[#480056] border-2 border-transparent group-hover:border-white/20"
                   >
-                    Start Generating AI-Powered Email Content
+                    Generate Better Emails Instantly →
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -1526,7 +1979,7 @@ export default function AIContentGenerationPage() {
                 transition={{ duration: 0.7 }}
                 style={{ maxWidth: '100px' }}
               />
-              <p className="text-white/80 text-xs lg:text-sm">✨ Transform your content creation with AI</p>
+              <p className="text-white/80 text-xs lg:text-sm">✨ Transform your email outreach with AI-powered generation</p>
             </motion.div>
           </motion.div>
         </section>
