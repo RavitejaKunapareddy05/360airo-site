@@ -76,17 +76,28 @@ export async function POST(req: NextRequest) {
     <meta name="viewport" content="width=600, initial-scale=1.0">
     <title>Email Verification Code</title>
     <style type="text/css">
-        body { background-color: #f5f5f5; margin: 0; padding: 0; }
-        table { border-collapse: collapse; }
+        * { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        body { margin: 0; padding: 0; background-color: #f5f5f5; min-width: 600px; }
+        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
         td { vertical-align: top; }
-        @media (max-width: 600px) {
-            table[width="600"] { width: 100% !important; }
-            td { width: 100% !important; }
+        
+        /* Force 600px width */
+        img { border: 0; display: block; }
+        
+        /* Disable mobile responsiveness */
+        @media only screen and (max-width: 480px) {
+            body { min-width: 600px !important; width: 600px !important; }
+            table { width: 600px !important; }
+        }
+        
+        @media only screen and (max-width: 600px) {
+            body { min-width: 600px !important; width: 600px !important; }
+            table { width: 600px !important; }
         }
     </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f5f5f5;">
-<table align="center" width="600" cellpadding="0" cellspacing="0" style="width: 600px; margin: 0 auto;">
+<body style="margin: 0 !important; padding: 0 !important; background-color: #f5f5f5 !important; width: 600px !important; max-width: 600px !important;">
+<table align="center" width="600" cellpadding="0" cellspacing="0" style="width: 600px !important; max-width: 600px !important; margin: 0 auto !important; min-width: 600px !important;">
     <tr>
         <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
             <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0;">360 Airo Free Tools</h1>
