@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=600, initial-scale=1.0">
     <title>Email Verification Code</title>
     <style type="text/css">
         body { background-color: #f5f5f5; margin: 0; padding: 0; }
