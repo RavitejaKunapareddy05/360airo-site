@@ -109,8 +109,8 @@ export async function POST(req: NextRequest) {
         <tbody>
             <tr>
                 <td align="center" style="margin: 0; padding: 0; width: 100%; vertical-align: top;">
-                    <div class="inner-wrapper" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; padding: 0;">
-                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 0; border-collapse: collapse;">
+                    <div class="inner-wrapper" style="display: block; width: 600px; max-width: 100%; margin: 0 auto; padding: 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="600" style="width: 600px !important; margin: 0 auto; padding: 0; border-collapse: collapse;">
                             <tbody>
                             <tr>
                                 <td class="header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; width: 100%;">
