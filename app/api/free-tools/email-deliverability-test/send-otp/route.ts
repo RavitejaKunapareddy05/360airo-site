@@ -156,46 +156,6 @@ export async function POST(req: NextRequest) {
 </body>
 </html>
         `,
-                    <tr>
-                        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
-                            <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">Email Deliverability Tester</h1>
-                            <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Content -->
-                    <tr>
-                        <td style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0; border-top: none;">
-                            <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
-                            <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
-                            
-                            <!-- OTP Box -->
-                            <table border="2" cellpadding="30" cellspacing="0" width="100%" style="border-color: #667eea; background-color: #f9f9f9; margin: 30px 0; border-collapse: collapse;">
-                                <tr>
-                                    <td style="text-align: center; padding: 30px 20px;">
-                                        <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0; font-family: 'Courier New', Monaco, monospace;">${otp}</div>
-                                        <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
-                                    </td>
-                                </tr>
-                            </table>
-                            
-                            <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">If you didn't request this code, please ignore this email.</p>
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style="background-color: white; border: 1px solid #e0e0e0; border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center;">
-                            <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
-        `,
         text: `Your verification code is: ${otp}\nValid for 10 minutes.`,
       });
 
