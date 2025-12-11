@@ -69,91 +69,51 @@ export async function POST(req: NextRequest) {
         subject: '🔐 360 Airo Free Tools - Your Verification Code',
         html: `
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Verification Code</title>
     <style type="text/css">
-        /* MSO Outlook fixes */
-        body, table, td, div, p, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
-        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
-        
-        /* Reset */
-        * { margin: 0; padding: 0; }
-        html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; min-height: auto !important; }
-        body { background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; font-size: 14px; }
-        
-        /* Container wrapping - critical for unified inbox */
-        .wrapper { display: block; width: 100%; margin: 0 auto; }
-        .inner-wrapper { display: block; max-width: 600px; margin: 0 auto; width: 100%; }
-        
-        /* Table resets */
-        table { width: 100% !important; border-collapse: collapse !important; }
-        td, tr { width: 100%; vertical-align: top; }
-        
-        /* Mobile responsive */
-        @media only screen and (max-width: 600px) {
-            .inner-wrapper { width: 100% !important; max-width: 100% !important; }
-            .header h1 { font-size: 22px !important; }
-            .content { padding: 20px 16px !important; }
-            .otp-code { font-size: 36px !important; letter-spacing: 8px !important; }
+        body { background-color: #f5f5f5; margin: 0; padding: 0; }
+        table { border-collapse: collapse; }
+        td { vertical-align: top; }
+        @media (max-width: 600px) {
+            table[width="600"] { width: 100% !important; }
+            td { width: 100% !important; }
         }
     </style>
 </head>
-<body style="margin: 0 !important; padding: 20px 0 !important; background-color: #f5f5f5 !important; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
-<div class="wrapper" style="display: block; width: 100%; margin: 0; padding: 0; background-color: #f5f5f5;">
-    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 100%; margin: 0; padding: 0; border-collapse: collapse; background-color: #f5f5f5;">
-        <tbody>
-            <tr>
-                <td align="center" style="margin: 0; padding: 0; width: 100%; vertical-align: top;">
-                    <div class="inner-wrapper" style="display: block; width: 600px; max-width: 100%; margin: 0 auto; padding: 0;">
-                        <table border="0" cellpadding="0" cellspacing="0" width="600" style="width: 600px !important; margin: 0 auto; padding: 0; border-collapse: collapse;">
-                            <tbody>
-                            <tr>
-                                <td class="header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; width: 100%;">
-                                    <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">360 Airo Free Tools</h1>
-                                    <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
-                                </td>
-                            </tr>
-                            
-                            <!-- Content -->
-                            <tr>
-                                <td class="content" style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0; border-top: none; width: 100%;">
-                                    <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
-                                    <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
-                                    
-                                    <!-- OTP Box -->
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea; border-collapse: collapse;">
-                                        <tr>
-                                            <td style="padding: 30px 20px; text-align: center; width: 100%;">
-                                                <div class="otp-code" style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0; font-family: 'Courier New', Monaco, monospace;">${otp}</div>
-                                                <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    
-                                    <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">Use this code to access all 360 Airo free tools and unlock powerful email management features.</p>
-                                </td>
-                            </tr>
-                            
-                            <!-- Footer -->
-                            <tr>
-                                <td style="background-color: white; border: 1px solid #e0e0e0; border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; width: 100%;">
-                                    <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
-                                    <p style="color: #bbb; font-size: 11px; margin: 12px 0 0 0; line-height: 1.4;">If you didn't request this code, please ignore this email.</p>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5;">
+<table align="center" width="600" cellpadding="0" cellspacing="0" style="width: 600px; margin: 0 auto;">
+    <tr>
+        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
+            <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0;">360 Airo Free Tools</h1>
+            <p style="color: white; font-size: 16px; margin: 0;">Email Verification Code</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0;">
+            <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0;">Verify Your Email</h2>
+            <p style="font-size: 15px; color: #666; margin: 0 0 24px 0;">Your verification code is valid for 10 minutes.</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea;">
+                <tr>
+                    <td style="padding: 30px; text-align: center;">
+                        <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; margin: 0 0 16px 0;">${otp}</div>
+                        <div style="color: #999; font-size: 13px;">⏱️ Valid for 10 minutes</div>
+                    </td>
+                </tr>
+            </table>
+            <p style="font-size: 15px; color: #666; margin: 30px 0 0 0; text-align: center;">Use this code to access all 360 Airo free tools.</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: white; border: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; font-size: 12px; color: #999;">
+            <p style="margin: 0;">© 2024 360 Airo. All rights reserved.</p>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
         `,
