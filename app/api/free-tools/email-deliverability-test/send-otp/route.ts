@@ -79,73 +79,120 @@ export async function POST(req: NextRequest) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Email Verification Code</title>
-    <!--[if !mso]><!-->
     <style>
-        html, body { margin: 0; padding: 0; }
-        table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, table, td, div, p, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
         img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
-        body { -webkit-font-smoothing: antialiased; width: 100%; background-color: #f5f5f5; }
-        .ExternalClass { width: 100%; }
-        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; }
+        body { background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; }
         
-        /* Media Query for Mobile */
-        @media only screen and (max-width: 599px) {
-            .wrapper { width: 100% !important; }
-            .content { width: 100% !important; }
-            .otp-code { font-size: 36px !important; letter-spacing: 6px !important; }
-            table { width: 100% !important; }
-            td { width: 100% !important; }
+        /* Dynamic scaling */
+        .wrapper { width: 100%; max-width: 100%; }
+        .inner-wrapper { width: 100%; max-width: 600px; margin: 0 auto; }
+        
+        /* Ensure content spans full width of container */
+        table { width: 100%; }
+        td { vertical-align: top; }
+        
+        /* Responsive design */
+        @media only screen and (max-width: 600px) {
+            .inner-wrapper { width: 100% !important; max-width: 100% !important; }
+            table[width="600"] { width: 100% !important; }
+            td, tr { width: 100% !important; }
+            .header h1 { font-size: 24px !important; }
+            .content { padding: 24px 20px !important; }
+            .otp-code { font-size: 36px !important; letter-spacing: 8px !important; }
         }
     </style>
-    <!--<![endif]-->
 </head>
-<body style="margin:0; padding:20px 0; background-color:#f5f5f5; -webkit-font-smoothing: antialiased;">
-    <center>
-        <table class="wrapper" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 600px; margin: 0 auto; background-color: #f5f5f5;">
+<body style="margin: 0; padding: 20px 0; background-color: #f5f5f5; width: 100%;">
+    <div class="wrapper" style="width: 100%; background-color: #f5f5f5;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #f5f5f5; margin: 0;">
             <tr>
-                <td style="padding: 0;">
-                    <!-- Header -->
-                    <table cellpadding="0" cellspacing="0" border="0" width="600" style="width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-collapse: collapse;">
-                        <tr>
-                            <td style="padding: 40px 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
-                                <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">Email Deliverability Tester</h1>
-                                <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <!-- Content -->
-                    <table cellpadding="0" cellspacing="0" border="0" width="600" style="width: 600px; margin: 0 auto; background-color: white; border: 1px solid #e0e0e0; border-top: none; border-collapse: collapse;">
-                        <tr>
-                            <td style="padding: 40px 30px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
-                                <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
-                                <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
-                                
-                                <!-- OTP Box -->
-                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea; border-radius: 8px; border-collapse: collapse;">
-                                    <tr>
-                                        <td style="padding: 30px 20px; text-align: center; font-family: 'Courier New', Monaco, monospace;">
-                                            <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0;">${otp}</div>
-                                            <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                
-                                <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">If you didn't request this code, please ignore this email.</p>
-                            </td>
-                        </tr>
-                        
-                        <!-- Footer -->
-                        <tr>
-                            <td style="border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
-                                <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
-                            </td>
-                        </tr>
-                    </table>
+                <td align="center" style="padding: 0;">
+                    <div class="inner-wrapper" style="width: 100%; max-width: 600px; margin: 0 auto;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0;">
+                            <!-- Header -->
+                            <tr>
+                                <td class="header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; width: 100%;">
+                                    <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">Email Deliverability Tester</h1>
+                                    <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
+                                </td>
+                            </tr>
+                            
+                            <!-- Content -->
+                            <tr>
+                                <td class="content" style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0; border-top: none; width: 100%;">
+                                    <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
+                                    <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
+                                    
+                                    <!-- OTP Box -->
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea; border-collapse: collapse;">
+                                        <tr>
+                                            <td style="padding: 30px 20px; text-align: center; width: 100%;">
+                                                <div class="otp-code" style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0; font-family: 'Courier New', Monaco, monospace;">${otp}</div>
+                                                <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">If you didn't request this code, please ignore this email.</p>
+                                </td>
+                            </tr>
+                            
+                            <!-- Footer -->
+                            <tr>
+                                <td style="background-color: white; border: 1px solid #e0e0e0; border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; width: 100%;">
+                                    <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </td>
             </tr>
         </table>
-    </center>
+    </div>
+</body>
+</html>
+        `,
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
+                            <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">Email Deliverability Tester</h1>
+                            <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0; border-top: none;">
+                            <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
+                            <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
+                            
+                            <!-- OTP Box -->
+                            <table border="2" cellpadding="30" cellspacing="0" width="100%" style="border-color: #667eea; background-color: #f9f9f9; margin: 30px 0; border-collapse: collapse;">
+                                <tr>
+                                    <td style="text-align: center; padding: 30px 20px;">
+                                        <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0; font-family: 'Courier New', Monaco, monospace;">${otp}</div>
+                                        <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">If you didn't request this code, please ignore this email.</p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: white; border: 1px solid #e0e0e0; border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center;">
+                            <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
         `,
