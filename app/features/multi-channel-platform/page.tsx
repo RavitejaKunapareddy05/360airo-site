@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Head from 'next/head';
 
 import {
   Zap,
@@ -100,7 +101,7 @@ const ChannelNetwork = () => {
           animate={{
             scale: activeChannel === index ? [1, 1.2, 1] : 1,
           }}
-          whileHover={{ scale: 1.3 }}
+          // whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.4 }}
           onClick={() => setActiveChannel(index)}
@@ -111,7 +112,7 @@ const ChannelNetwork = () => {
               background: channel.color,
               borderColor: channel.color,
             }}
-            whileHover={{ scale: 1.05 }}
+            // whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
             <channel.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8 text-white" />
@@ -148,7 +149,7 @@ const ChannelNetwork = () => {
       ))}
 
       {/* Central Hub */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         animate={{
           scale: [1, 1.05, 1],
@@ -159,8 +160,8 @@ const ChannelNetwork = () => {
       >
         <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
           <Network className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-white" />
-        </div>
-      </motion.div>
+        </div>"/;lo"
+      </motion.div> */}
     </div>
   );
 };
@@ -508,416 +509,491 @@ export default function MultiChannelPage() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
-      {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/multi-channel-platform" />
-      
-      <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Animated Channel Waves */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full border-2"
-              style={{
-                borderColor: i % 2 === 0 ? COLORS.purpleLight : COLORS.purpleDark,
-                width: `${80 + i * 80}px`,
-                height: `${80 + i * 80}px`,
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.1, 0.2, 0.1],
-              }}
-              transition={{
-                duration: 3 + i,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: i * 0.4,
-              }}
-            />
-          ))}
-        </div>
+    <>
+      <Head>
+        <title>Amplify Engagement with a Powerful Multi-Channel Platform</title>
+        <meta 
+          name="description" 
+          content="360Airo's simplified multi-channel platform lets you manage emails, LinkedIn, & other outreach channels effortlessly - all from one intelligent, unified dashboard." 
+        />
+        <meta 
+          name="keywords" 
+          content="multi-channel platform, email outreach, LinkedIn automation, social media outreach, unified dashboard, cross-channel marketing, 360Airo multi-channel" 
+        />
         
-        <motion.div 
-          className="max-w-7xl mx-auto w-full relative z-10"
-          style={{
-            scale: headerScale,
-            opacity: headerOpacity
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/multi-channel-platform" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Amplify Engagement with a Powerful Multi-Channel Platform" />
+        <meta property="og:description" content="360Airo’s simplified multi-channel platform lets you manage emails, LinkedIn, & other outreach channels effortlessly - all from one intelligent, unified dashboard." />
+        <meta property="og:url" content="https://360airo.com/features/multi-channel-platform" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-multi-channel-platform.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Amplify Engagement with a Powerful Multi-Channel Platform" />
+        <meta name="twitter:description" content="360Airo's simplified multi-channel platform lets you manage emails, LinkedIn, & other outreach channels effortlessly from one unified dashboard." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-multi-channel-platform.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#b45ecf" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Multi-Channel Platform",
+              "description": "360Airo's simplified multi-channel platform lets you manage emails, LinkedIn, & other outreach channels effortlessly - all from one intelligent, unified dashboard.",
+              "url": "https://360airo.com/features/multi-channel-platform",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              },
+              "featureList": [
+                "Unified multi-channel dashboard",
+                "Email outreach management",
+                "LinkedIn automation",
+                "Social media outreach",
+                "Cross-channel analytics",
+                "AI-powered personalization"
+              ]
+            })
           }}
-        >
-          <div className="text-center max-w-4xl mx-auto py-12 sm:py-16 lg:py-20">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6 sm:space-y-8"
-            >
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="inline-block"
-              >
-                <div 
-                  className="px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-xl border-2 backdrop-blur-sm"
-                  style={{ 
-                    background: COLORS.purpleLight,
-                    borderColor: COLORS.purpleLight
-                  }}
-                >
-                  <span className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center">
-                    <Layers className="h-3 w-3 sm:h-4 w-4 mr-2" />
-                    Multi-Channel Platform
-                  </span>
-                </div>
-              </motion.div>
+        />
+      </Head>
 
-              {/* Main Heading */}
-              <motion.h1
+      {/* Hidden link for SEO */}
+      <div className="hidden">
+        <a rel="canonical" href="https://360airo.com/features/multi-channel-platform">360Airo Multi-Channel Platform</a>
+      </div>
+
+      <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
+        <Navbar />
+
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Animated Channel Waves */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute rounded-full border-2"
+                style={{
+                  borderColor: i % 2 === 0 ? COLORS.purpleLight : COLORS.purpleDark,
+                  width: `${80 + i * 80}px`,
+                  height: `${80 + i * 80}px`,
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.1, 0.2, 0.1],
+                }}
+                transition={{
+                  duration: 3 + i,
+                  repeat: Number.POSITIVE_INFINITY,
+                  delay: i * 0.4,
+                }}
+              />
+            ))}
+          </div>
+          
+          <motion.div 
+            className="max-w-7xl mx-auto w-full relative z-10"
+            style={{
+              scale: headerScale,
+              opacity: headerOpacity
+            }}
+          >
+            <div className="text-center max-w-4xl mx-auto py-12 sm:py-16 lg:py-20">
+              <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight"
+                transition={{ duration: 0.8 }}
+                className="space-y-6 sm:space-y-8"
               >
-                <span className="block">Engage Smarter</span>
-                <motion.span
-                  style={{ color: COLORS.purpleLight }}
-                  animate={{
-                    textShadow: [
-                      `0 0 15px ${COLORS.purpleLight}`,
-                      `0 0 30px ${COLORS.purpleLight}`,
-                      `0 0 15px ${COLORS.purpleLight}`,
-                    ],
-                  }}
-                  transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-                  className="block"
-                >
-                  Across Every
-                </motion.span>
-                <span className="block">Channel</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-lg sm:text-xl lg:text-2xl text-white/80 font-light leading-relaxed"
-              >
-                Reach Your Audience Where They Are
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
-                className="space-y-3 sm:space-y-4 max-w-2xl mx-auto"
-              >
-                <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
-                  In today's fast-paced world, relying on a single channel isn't enough. 360Airo's multi-channel platform enables you to manage email, LinkedIn, and other outreach channels from a single, unified dashboard.
-                </p>
-                <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
-                  Engage prospects consistently, nurture leads across multiple touchpoints, and maximize your conversions — all without switching tools.
-                </p>
-                <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
-                  Whether it's cold email sequences, LinkedIn connection campaigns, or follow-up automation, our platform ensures every message is timely, relevant, and personalized.
-                </p>
-              </motion.div>
-
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6, duration: 0.5 }}
-                className="pt-4 sm:pt-6 lg:pt-8"
-              >
+                {/* Badge */}
                 <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="inline-block"
                 >
-                  <Button 
-                    size="lg" 
-                    className="px-6 py-3 sm:px-8 sm:py-4 lg:px-12 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
-                    style={{ background: COLORS.purpleLight }}
-                    onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                  <div 
+                    className="px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-xl border-2 backdrop-blur-sm"
+                    style={{ 
+                      background: COLORS.purpleLight,
+                      borderColor: COLORS.purpleLight
+                    }}
                   >
-                    <motion.span
-                      animate={{
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                      className="absolute inset-0 bg-white/20 rounded-xl"
-                    />
-                    <span className="relative z-10 flex items-center justify-center">
-                      <Globe className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6" />
-                      Experience Multi-Channel Outreach
-                      <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+                    <span className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center">
+                      <Layers className="h-3 w-3 sm:h-4 w-4 mr-2" />
+                      Multi-Channel Platform
                     </span>
-                  </Button>
+                  </div>
                 </motion.div>
+
+                {/* Main Heading */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight"
+                >
+                  <span className="block">Engage Smarter</span>
+                  <motion.span
+                    style={{ color: COLORS.purpleLight }}
+                    animate={{
+                      textShadow: [
+                        `0 0 15px ${COLORS.purpleLight}`,
+                        `0 0 30px ${COLORS.purpleLight}`,
+                        `0 0 15px ${COLORS.purpleLight}`,
+                      ],
+                    }}
+                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    className="block"
+                  >
+                    Across Every
+                  </motion.span>
+                  <span className="block">Channel</span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-lg sm:text-xl lg:text-2xl text-white/80 font-light leading-relaxed"
+                >
+                  Reach Your Audience Where They Are
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="space-y-3 sm:space-y-4 max-w-2xl mx-auto"
+                >
+                  <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
+                    In today's fast-paced world, relying on a single channel isn't enough. 360Airo's multi-channel platform enables you to manage email, LinkedIn, and other outreach channels from a single, unified dashboard.
+                  </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
+                    Engage prospects consistently, nurture leads across multiple touchpoints, and maximize your conversions — all without switching tools.
+                  </p>
+                  <p className="text-sm sm:text-base lg:text-lg text-white/70 leading-relaxed">
+                    Whether it's cold email sequences, LinkedIn connection campaigns, or follow-up automation, our platform ensures every message is timely, relevant, and personalized.
+                  </p>
+                </motion.div>
+
+                {/* CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                  className="pt-4 sm:pt-6 lg:pt-8"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <Button 
+                      size="lg" 
+                      className="px-6 py-3 sm:px-8 sm:py-4 lg:px-12 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
+                      style={{ background: COLORS.purpleLight }}
+                      onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                    >
+                      <motion.span
+                        animate={{
+                          scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Number.POSITIVE_INFINITY,
+                        }}
+                        className="absolute inset-0 bg-white/20 rounded-xl"
+                      />
+                      <span className="relative z-10 flex items-center justify-center">
+                        <Globe className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6" />
+                        Experience Multi-Channel Outreach
+                        <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </Button>
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Channel Network Visualization */}
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+              >
+                Unified Channel Network
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                Connect and manage all your outreach channels through a single, intelligent platform
+              </motion.p>
+            </motion.div>
+
+            <ChannelNetwork />
+          </div>
+        </section>
+
+        {/* Campaign Management Section */}
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 sm:mb-6"
+                style={{ color: COLORS.purpleLight }}
+              >
+                Unified Campaign Management
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                Stop juggling different tools and spreadsheets. 360Airo centralizes your multi-channel campaigns, giving you full visibility and control.
+              </motion.p>
+            </motion.div>
+
+            <CampaignManagement />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-8 sm:mt-12 text-center"
+            >
+              <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
+                With everything in one place, your team can focus on strategy and engagement instead of manual coordination.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* AI Personalization Section */}
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+              >
+                AI-Powered Cross-Channel Personalization
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                360Airo's AI engine personalizes each interaction based on recipient behavior and engagement patterns.
+              </motion.p>
+            </motion.div>
+
+            <AIPersonalization />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-8 sm:mt-12 text-center"
+            >
+              <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
+                This ensures every touchpoint feels human, relevant, and timely — even at scale.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Analytics Section */}
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 sm:mb-6"
+                style={{ color: COLORS.purpleDark }}
+              >
+                Track, Analyze, and Optimize Every Channel
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+              >
+                Gain actionable insights across your entire outreach strategy. 360Airo's multi-channel analytics provide comprehensive performance tracking.
+              </motion.p>
+            </motion.div>
+
+            <AnalyticsPreview />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-8 sm:mt-12 text-center"
+            >
+              <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
+                Continuous optimization helps you get the most out of every campaign, regardless of the channel.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+              >
+                Why 360Airo's Multi-Channel Platform Stands Out
+              </motion.h2>
+            </motion.div>
+
+            <PlatformBenefits />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mt-8 sm:mt-12 text-center"
+            >
+              <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
+                With 360Airo, your outreach is no longer fragmented. It's coordinated, intelligent, and effective — across every channel your audience engages with.
+              </p>
+            </motion.div>
+
+            {/* Final CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="pt-8 sm:pt-12 text-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Button 
+                  size="lg" 
+                  className="px-6 py-3 sm:px-10 sm:py-4 lg:px-12 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
+                  style={{ background: COLORS.purpleLight }}
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                >
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                    }}
+                    className="absolute inset-0 bg-white/30 rounded-xl"
+                  />
+                  <span className="relative z-10 flex items-center justify-center">
+                    <Radio className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6" />
+                    Experience Multi-Channel Outreach
+                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Button>
               </motion.div>
             </motion.div>
           </div>
-        </motion.div>
-      </section>
+        </section>
 
-      {/* Channel Network Visualization */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
-            >
-              Unified Channel Network
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              Connect and manage all your outreach channels through a single, intelligent platform
-            </motion.p>
-          </motion.div>
-
-          <ChannelNetwork />
-        </div>
-      </section>
-
-      {/* Campaign Management Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 sm:mb-6"
-              style={{ color: COLORS.purpleLight }}
-            >
-              Unified Campaign Management
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              Stop juggling different tools and spreadsheets. 360Airo centralizes your multi-channel campaigns, giving you full visibility and control.
-            </motion.p>
-          </motion.div>
-
-          <CampaignManagement />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 sm:mt-12 text-center"
-          >
-            <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-              With everything in one place, your team can focus on strategy and engagement instead of manual coordination.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* AI Personalization Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
-            >
-              AI-Powered Cross-Channel Personalization
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              360Airo's AI engine personalizes each interaction based on recipient behavior and engagement patterns.
-            </motion.p>
-          </motion.div>
-
-          <AIPersonalization />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 sm:mt-12 text-center"
-          >
-            <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-              This ensures every touchpoint feels human, relevant, and timely — even at scale.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Analytics Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 sm:mb-6"
-              style={{ color: COLORS.purpleDark }}
-            >
-              Track, Analyze, and Optimize Every Channel
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-            >
-              Gain actionable insights across your entire outreach strategy. 360Airo's multi-channel analytics provide comprehensive performance tracking.
-            </motion.p>
-          </motion.div>
-
-          <AnalyticsPreview />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 sm:mt-12 text-center"
-          >
-            <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-              Continuous optimization helps you get the most out of every campaign, regardless of the channel.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-8 sm:mb-12 lg:mb-16"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
-            >
-              Why 360Airo's Multi-Channel Platform Stands Out
-            </motion.h2>
-          </motion.div>
-
-          <PlatformBenefits />
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="mt-8 sm:mt-12 text-center"
-          >
-            <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto">
-              With 360Airo, your outreach is no longer fragmented. It's coordinated, intelligent, and effective — across every channel your audience engages with.
-            </p>
-          </motion.div>
-
-          {/* Final CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="pt-8 sm:pt-12 text-center"
-          >
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Button 
-                size="lg" 
-                className="px-6 py-3 sm:px-10 sm:py-4 lg:px-12 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
-                style={{ background: COLORS.purpleLight }}
-                onClick={() => window.open('https://app.360airo.com/', '_blank')}
-              >
-                <motion.span
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Number.POSITIVE_INFINITY,
-                  }}
-                  className="absolute inset-0 bg-white/30 rounded-xl"
-                />
-                <span className="relative z-10 flex items-center justify-center">
-                  <Radio className="mr-2 sm:mr-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6" />
-                  Experience Multi-Channel Outreach
-                  <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
