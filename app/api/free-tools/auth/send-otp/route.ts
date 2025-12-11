@@ -69,173 +69,80 @@ export async function POST(req: NextRequest) {
         subject: '🔐 360 Airo Free Tools - Your Verification Code',
         html: `
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=600px, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Email Verification Code</title>
-  <style type="text/css">
-    /* Reset Styles */
-    html, body { margin: 0 !important; padding: 0 !important; min-height: 100% !important; width: 100% !important; }
-    * { margin: 0; padding: 0; }
-    
-    /* Body and Base */
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; line-height: 1.6; color: #333; }
-    
-    /* Wrapper for fixed width */
-    .wrapper { width: 600px; max-width: 600px !important; margin: 0 auto; }
-    
-    /* Header Styles */
-    .header { 
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-      color: white; 
-      padding: 40px 20px; 
-      text-align: center; 
-      border-radius: 8px 8px 0 0;
-      width: 100% !important;
-      max-width: 600px !important;
-    }
-    .header h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px 0; color: white; letter-spacing: -0.5px; }
-    .header p { font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95; color: white; }
-    
-    /* Content Styles */
-    .content { 
-      background-color: #ffffff; 
-      padding: 40px 30px; 
-      border: 1px solid #e0e0e0;
-      border-top: none;
-      width: 100% !important;
-      max-width: 600px !important;
-    }
-    
-    .content h2 { 
-      font-size: 22px; 
-      color: #333; 
-      margin: 0 0 16px 0; 
-      font-weight: 600; 
-    }
-    
-    .content p { 
-      font-size: 15px; 
-      color: #666; 
-      margin: 0 0 24px 0; 
-      line-height: 1.6; 
-    }
-    
-    /* OTP Box */
-    .otp-box { 
-      background-color: #f9f9f9; 
-      padding: 30px; 
-      border-radius: 8px; 
-      margin: 30px 0; 
-      border: 2px solid #667eea; 
-      text-align: center;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
-    
-    .otp-code { 
-      font-size: 48px; 
-      font-weight: 700; 
-      color: #667eea; 
-      letter-spacing: 12px; 
-      font-family: 'Courier New', 'Monaco', 'monospace'; 
-      display: block; 
-      margin: 0 0 16px 0;
-      word-break: break-all;
-    }
-    
-    .timer { 
-      color: #999; 
-      font-size: 13px; 
-      font-weight: 500; 
-      margin: 0; 
-    }
-    
-    /* Footer Styles */
-    .footer { 
-      border-top: 1px solid #e0e0e0; 
-      padding-top: 24px; 
-      margin-top: 30px; 
-      text-align: center; 
-    }
-    
-    .footer p { 
-      color: #999; 
-      font-size: 12px; 
-      margin: 0; 
-      line-height: 1.4; 
-    }
-    
-    .footer-note { 
-      color: #bbb; 
-      font-size: 11px; 
-      margin-top: 12px; 
-      line-height: 1.4;
-    }
-    
-    /* Responsive Design - Mobile Only */
-    @media only screen and (max-width: 600px) {
-      .wrapper { width: 100% !important; max-width: 100% !important; }
-      .header { padding: 30px 20px !important; border-radius: 0 !important; }
-      .header h1 { font-size: 24px !important; }
-      .header p { font-size: 14px !important; }
-      .content { padding: 24px 20px !important; border-radius: 0 !important; }
-      .content h2 { font-size: 20px !important; }
-      .content p { font-size: 14px !important; }
-      .otp-box { padding: 24px 16px !important; margin: 24px 0 !important; }
-      .otp-code { font-size: 40px !important; letter-spacing: 8px !important; }
-      .timer { font-size: 12px !important; }
-      .footer { margin-top: 24px; padding-top: 16px; }
-    }
-    
-    @media only screen and (max-width: 480px) {
-      .content { padding: 20px 16px !important; }
-      .otp-code { font-size: 32px !important; letter-spacing: 4px !important; }
-      .otp-box { padding: 20px 12px !important; }
-    }
-  </style>
-</head>
-<body style="width: 100% !important; height: 100% !important; margin: 0; padding: 0; background-color: #f5f5f5;">
-  <!-- Wrapper for fixed width on desktop -->
-  <div style="margin: 0 auto; padding: 20px; background-color: #f5f5f5; width: 100%;">
-    <table role="presentation" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse;">
-      <tbody>
-        <!-- Header -->
-        <tr>
-          <td class="header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0; width: 100%;">
-            <h1 style="font-size: 28px; font-weight: 700; margin: 0 0 8px 0; color: white;">360 Airo Free Tools</h1>
-            <p style="font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95; color: white;">Email Verification Code</p>
-          </td>
-        </tr>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Verification Code</title>
+    <!--[if !mso]><!-->
+    <style>
+        html, body { margin: 0; padding: 0; }
+        table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
+        body { -webkit-font-smoothing: antialiased; width: 100%; background-color: #f5f5f5; }
+        .ExternalClass { width: 100%; }
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height: 100%; }
         
-        <!-- Content -->
-        <tr>
-          <td class="content" style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0; border-top: none;">
-            <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
-            <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
-            
-            <!-- OTP Box -->
-            <div style="background-color: #f9f9f9; padding: 30px; border-radius: 8px; margin: 30px 0; border: 2px solid #667eea; text-align: center;">
-              <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; font-family: 'Courier New', monospace; margin: 0 0 16px 0;">${otp}</div>
-              <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
-            </div>
-
-            <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">
-              Use this code to access all 360 Airo free tools and unlock powerful email management features.
-            </p>
-            
-            <!-- Footer -->
-            <div style="border-top: 1px solid #e0e0e0; padding-top: 24px; margin-top: 30px; text-align: center;">
-              <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
-              <p style="color: #bbb; font-size: 11px; margin-top: 12px; line-height: 1.4;">If you didn't request this code, please ignore this email.</p>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        /* Media Query for Mobile */
+        @media only screen and (max-width: 599px) {
+            .wrapper { width: 100% !important; }
+            .content { width: 100% !important; }
+            .otp-code { font-size: 36px !important; letter-spacing: 6px !important; }
+            table { width: 100% !important; }
+            td { width: 100% !important; }
+        }
+    </style>
+    <!--<![endif]-->
+</head>
+<body style="margin:0; padding:20px 0; background-color:#f5f5f5; -webkit-font-smoothing: antialiased;">
+    <center>
+        <table class="wrapper" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 600px; margin: 0 auto; background-color: #f5f5f5;">
+            <tr>
+                <td style="padding: 0;">
+                    <!-- Header -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="600" style="width: 600px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 40px 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
+                                <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">360 Airo Free Tools</h1>
+                                <p style="color: white; font-size: 16px; font-weight: 400; margin: 0; opacity: 0.95;">Email Verification Code</p>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Content -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="600" style="width: 600px; margin: 0 auto; background-color: white; border: 1px solid #e0e0e0; border-top: none; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 40px 30px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
+                                <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0; font-weight: 600;">Verify Your Email</h2>
+                                <p style="font-size: 15px; color: #666; margin: 0 0 24px 0; line-height: 1.6;">Your verification code is valid for 10 minutes.</p>
+                                
+                                <!-- OTP Box -->
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea; border-radius: 8px; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="padding: 30px 20px; text-align: center; font-family: 'Courier New', Monaco, monospace;">
+                                            <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; word-break: break-all; margin: 0 0 16px 0;">${otp}</div>
+                                            <div style="color: #999; font-size: 13px; font-weight: 500;">⏱️ Valid for 10 minutes</div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <p style="margin: 30px 0 0 0; color: #666; font-size: 15px; text-align: center; line-height: 1.6;">Use this code to access all 360 Airo free tools and unlock powerful email management features.</p>
+                            </td>
+                        </tr>
+                        
+                        <!-- Footer -->
+                        <tr>
+                            <td style="border-top: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;">
+                                <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
+                                <p style="color: #bbb; font-size: 11px; margin: 12px 0 0 0; line-height: 1.4;">If you didn't request this code, please ignore this email.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </center>
 </body>
 </html>
         `,
