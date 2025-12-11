@@ -79,41 +79,43 @@ export async function POST(req: NextRequest) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Email Verification Code</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <style type="text/css">
+        /* MSO Outlook fixes */
         body, table, td, div, p, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
         table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
         img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; }
-        html, body { margin: 0; padding: 0; width: 100%; height: 100%; }
-        body { background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; }
         
-        /* Dynamic scaling */
-        .wrapper { width: 100%; max-width: 100%; }
-        .inner-wrapper { width: 100%; max-width: 600px; margin: 0 auto; }
+        /* Reset */
+        * { margin: 0; padding: 0; }
+        html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; min-height: auto !important; }
+        body { background-color: #f5f5f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif; font-size: 14px; }
         
-        /* Ensure content spans full width of container */
-        table { width: 100%; }
-        td { vertical-align: top; }
+        /* Container wrapping - critical for unified inbox */
+        .wrapper { display: block; width: 100%; margin: 0 auto; }
+        .inner-wrapper { display: block; max-width: 600px; margin: 0 auto; width: 100%; }
         
-        /* Responsive design */
+        /* Table resets */
+        table { width: 100% !important; border-collapse: collapse !important; }
+        td, tr { width: 100%; vertical-align: top; }
+        
+        /* Mobile responsive */
         @media only screen and (max-width: 600px) {
             .inner-wrapper { width: 100% !important; max-width: 100% !important; }
-            table[width="600"] { width: 100% !important; }
-            td, tr { width: 100% !important; }
-            .header h1 { font-size: 24px !important; }
-            .content { padding: 24px 20px !important; }
+            .header h1 { font-size: 22px !important; }
+            .content { padding: 20px 16px !important; }
             .otp-code { font-size: 36px !important; letter-spacing: 8px !important; }
         }
     </style>
 </head>
-<body style="margin: 0; padding: 20px 0; background-color: #f5f5f5; width: 100%;">
-    <div class="wrapper" style="width: 100%; background-color: #f5f5f5;">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #f5f5f5; margin: 0;">
+<body style="margin: 0 !important; padding: 20px 0 !important; background-color: #f5f5f5 !important; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+<div class="wrapper" style="display: block; width: 100%; margin: 0; padding: 0; background-color: #f5f5f5;">
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 100%; margin: 0; padding: 0; border-collapse: collapse; background-color: #f5f5f5;">
+        <tbody>
             <tr>
-                <td align="center" style="padding: 0;">
-                    <div class="inner-wrapper" style="width: 100%; max-width: 600px; margin: 0 auto;">
-                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin: 0;">
-                            <!-- Header -->
+                <td align="center" style="margin: 0; padding: 0; width: 100%; vertical-align: top;">
+                    <div class="inner-wrapper" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; padding: 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 600px; margin: 0 auto; padding: 0; border-collapse: collapse;">
+                            <tbody>
                             <tr>
                                 <td class="header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; width: 100%;">
                                     <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0; letter-spacing: -0.5px;">Email Deliverability Tester</h1>
@@ -147,12 +149,14 @@ export async function POST(req: NextRequest) {
                                     <p style="color: #999; font-size: 12px; margin: 0; line-height: 1.4;">© 2024 360 Airo. All rights reserved.</p>
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
                     </div>
                 </td>
             </tr>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
         `,
