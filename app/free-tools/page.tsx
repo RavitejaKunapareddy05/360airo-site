@@ -347,7 +347,7 @@ export default function FreeToolsPage() {
       {/* Final CTA */}
       <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#480056]/20 via-[#19001d]/40 to-[#480056]/20" />
-        <div className="max-w-4xl mx-auto text-center relative z-10 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto text-left relative z-10 px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -361,7 +361,7 @@ export default function FreeToolsPage() {
             <p className="text-white/90 text-base lg:text-lg">
               Quick email verification required. Access all tools instantly with no credit card needed.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-start pt-2">
               <motion.div whileHover={{ scale: 1.05, y: -4 }} whileTap={{ scale: 0.96 }} className="group relative overflow-hidden rounded-xl">
                 <Button 
                   size="lg" 
@@ -373,7 +373,7 @@ export default function FreeToolsPage() {
                 </Button>
               </motion.div>
             </div>
-            <div className="flex flex-wrap justify-center gap-3 lg:gap-4 text-white/70 text-xs lg:text-sm">
+            <div className="flex flex-wrap justify-start gap-3 lg:gap-4 text-white/70 text-xs lg:text-sm">
               <div className="flex items-center">
                 <BadgeCheck className="h-3 w-3 lg:h-4 lg:w-4 text-[#b45ecf] mr-1 lg:mr-2" />
                 No credit card required

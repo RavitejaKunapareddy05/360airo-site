@@ -39,7 +39,7 @@ export function ToolUserSidebar() {
   const emailName = verifiedEmail.split('@')[0] || 'user';
 
   return (
-    <div className="fixed top-4 right-4 z-40 animate-in fade-in slide-in-from-top-2 duration-300">
+    <div className="fixed top-20 right-4 z-40 animate-in fade-in slide-in-from-top-2 duration-300">
       <div className="bg-gradient-to-br from-[#b45ecf]/20 to-[#d67bff]/15 backdrop-blur-lg rounded-xl shadow-xl border border-[#b45ecf]/40 p-3 min-w-[260px] group hover:border-[#b45ecf]/60 transition-all duration-300 hover:shadow-2xl">
         {/* Header */}
         <div className="flex items-center gap-3 mb-3">

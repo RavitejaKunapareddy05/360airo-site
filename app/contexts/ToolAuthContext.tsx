@@ -25,34 +25,9 @@ export function ToolAuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const checkVerification = async () => {
       if (typeof window !== 'undefined') {
-        // First, try to load from sessionStorage (current session)
-        const storedEmail = sessionStorage.getItem('toolVerifiedEmail');
+        // Only load API key, don't auto-verify email
+        // This ensures OTP modal always appears
         const storedApiKey = localStorage.getItem('toolApiKey');
-        
-        if (storedEmail) {
-          setVerifiedEmailState(storedEmail);
-        } else {
-          // If not in session storage, try to check if browser's saved email is verified on backend
-          // This helps when user closes browser and comes back
-          const savedEmail = localStorage.getItem('lastUsedEmail');
-          if (savedEmail) {
-            try {
-              const response = await fetch('/api/free-tools/auth/check-verified', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: savedEmail }),
-              });
-              
-              const data = await response.json();
-              if (data.verified) {
-                setVerifiedEmailState(savedEmail);
-                sessionStorage.setItem('toolVerifiedEmail', savedEmail);
-              }
-            } catch (error) {
-              console.error('Error checking verification status:', error);
-            }
-          }
-        }
         
         if (storedApiKey) {
           setApiKeyState(storedApiKey);

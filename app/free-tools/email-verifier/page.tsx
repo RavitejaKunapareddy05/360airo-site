@@ -212,16 +212,6 @@ export default function EmailVerifierPage() {
           </p>
         </motion.div>
 
-        {/* API Key Status Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8 bg-green-500/10 border border-green-500/30 rounded-xl p-4 flex items-center gap-3"
-        >
-          <div className="h-3 w-3 bg-green-500 rounded-full animate-pulse"></div>
-          <p className="text-green-400 font-semibold">✅ Email Verification Service Active - Powered by MailTester API</p>
-        </motion.div>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Input Section */}
           <motion.div

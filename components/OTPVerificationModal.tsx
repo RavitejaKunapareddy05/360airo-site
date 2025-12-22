@@ -40,12 +40,13 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
       const checkData = await checkResponse.json();
 
       if (checkData.verified) {
-        // Email is already verified - grant access directly
+        // Email is already verified - grant access directly without OTP
         console.log(`✅ Email already verified: ${normalizedEmail}`);
         setVerifiedEmail(normalizedEmail);
         setUserEmail('');
         setOtp('');
         setOtpStep('email');
+        setIsLoading(false);
         onClose?.();
         return;
       }
@@ -127,9 +128,9 @@ export function OTPVerificationModal({ isOpen, onClose }: OTPModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Transparent backdrop - no color */}
-      <div className="absolute inset-0" />
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Dark backdrop overlay */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       {/* Modal Container */}
       <div className="relative w-full max-w-xs">

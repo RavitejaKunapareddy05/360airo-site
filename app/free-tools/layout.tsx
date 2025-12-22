@@ -37,12 +37,12 @@ function FreeToolsLayoutContent({
         </div>
       )}
 
-      {/* Always show content in background - clear when not verified, interactive when verified */}
-      <div className={`${isVerified ? '' : 'pointer-events-none opacity-40'} transition-all duration-500`}>
+      {/* Content always visible */}
+      <div>
         {children}
       </div>
 
-      {/* Show login modal if not verified - overlays the content */}
+      {/* Show login modal if not verified - overlays on top with high z-index */}
       {!isVerified && <OTPVerificationModal isOpen={!isVerified} onClose={() => {}} />}
 
       {/* Show sidebar when verified */}
