@@ -27,7 +27,24 @@ import {
   TrendingUp,
   Lightbulb,
   Settings,
-  PlayCircle
+  PlayCircle,
+  Send,
+  GitMerge,
+  RefreshCw,
+  Bell,
+  Calendar,
+  PieChart,
+  Eye,
+  FileText,
+  Layers,
+  Cpu as CpuIcon,
+  Smartphone,
+  Monitor,
+  Server,
+  Database,
+  Cloud,
+  Wifi,
+  Activity
 } from 'lucide-react';
 
 // Color constants
@@ -428,8 +445,8 @@ const BenefitsGrid = () => {
   );
 };
 
-// Hero Section Component - Mobile optimized
-const HeroSection = () => {
+// AI Email Automation Hero Section
+const AIEmailAutomationHero = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -446,7 +463,6 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16 lg:pt-20 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Floating AI Elements - Reduced on mobile */}
         {[...Array(isMobile ? 4 : 8)].map((_, i) => (
           <motion.div
             key={i}
@@ -485,7 +501,7 @@ const HeroSection = () => {
           </motion.div>
         ))}
 
-        {/* Gradient Orbs - Smaller on mobile */}
+        {/* Gradient Orbs */}
         <motion.div
           animate={{
             x: [0, isMobile ? 20 : 40, 0],
@@ -534,7 +550,7 @@ const HeroSection = () => {
           <div className={`${isMobile ? 'w-4 h-4' : 'w-6 h-6'} bg-gradient-to-r from-[#ad60f8] to-[#3B82F6] rounded-full flex items-center justify-center`}>
             <Zap className={`${isMobile ? 'h-2 w-2' : 'h-3 w-3'} text-white`} />
           </div>
-          <span className={`text-white/80 font-medium ${isMobile ? 'text-xs' : 'text-sm'}`}>AI Automation Platform</span>
+          <span className={`text-white/80 font-medium ${isMobile ? 'text-xs' : 'text-sm'}`}>AI Email Automation Platform</span>
         </motion.div>
 
         {/* Main Heading */}
@@ -544,7 +560,7 @@ const HeroSection = () => {
           transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.1 }}
           className={`${isMobile ? 'text-2xl' : 'text-4xl md:text-6xl'} font-bold text-white mb-4 lg:mb-6`}
         >
-          AI Automation
+          AI Email Automation —
           <br />
           <span className="bg-gradient-to-r from-[#ad60f8] via-[#3B82F6] to-white bg-clip-text text-transparent">
             Work Smarter, Scale Faster
@@ -558,7 +574,7 @@ const HeroSection = () => {
           transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.3 }}
           className={`${isMobile ? 'text-base' : 'text-xl md:text-2xl'} text-[#ad60f8] font-semibold mb-6 lg:mb-8 leading-relaxed`}
         >
-          Let AI Handle the Repetitive So You Can Focus on Strategy
+          Let automation handle the repetitive work so you can focus on strategy
         </motion.h2>
 
         {/* Description */}
@@ -569,7 +585,7 @@ const HeroSection = () => {
             transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.5 }}
             className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/80 leading-relaxed`}
           >
-            Every successful campaign starts with smart automation — and 360Airo's AI automation platform makes that effortless. From content creation and lead nurturing to campaign tracking and optimization, our intelligent system automates what slows you down while enhancing what makes your outreach stand out.
+            Every successful campaign depends on consistent execution, and 360Airo's AI email automation engine makes that effortless. From message creation to lead nurturing, campaign routing, and performance tracking, our refined AI email automation platform streamlines what slows teams down while elevating the quality of every conversation.
           </motion.p>
 
           <motion.p
@@ -578,7 +594,7 @@ const HeroSection = () => {
             transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.7 }}
             className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/70 leading-relaxed`}
           >
-            Whether you're running cold email campaigns, LinkedIn outreach, or multi-channel marketing, 360Airo's AI ensures every task is executed faster, cleaner, and with precision.
+            Whether you're running cold campaigns, <a href="/features/linkedin-automation" className="text-[#3B82F6] hover:text-white transition-colors">LinkedIn Automation</a>, or <a href="/features/multi-channel-campaigns" className="text-[#ad60f8] hover:text-white transition-colors">Multi-Channel</a> outreach, your workflows become faster, cleaner, and more strategic.
           </motion.p>
         </div>
 
@@ -611,7 +627,7 @@ const HeroSection = () => {
                 }}
               />
               <span className="relative z-10 flex items-center text-sm lg:text-base">
-                Automate with Intelligence
+                Automate with Intelligence →
                 <motion.div
                   animate={{ x: [0, 3, 0] }}
                   transition={{ duration: isMobile ? 1.2 : 1.5, repeat: Infinity }}
@@ -633,7 +649,7 @@ const handleCTAClick = () => {
 };
 
 // Main Component - Mobile optimized
-export default function AIAutomationPage() {
+export default function AIEmailAutomationPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -655,77 +671,92 @@ export default function AIAutomationPage() {
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
 
-  const features = [
+  const intelligentWorkflowFeatures = [
+    "Automate campaign scheduling, follow-ups, and data syncing",
+    "Activate behavior-based triggers such as open, reply, or no response",
+    "Use insights from <a href='/features/email-sequences' class='text-[#ad60f8] hover:text-white transition-colors'>Email Sequences</a> to refine performance continuously",
+    "Run cross-channel workflows with <a href='/features/multi-channel-campaigns' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> automation",
+    "Automate LinkedIn messaging using <a href='/features/linkedin-automation' class='text-[#ad60f8] hover:text-white transition-colors'>LinkedIn Automation</a>"
+  ];
+
+  const automationGoalsFeatures = [
+    "Improve follow-up precision with email response AI",
+    "Strengthen campaign timing and message relevance",
+    "Identify performance trends for smarter decisions",
+    "Enhance results continuously across long-term outreach cycles"
+  ];
+
+  const personalizationFeatures = [
+    "Craft high-performing content with AI email marketing tools",
+    "Deliver timing-optimized follow-ups across every stage",
+    "Build context-aware sequences that adapt to recipient behavior",
+    "Maintain consistency across all <a href='/features/multi-channel-campaigns' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> touchpoints"
+  ];
+
+  const emailAutomationFeatures = [
     {
       icon: Workflow,
       title: "Intelligent Workflow Automation for Every Team",
-      description: "360Airo's AI automation tools are built to simplify complex workflows.",
-      features: [
-        "Automate campaign scheduling, lead follow-ups, and data syncing",
-        "Set smart triggers for actions like 'open,' 'reply,' or 'no response'",
-        "Use AI-driven analytics to refine performance automatically",
-        "Integrate with CRMs and email systems seamlessly"
-      ],
-      note: "No more manual tracking or spreadsheet chaos — the system learns, adapts, and scales with your business."
+      description: "360Airo's AI email automation platform is designed to simplify and coordinate complex outreach processes across email and LinkedIn.",
+      features: intelligentWorkflowFeatures,
+      note: "No more manual tracking or scattered spreadsheets — automation keeps your entire system aligned."
+    },
+    {
+      icon: Target,
+      title: "Automation That Understands Your Goals",
+      description: "360Airo enhances more than just delivery—it optimizes outcomes. Through engagement analysis and performance insights, the system supports your goals across email deliverability, lead conversion, and sustained sender reputation.",
+      features: automationGoalsFeatures,
+      note: "Your campaigns improve automatically as the system refines every touchpoint."
     },
     {
       icon: Brain,
-      title: "AI That Understands Your Goals",
-      description: "Unlike traditional automation tools, 360Airo's system doesn't just execute — it thinks. It learns from your campaign patterns, analyzes engagement behavior, and continuously optimizes your next move.",
-      features: [
-        "Machine learning from campaign patterns",
-        "Engagement behavior analysis",
-        "Continuous optimization algorithms",
-        "Goal-oriented automation strategies"
-      ],
-      note: "Whether you want to improve email deliverability, boost lead conversion rates, or strengthen sender reputation, the AI works silently in the background to ensure every campaign performs better than the last."
-    },
-    {
-      icon: MessageCircle,
       title: "Personalization at Machine Speed",
-      description: "With 360Airo, you get the best of both worlds — automation with a human touch. Our AI personalization engine crafts messages that sound natural, relevant, and context-aware.",
-      features: [
-        "Natural language message generation",
-        "Context-aware personalization",
-        "Dynamic tone and timing adaptation",
-        "Recipient-specific optimization"
-      ],
-      note: "From subject lines to follow-ups, the tone, timing, and delivery adapt dynamically to each recipient, ensuring higher engagement and better outcomes."
+      description: "360Airo blends automation with tailored communication. Its advanced personalization engine helps you create messages that feel natural, relevant, and individualized without slowing your workflow.",
+      features: personalizationFeatures,
+      note: "Your outreach becomes more engaging, increasing both replies and conversions."
     }
+  ];
+
+  const whyChooseFeatures = [
+    "End-to-end automation from setup to reporting",
+    "Performance improvement driven by AI in marketing automation",
+    "Seamless integrations across email, LinkedIn, and CRM tools",
+    "Scalable workflows for startups, agencies, and enterprise teams",
+    "Real-time visibility into all campaign metrics"
   ];
 
   return (
     <>
       <Head>
-        <title>AI Automation Platform | 360Airo - Work Smarter, Scale Faster</title>
+        <title>AI Email Automation — Work Smarter, Scale Faster | 360Airo</title>
         <meta 
           name="description" 
-          content="360Airo's AI automation platform automates your workflow from campaign setup to reporting. Let AI handle repetitive tasks while you focus on strategy and growth." 
+          content="Let automation handle the repetitive work so you can focus on strategy. 360Airo's AI email automation engine makes campaign execution effortless." 
         />
         <meta 
           name="keywords" 
-          content="AI automation, workflow automation, intelligent automation, campaign automation, lead nurturing, multi-channel marketing, 360Airo" 
+          content="AI email automation, email automation, workflow automation, intelligent automation, campaign automation, multi-channel automation, 360Airo, outreach automation" 
         />
         
-        {/* Canonical URL - This tells search engines this is the original page */}
-        <link rel="canonical" href="https://360airo.com/app/features/ai-automation" />
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/ai-email-automation" />
         
-        {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="AI Automation Platform | 360Airo - Work Smarter, Scale Faster" />
-        <meta property="og:description" content="360Airo's AI automation platform automates your workflow from campaign setup to reporting. Let AI handle repetitive tasks while you focus on strategy and growth." />
-        <meta property="og:url" content="https://360airo.com/app/features/ai-automation" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="AI Email Automation — Work Smarter, Scale Faster | 360Airo" />
+        <meta property="og:description" content="Let automation handle the repetitive work so you can focus on strategy. 360Airo's AI email automation engine makes campaign execution effortless." />
+        <meta property="og:url" content="https://360airo.com/features/ai-email-automation" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-ai-automation.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-ai-email-automation.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Automation Platform | 360Airo" />
-        <meta name="twitter:description" content="Let AI handle the repetitive so you can focus on strategy. 360Airo's intelligent automation platform helps you work smarter and scale faster." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-ai-automation.jpg" />
+        <meta name="twitter:title" content="AI Email Automation — Work Smarter, Scale Faster | 360Airo" />
+        <meta name="twitter:description" content="360Airo's AI email automation engine makes campaign execution effortless. Let automation handle the repetitive work so you can focus on strategy." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-automation.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -741,9 +772,9 @@ export default function AIAutomationPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo AI Automation Platform",
-              "description": "360Airo's AI automation platform automates your workflow from campaign setup to reporting. Let AI handle repetitive tasks while you focus on strategy and growth.",
-              "url": "https://360airo.com/app/features/ai-automation",
+              "name": "360Airo AI Email Automation Platform",
+              "description": "Let automation handle the repetitive work so you can focus on strategy. 360Airo's AI email automation engine makes campaign execution effortless.",
+              "url": "https://360airo.com/features/ai-email-automation",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -753,22 +784,30 @@ export default function AIAutomationPage() {
                 "url": "https://app.360airo.com/",
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/OnlineOnly"
-              }
+              },
+              "featureList": [
+                "Intelligent workflow automation",
+                "Behavior-based triggers",
+                "Cross-channel automation",
+                "AI-powered personalization",
+                "Performance optimization",
+                "Real-time campaign tracking"
+              ]
             })
           }}
         />
       </Head>
 
-      {/* Hidden link for SEO - helps search engines discover the URL */}
+      {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/app/features/ai-automation">360Airo AI Automation</a>
+        <a rel="canonical" href="https://360airo.com/features/ai-email-automation">360Airo AI Email Automation</a>
       </div>
 
       <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
         <Navbar />
 
-        {/* Hero Section */}
-        <HeroSection />
+        {/* AI Email Automation Hero Section */}
+        <AIEmailAutomationHero />
 
         {/* Workflow Visualization */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black">
@@ -780,56 +819,212 @@ export default function AIAutomationPage() {
               className="text-center mb-8 lg:mb-12"
             >
               <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white mb-3 lg:mb-4`}>
-                How Our AI Automation Works
+                How Our AI Email Automation Works
               </h2>
               <p className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/70 max-w-2xl mx-auto`}>
-                A seamless workflow that transforms your outreach from manual to magical
+                A seamless workflow that transforms your email outreach from manual to automated
               </p>
             </motion.div>
             <WorkflowVisualization />
           </div>
         </section>
 
-        {/* Features Section */}
+        {/* Intelligent Workflow Automation Section */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
-              className="text-center mb-12 lg:mb-16"
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-16"
             >
-              <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white mb-3 lg:mb-4`}>
-                Powerful AI Automation Features
-              </h2>
-              <p className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/70 max-w-3xl mx-auto`}>
-                Discover how our intelligent automation can transform your workflow and drive better results
-              </p>
+              <div className="space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#ad60f8] to-[#3B82F6] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Workflow className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Intelligent Workflow Automation for Every Team
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  360Airo's AI email automation platform is designed to simplify and coordinate complex outreach processes across email and LinkedIn.
+                </p>
+                
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-[#ad60f8]/20 to-[#3B82F6]/20 p-4 rounded-xl border border-[#ad60f8]/30">
+                    <ul className="space-y-2 text-white/80 text-sm lg:text-base">
+                      {intelligentWorkflowFeatures.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#ad60f8] mr-2 mt-0.5 flex-shrink-0" />
+                          <span dangerouslySetInnerHTML={{ __html: feature }} />
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="text-white font-medium text-sm lg:text-base mt-4">
+                      No more manual tracking or scattered spreadsheets — automation keeps your entire system aligned.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <AIAutomationDemo />
+              </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-12 lg:mb-16">
-              <AIAutomationDemo />
-              <div className="space-y-6 lg:space-y-8">
-                {features.slice(0, 2).map((feature, index) => (
-                  <FeatureCard 
-                    key={feature.title}
-                    {...feature}
-                    delay={index * (isMobile ? 0.15 : 0.2)}
-                  />
-                ))}
+            {/* Automation That Understands Your Goals */}
+            <motion.div
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12 lg:mb-16"
+            >
+              <div className="lg:order-2 space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#3B82F6] to-[#ad60f8] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Target className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Automation That Understands Your Goals
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  360Airo enhances more than just delivery—it optimizes outcomes. Through engagement analysis and performance insights, the system supports your goals across email deliverability, lead conversion, and sustained sender reputation.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {automationGoalsFeatures.map((feature, index) => (
+                    <div key={index} className="bg-white/5 p-4 rounded-lg border border-white/10">
+                      <div className="text-white font-medium text-sm mb-1">{feature.split(':')[0]}</div>
+                      <div className="text-white/60 text-xs">{feature.split(':')[1] || feature}</div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#3B82F6]/10 to-[#ad60f8]/10 p-4 rounded-xl border border-[#3B82F6]/20">
+                  <p className="text-white/80 text-sm lg:text-base">
+                    Your campaigns improve automatically as the system refines every touchpoint.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 gap-6 lg:gap-8">
-              <FeatureCard 
-                {...features[2]}
-                delay={isMobile ? 0.3 : 0.4}
-              />
-            </div>
+              <div className="lg:order-1 relative">
+                <div className="bg-[#1A1A1A] rounded-xl lg:rounded-2xl border border-[#3B82F6]/40 p-6 lg:p-8 backdrop-blur-sm">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center space-x-2 bg-[#3B82F6]/20 px-3 py-1.5 rounded-lg mb-4">
+                      <Activity className="h-4 w-4 text-[#3B82F6]" />
+                      <span className="text-[#3B82F6] text-sm font-medium">Goal Tracking</span>
+                    </div>
+                    <h4 className="text-white text-lg font-bold mb-2">Campaign Performance Dashboard</h4>
+                    <p className="text-white/60 text-sm">Real-time optimization metrics</p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {[
+                      { metric: "Email Deliverability", value: "98.5%", trend: "+2.3%" },
+                      { metric: "Lead Conversion", value: "24.7%", trend: "+5.1%" },
+                      { metric: "Sender Reputation", value: "Excellent", trend: "+8.2%" },
+                      { metric: "Engagement Rate", value: "42.3%", trend: "+3.7%" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                        <div className="text-white text-sm">{item.metric}</div>
+                        <div className="flex items-center space-x-2">
+                          <div className="text-white font-bold">{item.value}</div>
+                          <div className="text-green-400 text-xs">↑ {item.trend}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Personalization at Machine Speed */}
+            <motion.div
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+            >
+              <div className="space-y-4 lg:space-y-6">
+                <motion.div
+                  className="bg-gradient-to-r from-[#ad60f8] to-[#3B82F6] w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6"
+                  whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Brain className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                </motion.div>
+                <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
+                  Personalization at Machine Speed
+                </h3>
+                <p className="text-white/80 text-base lg:text-lg leading-relaxed">
+                  360Airo blends automation with tailored communication. Its advanced personalization engine helps you create messages that feel natural, relevant, and individualized without slowing your workflow.
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {personalizationFeatures.map((feature, index) => (
+                    <div key={index} className="bg-white/5 p-3 rounded-lg border border-white/10">
+                      <div className="text-white font-medium text-sm mb-1" dangerouslySetInnerHTML={{ __html: feature.split('—')[0] }} />
+                      <div className="text-white/60 text-xs" dangerouslySetInnerHTML={{ __html: feature.split('—')[1] || feature }} />
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="bg-gradient-to-r from-[#ad60f8]/10 to-[#3B82F6]/10 p-4 rounded-xl border border-[#ad60f8]/20">
+                  <p className="text-white font-semibold text-center text-sm lg:text-base">
+                    Your outreach becomes more engaging, increasing both replies and conversions.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="bg-[#1A1A1A] rounded-xl lg:rounded-2xl border border-[#ad60f8]/40 p-6 lg:p-8 backdrop-blur-sm">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center space-x-2 bg-[#ad60f8]/20 px-3 py-1.5 rounded-lg mb-4">
+                      <Brain className="h-4 w-4 text-[#ad60f8]" />
+                      <span className="text-[#ad60f8] text-sm font-medium">AI Personalization</span>
+                    </div>
+                    <h4 className="text-white text-lg font-bold mb-2">Personalization Engine</h4>
+                    <p className="text-white/60 text-sm">Real-time message optimization</p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-white/5 p-4 rounded-lg">
+                      <div className="text-xs text-white/60 mb-2">Generated Personalized Message</div>
+                      <div className="text-white text-sm leading-relaxed">
+                        "Hi [Name], I noticed your recent work on [Project] and was impressed by your approach to [Specific Detail]. Our AI automation can help streamline similar processes..."
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-2 text-center">
+                      <div className="bg-[#ad60f8]/10 p-2 rounded">
+                        <div className="text-xs text-white/60">Personalization</div>
+                        <div className="text-white font-bold text-sm">94%</div>
+                      </div>
+                      <div className="bg-[#3B82F6]/10 p-2 rounded">
+                        <div className="text-xs text-white/60">Relevance</div>
+                        <div className="text-white font-bold text-sm">96%</div>
+                      </div>
+                      <div className="bg-white/10 p-2 rounded">
+                        <div className="text-xs text-white/60">Speed</div>
+                        <div className="text-white font-bold text-sm">0.8s</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* Why Choose 360Airo for AI Email Automation */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 bg-black">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -839,14 +1034,54 @@ export default function AIAutomationPage() {
               className="text-center mb-8 lg:mb-12"
             >
               <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white mb-3 lg:mb-4`}>
-                Why Choose 360Airo for AI Automation
+                Why Choose 360Airo for AI Email Automation
               </h2>
               <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto`}>
-                With 360Airo's AI automation, your outreach becomes faster, smarter, and more human than ever before.
+                With 360Airo's AI email automation, your outreach becomes faster, more precise, and consistently effective.
               </p>
             </motion.div>
 
-            <BenefitsGrid />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
+              {whyChooseFeatures.map((feature, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.08 : 0.1) }}
+                  whileHover={{ y: isMobile ? -2 : -5, scale: isMobile ? 1.01 : 1.02 }}
+                  className="bg-[#1A1A1A] rounded-xl lg:rounded-2xl border border-[#ad60f8]/30 p-4 lg:p-6 hover:border-[#ad60f8]/50 transition-all duration-300"
+                >
+                  <div className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} bg-gradient-to-br from-[#ad60f8] to-[#3B82F6] ${isMobile ? 'rounded-lg' : 'rounded-xl'} flex items-center justify-center mb-3`}>
+                    <CheckCircle2 className={`${isMobile ? 'h-4 w-4' : 'h-5 w-5'} text-white`} />
+                  </div>
+                  <h4 className={`text-white font-bold mb-2 ${isMobile ? 'text-sm' : ''}`}>{feature}</h4>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ delay: 0.6, type: "spring" }}
+              className="flex justify-center"
+            >
+              <motion.div 
+                whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="group relative overflow-hidden rounded-xl"
+                onClick={handleCTAClick}
+              >
+                <Button 
+                  size="lg" 
+                  className="relative bg-white text-black hover:bg-white/90 px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300"
+                >
+                  Automate with Intelligence →
+                  <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
@@ -860,10 +1095,10 @@ export default function AIAutomationPage() {
               className="space-y-4 lg:space-y-6"
             >
               <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white`}>
-                Ready to Transform Your Workflow?
+                Ready to Transform Your Email Workflow?
               </h2>
               <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto leading-relaxed`}>
-                Join thousands of teams using 360Airo's AI automation to work smarter, scale faster, and achieve better results.
+                Join thousands of teams using 360Airo's AI email automation to work smarter, scale faster, and achieve better results.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center items-center pt-4 lg:pt-6">
