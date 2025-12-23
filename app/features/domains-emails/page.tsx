@@ -31,6 +31,7 @@ import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow - Mobile optimized */
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -254,6 +255,18 @@ const SectionDivider = ({ variant = 'center' }: { variant?: 'center' | 'left' | 
   );
 };
 
+/* Internal Link Component */
+const InternalLink = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
+  return (
+    <Link 
+      href={href}
+      className={`text-[#6366F1] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+};
+
 export default function DomainsEmailsPage() {
   const redirectToApp = () => {
     window.open('https://app.360airo.com/', '_blank');
@@ -262,12 +275,68 @@ export default function DomainsEmailsPage() {
   return (
     <>
       <Head>
+        <title>Domains & Emails | 360Airo - Build Trust Before You Hit Send</title>
+        <meta name="description" content="Establish, authenticate, and scale your email domains without deliverability worries. 360Airo's Domains & Emails feature ensures verified, secure, and reputation-safe infrastructure." />
+        <meta name="keywords" content="domain authentication, email setup, SPF DKIM DMARC, email deliverability, domain management, sender reputation" />
+        
+        {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/domains-emails" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Domains & Emails | 360Airo - Build Trust Before You Hit Send" />
+        <meta property="og:description" content="Establish, authenticate, and scale without deliverability worries. 360Airo's Domains & Emails feature ensures verified, secure, and reputation-safe infrastructure." />
+        <meta property="og:url" content="https://360airo.com/features/domains-emails" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-domains-emails.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Domains & Emails | 360Airo" />
+        <meta name="twitter:description" content="Build trust before you hit send. Verified domains and emails for reliable outreach." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-domains-emails.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#3B82F6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Domains & Emails",
+              "description": "Establish, authenticate, and scale your email domains without deliverability worries.",
+              "url": "https://360airo.com/features/domains-emails",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              }
+            })
+          }}
+        />
       </Head>
 
+      {/* Hidden link for SEO */}
+      <div className="hidden">
+        <a rel="canonical" href="https://360airo.com/features/domains-emails">360Airo Domains & Emails - Domain Authentication & Management</a>
+      </div>
+
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
-               {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/domains-emails" />
         <Navbar />
 
         {/* HERO SECTION - Mobile Optimized with Content First */}
@@ -347,7 +416,7 @@ export default function DomainsEmailsPage() {
                         ],
                       }}
                       transition={{ duration: 3, repeat: Infinity }}
-                     className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/20 via-[#6366F1]/20 to-[#8B5CF6]/20 rounded-full blur-lg"
+                      className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/30 via-[#6366F1]/20 to-[#8B5CF6]/30 rounded-full blur-lg"
                     />
                     <span className="relative inline-flex items-center px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-[#3B82F6]/50 text-white font-semibold text-xs sm:text-sm">
                       <motion.div
@@ -436,6 +505,12 @@ export default function DomainsEmailsPage() {
                   <p className="text-sm sm:text-base text-white/75 leading-relaxed">
                     Every great outreach campaign starts with a trusted foundation — your domain and email setup.
                     360Airo's Domains & Emails feature ensures your communication is backed by verified, secure, and reputation-safe infrastructure.
+                    From authentication to monitoring, it's designed to help your messages reach inboxes confidently and consistently.
+                    It also integrates smoothly with your{' '}
+                    <InternalLink href="/features/unified-inbox">
+                      Unified Inbox
+                    </InternalLink>
+                    {' '}for better communication management.
                   </p>
                 </motion.div>
 
@@ -678,7 +753,6 @@ export default function DomainsEmailsPage() {
         </section>
 
         {/* HOW IT WORKS - Mobile Optimized */}
-      
         <section className="py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -704,7 +778,7 @@ export default function DomainsEmailsPage() {
               {setupSteps.map((item, index) => (
                 <motion.div 
                   key={index} 
-                  // variants={itemVariants} 
+                  variants={itemVariants} 
                   className="flex flex-col items-center text-center gap-6 lg:gap-8 group"
                 >
                   <GlowCard className="flex-shrink-0 cursor-pointer rounded-full">
@@ -725,7 +799,6 @@ export default function DomainsEmailsPage() {
                     </div>
                   </GlowCard>
                   <div className="flex-1">
-
                     <SectionDivider variant="left" />
                     <h3 className="text-xl lg:text-2xl font-bold text-white mb-3 transition-colors group-hover:text-[#6366F1]">{item.title}</h3>
                     <p className="text-white/80 text-base lg:text-lg leading-relaxed">{item.description}</p>
@@ -781,10 +854,11 @@ export default function DomainsEmailsPage() {
               <h2 className="text-2xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                 Monitor Performance Across <span className="text-[#3B82F6]">Multiple Domains</span>
               </h2>
-              
-            <SectionDivider />
+              <SectionDivider />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
                 Whether you manage one brand or several, 360Airo's dashboard lets you monitor all your domains and sender accounts in one place.
+                You can track sender scores, domain health, and performance insights — empowering you to make informed decisions that keep your campaigns compliant and optimized.
+                Smart alerts notify you of potential reputation drops, giving you time to act before it impacts deliverability.
               </p>
             </motion.div>
 
@@ -837,7 +911,12 @@ export default function DomainsEmailsPage() {
               </h2>
               <SectionDivider />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                360Airo makes that expansion effortless. Each new domain goes through a controlled warmup phase, protecting your sender reputation and ensuring safe volume growth.
+                360Airo makes that expansion effortless. Each new domain goes through a controlled{' '}
+                <InternalLink href="/features/email-warmup">
+                  Email Warmup
+                </InternalLink>
+                {' '}phase, protecting your sender reputation and ensuring safe volume growth.
+                It's a balance of automation and control — helping you build domain trust, maintain consistency, and grow outreach without compromising deliverability.
               </p>
             </motion.div>
 
@@ -847,7 +926,7 @@ export default function DomainsEmailsPage() {
                   <div className="relative bg-white/5 backdrop-blur-sm p-6 lg:p-8 rounded-xl border border-white/10 text-center transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#3B82F6]/50 h-full group-hover:scale-102">
                     <motion.div
                       className={`bg-gradient-to-r ${benefit.color} w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6`}
-                      whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(59,130,246,0.4)' }}
+                      whileHover={{ rotate: 360, scale: 1.1, boxShadow: '0 0 20px rgba(59,130,246,0.4)' }}
                       transition={{ duration: 0.6 }}
                     >
                       <benefit.icon className="h-5 w-5 lg:h-7 lg:w-7 text-white" />
@@ -883,7 +962,7 @@ export default function DomainsEmailsPage() {
                   <div className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl p-6 lg:p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#3B82F6]/50">
                     <motion.div
                       className="bg-white/15 w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#3B82F6]/30"
-                      whileHover={{  scale: 1.1 }}
+                      whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
                       <stat.icon className="h-5 w-5 lg:h-6 lg:w-6 text-[#3B82F6] transition-colors group-hover:text-white" />
@@ -922,10 +1001,12 @@ export default function DomainsEmailsPage() {
               <h2 className="text-2xl lg:text-5xl font-bold text-white leading-tight">
                 From setup to scalability, 360Airo's Domains & Emails feature does more than manage your technical framework — it builds long-term reliability.
               </h2>
-              <SectionDivider />
-              <p className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
-                With proper authentication, validation, and monitoring, you send with confidence knowing your domain stands on solid ground.
-              </p>
+              <SectionDivider variant="gradient" />
+              <div className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
+                <p>
+                  With proper authentication, validation, and monitoring, you send with confidence knowing your domain stands on solid ground.
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
                 <motion.div 
                   whileHover={{ scale: 1.02, y: -2 }} 
@@ -934,7 +1015,7 @@ export default function DomainsEmailsPage() {
                   onClick={redirectToApp}
                 >
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-[#480056] border-2 border-transparent group-hover:border-white/20 w-full sm:w-auto">
+                  <Button size="lg" className="relative bg-white text-[#480056] hover:bg-transparent px-6 lg:px-10 py-4 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20 w-full sm:w-auto">
                     Get Started with Domains & Emails
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
@@ -948,7 +1029,7 @@ export default function DomainsEmailsPage() {
                 transition={{ duration: 0.7 }}
                 style={{ maxWidth: '100px' }}
               />
-              <p className="text-white/0 text-xs lg:text-sm">🔒 Build trust with verified, authenticated domains</p>
+              <p className="text-white/70 text-xs lg:text-sm">🔒 Build trust with verified, authenticated domains</p>
             </motion.div>
           </motion.div>
         </section>
