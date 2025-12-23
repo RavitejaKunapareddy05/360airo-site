@@ -51,6 +51,7 @@ import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow - Mobile optimized */
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -1159,11 +1160,11 @@ export default function AIContentGenerationPage() {
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Write follow-ups that stay aligned to Email Sequences</span>
+                        <span>Write follow-ups that stay aligned to <Link href="/features/email-sequences" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">Email Sequences</Link></span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Craft LinkedIn messages that pair perfectly with LinkedIn Automation</span>
+                        <span>Craft LinkedIn messages that pair perfectly with <Link href="/features/linkedin-automation" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">LinkedIn Automation</Link></span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
@@ -1217,19 +1218,29 @@ export default function AIContentGenerationPage() {
                     </div>
                     
                     <div className="space-y-3">
-                      {['LinkedIn Messages', 'A/B Testing', 'Tone Consistency'].map((item, i) => (
+                      {[
+                        { name: 'LinkedIn Messages', url: '/features/linkedin-automation' },
+                        { name: 'A/B Testing', url: '#' },
+                        { name: 'Tone Consistency', url: '#' }
+                      ].map((item, i) => (
                         <motion.div
                           key={i}
                           initial={{ opacity: 0, x: -20 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ delay: i * 0.1 }}
-                          className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10"
+                          className="flex items-center justify-between p-3 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-colors"
                         >
                           <div className="flex items-center space-x-3">
                             <div className={`w-2 h-2 rounded-full ${
                               i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-pink-400'
                             }`} />
-                            <span className="text-white text-sm">{item}</span>
+                            {item.url !== '#' ? (
+                              <Link href={item.url} className="text-white text-sm hover:text-[#A855F7] transition-colors">
+                                {item.name}
+                              </Link>
+                            ) : (
+                              <span className="text-white text-sm">{item.name}</span>
+                            )}
                           </div>
                           <div className="text-white/40 text-sm">✓ Integrated</div>
                         </motion.div>
@@ -1381,7 +1392,7 @@ export default function AIContentGenerationPage() {
                       <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
                         <CheckCircle2 className="h-3 w-3 text-white" />
                       </div>
-                      <span className="text-white/80 text-sm">Improve deliverability through cleaner messaging paired with Email Warmup</span>
+                      <span className="text-white/80 text-sm">Improve deliverability through cleaner messaging paired with <Link href="/features/email-warmup" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">Email Warmup</Link></span>
                     </div>
                     <div className="flex items-start">
                       <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
@@ -1521,11 +1532,11 @@ export default function AIContentGenerationPage() {
                     <div className="space-y-3">
                       {[
                         { scenario: 'Cold Outreach', status: 'active', icon: '📧' },
-                        { scenario: 'Follow-up Sequence', status: 'active', icon: '🔄' },
+                        { scenario: 'Follow-up Sequence', status: 'active', icon: '🔄', url: '/features/email-sequences' },
                         { scenario: 'Meeting Scheduling', status: 'active', icon: '📅' },
                         { scenario: 'Proposal Delivery', status: 'active', icon: '📄' },
                         { scenario: 'Re-engagement', status: 'active', icon: '⚡' },
-                        { scenario: 'Onboarding', status: 'active', icon: '🚀' },
+                        { scenario: 'LinkedIn Messaging', status: 'active', icon: '💼', url: '/features/linkedin-automation' },
                       ].map((item, i) => (
                         <motion.div
                           key={i}
@@ -1537,7 +1548,13 @@ export default function AIContentGenerationPage() {
                           <div className="flex items-center space-x-3">
                             <div className="text-lg">{item.icon}</div>
                             <div>
-                              <div className="text-white text-sm font-semibold">{item.scenario}</div>
+                              {item.url ? (
+                                <Link href={item.url} className="text-white text-sm font-semibold hover:text-[#A855F7] transition-colors">
+                                  {item.scenario}
+                                </Link>
+                              ) : (
+                                <div className="text-white text-sm font-semibold">{item.scenario}</div>
+                              )}
                               <div className="text-white/60 text-xs">Professional template</div>
                             </div>
                           </div>
@@ -1596,7 +1613,7 @@ export default function AIContentGenerationPage() {
                   {[
                     "Consistent messaging across every campaign",
                     "High-quality, professional copy produced instantly",
-                    "Seamless connection to LinkedIn Automation and LinkedIn flows",
+                    `Seamless connection to <Link href="/features/linkedin-automation" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">LinkedIn Automation</Link> and LinkedIn flows`,
                     "Enhanced deliverability and engagement",
                     "Designed for teams that need quality communication at scale",
                     "Save hours of manual writing every week"
@@ -1611,7 +1628,7 @@ export default function AIContentGenerationPage() {
                       <div className="w-5 h-5 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
                         <CheckCircle2 className="h-3 w-3 text-white" />
                       </div>
-                      <span className="text-white/80 text-sm text-left">{item}</span>
+                      <span className="text-white/80 text-sm text-left" dangerouslySetInnerHTML={{ __html: item }} />
                     </motion.div>
                   ))}
                 </div>
