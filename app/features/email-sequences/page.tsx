@@ -407,47 +407,48 @@ export default function EmailSequencesPage() {
     {
       icon: Shield,
       title: "Smart Sequencing Built for High Deliverability",
-      description: "Every sequence in 360Airo is optimized for email deliverability and sender reputation. The system automatically adjusts send times, personalizes content, and avoids over-sending to protect your domain health and inbox placement.",
+      description: "Every sequence in 360Airo is designed to protect deliverability and strengthen sender reputation. The system optimizes timing, message pacing, and frequency to maintain domain health and deliver stronger inbox placement across every mail sequence.",
       features: [
         "Customize delays and message frequency",
-        "Set triggers based on open, click, or reply actions",
-        "Pause or skip contacts when they engage",
-        "Integrate seamlessly with your email warmup and AI automation tools"
+        "Set triggers based on opens, clicks, or replies",
+        "Pause or skip contacts instantly when they engage",
+        "Improve deliverability using Email Warmup",
+        "Sync effortlessly with AI Email Automation"
       ],
-      note: "This means your outreach stays natural — never spammy — and your responses increase steadily over time."
+      note: "Your outreach stays natural — never pushy — while your response rates steadily rise."
     },
     {
       icon: Brain,
-      title: "Personalization That Scales with AI",
-      description: "360Airo's AI-powered sequencing crafts context-aware messages that feel personal even at scale. The system analyzes engagement patterns to tweak tone, optimize send times, and suggest next-best actions — keeping your sequences fresh and performance-driven.",
+      title: "Scalable Personalization for the Best Email Sequences",
+      description: "Crafting messages that resonate shouldn't slow you down. 360Airo supports large-scale personalization by analyzing engagement patterns, refining tone, and helping you build the best email sequences for cold outreach, nurturing, and re-engagement.",
       features: [
-        "AI-powered content optimization",
-        "Context-aware message timing",
-        "Continuous learning from engagement patterns",
-        "Personalized tone adjustment"
+        "Create email copy instantly via AI Email Generation",
+        "Build targeted follow-up journeys for every lead type",
+        "Optimize send windows for maximum impact",
+        "Strengthen every cold email sequence with smart insights"
       ],
-      note: "From cold introductions to re-engagement campaigns, every message learns from the last."
+      note: "Whether it's a first introduction or a strategic re-touch, each message carries forward what worked before."
     },
     {
       icon: BarChart3,
       title: "Streamline Campaigns with Full Visibility",
-      description: "Stay in control of every touchpoint. 360Airo's dashboard gives you complete visibility into your sequence performance — opens, clicks, replies, and conversions — all in real time.",
+      description: "Stay in control of every touchpoint from one clear dashboard. Track opens, clicks, replies, and conversions in real time, and refine every step of your cold email sequence using data-backed insights.",
       features: [
-        "Real-time performance tracking",
-        "A/B testing capabilities",
-        "Conversion funnel analysis",
-        "Automated performance insights"
+        "Measure sequence performance at a glance",
+        "Run variation tests to find winning messages",
+        "Monitor prospect activity without spreadsheets",
+        "Let analytics guide your next move"
       ],
-      note: "Quickly identify what's working, test variations, and let data guide your next move. No spreadsheets, no confusion — just clear insights that help you scale faster."
+      note: "No clutter. No confusion. Just the clarity you need to scale faster."
     }
   ];
 
   const benefits = [
-    "Automated follow-ups that feel human",
-    "Adaptive scheduling based on recipient behavior",
-    "Integrated analytics for full campaign visibility",
-    "Personalization powered by AI",
-    "Better deliverability and engagement rates"
+    "Automated follow-ups that sound human",
+    "Recipient-aware scheduling for better timing",
+    "Integrated reporting for true campaign visibility",
+    "Personalized messaging supported by smart insights",
+    "Stronger deliverability backed by built-in protection"
   ];
 
   return (
@@ -690,7 +691,7 @@ export default function EmailSequencesPage() {
                     transition={{ duration: 0.5, delay: 0.6 }}
                     className="text-white/70 leading-relaxed text-sm lg:text-base"
                   >
-                    Consistency wins deals. With 360Airo's email sequences, you can send the right message at the right time — without ever missing a follow-up.
+                    Consistency wins deals, and 360Airo's email sequence software helps you deliver the right message at the right moment — without missing a single follow-up. Build automated, personalized flows that nurture leads, increase responses, and keep your pipeline moving even when your team is offline.
                   </motion.p>
 
                   <motion.p
@@ -699,7 +700,7 @@ export default function EmailSequencesPage() {
                     transition={{ duration: 0.5, delay: 0.75 }}
                     className="text-white/60 leading-relaxed text-sm lg:text-base"
                   >
-                    Build automated, personalized email flows that nurture leads, boost responses, and keep your pipeline active even while you're offline.
+                    Our streamlined email sequencing tool creates tailored follow-up paths for every stage of the journey, ensuring your outreach to cold prospects, warm leads, and returning contacts feels timely, relevant, and genuinely human.
                   </motion.p>
                 </div>
 
@@ -981,7 +982,7 @@ export default function EmailSequencesPage() {
               className="space-y-4 lg:space-y-6"
             >
               <p className="text-lg lg:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-                With 360Airo, your email sequences don't just send messages — they start conversations that build trust and drive conversions.
+                With 360Airo, your Email Sequences don't just send messages — they start conversations that build trust and drive conversions.
               </p>
 
               <Button 
@@ -992,6 +993,154 @@ export default function EmailSequencesPage() {
                 Build Your Sequence
                 <ArrowRight className="ml-1.5 lg:ml-2 h-4 w-4 lg:h-5 lg:w-5" />
               </Button>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Content Summary Section */}
+        <section className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-[#19001d]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              className="space-y-6 lg:space-y-8"
+            >
+              <div className="text-center mb-8 lg:mb-12">
+                <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Email Sequences — Automate Conversations That Convert</h2>
+                <div className="h-1 bg-[#b45ecf] rounded-full max-w-32 mx-auto mb-4"></div>
+              </div>
+
+              <div className="space-y-4 lg:space-y-6">
+                <div className="bg-black/50 rounded-xl lg:rounded-2xl p-6 lg:p-8 border border-[#b45ecf]/20">
+                  <h3 className="text-xl lg:text-2xl font-bold text-[#b45ecf] mb-3 lg:mb-4">Turn outreach into ongoing engagement</h3>
+                  <p className="text-white/80 leading-relaxed mb-3 lg:mb-4">
+                    Consistency wins deals, and 360Airo's email sequence software helps you deliver the right message at the right moment — without missing a single follow-up. Build automated, personalized flows that nurture leads, increase responses, and keep your pipeline moving even when your team is offline.
+                  </p>
+                  <p className="text-white/70 leading-relaxed">
+                    Our streamlined email sequencing tool creates tailored follow-up paths for every stage of the journey, ensuring your outreach to cold prospects, warm leads, and returning contacts feels timely, relevant, and genuinely human.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                  <div className="bg-black/50 rounded-xl lg:rounded-2xl p-6 lg:p-8 border border-[#b45ecf]/20">
+                    <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4">Smart Sequencing Built for High Deliverability</h3>
+                    <p className="text-white/80 leading-relaxed mb-3 lg:mb-4">
+                      Every sequence in 360Airo is designed to protect deliverability and strengthen sender reputation. The system optimizes timing, message pacing, and frequency to maintain domain health and deliver stronger inbox placement across every mail sequence.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Customize delays and message frequency</span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Set triggers based on opens, clicks, or replies</span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Pause or skip contacts instantly when they engage</span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Improve deliverability using <a href="/features/email-warmup" className="text-[#b45ecf] hover:text-white transition-colors">Email Warmup</a></span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Sync effortlessly with <a href="/features/ai-email-automation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Automation</a></span>
+                      </li>
+                    </ul>
+                    <p className="text-[#b45ecf] italic mt-4 lg:mt-6 text-sm lg:text-base">
+                      Your outreach stays natural — never pushy — while your response rates steadily rise.
+                    </p>
+                  </div>
+
+                  <div className="bg-black/50 rounded-xl lg:rounded-2xl p-6 lg:p-8 border border-[#b45ecf]/20">
+                    <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4">Scalable Personalization for the Best Email Sequences</h3>
+                    <p className="text-white/80 leading-relaxed mb-3 lg:mb-4">
+                      Crafting messages that resonate shouldn't slow you down. 360Airo supports large-scale personalization by analyzing engagement patterns, refining tone, and helping you build the best email sequences for cold outreach, nurturing, and re-engagement.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Create email copy instantly via <a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Generation</a></span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Build targeted follow-up journeys for every lead type</span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Optimize send windows for maximum impact</span>
+                      </li>
+                      <li className="flex items-start space-x-2 text-white/80">
+                        <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                        <span>Strengthen every cold email sequence with smart insights</span>
+                      </li>
+                    </ul>
+                    <p className="text-[#b45ecf] italic mt-4 lg:mt-6 text-sm lg:text-base">
+                      Whether it's a first introduction or a strategic re-touch, each message carries forward what worked before.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-black/50 rounded-xl lg:rounded-2xl p-6 lg:p-8 border border-[#b45ecf]/20">
+                  <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4">Streamline Campaigns with Full Visibility</h3>
+                  <p className="text-white/80 leading-relaxed mb-3 lg:mb-4">
+                    Stay in control of every touchpoint from one clear dashboard. Track opens, clicks, replies, and conversions in real time, and refine every step of your cold email sequence using data-backed insights.
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start space-x-2 text-white/80">
+                      <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                      <span>Measure sequence performance at a glance</span>
+                    </li>
+                    <li className="flex items-start space-x-2 text-white/80">
+                      <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                      <span>Run variation tests to find winning messages</span>
+                    </li>
+                    <li className="flex items-start space-x-2 text-white/80">
+                      <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                      <span>Monitor prospect activity without spreadsheets</span>
+                    </li>
+                    <li className="flex items-start space-x-2 text-white/80">
+                      <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
+                      <span>Let analytics guide your next move</span>
+                    </li>
+                  </ul>
+                  <p className="text-[#b45ecf] italic mt-4 lg:mt-6 text-sm lg:text-base">
+                    No clutter. No confusion. Just the clarity you need to scale faster.
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-center pt-4 lg:pt-6">
+                <h3 className="text-lg lg:text-xl font-bold text-white mb-4 lg:mb-6">Why Teams Love 360Airo's Email Sequences</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 mb-6 lg:mb-8">
+                  {[
+                    "Automated follow-ups that sound human",
+                    "Recipient-aware scheduling for better timing",
+                    "Integrated reporting for true campaign visibility",
+                    "Personalized messaging supported by smart insights",
+                    "Stronger deliverability backed by built-in protection"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center space-x-2 p-3 lg:p-4 bg-black/30 rounded-lg border border-[#b45ecf]/20">
+                      <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0" />
+                      <span className="text-white/80 text-sm lg:text-base text-left">{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-white/70 text-lg lg:text-xl mb-6 lg:mb-8 leading-relaxed">
+                  With 360Airo, your Email Sequences don't just send messages — they start conversations that build trust and drive conversions.
+                </p>
+                <Button 
+                  size="lg" 
+                  className="bg-[#b45ecf] hover:bg-[#b45ecf]/90 px-6 lg:px-8 py-2.5 lg:py-3 text-base lg:text-lg rounded-lg lg:rounded-xl shadow-lg shadow-[#b45ecf]/30"
+                  onClick={redirectToApp}
+                >
+                  Build Your Sequence
+                  <ArrowRight className="ml-1.5 lg:ml-2 h-4 w-4 lg:h-5 lg:w-5" />
+                </Button>
+              </div>
             </motion.div>
           </div>
         </section>
