@@ -31,6 +31,7 @@ import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow - Mobile optimized */
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -116,29 +117,41 @@ const itemVariants: Variants = {
 const warmupSteps = [
   {
     step: '01',
-    title: 'Smart, Gradual Ramp-Up',
-    description: 'Our system starts small — sending only a few emails per day — and scales up intelligently based on engagement and sender health.',
+    title: 'A Safe, Gradual Ramp Up',
+    description: 'We start small and increase your sending volume only when your domain shows positive engagement. This protects your reputation and keeps your domain aligned with what inbox providers expect.',
     icon: TrendingUp,
     color: 'from-[#FF6432] to-[#FF8A65]',
   },
   {
     step: '02',
-    title: 'Real Interactions, Real Impact',
-    description: 'Every email sent and received through our automated warmup network is opened, replied to, and marked as important by verified accounts — mimicking genuine human activity that ISPs trust.',
+    title: 'Real Interactions That Count',
+    description: 'Warmup emails are opened, replied to, and even marked as important by real verified accounts. These interactions look authentic and help inbox providers trust your domain faster.',
     icon: Users,
     color: 'from-[#FF8A65] to-[#FFB74D]',
   },
   {
     step: '03',
-    title: 'Reputation Tracking Dashboard',
-    description: 'Stay in control with real-time analytics. Track sender reputation, domain warmup progress, and email health scores all in one place.',
+    title: 'Full Visibility and Control',
+    description: 'Monitor every stage of your warmup inside the Email campaign analytics panel. Track deliverability score, domain reputation, spam signals, and email health—all transparent and understandable.',
     icon: BarChart3,
     color: 'from-[#FFB74D] to-[#FFC107]',
   },
   {
     step: '04',
-    title: 'Continuous Protection',
-    description: '360Airo monitors spam complaints, bounce rates, and blacklists to help improve email deliverability and maintain domain trust over time.',
+    title: 'Long Term Protection',
+    description: (
+      <>
+        Instead of warming your domain once, 360Airo keeps watching for spam traps, bounce issues, and blacklist risks. 
+        Use warmup insights directly inside your{' '}
+        <Link 
+          href="/features/email-sequences" 
+          className="text-[#FF8A65] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2"
+        >
+          Email Sequences
+        </Link>
+        {' '}to improve timing and conversions.
+      </>
+    ),
     icon: Shield,
     color: 'from-[#FFC107] to-[#FF6432]',
   },
@@ -147,50 +160,75 @@ const warmupSteps = [
 const benefits = [
   {
     icon: Eye,
-    title: 'Higher Open and Reply Rates',
-    description: 'because your emails actually reach inboxes.',
+    title: 'Higher opens',
+    description: 'because your emails are actually seen in the inbox.',
     color: 'from-[#FF6432] to-[#FF8A65]',
     metric: '+85%',
   },
   {
-    icon: Award,
-    title: 'Stronger Sender Score',
-    description: 'sustained by consistent, reputation-safe activity.',
+    icon: UserCheck,
+    title: 'Higher replies',
+    description: 'because your messages are actually delivered to recipients.',
     color: 'from-[#FF8A65] to-[#FFB74D]',
+    metric: '+70%',
+  },
+  {
+    icon: Award,
+    title: 'Stronger sender score',
+    description: 'built through natural and trusted activity.',
+    color: 'from-[#FFB74D] to-[#FFC107]',
     metric: '95+',
   },
   {
     icon: AlertTriangle,
-    title: 'Reduced Spam Risk',
-    description: 'through steady, compliant warmup patterns.',
-    color: 'from-[#FFB74D] to-[#FFC107]',
+    title: 'Lower spam rates',
+    description: 'because your domain behaves exactly as inbox providers expect.',
+    color: 'from-[#FFC107] to-[#FF6432]',
     metric: '-90%',
   },
   {
     icon: Target,
-    title: 'Better Outreach ROI',
-    description: 'since every campaign starts with healthy deliverability.',
-    color: 'from-[#FFC107] to-[#FF6432]',
+    title: 'Better ROI',
+    description: 'since every campaign starts with healthy deliverability from day one.',
+    color: 'from-[#FF6432] to-[#FF8A65]',
     metric: '3x',
+  },
+  {
+    icon: Zap,
+    title: 'Faster scaling',
+    description: (
+      <>
+        when combined with{' '}
+        <Link 
+          href="/features/email-sequences" 
+          className="text-[#FF8A65] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2"
+        >
+          AI email automation
+        </Link>
+        {' '}for large outbound activity.
+      </>
+    ),
+    color: 'from-[#FF8A65] to-[#FFB74D]',
+    metric: '10x',
   },
 ];
 
 const userTypes = [
   {
-    title: 'Founders & Marketers',
-    description: 'Launch campaigns with confidence knowing your domain reputation is protected',
+    title: 'Founders & Growth Teams',
+    description: 'When revenue depends on email, warmup is non-negotiable. Build trust from day one.',
     icon: Star,
     color: 'from-[#FF6432] to-[#FF8A65]',
   },
   {
     title: 'SDRs & Sales Teams',
-    description: 'Focus on selling while we handle the technical aspects of email deliverability',
+    description: 'If inboxing is your goal, warmup is your first step to successful cold outreach.',
     icon: Target,
     color: 'from-[#FF8A65] to-[#FFB74D]',
   },
   {
-    title: 'Agencies',
-    description: 'Manage multiple client domains with centralized warmup monitoring and reporting',
+    title: 'Agencies & Marketing',
+    description: 'Manage multiple client domains with reliable deliverability and transparent reporting.',
     icon: Users,
     color: 'from-[#FFB74D] to-[#FFC107]',
   },
@@ -198,9 +236,9 @@ const userTypes = [
 
 const stats = [
   { value: '98%', label: 'Inbox Delivery Rate', icon: Mail },
-  { value: '30 Days', label: 'Average Warmup Time', icon: Timer },
-  { value: '10,000+', label: 'Domains Warmed', icon: ThermometerSun },
-  { value: '99.9%', label: 'Uptime Guarantee', icon: Activity },
+  { value: '30 Days', label: 'Proven Warmup Process', icon: Timer },
+  { value: '10,000+', label: 'Domains Successfully Warmed', icon: ThermometerSun },
+  { value: '99.9%', label: 'Uptime & Reliability', icon: Activity },
 ];
 
 /* Section divider - Mobile optimized */
@@ -249,6 +287,18 @@ const handleCTAClick = () => {
   window.open('https://app.360airo.com/', '_blank');
 };
 
+/* Internal Link Component */
+const InternalLink = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
+  return (
+    <Link 
+      href={href}
+      className={`text-[#FF8A65] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+};
+
 export default function EmailWarmupPage() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -265,16 +315,16 @@ export default function EmailWarmupPage() {
   return (
     <>
       <Head>
-        <title>Email Warmup Service | 360Airo - Boost Email Deliverability & Inbox Placement</title>
-        <meta name="description" content="360Airo's automated email warmup service builds domain reputation, increases sender score, and ensures your emails reach inboxes, not spam folders. Start warming up today!" />
-        <meta name="keywords" content="email warmup, email deliverability, sender reputation, domain warmup, email outreach, cold email, inbox placement" />
+        <title>Email Warmup: Get Your Emails Into the Inbox, Not Spam | 360Airo</title>
+        <meta name="description" content="Turn cold domains into trusted senders with 360Airo's email warmup tool. Guaranteed inbox delivery, higher open rates, and better ROI for your outreach campaigns." />
+        <meta name="keywords" content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" />
         
-        {/* Canonical URL - This tells search engines this is the original page */}
+        {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/email-warmup" />
         
-        {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="Email Warmup Service | 360Airo - Boost Email Deliverability" />
-        <meta property="og:description" content="Automated email warmup service that builds domain reputation and ensures inbox placement for your outreach campaigns." />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Email Warmup: Get Your Emails Into the Inbox, Not Spam | 360Airo" />
+        <meta property="og:description" content="The reason 360Airo is known as one of the best email warmup tools for serious outreach. Turn cold domains into trusted senders." />
         <meta property="og:url" content="https://360airo.com/features/email-warmup" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -285,8 +335,8 @@ export default function EmailWarmupPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Email Warmup Service | 360Airo - Boost Email Deliverability" />
-        <meta name="twitter:description" content="Automated email warmup service that builds domain reputation and ensures inbox placement for your outreach campaigns." />
+        <meta name="twitter:title" content="Email Warmup: Get Your Emails Into the Inbox, Not Spam | 360Airo" />
+        <meta name="twitter:description" content="The reason 360Airo is known as one of the best email warmup tools for serious outreach." />
         <meta name="twitter:image" content="https://360airo.com/twitter-email-warmup.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -303,8 +353,8 @@ export default function EmailWarmupPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo Email Warmup Service",
-              "description": "Automated email warmup service that builds domain reputation and ensures inbox placement for your outreach campaigns.",
+              "name": "360Airo Email Warmup Tool",
+              "description": "One of the best email warmup tools for turning cold domains into trusted senders with guaranteed inbox delivery.",
               "url": "https://360airo.com/features/email-warmup",
               "brand": {
                 "@type": "Brand",
@@ -315,23 +365,27 @@ export default function EmailWarmupPage() {
                 "url": "https://app.360airo.com/",
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/OnlineOnly"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "1000"
               }
             })
           }}
         />
       </Head>
 
-      {/* Add the URL in the HTML content for search engines to discover */}
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
         
-        {/* Hidden link for SEO - helps search engines discover the URL */}
+        {/* Hidden link for SEO */}
         <div className="hidden">
-          <a rel="canonical" href="https://360airo.com/features/email-warmup">360Airo Email Warmup Service</a>
+          <a rel="canonical" href="https://360airo.com/features/email-warmup">360Airo Email Warmup Tool - Best Email Warmup Service</a>
         </div>
 
         <Navbar />
 
-        {/* HERO SECTION - Mobile optimized with content first */}
+        {/* HERO SECTION */}
         <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <motion.div
@@ -387,9 +441,8 @@ export default function EmailWarmupPage() {
             transition={{ duration: 0.8 }}
             className="max-w-7xl mx-auto relative z-10 w-full"
           >
-            {/* MOBILE: Content first, then timeline */}
             <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12 lg:py-20">
-              {/* CONTENT COLUMN - Always first on mobile */}
+              {/* CONTENT COLUMN */}
               <div className="space-y-6 lg:space-y-8 order-1">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -417,7 +470,7 @@ export default function EmailWarmupPage() {
                       >
                         <Flame className="h-3 w-3 lg:h-4 lg:w-4 text-[#FF8A65]" />
                       </motion.div>
-                      <span>Email Warmup Service</span>
+                      <span>Best Email Warmup Tool</span>
                     </span>
                   </div>
                 </motion.div>
@@ -435,7 +488,7 @@ export default function EmailWarmupPage() {
                       transition={{ delay: 0.5, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Warm Up
+                      Get Your Emails
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -443,7 +496,7 @@ export default function EmailWarmupPage() {
                       transition={{ delay: 0.6, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Your Emails.
+                      Into the Inbox,
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, scale: 0.7 }}
@@ -451,7 +504,7 @@ export default function EmailWarmupPage() {
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
                       className="block bg-gradient-to-r from-[#FF6432] via-[#FF8A65] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-6xl"
                     >
-                      Win the Inbox.
+                      Not Spam.
                     </motion.span>
                   </motion.h1>
 
@@ -475,19 +528,16 @@ export default function EmailWarmupPage() {
                   transition={{ delay: 0.9, duration: 0.5 }}
                   className="space-y-4 lg:space-y-5 max-w-xl"
                 >
-                  <p className="text-base lg:text-lg text-white/90 leading-relaxed font-light">
-                    Turn Cold Domains into Trusted Senders with{' '}
-                    <motion.span
-                      animate={{ color: ['#FF6432', '#FF8A65', '#ffffff', '#FF6432'] }}
-                      transition={{ duration: 2.5, repeat: Infinity }}
-                      className="font-semibold"
-                    >
-                      360Airo's Email Warmup Tool
-                    </motion.span>
+                  <p className="text-base lg:text-lg text-white/90 leading-relaxed font-bold">
+                    If your emails are not landing in the inbox, everything else fails.
                   </p>
                   <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                    Before your campaign can connect, your emails need to land — not linger in spam.
-                    360Airo's email warmup service builds trust with inbox providers through authentic, automated engagement.
+                    Your outreach, your sales, your follow ups, your marketing. Nothing works if people never see your message.
+                    This is exactly where 360Airo's email warmup tool becomes your advantage.
+                  </p>
+                  <p className="text-sm lg:text-base text-white/75 leading-relaxed">
+                    We help you turn a cold, unknown domain into a trusted sender that inbox providers recognise and allow inside.
+                    Thousands of teams rely on this process, and it is the reason 360Airo is known as one of the best email warmup tools for serious outreach.
                   </p>
                 </motion.div>
 
@@ -524,7 +574,7 @@ export default function EmailWarmupPage() {
                 </motion.div>
               </div>
 
-              {/* TIMELINE COLUMN - Always second on mobile */}
+              {/* TIMELINE COLUMN */}
               <motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 100, y: isMobile ? 40 : 0 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
@@ -544,7 +594,7 @@ export default function EmailWarmupPage() {
                       />
                     </div>
 
-                    {/* Timeline Steps - Mobile Compact */}
+                    {/* Timeline Steps */}
                     {[
                       {
                         icon: Clock,
@@ -586,7 +636,7 @@ export default function EmailWarmupPage() {
                         transition={{ delay: step.delay, duration: 0.4 }}
                         className="relative flex items-start mb-4 lg:mb-6 group"
                       >
-                        {/* Timeline Node - Mobile Compact */}
+                        {/* Timeline Node */}
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
@@ -601,7 +651,7 @@ export default function EmailWarmupPage() {
                         >
                           <step.icon className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
                           
-                          {/* Status Indicator - Mobile Smaller */}
+                          {/* Status Indicator */}
                           {step.status === 'completed' && (
                             <motion.div
                               initial={{ scale: 0 }}
@@ -622,7 +672,7 @@ export default function EmailWarmupPage() {
                           )}
                         </motion.div>
 
-                        {/* Step Content - Mobile Compact */}
+                        {/* Step Content */}
                         <motion.div
                           initial={{ opacity: 0, x: 10 }}
                           animate={{ opacity: 1, x: 0 }}
@@ -649,7 +699,7 @@ export default function EmailWarmupPage() {
                       </motion.div>
                     ))}
 
-                    {/* Current Status Card - Mobile Compact */}
+                    {/* Current Status Card */}
                     <motion.div
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -672,7 +722,7 @@ export default function EmailWarmupPage() {
                         </div>
                       </div>
                       
-                      {/* Progress Bar - Mobile Compact */}
+                      {/* Progress Bar */}
                       <div className="space-y-1 mb-2 lg:mb-3">
                         <div className="flex justify-between text-xs">
                           <span className="text-white/70">Warmup Progress</span>
@@ -688,7 +738,7 @@ export default function EmailWarmupPage() {
                         </div>
                       </div>
 
-                      {/* Quick Stats - Mobile Compact */}
+                      {/* Quick Stats */}
                       <div className="grid grid-cols-3 gap-1 lg:gap-2">
                         {[
                           { label: 'Sent', value: '47', icon: Send },
@@ -710,7 +760,7 @@ export default function EmailWarmupPage() {
                       </div>
                     </motion.div>
 
-                    {/* Floating Heat Indicators - Mobile Subtle */}
+                    {/* Floating Heat Indicators */}
                     {[...Array(isMobile ? 2 : 3)].map((_, i) => (
                       <motion.div
                         key={`heat-${i}`}
@@ -737,8 +787,7 @@ export default function EmailWarmupPage() {
           </motion.div>
         </section>
 
-        {/* Rest of the sections remain exactly the same */}
-        {/* WHAT IS EMAIL WARMUP - Mobile optimized */}
+        {/* WHAT IS EMAIL WARMUP */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -752,22 +801,31 @@ export default function EmailWarmupPage() {
                 <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Understanding Email Warmup</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                What Is Email Warmup?
+                What Email Warmup Actually Does
               </h2>
               <SectionDivider />
               <div className="text-left space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed">
                 <p>
-                  When a new domain starts sending emails in bulk, ISPs often flag it as suspicious. The email warmup process gradually increases your sending volume, letting your domain establish credibility.
+                  When you start sending emails from a new or inactive domain, inbox providers instantly become cautious.
+                  Too many new emails at once can make your domain look risky, which often leads to spam or low deliverability.
                 </p>
                 <p>
-                  With 360Airo, this process is <span className="text-[#FF6432] font-semibold">completely automated</span> — designed to boost inbox placement and protect your domain reputation without manual effort.
+                  Email warmup fixes this by slowly building trust between your domain and inbox providers.
+                  With 360Airo, everything is automated so the warmup feels natural, safe, and consistent.
+                </p>
+                <p className="font-semibold text-[#FF8A65]">
+                  Before you begin, connect and authenticate your domain through{' '}
+                  <InternalLink href="/features/domains-emails">
+                    Domains & Emails
+                  </InternalLink>
+                  {' '}to create a strong base for your warmup.
                 </p>
               </div>
             </motion.div>
           </motion.div>
         </section>
 
-        {/* HOW IT WORKS - Mobile optimized */}
+        {/* HOW IT WORKS */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -778,14 +836,14 @@ export default function EmailWarmupPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">How 360Airo's Warmup Works</span>
+                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">How 360Airo Builds Your Sender Reputation</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 Four Steps to <span className="text-[#FF6432]">Inbox Success</span>
               </h2>
               <SectionDivider />
               <p className="text-base lg:text-lg text-white/80">
-                Our intelligent system handles every aspect of the warmup process automatically.
+                This careful build up is one of the reasons 360Airo stands out among the best email warmup tools today.
               </p>
             </motion.div>
 
@@ -816,7 +874,9 @@ export default function EmailWarmupPage() {
                   <div className="flex-1 text-center md:text-left">
                     <SectionDivider variant="left" />
                     <h3 className="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-3 transition-colors group-hover:text-[#FF8A65]">{item.title}</h3>
-                    <p className="text-white/80 text-base lg:text-lg leading-relaxed">{item.description}</p>
+                    <div className="text-white/80 text-base lg:text-lg leading-relaxed">
+                      {item.description}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -824,7 +884,7 @@ export default function EmailWarmupPage() {
           </motion.div>
         </section>
 
-        {/* WHY IT MATTERS - Mobile optimized */}
+        {/* WHY IT MATTERS */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -835,18 +895,18 @@ export default function EmailWarmupPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Why It Matters</span>
+                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Why Email Warmup Matters for Your Business</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                The Impact on Your <span className="text-[#FF6432]">Bottom Line</span>
+                When warmup is done correctly, <span className="text-[#FF6432]">everything improves</span>
               </h2>
               <SectionDivider />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                Email warmup isn't just about deliverability — it's about protecting your investment and maximizing your outreach ROI.
+                Most campaigns fail because emails never reach the inbox. This is the foundation of successful cold outreach.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               {benefits.map((benefit, index) => (
                 <GlowCard key={index} className="group cursor-pointer rounded-xl">
                   <Card className="relative bg-white/5 backdrop-blur-sm p-4 lg:p-6 h-full border border-white/10 rounded-xl transition-all duration-500 group-hover:bg-white/10 group-hover:border-[#FF6432]/50 group-hover:scale-105">
@@ -867,7 +927,9 @@ export default function EmailWarmupPage() {
                         viewport={{ once: true, margin: '-50px' }}
                         transition={{ delay: index * 0.1, duration: 0.6 }}
                       />
-                      <p className="text-white/80 text-xs lg:text-sm leading-relaxed">{benefit.description}</p>
+                      <div className="text-white/80 text-xs lg:text-sm leading-relaxed">
+                        {benefit.description}
+                      </div>
                     </div>
                   </Card>
                 </GlowCard>
@@ -876,7 +938,7 @@ export default function EmailWarmupPage() {
           </motion.div>
         </section>
 
-        {/* STATS SECTION - Mobile optimized */}
+        {/* STATS SECTION */}
         <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -891,7 +953,7 @@ export default function EmailWarmupPage() {
                   <div className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#FF6432]/50">
                     <motion.div
                       className="bg-white/15 w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#FF6432]/30"
-                      whileHover={{scale: isMobile ? 1.1 : 1.2 }}
+                      whileHover={{ rotate: 360, scale: isMobile ? 1.1 : 1.2 }}
                       transition={{ duration: 0.6 }}
                     >
                       <stat.icon className="h-5 w-5 lg:h-8 lg:w-8 text-[#FF6432] transition-colors group-hover:text-white" />
@@ -913,7 +975,7 @@ export default function EmailWarmupPage() {
           </motion.div>
         </section>
 
-        {/* BUILT FOR TEAMS - Mobile optimized */}
+        {/* BUILT FOR TEAMS */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/20 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -924,14 +986,15 @@ export default function EmailWarmupPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Built for Teams That Mean Business</span>
+                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Who Benefits the Most</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                From founders and marketers to SDRs and agencies
+                Built for teams that mean business
               </h2>
               <SectionDivider />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                Anyone running cold email campaigns can benefit from 360Airo's email warmup service. We make it effortless to build domain trust, increase sender score, and optimize email outreach at scale.
+                360Airo's email warmup tool is used by founders, growth teams, agencies, SDRs, marketing departments, and anyone who sends cold emails at scale.
+                Our process is simple, safe, and proven to work.
               </p>
             </motion.div>
 
@@ -942,6 +1005,7 @@ export default function EmailWarmupPage() {
                     <motion.div
                       className={`bg-gradient-to-r ${type.color} w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6`}
                       whileHover={{ 
+                        rotate: 360, 
                         scale: isMobile ? 1.1 : 1.2, 
                         boxShadow: '0 0 25px rgba(255,100,50,0.4)' 
                       }}
@@ -965,7 +1029,7 @@ export default function EmailWarmupPage() {
           </motion.div>
         </section>
 
-        {/* FINAL CTA - Mobile optimized */}
+        {/* FINAL CTA */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#FF6432]/20 via-[#19001d]/40 to-[#FF8A65]/20" />
           <motion.div 
@@ -977,15 +1041,24 @@ export default function EmailWarmupPage() {
           >
             <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block">
-                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Start Warming Up Smarter</span>
+                <span className="text-[#FF6432] font-semibold text-xs lg:text-sm tracking-wider uppercase">Start Your Warmup With Confidence</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl md:text-5xl font-bold text-white">
                 Don't let spam filters decide your campaign's fate.
               </h2>
               <SectionDivider variant="gradient" />
-              <p className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
-                Let 360Airo help you boost open rates, avoid spam folders, and earn inbox credibility — automatically.
-              </p>
+              <div className="space-y-4 text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
+                <p>
+                  Your team puts effort, time, and money into every campaign.
+                </p>
+                <p>
+                  <span className="font-bold text-[#FF8A65]">360Airo helps you reach the inbox, build a trusted sender reputation, and protect your domain for long term success.</span>
+                </p>
+                <p>
+                  Everything is automated and designed to give you reliable deliverability from day one.
+                  That is why businesses choose us when they want guaranteed improvements in deliverability.
+                </p>
+              </div>
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
                 <motion.div 
                   whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
@@ -996,7 +1069,7 @@ export default function EmailWarmupPage() {
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Button 
                     size="lg" 
-                    className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text [#210d27] border-2 border-transparent group-hover:border-white/20"
+                    className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20"
                   >
                     Get Started with Email Warmup
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
@@ -1011,7 +1084,7 @@ export default function EmailWarmupPage() {
                 transition={{ duration: 0.7 }}
                 style={{ maxWidth: '100px' }}
               />
-              <p className="text-white/90 text-xs lg:text-sm">🔥 Transform cold domains into trusted senders</p>
+              <p className="text-white/70 text-xs lg:text-sm">🔥 Transform cold domains into trusted senders</p>
             </motion.div>
           </motion.div>
         </section>
