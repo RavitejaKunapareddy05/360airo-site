@@ -37,6 +37,8 @@ function incrementDailyCount(ipAddress: string, count: number): void {
   }
   const limit = dailyLimits.get(key)!;
   limit.count += count;
+  console.log(`📊 Daily limit tracking: ${ipAddress} - Used: ${limit.count}/${DAILY_LIMIT}`);
+  return limit.count;
 }
 
 // Email format validation using regex
@@ -161,10 +163,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Increment daily count
-    incrementDailyCount(ipAddress, emails.length);
+    const usedCount = incrementDailyCount(ipAddress, emails.length);
 
-    // Process emails in parallel with concurrency limit
-    const CONCURRENCY_LIMIT = 1;
+    // Process emails in batches of 5, sequentially (10 seconds per email)
+    const BATCH_SIZE = 5;
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
@@ -208,7 +210,7 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Process all emails in parallel batches
+    // Process all emails in sequential batches
     const encoder = new TextEncoder();
     let resultCount = 0;
     
@@ -217,22 +219,28 @@ export async function POST(request: NextRequest) {
         try {
           controller.enqueue(encoder.encode('[\n'));
           
-          for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
-            const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
-            const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
+          // Process emails in batches of 5 sequentially (each email takes ~10 seconds)
+          for (let i = 0; i < emails.length; i += BATCH_SIZE) {
+            const batch = emails.slice(i, i + BATCH_SIZE);
+            console.log(`Processing batch: ${Math.floor(i / BATCH_SIZE) + 1}, emails ${i + 1}-${Math.min(i + BATCH_SIZE, emails.length)} of ${emails.length}`);
             
-            for (const result of batchResults) {
+            // Process each email in the batch sequentially (one at a time, not in parallel)
+            for (const email of batch) {
+              const result = await verifyEmailWithLimit(email);
               if (resultCount > 0) {
                 controller.enqueue(encoder.encode(',\n'));
               }
               controller.enqueue(encoder.encode(JSON.stringify(result)));
               resultCount++;
+              console.log(`✓ Verified ${resultCount}/${emails.length}: ${email}`);
             }
           }
           
+          console.log(`✅ All ${emails.length} emails verified successfully`);
           controller.enqueue(encoder.encode('\n]'));
           controller.close();
         } catch (error) {
+          console.error('Stream error:', error);
           controller.error(error);
         }
       }
@@ -241,6 +249,7 @@ export async function POST(request: NextRequest) {
     return new NextResponse(stream, {
       headers: {
         'Content-Type': 'application/json',
+        'X-Remaining-Daily-Limit': (DAILY_LIMIT - usedCount).toString(),
       }
     });
   } catch (error: any) {
