@@ -2,6 +2,7 @@
   command = "npm run build"
   functions = "netlify/functions"
   publish = ".next"
+  environment = { NEXT_PUBLIC_MAILTESTER_API_KEY = "sub_1SQ8ntAJu6gy4fiYiCXxoUQc" }
 
 [functions]
   node_bundler = "esbuild"

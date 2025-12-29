@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
-// Backend API Key - hardcoded and secure
-const BACKEND_API_KEY = 'sub_1SQ8ntAJu6gy4fiYiCXxoUQc';
+// Backend API Key from environment variable
+const BACKEND_API_KEY = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || 'sub_1SQ8ntAJu6gy4fiYiCXxoUQc';
 const MAILTESTER_API_ENDPOINT = 'https://happy.mailtester.ninja/ninja';
 
 // Email format validation using regex
