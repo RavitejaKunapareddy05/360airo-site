@@ -54,7 +54,7 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
         email: email.toLowerCase().trim(),
         key: BACKEND_API_KEY,
       },
-      timeout: 15000,
+      timeout: 10000,
       family: 4,
     });
     
@@ -164,7 +164,10 @@ export async function POST(request: NextRequest) {
     // Increment daily count
     const usedCount = incrementDailyCount(ipAddress, emails.length);
 
-    // Process emails sequentially (10-15 seconds per email for accuracy)
+    // Initialize results array
+    const allResults = [];
+
+    // Process emails sequentially (10 seconds per email for speed)
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
@@ -208,21 +211,54 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Process all emails sequentially to ensure completion
-    const allResults = [];
-    
-    for (let i = 0; i < emails.length; i++) {
-      const result = await verifyEmailWithLimit(emails[i]);
-      allResults.push(result);
-      console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
-    }
-    
-    console.log(`✅ All ${emails.length} emails verified successfully`);
+    // Process all emails sequentially and stream results
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          controller.enqueue(encoder.encode('['));
+          
+          for (let i = 0; i < emails.length; i++) {
+            try {
+              const result = await verifyEmailWithLimit(emails[i]);
+              allResults.push(result);
+              
+              // Send each result as it completes
+              const json = JSON.stringify(result);
+              controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
+              
+              console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
+            } catch (err) {
+              console.error(`Error verifying ${emails[i]}:`, err);
+              const errorResult = {
+                email: emails[i],
+                status: 'unknown',
+                reason: 'Verification timeout - email took too long to verify',
+                verificationTime: 10000,
+                verificationMethod: 'error',
+              };
+              allResults.push(errorResult);
+              const json = JSON.stringify(errorResult);
+              controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
+            }
+          }
+          
+          controller.enqueue(encoder.encode(']'));
+          controller.close();
+          console.log(`✅ All ${emails.length} emails verified and streamed`);
+        } catch (error) {
+          console.error('Stream error:', error);
+          controller.error(error);
+        }
+      },
+    });
 
-    return NextResponse.json(allResults, {
+    return new NextResponse(stream, {
       headers: {
+        'Content-Type': 'application/json',
         'X-Remaining-Daily-Limit': (DAILY_LIMIT - usedCount).toString(),
-      }
+        'Transfer-Encoding': 'chunked',
+      },
     });
   } catch (error: any) {
     console.error('Email verifier route error:', error);

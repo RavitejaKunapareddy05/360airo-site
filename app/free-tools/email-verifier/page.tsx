@@ -85,12 +85,7 @@ export default function EmailVerifierPage() {
         return;
       }
 
-      // Parse JSON response
-      const responseData = await response.json();
-      const resultsArray = Array.isArray(responseData) ? responseData : [];
-
-      setResults(resultsArray);
-      setProgress(100);      // Parse streaming JSON array
+      // Parse streaming JSON array
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       if (!reader) throw new Error('No response body');
