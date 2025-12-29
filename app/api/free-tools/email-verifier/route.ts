@@ -19,7 +19,7 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
         email: email.toLowerCase().trim(),
         key: BACKEND_API_KEY,
       },
-      timeout: 10000,
+      timeout: 5000,
       family: 4,
     });
     
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Process emails in parallel with concurrency limit
-    const CONCURRENCY_LIMIT = 5;
+    const CONCURRENCY_LIMIT = 10;
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
