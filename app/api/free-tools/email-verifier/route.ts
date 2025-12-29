@@ -5,6 +5,40 @@ import axios from 'axios';
 const BACKEND_API_KEY = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || 'sub_1SQ8ntAJu6gy4fiYiCXxoUQc';
 const MAILTESTER_API_ENDPOINT = 'https://happy.mailtester.ninja/ninja';
 
+// Daily limit tracking (resets per deployment, use database for production)
+const dailyLimits = new Map<string, { count: number; date: string }>();
+const DAILY_LIMIT = 30;
+
+function getDailyKey(ipAddress: string): string {
+  return `${ipAddress}:${new Date().toISOString().split('T')[0]}`;
+}
+
+function checkDailyLimit(ipAddress: string): { allowed: boolean; remaining: number } {
+  const key = getDailyKey(ipAddress);
+  const today = new Date().toISOString().split('T')[0];
+  
+  if (!dailyLimits.has(key)) {
+    dailyLimits.set(key, { count: 0, date: today });
+  }
+  
+  const limit = dailyLimits.get(key)!;
+  
+  if (limit.count >= DAILY_LIMIT) {
+    return { allowed: false, remaining: 0 };
+  }
+  
+  return { allowed: true, remaining: DAILY_LIMIT - limit.count };
+}
+
+function incrementDailyCount(ipAddress: string, count: number): void {
+  const key = getDailyKey(ipAddress);
+  if (!dailyLimits.has(key)) {
+    dailyLimits.set(key, { count: 0, date: new Date().toISOString().split('T')[0] });
+  }
+  const limit = dailyLimits.get(key)!;
+  limit.count += count;
+}
+
 // Email format validation using regex
 function validateEmailFormat(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,7 +53,7 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
         email: email.toLowerCase().trim(),
         key: BACKEND_API_KEY,
       },
-      timeout: 5000,
+      timeout: 10000,
       family: 4,
     });
     
@@ -98,8 +132,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get IP address for rate limiting
+    const ipAddress = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+    
+    // Check daily limit
+    const { allowed, remaining } = checkDailyLimit(ipAddress);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'You have reached today\'s limit of 30 emails. Come again tomorrow!' },
+        { status: 429 }
+      );
+    }
+
+    // Check if batch exceeds remaining limit
+    if (emails.length > remaining) {
+      return NextResponse.json(
+        { error: `You can verify ${remaining} more email(s) today. Limit resets tomorrow.` },
+        { status: 429 }
+      );
+    }
+
+    // Increment daily count
+    incrementDailyCount(ipAddress, emails.length);
+
     // Process emails in parallel with concurrency limit
-    const CONCURRENCY_LIMIT = 10;
+    const CONCURRENCY_LIMIT = 1;
     
     const verifyEmailWithLimit = async (email: string) => {
       try {

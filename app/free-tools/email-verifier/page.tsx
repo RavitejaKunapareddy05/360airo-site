@@ -208,7 +208,7 @@ export default function EmailVerifierPage() {
             Email <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Verifier</span>
           </h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Verify email addresses in bulk and reduce bounce rates. Advanced verification powered by MailTester API.
+            Verify email addresses in bulk and reduce bounce rates. SMTP verification ensures accuracy.
           </p>
         </motion.div>
 
