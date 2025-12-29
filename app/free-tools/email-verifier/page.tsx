@@ -90,24 +90,39 @@ export default function EmailVerifierPage() {
       const decoder = new TextDecoder();
       if (!reader) throw new Error('No response body');
 
-      let fullText = '';
+      let buffer = '';
       const resultsArray: VerificationResult[] = [];
 
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          // Process any remaining data
+          if (buffer.trim() && buffer.trim() !== '[' && buffer.trim() !== ']') {
+            const cleaned = buffer.trim().replace(/^,|,$/g, '');
+            if (cleaned) {
+              try {
+                const result: VerificationResult = JSON.parse(cleaned);
+                resultsArray.push(result);
+                setResults([...resultsArray]);
+                setProgress(100);
+              } catch (e) {
+                console.error('Failed to parse final result:', cleaned);
+              }
+            }
+          }
+          break;
+        }
 
-        fullText += decoder.decode(value, { stream: true });
+        buffer += decoder.decode(value, { stream: true });
 
-        // Try to extract complete JSON objects
-        let lastValidIndex = 0;
-        let depth = 0;
+        // Extract complete JSON objects separated by commas
+        let objectDepth = 0;
         let inString = false;
         let escaped = false;
-        let objectStart = -1;
+        let lastCommaIndex = -1;
 
-        for (let i = 0; i < fullText.length; i++) {
-          const char = fullText[i];
+        for (let i = 0; i < buffer.length; i++) {
+          const char = buffer[i];
 
           if (escaped) {
             escaped = false;
@@ -126,29 +141,30 @@ export default function EmailVerifierPage() {
 
           if (inString) continue;
 
-          if (char === '{') {
-            if (depth === 0) objectStart = i;
-            depth++;
-          } else if (char === '}') {
-            depth--;
-            if (depth === 0 && objectStart >= 0) {
-              const jsonStr = fullText.substring(objectStart, i + 1);
+          if (char === '{') objectDepth++;
+          else if (char === '}') objectDepth--;
+          else if (char === ',' && objectDepth === 0) {
+            // Found complete object before comma
+            const jsonStr = buffer.substring(lastCommaIndex + 1, i).trim();
+            if (jsonStr && jsonStr !== '[') {
               try {
                 const result: VerificationResult = JSON.parse(jsonStr);
                 resultsArray.push(result);
                 setResults([...resultsArray]);
                 setProgress(Math.round((resultsArray.length / emailList.length) * 100));
-                lastValidIndex = i + 1;
               } catch (e) {
-                // Parse error, continue
+                console.error('Failed to parse:', jsonStr);
               }
-              objectStart = -1;
             }
+            lastCommaIndex = i;
           }
         }
 
-        // Keep unparsed data for next iteration
-        fullText = fullText.substring(lastValidIndex);
+        // Remove processed data from buffer
+        if (lastCommaIndex >= 0) {
+          buffer = buffer.substring(lastCommaIndex + 1);
+          lastCommaIndex = -1;
+        }
       }
 
       // Ensure progress is at 100%

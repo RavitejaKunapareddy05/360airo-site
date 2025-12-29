@@ -219,28 +219,14 @@ export async function POST(request: NextRequest) {
           controller.enqueue(encoder.encode('['));
           
           for (let i = 0; i < emails.length; i++) {
-            try {
-              const result = await verifyEmailWithLimit(emails[i]);
-              allResults.push(result);
-              
-              // Send each result as it completes
-              const json = JSON.stringify(result);
-              controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
-              
-              console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
-            } catch (err) {
-              console.error(`Error verifying ${emails[i]}:`, err);
-              const errorResult = {
-                email: emails[i],
-                status: 'unknown',
-                reason: 'Verification timeout - email took too long to verify',
-                verificationTime: 10000,
-                verificationMethod: 'error',
-              };
-              allResults.push(errorResult);
-              const json = JSON.stringify(errorResult);
-              controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
-            }
+            const result = await verifyEmailWithLimit(emails[i]);
+            allResults.push(result);
+            
+            // Send each result as it completes
+            const json = JSON.stringify(result);
+            controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
+            
+            console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
           }
           
           controller.enqueue(encoder.encode(']'));
