@@ -71,7 +71,31 @@ export default function EmailVerifierPage() {
       });
 
       if (!response.ok) {
-        throw new Error(await response.text());
+        const errorText = await response.text();
+        let errorMessage = errorText;
+        let remaining = 0;
+        
+        try {
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.error || errorText;
+          remaining = errorData.remaining !== undefined ? errorData.remaining : 0;
+        } catch (e) {
+          // If not JSON, use raw text
+        }
+
+        // Handle rate limit (429)
+        if (response.status === 429) {
+          if (remaining === 0) {
+            setError(`⛔ Daily Limit Reached\n\n${errorMessage}\n\nYou must wait until tomorrow to verify more emails.`);
+          } else {
+            setError(`⚠️ Limit Exceeded\n\n${errorMessage}\n\nYou have ${remaining} verification(s) remaining today.`);
+          }
+        } else {
+          setError(errorMessage);
+        }
+        
+        setLoading(false);
+        return;
       }
 
       // Parse streaming JSON array
@@ -268,10 +292,10 @@ export default function EmailVerifierPage() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm flex items-start gap-3"
+                  className="mt-4 p-5 bg-red-500/20 border border-red-500/50 rounded-lg text-red-200 text-sm flex items-start gap-3 whitespace-pre-line"
                 >
                   <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span>{error}</span>
+                  <span className="leading-relaxed">{error}</span>
                 </motion.div>
               )}
             </div>

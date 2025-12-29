@@ -139,7 +139,11 @@ export async function POST(request: NextRequest) {
     const { allowed, remaining } = checkDailyLimit(ipAddress);
     if (!allowed) {
       return NextResponse.json(
-        { error: 'You have reached today\'s limit of 30 emails. Come again tomorrow!' },
+        { 
+          error: 'You have reached today\'s limit of 30 emails. Come again tomorrow!',
+          remaining: 0,
+          limit: 30
+        },
         { status: 429 }
       );
     }
@@ -147,7 +151,11 @@ export async function POST(request: NextRequest) {
     // Check if batch exceeds remaining limit
     if (emails.length > remaining) {
       return NextResponse.json(
-        { error: `You can verify ${remaining} more email(s) today. Limit resets tomorrow.` },
+        { 
+          error: `You can verify only ${remaining} more email(s) today. Your daily limit is 30. Limit resets tomorrow.`,
+          remaining: remaining,
+          limit: 30
+        },
         { status: 429 }
       );
     }
