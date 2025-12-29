@@ -636,9 +636,7 @@ export function Navbar() {
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-xl pointer-events-none" />
                       
                       {/* Scrollable Container */}
-                      <div className="free-tools-dropdown relative overflow-y-auto p-3 max-h-[300px]" style={{
-                        scrollBehavior: 'smooth'
-                      }}>
+                      <div className="free-tools-dropdown relative overflow-y-auto p-3 max-h-[300px]">
                         <div className="grid grid-cols-3 gap-2">
                           {freeTools.map((tool, index) => (
                             <motion.div

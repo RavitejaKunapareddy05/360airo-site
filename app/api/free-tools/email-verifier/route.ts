@@ -30,14 +30,13 @@ function checkDailyLimit(ipAddress: string): { allowed: boolean; remaining: numb
   return { allowed: true, remaining: DAILY_LIMIT - limit.count };
 }
 
-function incrementDailyCount(ipAddress: string, count: number): void {
+function incrementDailyCount(ipAddress: string, count: number): number {
   const key = getDailyKey(ipAddress);
   if (!dailyLimits.has(key)) {
     dailyLimits.set(key, { count: 0, date: new Date().toISOString().split('T')[0] });
   }
   const limit = dailyLimits.get(key)!;
   limit.count += count;
-  console.log(`📊 Daily limit tracking: ${ipAddress} - Used: ${limit.count}/${DAILY_LIMIT}`);
   return limit.count;
 }
 
@@ -165,8 +164,8 @@ export async function POST(request: NextRequest) {
     // Increment daily count
     const usedCount = incrementDailyCount(ipAddress, emails.length);
 
-    // Process emails in batches of 5, sequentially (10 seconds per email)
-    const BATCH_SIZE = 5;
+    // Process emails in parallel with concurrency limit
+    const CONCURRENCY_LIMIT = 1;
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
@@ -210,7 +209,7 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Process all emails in sequential batches
+    // Process all emails in parallel batches
     const encoder = new TextEncoder();
     let resultCount = 0;
     
@@ -219,28 +218,22 @@ export async function POST(request: NextRequest) {
         try {
           controller.enqueue(encoder.encode('[\n'));
           
-          // Process emails in batches of 5 sequentially (each email takes ~10 seconds)
-          for (let i = 0; i < emails.length; i += BATCH_SIZE) {
-            const batch = emails.slice(i, i + BATCH_SIZE);
-            console.log(`Processing batch: ${Math.floor(i / BATCH_SIZE) + 1}, emails ${i + 1}-${Math.min(i + BATCH_SIZE, emails.length)} of ${emails.length}`);
+          for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
+            const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
+            const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
             
-            // Process each email in the batch sequentially (one at a time, not in parallel)
-            for (const email of batch) {
-              const result = await verifyEmailWithLimit(email);
+            for (const result of batchResults) {
               if (resultCount > 0) {
                 controller.enqueue(encoder.encode(',\n'));
               }
               controller.enqueue(encoder.encode(JSON.stringify(result)));
               resultCount++;
-              console.log(`✓ Verified ${resultCount}/${emails.length}: ${email}`);
             }
           }
           
-          console.log(`✅ All ${emails.length} emails verified successfully`);
           controller.enqueue(encoder.encode('\n]'));
           controller.close();
         } catch (error) {
-          console.error('Stream error:', error);
           controller.error(error);
         }
       }
