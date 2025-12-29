@@ -54,7 +54,7 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
         email: email.toLowerCase().trim(),
         key: BACKEND_API_KEY,
       },
-      timeout: 10000,
+      timeout: 15000,
       family: 4,
     });
     
@@ -164,8 +164,7 @@ export async function POST(request: NextRequest) {
     // Increment daily count
     const usedCount = incrementDailyCount(ipAddress, emails.length);
 
-    // Process emails in parallel with concurrency limit
-    const CONCURRENCY_LIMIT = 1;
+    // Process emails sequentially (10-15 seconds per email for accuracy)
     
     const verifyEmailWithLimit = async (email: string) => {
       try {
@@ -209,39 +208,19 @@ export async function POST(request: NextRequest) {
       }
     };
 
-    // Process all emails in parallel batches
-    const encoder = new TextEncoder();
-    let resultCount = 0;
+    // Process all emails sequentially to ensure completion
+    const allResults = [];
     
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          controller.enqueue(encoder.encode('[\n'));
-          
-          for (let i = 0; i < emails.length; i += CONCURRENCY_LIMIT) {
-            const batch = emails.slice(i, i + CONCURRENCY_LIMIT);
-            const batchResults = await Promise.all(batch.map(verifyEmailWithLimit));
-            
-            for (const result of batchResults) {
-              if (resultCount > 0) {
-                controller.enqueue(encoder.encode(',\n'));
-              }
-              controller.enqueue(encoder.encode(JSON.stringify(result)));
-              resultCount++;
-            }
-          }
-          
-          controller.enqueue(encoder.encode('\n]'));
-          controller.close();
-        } catch (error) {
-          controller.error(error);
-        }
-      }
-    });
+    for (let i = 0; i < emails.length; i++) {
+      const result = await verifyEmailWithLimit(emails[i]);
+      allResults.push(result);
+      console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
+    }
+    
+    console.log(`✅ All ${emails.length} emails verified successfully`);
 
-    return new NextResponse(stream, {
+    return NextResponse.json(allResults, {
       headers: {
-        'Content-Type': 'application/json',
         'X-Remaining-Daily-Limit': (DAILY_LIMIT - usedCount).toString(),
       }
     });

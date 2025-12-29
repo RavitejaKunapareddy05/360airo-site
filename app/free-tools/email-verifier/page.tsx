@@ -21,21 +21,8 @@ export default function EmailVerifierPage() {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
   const [startTime, setStartTime] = useState<Date | null>(null);
-  const [elapsedTime, setElapsedTime] = useState('0s');
   const [showDetails, setShowDetails] = useState(false);
   const [copied, setCopied] = useState(false);
-
-  // Update elapsed time every second
-  useEffect(() => {
-    if (!loading || !startTime) return;
-    const interval = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - startTime.getTime()) / 1000);
-      const minutes = Math.floor(elapsed / 60);
-      const seconds = elapsed % 60;
-      setElapsedTime(minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [loading, startTime]);
 
   const handleVerify = async () => {
     setError('');
@@ -98,7 +85,12 @@ export default function EmailVerifierPage() {
         return;
       }
 
-      // Parse streaming JSON array
+      // Parse JSON response
+      const responseData = await response.json();
+      const resultsArray = Array.isArray(responseData) ? responseData : [];
+
+      setResults(resultsArray);
+      setProgress(100);      // Parse streaming JSON array
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       if (!reader) throw new Error('No response body');
@@ -323,7 +315,6 @@ export default function EmailVerifierPage() {
                 {loading && totalProcessed > 0 && (
                   <div className="flex items-center justify-between mt-4 text-white/60 text-sm">
                     <span>Processed: {totalProcessed} / {emails.split('\n').filter(e => e.trim()).length}</span>
-                    <span>{elapsedTime}</span>
                   </div>
                 )}
               </motion.div>
