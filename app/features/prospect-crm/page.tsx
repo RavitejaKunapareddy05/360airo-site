@@ -674,7 +674,7 @@ const HeroSection = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="block transform-gpu"
                 >
-                  Smarter Relationships,
+                  Prospect CRM Smarter Relationships,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
