@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Head from 'next/head';
+import Link from 'next/link';
 
 import {
   MessageSquare,
@@ -33,6 +35,18 @@ import {
   Workflow,
   MessageCircleReply
 } from 'lucide-react';
+
+/* Internal Link Component */
+const InternalLink = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
+  return (
+    <Link 
+      href={href}
+      className={`text-[#b45ecf] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+};
 
 // Circular Connection Animation - Mobile optimized
 const CircularConnections = () => {
@@ -376,262 +390,348 @@ export default function UnifiedInboxRadialPage() {
 
   const featureSections = [
     {
-      title: "All Your Accounts, Perfectly Synced",
-      description: "Say goodbye to switching tabs or logging into multiple accounts. 360Airo connects all your domains and emails into one shared inbox, syncing every thread instantly. Whether you're managing multiple campaigns or working with a distributed sales team, everyone stays on the same page — literally.",
-      features: [
-        "Manage multiple sender accounts in one dashboard",
-        "Assign conversations to specific team members",
-        "Track message history and response timelines",
-        "Keep complete visibility over all client interactions"
-      ],
-      note: "Your outreach becomes smoother, faster, and perfectly coordinated."
+      title: "Unified Inbox — Every Conversation, One View",
+      description: "Collaborate effortlessly across all your outreach channels. Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's unified inbox, every message from your email sequences, LinkedIn outreach, and campaign replies appears in one clean, centralized workspace. Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. <InternalLink href='/features/team-collaboration'>Team Collaboration</InternalLink> becomes seamless and organized.",
+      features: [],
+      note: ""
     },
     {
-      title: "Smarter Collaboration with AI Assistance",
-      description: "360Airo's AI-powered inbox management helps your team respond faster and smarter. It detects message intent, flags high-priority replies, and even suggests personalized responses — all while maintaining your brand's tone.",
+      title: "All Your Accounts, Perfectly Synced",
+      description: "Say goodbye to switching tabs or logging into multiple platforms. 360Airo connects all your domains and emails into a single, synchronized inbox that updates every thread instantly. Whether you're handling multiple campaigns or coordinating across a distributed team, everyone stays aligned — literally. Your outreach becomes smoother, faster, and far more coordinated.",
       features: [
-        "Get AI-suggested replies for faster follow-ups",
-        "Categorize and prioritize messages automatically", 
-        "Never lose track of client communications or leads"
+        "Manage multiple sender accounts in one dashboard",
+        "Assign conversations to the right team members",
+        "Track complete message history and response timelines",
+        "Maintain full visibility over all prospect interactions through <InternalLink href='/features/prospect-crm'>Prospect CRM</InternalLink>",
+        "Connect Gmail, Outlook & SMTP for a multi-channel inbox"
       ],
-      note: "The result? You save hours every week while delivering a seamless experience to every prospect."
+      note: ""
+    },
+    {
+      title: "Smarter Collaboration with Intelligent Assistance",
+      description: "Respond faster and stay organized with enhanced inbox management. 360Airo supports intelligent sorting and prioritization to help your team handle conversations efficiently while keeping communication personal and consistent.",
+      features: [
+        "Suggested replies for quicker, more accurate follow-ups",
+        "Automatic categorization and prioritization of messages",
+        "Clear visibility into client communication across the entire team",
+        "Manage all team communication using our Team Collaboration tools"
+      ],
+      note: "The result? You save hours each week while delivering a unified, professional experience to every prospect."
     },
     {
       title: "Transparency Without Overlap",
-      description: "No more duplicate replies or missed handoffs. Each team member knows who's handling what, with clear ownership and visibility over every conversation thread.",
+      description: "No more duplicate replies. No missed handoffs. Every conversation has clear ownership, ensuring that team members always know who is handling which thread. This shared structure is designed for sales, marketing, and success teams that need clarity, not chaos.",
       features: [
-        "Real-time team visibility",
-        "Clear conversation ownership",
-        "No duplicate responses",
-        "Seamless team handoffs"
+        "Organized collaborative inbox workflows",
+        "Full transparency for every message and sender",
+        "Streamlined communication across shared email channels"
       ],
-      note: "360Airo's unified communication system is built for sales, marketing, and customer success teams that need clarity, not chaos."
+      note: ""
     }
   ];
 
   const benefits = [
-    "One inbox for all campaigns and accounts",
-    "Team collaboration made easy with real-time updates",
-    "AI-assisted response suggestions and prioritization", 
-    "Complete message history and transparency",
-    "Improved response times and customer satisfaction"
+    "One inbox for all campaigns, accounts, and platforms",
+    "Real-time updates that make team collaboration effortless",
+    "Smart response suggestions and message prioritization",
+    "Complete message history with clear ownership",
+    "Faster response times and higher customer satisfaction"
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/30 to-blue-950/50 overflow-hidden">
-           {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/unified-shared-inbox" />
-      <Navbar />
-
-      {/* Hero Section with Radial Design - Mobile optimized */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16 lg:pt-20 overflow-hidden">
-        <CircularConnections />
-        <FloatingPlatforms />
+    <>
+      <Head>
+        <title>Unified Shared Inbox for Team Collaboration | 360Airo</title>
+        <meta 
+          name="description" 
+          content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." 
+        />
+        <meta 
+          name="keywords" 
+          content="unified inbox, shared inbox, team collaboration, email management, LinkedIn replies, campaign messages, 360Airo inbox" 
+        />
         
-        <motion.div 
-          className="max-w-4xl mx-auto text-center relative z-10"
-          style={{ opacity, scale }}
-        >
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, type: "spring" }}
-            className={`${isMobile ? 'w-16 h-16' : 'w-24 h-24'} bg-gradient-to-r from-blue-500 to-purple-500 ${isMobile ? 'rounded-2xl' : 'rounded-3xl'} flex items-center justify-center mx-auto mb-6 lg:mb-8`}
-          >
-            <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white`} />
-          </motion.div>
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/unified-shared-inbox" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
+        <meta property="og:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." />
+        <meta property="og:url" content="https://360airo.com/features/unified-shared-inbox" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-unified-inbox.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
+        <meta name="twitter:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-unified-inbox.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#3B82F6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Unified Shared Inbox",
+              "description": "360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication.",
+              "url": "https://360airo.com/features/unified-shared-inbox",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              },
+              "featureList": [
+                "Unified email management",
+                "Team collaboration tools",
+                "LinkedIn message integration",
+                "Campaign message centralization",
+                "AI-powered response suggestions"
+              ]
+            })
+          }}
+        />
+      </Head>
+
+      {/* Hidden link for SEO */}
+      <div className="hidden">
+        <a rel="canonical" href="https://360airo.com/features/unified-shared-inbox">360Airo Unified Shared Inbox</a>
+      </div>
+
+      <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/30 to-blue-950/50 overflow-hidden">
+        <Navbar />
+
+        {/* Hero Section with Radial Design - Mobile optimized */}
+        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16 lg:pt-20 overflow-hidden">
+          <CircularConnections />
+          <FloatingPlatforms />
           
-          <motion.h1
-            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.1 }}
-            className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-7xl'} font-black text-white mb-4 lg:mb-6`}
+          <motion.div 
+            className="max-w-4xl mx-auto text-center relative z-10"
+            style={{ opacity, scale }}
           >
-            Unified Shared Inbox
-          </motion.h1>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: isMobile ? 15 : 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.3 }}
-            className={`${isMobile ? 'text-lg' : 'text-2xl md:text-3xl'} text-blue-400 mb-6 lg:mb-8 font-semibold`}
-          >
-            Every Conversation, One View
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.5 }}
-            className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed`}
-          >
-            Collaborate Effortlessly Across All Your Outreach Channels
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.7 }}
-            className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-6 lg:mb-8 max-w-3xl mx-auto leading-relaxed`}
-          >
-            Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's Unified Shared Inbox, every message from your email sequences, LinkedIn outreach, and campaign replies lands in one clean, centralized workspace.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.9 }}
-            className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed`}
-          >
-            Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. Collaboration just became effortless.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: isMobile ? 0.6 : 0.8, delay: 1.1 }}
-          >
-            <Button 
-              size="lg" 
-              className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
-              onClick={handleCTAClick}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, type: "spring" }}
+              className={`${isMobile ? 'w-16 h-16' : 'w-24 h-24'} bg-gradient-to-r from-blue-500 to-purple-500 ${isMobile ? 'rounded-2xl' : 'rounded-3xl'} flex items-center justify-center mx-auto mb-6 lg:mb-8`}
             >
-              Simplify Your Inbox
-              <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
-            </Button>
-          </motion.div>
-        </motion.div>
-      </section>
+              <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white`} />
+            </motion.div>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.1 }}
+              className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-7xl'} font-black text-white mb-4 lg:mb-6`}
+            >
+              Unified Shared Inbox
+            </motion.h1>
+            
+            <motion.h2
+              initial={{ opacity: 0, y: isMobile ? 15 : 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.3 }}
+              className={`${isMobile ? 'text-lg' : 'text-2xl md:text-3xl'} text-blue-400 mb-6 lg:mb-8 font-semibold`}
+            >
+              Every Conversation, One View
+            </motion.h2>
 
-      {/* Radial Features Section - Mobile optimized */}
-      <section className="py-16 lg:py-32 px-4 sm:px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className={`relative ${isMobile ? 'h-64' : 'h-96'} mb-16 lg:mb-20`}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: isMobile ? 0.6 : 0.8 }}
-                className={`${isMobile ? 'w-32 h-32' : 'w-48 h-48'} bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full border border-white/10 backdrop-blur-sm flex items-center justify-center`}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.5 }}
+              className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed`}
+            >
+              Collaborate Effortlessly Across All Your Outreach Channels
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.7 }}
+              className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-6 lg:mb-8 max-w-3xl mx-auto leading-relaxed`}
+            >
+              Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's Unified Shared Inbox, every message from your email sequences, LinkedIn outreach, and campaign replies lands in one clean, centralized workspace.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.9 }}
+              className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed`}
+            >
+              Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. <InternalLink href="/features/team-collaboration">Team Collaboration</InternalLink> becomes seamless and organized.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 1.1 }}
+            >
+              <Button 
+                size="lg" 
+                className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
+                onClick={handleCTAClick}
               >
-                <div className="text-center">
-                  <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white mx-auto mb-1 lg:mb-2`} />
-                  <div className={`text-white font-bold ${isMobile ? 'text-sm' : ''}`}>All Platforms</div>
-                  <div className={`text-white/60 ${isMobile ? 'text-xs' : 'text-sm'}`}>Connected</div>
-                </div>
-              </motion.div>
-            </div>
-            
-            {coreFeatures.map((feature, index) => (
-              <RadialFeature
-                key={feature.title}
-                {...feature}
-                delay={index * (isMobile ? 0.15 : 0.2)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+                Simplify Your Inbox
+                <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
+              </Button>
+            </motion.div>
+          </motion.div>
+        </section>
 
-      {/* Features with Timeline - Mobile optimized */}
-      <section className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 to-transparent">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-            <div className={isMobile ? 'mb-8' : ''}>
-              <ConversationTimeline />
-            </div>
-            
-            <div className="space-y-8 lg:space-y-12">
-              {featureSections.map((section, index) => (
+        {/* Radial Features Section - Mobile optimized */}
+        <section className="py-16 lg:py-32 px-4 sm:px-6 relative">
+          <div className="max-w-6xl mx-auto">
+            <div className={`relative ${isMobile ? 'h-64' : 'h-96'} mb-16 lg:mb-20`}>
+              <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
-                  key={section.title}
-                  initial={{ opacity: 0, x: isMobile ? 30 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
                   viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.15 : 0.2) }}
-                  className="space-y-3 lg:space-y-4"
+                  transition={{ duration: isMobile ? 0.6 : 0.8 }}
+                  className={`${isMobile ? 'w-32 h-32' : 'w-48 h-48'} bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full border border-white/10 backdrop-blur-sm flex items-center justify-center`}
                 >
-                  <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{section.title}</h3>
-                  <p className={`text-white/70 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{section.description}</p>
-                  
-                  <div className="space-y-2">
-                    {section.features.map((feature, featureIndex) => (
-                      <motion.div
-                        key={feature}
-                        initial={{ opacity: 0, x: isMobile ? 15 : 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-50px' }}
-                        transition={{ delay: index * (isMobile ? 0.15 : 0.2) + featureIndex * (isMobile ? 0.08 : 0.1) }}
-                        className="flex items-center space-x-3 text-white/80"
-                      >
-                        <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full flex-shrink-0" />
-                        <span className={isMobile ? 'text-sm' : ''}>{feature}</span>
-                      </motion.div>
-                    ))}
+                  <div className="text-center">
+                    <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white mx-auto mb-1 lg:mb-2`} />
+                    <div className={`text-white font-bold ${isMobile ? 'text-sm' : ''}`}>All Platforms</div>
+                    <div className={`text-white/60 ${isMobile ? 'text-xs' : 'text-sm'}`}>Connected</div>
                   </div>
-                  
-                  <p className="text-white/60 italic text-sm">{section.note}</p>
                 </motion.div>
+              </div>
+              
+              {coreFeatures.map((feature, index) => (
+                <RadialFeature
+                  key={feature.title}
+                  {...feature}
+                  delay={index * (isMobile ? 0.15 : 0.2)}
+                />
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Benefits Section - Mobile optimized */}
-      <section className="py-12 lg:py-20 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-white mb-8 lg:mb-12`}
-          >
-            Why Choose 360Airo's Unified Shared Inbox
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={benefit}
-                initial={{ opacity: 0, scale: isMobile ? 0.9 : 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.08 : 0.1) }}
-                className="p-4 lg:p-6 bg-white/5 rounded-lg lg:rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-              >
-                <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 lg:mb-4`}>
-                  <CheckCircle2 className={`${isMobile ? 'h-4 w-4' : 'h-6 w-6'} text-blue-400`} />
-                </div>
-                <p className={`text-white/80 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{benefit}</p>
-              </motion.div>
-            ))}
+        {/* Features with Timeline - Mobile optimized */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 to-transparent">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+              <div className={isMobile ? 'mb-8' : ''}>
+                <ConversationTimeline />
+              </div>
+              
+              <div className="space-y-8 lg:space-y-12">
+                {featureSections.map((section, index) => (
+                  <motion.div
+                    key={section.title}
+                    initial={{ opacity: 0, x: isMobile ? 30 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.15 : 0.2) }}
+                    className="space-y-3 lg:space-y-4"
+                  >
+                    <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{section.title}</h3>
+                    <p className={`text-white/70 leading-relaxed ${isMobile ? 'text-sm' : ''}`} dangerouslySetInnerHTML={{ __html: section.description }} />
+                    
+                    {section.features.length > 0 && (
+                      <div className="space-y-2">
+                        {section.features.map((feature, featureIndex) => (
+                          <motion.div
+                            key={feature}
+                            initial={{ opacity: 0, x: isMobile ? 15 : 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: '-50px' }}
+                            transition={{ delay: index * (isMobile ? 0.15 : 0.2) + featureIndex * (isMobile ? 0.08 : 0.1) }}
+                            className="flex items-center space-x-3 text-white/80"
+                          >
+                            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full flex-shrink-0" />
+                            <span className={isMobile ? 'text-sm' : ''} dangerouslySetInnerHTML={{ __html: feature }} />
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {section.note && (
+                      <p className="text-white/60 italic text-sm">{section.note}</p>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
+        </section>
 
-          <motion.div
-            initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            className="space-y-4 lg:space-y-6"
-          >
-            <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto leading-relaxed`}>
-              Manage outreach like a team, not a crowd. With 360Airo's Unified Shared Inbox, every reply, every lead, and every opportunity stays right where it belongs — in one place.
-            </p>
-
-            <Button 
-              size="lg" 
-              className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
-              onClick={handleCTAClick}
+        {/* Benefits Section - Mobile optimized */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-white mb-8 lg:mb-12`}
             >
-              Simplify Your Inbox
-              <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+              Why Choose 360Airo's Unified Inbox
+            </motion.h2>
 
-      <Footer />
-    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
+              {benefits.map((benefit, index) => (
+                <motion.div
+                  key={benefit}
+                  initial={{ opacity: 0, scale: isMobile ? 0.9 : 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.08 : 0.1) }}
+                  className="p-4 lg:p-6 bg-white/5 rounded-lg lg:rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
+                >
+                  <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 lg:mb-4`}>
+                    <CheckCircle2 className={`${isMobile ? 'h-4 w-4' : 'h-6 w-6'} text-blue-400`} />
+                  </div>
+                  <p className={`text-white/80 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{benefit}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              className="space-y-4 lg:space-y-6"
+            >
+              <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto leading-relaxed`}>
+                Manage outreach like a team, not a crowd. With 360Airo's unified inbox, every reply, every lead, and every opportunity stays exactly where it belongs — in one place.
+              </p>
+
+              <Button 
+                size="lg" 
+                className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
+                onClick={handleCTAClick}
+              >
+                Simplify Your Inbox
+                <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
+              </Button>
+            </motion.div>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
+    </>
   );
 }
