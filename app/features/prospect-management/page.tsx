@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Head from 'next/head';
+import Link from 'next/link';
 
 import {
   Users,
@@ -898,414 +900,797 @@ export default function ProspectManagementPage() {
   const headerY = useTransform(scrollYProgress, [0, 0.1], [0, 40]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
-      {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/prospect-management" />
-      
-      <Navbar />
-
-      {/* Enhanced Hero Section */}
-      <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
-        <FloatingParticles />
-        
-        {/* Animated Background Gradient */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 80%, rgba(180, 94, 207, 0.15), transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(180, 94, 207, 0.15), transparent 50%)',
-              'radial-gradient(circle at 40% 40%, rgba(180, 94, 207, 0.15), transparent 50%)',
-            ],
-          }}
-          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+    <>
+      <Head>
+        <title>Lead Management Software to Organize, Track, and Convert Leads | 360Airo</title>
+        <meta 
+          name="description" 
+          content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." 
+        />
+        <meta 
+          name="keywords" 
+          content="lead management software, lead tracking, prospect management, sales pipeline, lead conversion, CRM software, 360Airo" 
         />
         
-        <motion.div 
-          className="max-w-7xl mx-auto w-full relative z-10"
-          style={{
-            scale: headerScale,
-            opacity: headerOpacity,
-            y: headerY
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://360airo.com/features/lead-management-software" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Lead Management Software to Organize, Track, and Convert Leads | 360Airo" />
+        <meta property="og:description" content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." />
+        <meta property="og:url" content="https://360airo.com/features/lead-management-software" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-lead-management.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Lead Management Software to Organize, Track, and Convert Leads | 360Airo" />
+        <meta name="twitter:description" content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-lead-management.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#b45ecf" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Lead Management Software",
+              "description": "Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels.",
+              "url": "https://360airo.com/features/lead-management-software",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              },
+              "featureList": [
+                "Centralized lead tracking",
+                "Multi-channel prospect management",
+                "AI-powered insights",
+                "Automated follow-ups",
+                "Real-time pipeline analytics",
+                "Seamless CRM integration"
+              ]
+            })
           }}
-        >
-          <div className="text-center max-w-6xl mx-auto py-16 sm:py-20 lg:py-24">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8 sm:space-y-10"
-            >
-              {/* Enhanced Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
-                className="inline-block"
-              >
-                <div 
-                  className="px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg border-2 backdrop-blur-sm relative overflow-hidden"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
-                    borderColor: COLORS.purpleLight
-                  }}
-                >
-                  <motion.span
-                    className="text-white font-bold text-sm sm:text-lg uppercase tracking-wider flex items-center relative z-10"
-                    animate={{
-                      textShadow: [
-                        '0 0 0px rgba(255,255,255,0)',
-                        '0 0 8px rgba(255,255,255,0.5)',
-                        '0 0 0px rgba(255,255,255,0)',
-                      ],
-                    }}
-                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-                  >
-                    <Users className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
-                    Prospect Management
-                  </motion.span>
-                  
-                  {/* Shimmer Effect */}
-                  <motion.div
-                    className="absolute inset-0"
-                    animate={{
-                      background: [
-                        `linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent)`,
-                        `linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)`,
-                      ],
-                      x: [-100, 100],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Number.POSITIVE_INFINITY,
-                    }}
-                  />
-                </div>
-              </motion.div>
+        />
+      </Head>
 
-              {/* Enhanced Main Heading */}
-              <motion.h1
+      {/* Hidden link for SEO */}
+      <div className="hidden">
+        <a rel="canonical" href="https://360airo.com/features/lead-management-software">360Airo Lead Management Software</a>
+      </div>
+
+      <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
+        <Navbar />
+
+        {/* Enhanced Hero Section */}
+        <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+          <FloatingParticles />
+          
+          {/* Animated Background Gradient */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(circle at 20% 80%, rgba(180, 94, 207, 0.15), transparent 50%)',
+                'radial-gradient(circle at 80% 20%, rgba(180, 94, 207, 0.15), transparent 50%)',
+                'radial-gradient(circle at 40% 40%, rgba(180, 94, 207, 0.15), transparent 50%)',
+              ],
+            }}
+            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+          />
+          
+          <motion.div 
+            className="max-w-7xl mx-auto w-full relative z-10"
+            style={{
+              scale: headerScale,
+              opacity: headerOpacity,
+              y: headerY
+            }}
+          >
+            <div className="text-center max-w-6xl mx-auto py-16 sm:py-20 lg:py-24">
+              <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight"
+                transition={{ duration: 0.8 }}
+                className="space-y-8 sm:space-y-10"
               >
-                <span className="block">
-                  <AnimatedGradientText>
-                    Organize, Track,
-                  </AnimatedGradientText>
-                </span>
-                <motion.span
-                  className="block"
-                  style={{ color: COLORS.purpleLight }}
-                  animate={{
-                    textShadow: [
-                      `0 0 15px ${COLORS.purpleLight}`,
-                      `0 0 30px ${COLORS.purpleLight}`,
-                      `0 0 45px ${COLORS.purpleLight}`,
-                      `0 0 15px ${COLORS.purpleLight}`,
-                    ],
-                    scale: [1, 1.01, 1],
-                  }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                >
-                  and Convert Leads
-                </motion.span>
-                <span className="block">
-                  <AnimatedGradientText>
-                    Efficiently
-                  </AnimatedGradientText>
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 }}
-                className="text-xl sm:text-2xl lg:text-3xl text-white/80 font-light leading-relaxed"
-              >
-                Centralize All Your Leads in One Intelligent Platform
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.6 }}
-                className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
-              >
-                <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed">
-                  Managing prospects shouldn't feel chaotic. 360Airo's prospect management tools allow you to consolidate, organize, and track all your leads in a single, intuitive dashboard.
-                </p>
-                <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed">
-                  From first contact to closed deal, every interaction is stored, monitored, and actionable. Keep your email sequences, LinkedIn outreach, and multi-channel campaigns organized for smarter follow-ups and higher conversions.
-                </p>
-              </motion.div>
-
-              {/* Enhanced CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.6, duration: 0.5 }}
-                className="pt-8 sm:pt-10 lg:pt-12"
-              >
+                {/* Enhanced Badge */}
                 <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="relative"
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5, type: "spring" }}
+                  className="inline-block"
                 >
-                  <Button 
-                    size="lg" 
-                    className="px-8 py-4 sm:px-12 sm:py-5 lg:px-16 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
-                    style={{ background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})` }}
-                    onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                  <div 
+                    className="px-6 py-3 sm:px-8 sm:py-4 rounded-xl sm:rounded-2xl shadow-lg border-2 backdrop-blur-sm relative overflow-hidden"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
+                      borderColor: COLORS.purpleLight
+                    }}
                   >
-                    {/* Animated Background */}
+                    <motion.span
+                      className="text-white font-bold text-sm sm:text-lg uppercase tracking-wider flex items-center relative z-10"
+                      animate={{
+                        textShadow: [
+                          '0 0 0px rgba(255,255,255,0)',
+                          '0 0 8px rgba(255,255,255,0.5)',
+                          '0 0 0px rgba(255,255,255,0)',
+                        ],
+                      }}
+                      transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    >
+                      <Users className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
+                      Lead Management Software
+                    </motion.span>
+                    
+                    {/* Shimmer Effect */}
                     <motion.div
                       className="absolute inset-0"
                       animate={{
                         background: [
-                          `linear-gradient(45deg, ${COLORS.purpleLight}, ${COLORS.purpleDark}, ${COLORS.purpleLight})`,
-                          `linear-gradient(45deg, ${COLORS.purpleDark}, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
+                          `linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent)`,
+                          `linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent)`,
                         ],
-                        backgroundSize: ['200% 200%', '200% 200%'],
+                        x: [-100, 100],
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 1.5,
                         repeat: Number.POSITIVE_INFINITY,
                       }}
                     />
-                    
-                    {/* Sparkle Particles */}
-                    <AnimatePresence>
-                      {[...Array(3)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-1.5 h-1.5 rounded-full bg-white"
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{
-                            scale: [0, 1, 0],
-                            opacity: [0, 1, 0],
-                            x: [0, (Math.random() - 0.5) * 60],
-                            y: [0, (Math.random() - 0.5) * 60],
-                          }}
-                          transition={{
-                            duration: 1.2,
-                            repeat: Number.POSITIVE_INFINITY,
-                            delay: i * 0.4,
-                          }}
-                        />
-                      ))}
-                    </AnimatePresence>
+                  </div>
+                </motion.div>
 
-                    <span className="relative z-10 flex items-center justify-center">
-                      <Rocket className="mr-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
-                      Start Managing Prospects Smarter
-                      <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 transition-transform group-hover:translate-x-2" />
-                    </span>
-                  </Button>
+                {/* Enhanced Main Heading */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                  className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight"
+                >
+                  <span className="block">
+                    <AnimatedGradientText>
+                      Lead Management Software
+                    </AnimatedGradientText>
+                  </span>
+                  <motion.span
+                    className="block"
+                    style={{ color: COLORS.purpleLight }}
+                    animate={{
+                      textShadow: [
+                        `0 0 15px ${COLORS.purpleLight}`,
+                        `0 0 30px ${COLORS.purpleLight}`,
+                        `0 0 45px ${COLORS.purpleLight}`,
+                        `0 0 15px ${COLORS.purpleLight}`,
+                      ],
+                      scale: [1, 1.01, 1],
+                    }}
+                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                  >
+                    to Organize, Track, and
+                  </motion.span>
+                  <span className="block">
+                    <AnimatedGradientText>
+                      Convert Leads
+                    </AnimatedGradientText>
+                  </span>
+                </motion.h1>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-xl sm:text-2xl lg:text-3xl text-white/80 font-light leading-relaxed"
+                >
+                  Centralize All Your Leads in One Place
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="space-y-4 sm:space-y-6 max-w-4xl mx-auto"
+                >
+                  <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed">
+                    Managing leads should feel structured and under control, not scattered across tools and inboxes. 360Airo's <strong className="text-purple-300">lead management software</strong> helps you capture, organize, and track every lead from first interaction to closed deal. All prospect data, conversations, and engagement history live in one simple dashboard, giving your team complete clarity at every stage.
+                  </p>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed">
+                    From <Link href="/features/email-sequences" className="text-purple-300 hover:text-white transition-colors duration-300 underline underline-offset-2">Email Sequences</Link> to LinkedIn outreach and multichannel follow-ups, everything stays connected so your communication feels timely, relevant, and consistent.
+                  </p>
+                </motion.div>
+
+                {/* Enhanced CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                  className="pt-8 sm:pt-10 lg:pt-12"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="relative"
+                  >
+                    <Button 
+                      size="lg" 
+                      className="px-8 py-4 sm:px-12 sm:py-5 lg:px-16 lg:py-6 text-base sm:text-lg lg:text-xl font-bold rounded-xl sm:rounded-2xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
+                      style={{ background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})` }}
+                      onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                    >
+                      {/* Animated Background */}
+                      <motion.div
+                        className="absolute inset-0"
+                        animate={{
+                          background: [
+                            `linear-gradient(45deg, ${COLORS.purpleLight}, ${COLORS.purpleDark}, ${COLORS.purpleLight})`,
+                            `linear-gradient(45deg, ${COLORS.purpleDark}, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
+                          ],
+                          backgroundSize: ['200% 200%', '200% 200%'],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Number.POSITIVE_INFINITY,
+                        }}
+                      />
+                      
+                      {/* Sparkle Particles */}
+                      <AnimatePresence>
+                        {[...Array(3)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            className="absolute w-1.5 h-1.5 rounded-full bg-white"
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                              scale: [0, 1, 0],
+                              opacity: [0, 1, 0],
+                              x: [0, (Math.random() - 0.5) * 60],
+                              y: [0, (Math.random() - 0.5) * 60],
+                            }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Number.POSITIVE_INFINITY,
+                              delay: i * 0.4,
+                            }}
+                          />
+                        ))}
+                      </AnimatePresence>
+
+                      <span className="relative z-10 flex items-center justify-center">
+                        <Rocket className="mr-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                        Start Managing Leads Smarter
+                        <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 transition-transform group-hover:translate-x-2" />
+                      </span>
+                    </Button>
+                  </motion.div>
                 </motion.div>
               </motion.div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Complete Visibility Section */}
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <FloatingParticles />
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-6 sm:mb-8"
+              >
+                <AnimatedGradientText>
+                  Complete Visibility With a Smart Lead Management System
+                </AnimatedGradientText>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
+              >
+                Knowing where each lead stands makes all the difference. 360Airo gives you full visibility into your pipeline through a powerful <strong className="text-purple-300">lead management system</strong> designed to support growing sales teams.
+              </motion.p>
+            </motion.div>
+
+            <PipelineVisualization />
+
+            {/* Features List */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 sm:mt-16 lg:mt-20"
+            >
+              <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+                <div className="space-y-4 sm:space-y-6">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                    With this system, you can:
+                  </h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    {[
+                      "Track lead activity, engagement, and response history in real time",
+                      "Segment leads based on behavior, industry, or engagement level",
+                      "Set reminders and follow-ups so no opportunity is overlooked",
+                      "Sync seamlessly with your Prospect CRM and automation tools"
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -15 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.08 }}
+                        className="flex items-start space-x-3 sm:space-x-4 group"
+                      >
+                        <motion.div
+                          className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 relative"
+                          style={{ background: COLORS.purpleLight }}
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                        </motion.div>
+                        <span className="text-white text-sm sm:text-base lg:text-lg leading-relaxed group-hover:text-purple-300 transition-colors">
+                          {item}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border-2 border-purple-500/30 w-full"
+                  >
+                    <p className="text-white text-base sm:text-lg lg:text-xl italic text-center leading-relaxed">
+                      This structured approach to sales pipeline management helps your team focus on closing deals while the platform keeps everything organized.
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
           </div>
-        </motion.div>
-      </section>
+        </section>
 
-      {/* Enhanced Pipeline Visualization Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <FloatingParticles />
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 sm:mb-16 lg:mb-20"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-6 sm:mb-8"
-            >
-              <AnimatedGradientText>
-                Complete Visibility Into Your Pipeline
-              </AnimatedGradientText>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
-            >
-              Gain full insight into every lead's journey with prospect management. Your team can focus on closing deals while 360Airo keeps every detail organized.
-            </motion.p>
-          </motion.div>
-
-          <PipelineVisualization />
-        </div>
-      </section>
-
-      {/* Enhanced Features Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <FloatingParticles />
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 sm:mb-16 lg:mb-20"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-6 sm:mb-8"
-            >
-              <AnimatedGradientText>
-                Powerful Features for Modern Prospecting
-              </AnimatedGradientText>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto"
-            >
-              Everything you need to manage prospects efficiently and close more deals
-            </motion.p>
-          </motion.div>
-
-          <FeatureCards />
-        </div>
-      </section>
-
-      {/* Enhanced AI Insights Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <FloatingParticles />
-        <div className="max-w-7xl mx-auto">
-          <AIInsightsSection />
-        </div>
-      </section>
-
-      {/* Enhanced Multi-Channel Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black relative overflow-hidden">
-        <FloatingParticles />
-        <div className="max-w-7xl mx-auto">
-          <MultiChannelSection />
-        </div>
-      </section>
-
-      {/* Enhanced Benefits Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-        <FloatingParticles />
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 sm:mb-16 lg:mb-20"
-          >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-6 sm:mb-8"
-            >
-              <AnimatedGradientText>
-                Why Choose 360Airo for Prospect Management
-              </AnimatedGradientText>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
-            >
-              360Airo's prospect management system ensures no lead falls through the cracks, helping your team focus on what matters — building relationships and closing deals.
-            </motion.p>
-          </motion.div>
-
-          <BenefitsGrid />
-
-          {/* Enhanced Final CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="pt-12 sm:pt-16 lg:pt-20 text-center"
-          >
+        {/* Enhanced Features Section */}
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <FloatingParticles />
+          <div className="max-w-7xl mx-auto">
             <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="relative inline-block"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
             >
-              <Button 
-                size="lg" 
-                className="px-8 py-4 sm:px-12 sm:py-5 lg:px-16 lg:py-8 text-base sm:text-lg lg:text-xl xl:text-2xl font-bold rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
-                style={{ background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})` }}
-                onClick={() => window.open('https://app.360airo.com/', '_blank')}
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white mb-6 sm:mb-8"
               >
-                {/* Animated Gradient */}
-                <motion.div
-                  className="absolute inset-0"
-                  animate={{
-                    background: [
-                      `linear-gradient(45deg, ${COLORS.purpleLight}, ${COLORS.purpleDark}, ${COLORS.purpleLight})`,
-                      `linear-gradient(45deg, ${COLORS.purpleDark}, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
-                    ],
-                    backgroundSize: ['200% 200%', '200% 200%'],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Number.POSITIVE_INFINITY,
-                  }}
-                />
+                <AnimatedGradientText>
+                  Powerful Features for Modern Lead Management
+                </AnimatedGradientText>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto"
+              >
+                Everything you need to manage leads efficiently and close more deals
+              </motion.p>
+            </motion.div>
 
-                {/* Floating Stars */}
-                {[...Array(4)].map((_, i) => (
+            <FeatureCards />
+          </div>
+        </section>
+
+        {/* AI-Powered Insights Section */}
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <FloatingParticles />
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 sm:mb-8"
+              >
+                <AnimatedGradientText>
+                  AI-Powered Insights to Strengthen Your Sales Pipeline
+                </AnimatedGradientText>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
+              >
+                Good decisions come from clear insights. 360Airo uses intelligent analytics to turn your <strong className="text-purple-300">lead management software</strong> into a decision-making engine.
+              </motion.p>
+            </motion.div>
+
+            <AIInsightsSection />
+
+            {/* Additional AI Features */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 sm:mt-16 lg:mt-20"
+            >
+              <div className="bg-gradient-to-br from-[#b45ecf]/10 via-[#480056]/15 to-[#19001d]/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border-2 border-[#b45ecf]/30">
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
+                      You can:
+                    </h3>
+                    <div className="space-y-3 sm:space-y-4">
+                      {[
+                        "Identify high-priority leads based on engagement patterns",
+                        "Receive AI-driven suggestions for follow-ups and next actions",
+                        "Automate repetitive tasks without losing personalization",
+                        "Monitor pipeline health and conversion trends in real time"
+                      ].map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -15 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.08 }}
+                          className="flex items-start space-x-3 sm:space-x-4 group"
+                        >
+                          <motion.div
+                            className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 relative"
+                            style={{ background: COLORS.purpleLight }}
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                          </motion.div>
+                          <span className="text-white text-sm sm:text-base lg:text-lg leading-relaxed group-hover:text-purple-300 transition-colors">
+                            {item}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6 }}
+                      className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border-2 border-purple-500/30 w-full"
+                    >
+                      <p className="text-white text-base sm:text-lg lg:text-xl italic text-center leading-relaxed">
+                        These insights help your <strong className="text-purple-300">sales pipeline software</strong> work smarter, not harder, at every stage.
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Seamless Multi-Channel Lead Engagement Section */}
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <FloatingParticles />
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 sm:mb-8"
+              >
+                <AnimatedGradientText>
+                  Seamless Multi-Channel Lead Engagement
+                </AnimatedGradientText>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
+              >
+                Lead management is more than storing contacts. It is about building consistent relationships across channels. 360Airo enables coordinated outreach through email, LinkedIn, and other channels while keeping every interaction aligned inside one dashboard.
+              </motion.p>
+            </motion.div>
+
+            <MultiChannelSection />
+
+            {/* Additional Features */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 sm:mt-16 lg:mt-20"
+            >
+              <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+                <div className="space-y-4 sm:space-y-6">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                    You can:
+                  </h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    {[
+                      "Sync all lead interactions across channels automatically",
+                      "Maintain consistent messaging at every touchpoint",
+                      "Track the performance of each outreach channel clearly"
+                    ].map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -15 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.08 }}
+                        className="flex items-start space-x-3 sm:space-x-4 group"
+                      >
+                        <motion.div
+                          className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 relative"
+                          style={{ background: COLORS.purpleLight }}
+                          whileHover={{ scale: 1.2 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                        </motion.div>
+                        <span className="text-white text-sm sm:text-base lg:text-lg leading-relaxed group-hover:text-purple-300 transition-colors">
+                          {item}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center justify-center">
                   <motion.div
-                    key={i}
-                    className="absolute"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 }}
+                    className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border-2 border-purple-500/30 w-full"
+                  >
+                    <p className="text-white text-base sm:text-lg lg:text-xl italic text-center leading-relaxed">
+                      As a reliable <strong className="text-purple-300">lead generation management software</strong>, 360Airo helps your team nurture leads with confidence and convert them faster.
+                    </p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Teams Choose Section */}
+        <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <FloatingParticles />
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12 sm:mb-16 lg:mb-20"
+            >
+              <motion.h2
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 sm:mb-8"
+              >
+                <AnimatedGradientText>
+                  Why Teams Choose 360Airo as Their Lead Management Software
+                </AnimatedGradientText>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-lg sm:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto leading-relaxed"
+              >
+                360Airo's <strong className="text-purple-300">lead management software</strong> ensures no lead is forgotten, no follow-up is missed, and every opportunity is handled with care.
+              </motion.p>
+            </motion.div>
+
+            <BenefitsGrid />
+
+            {/* Additional Benefits */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 sm:mt-16 lg:mt-20"
+            >
+              <div className="bg-gradient-to-br from-[#b45ecf]/10 via-[#480056]/15 to-[#19001d]/20 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border-2 border-[#b45ecf]/30">
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6">
+                      Key Benefits:
+                    </h3>
+                    <div className="space-y-3 sm:space-y-4">
+                      {[
+                        "Centralized lead tracking across all channels and campaigns",
+                        "Smart prioritization using AI-driven insights",
+                        "Seamless integration with CRM and automation tools",
+                        "Clear analytics for pipeline visibility and performance",
+                        "Collaboration features for teams managing shared leads"
+                      ].map((item, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, x: -15 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.08 }}
+                          className="flex items-start space-x-3 sm:space-x-4 group"
+                        >
+                          <motion.div
+                            className="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-1 relative"
+                            style={{ background: COLORS.purpleLight }}
+                            whileHover={{ scale: 1.2 }}
+                            whileTap={{ scale: 0.9 }}
+                          >
+                            <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                          </motion.div>
+                          <span className="text-white text-sm sm:text-base lg:text-lg leading-relaxed group-hover:text-purple-300 transition-colors">
+                            {item}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.6 }}
+                      className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border-2 border-purple-500/30 w-full"
+                    >
+                      <p className="text-white text-base sm:text-lg lg:text-xl italic text-center leading-relaxed">
+                        360Airo's <Link href="/features/prospect-crm" className="text-purple-300 hover:text-white transition-colors duration-300 underline underline-offset-2">Prospect CRM</Link> helps teams sell smarter, follow up faster, and build relationships that convert consistently.
+                      </p>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Enhanced Final CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="pt-12 sm:pt-16 lg:pt-20 text-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="relative inline-block"
+              >
+                <Button 
+                  size="lg" 
+                  className="px-8 py-4 sm:px-12 sm:py-5 lg:px-16 lg:py-8 text-base sm:text-lg lg:text-xl xl:text-2xl font-bold rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl border-0 relative overflow-hidden group w-full sm:w-auto"
+                  style={{ background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purpleDark})` }}
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                >
+                  {/* Animated Gradient */}
+                  <motion.div
+                    className="absolute inset-0"
                     animate={{
-                      y: [0, -12, 0],
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0],
+                      background: [
+                        `linear-gradient(45deg, ${COLORS.purpleLight}, ${COLORS.purpleDark}, ${COLORS.purpleLight})`,
+                        `linear-gradient(45deg, ${COLORS.purpleDark}, ${COLORS.purpleLight}, ${COLORS.purpleDark})`,
+                      ],
+                      backgroundSize: ['200% 200%', '200% 200%'],
                     }}
                     transition={{
-                      duration: 1.5,
+                      duration: 2,
                       repeat: Number.POSITIVE_INFINITY,
-                      delay: i * 0.3,
                     }}
-                    style={{
-                      left: `${20 + i * 20}%`,
-                      top: '50%',
-                    }}
-                  >
-                    <Star className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-                  </motion.div>
-                ))}
+                  />
 
-                <span className="relative z-10 flex items-center justify-center">
-                  <Sparkles className="mr-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
-                  Transform Your Prospecting Today
-                  <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 transition-transform group-hover:translate-x-2" />
-                </span>
-              </Button>
+                  {/* Floating Stars */}
+                  {[...Array(4)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute"
+                      animate={{
+                        y: [0, -12, 0],
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Number.POSITIVE_INFINITY,
+                        delay: i * 0.3,
+                      }}
+                      style={{
+                        left: `${20 + i * 20}%`,
+                        top: '50%',
+                      }}
+                    >
+                      <Star className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                    </motion.div>
+                  ))}
+
+                  <span className="relative z-10 flex items-center justify-center">
+                    <Sparkles className="mr-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7" />
+                    Start Managing Leads Smarter
+                    <ArrowRight className="ml-3 h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 transition-transform group-hover:translate-x-2" />
+                  </span>
+                </Button>
+              </motion.div>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: 1.0 }}
+                className="mt-6 sm:mt-8 text-white/70 text-sm sm:text-base lg:text-lg"
+              >
+                Transform your lead management process today and start converting more leads into customers.
+              </motion.p>
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
