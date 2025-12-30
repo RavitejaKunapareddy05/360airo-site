@@ -676,7 +676,7 @@ export default function AIEmailAutomationPage() {
     "Activate behavior-based triggers such as open, reply, or no response",
     "Use insights from <a href='/features/email-sequences' class='text-[#ad60f8] hover:text-white transition-colors'>Email Sequences</a> to refine performance continuously",
     "Run cross-channel workflows with <a href='/features/multi-channel-campaigns' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> automation",
-    "Automate LinkedIn messaging using <a href='/features/linkedin-automation' class='text-[#ad60f8] hover:text-white transition-colors'>LinkedIn Automation</a>"
+    "Automate LinkedIn messaging using LinkedIn Automation"
   ];
 
   const automationGoalsFeatures = [
