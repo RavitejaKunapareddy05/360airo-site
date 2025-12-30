@@ -4,6 +4,7 @@ import { motion ,AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import { 
   ArrowRight, 
@@ -44,7 +45,8 @@ import {
   PhoneCall,
   MailOpen,
   UserCheck,
-  CalendarDays
+  CalendarDays,
+  Inbox
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -577,7 +579,7 @@ const FeatureCard = ({ feature, index }: any) => {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ delay: index * 0.2 }}
           >
-            {feature.features.map((item: string, i: number) => (
+            {feature.features.map((item: any, i: number) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, scale: 0.8, y: 8 }}
@@ -692,7 +694,7 @@ const HeroSection = () => {
                 className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-400 rounded-full relative overflow-hidden max-w-xs lg:max-w-md"
               >
                 <motion.div
-                  animate={{ x: ['-100%', '200%'] }}
+                  animate={{ x: ['-100%', '100%'] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   className="absolute inset-0 bg-white/40 rounded-full blur-sm"
                 />
@@ -707,20 +709,13 @@ const HeroSection = () => {
               className="space-y-4 lg:space-y-5 max-w-xl"
             >
               <p className="text-base lg:text-lg text-white/90 leading-relaxed font-light">
-                Turn Every Lead into a{' '}
-                <motion.span
-                  animate={{ color: ['#3B82F6', '#8B5CF6', '#ffffff', '#3B82F6'] }}
-                  transition={{ duration: 2.5, repeat: Infinity }}
-                  className="font-semibold"
-                >
-                  Lasting Connection
-                </motion.span>
+                Turn every lead into a meaningful connection.
               </p>
               <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                Your prospects deserve more than just a name in a spreadsheet. 360Airo's Prospect CRM helps you manage, track, and nurture every lead from first contact to conversion — all within one intelligent, unified system.
+                360Airo's Prospect CRM helps you manage, track, and nurture leads from first contact to conversion using a streamlined <Link href="/features/lead-management-software" className="text-blue-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management system</Link> built for clarity and performance. It gives modern outreach teams the structure of advanced sales CRM software without the clutter—so you can focus on conversations that move deals forward while the system handles everything behind the scenes.
               </p>
               <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                It's designed for modern outreach teams that want clarity, not clutter — so you can focus on building genuine relationships while our CRM automates the rest.
+                Designed for modern outreach teams that want clarity, not clutter — so you can focus on building genuine relationships while our CRM automates the rest.
               </p>
             </motion.div>
 
@@ -792,30 +787,50 @@ export default function ProspectCRMPage() {
   const features = [
     {
       icon: Database,
-      title: 'Centralized Lead Management',
-      description: 'No more losing track of potential customers across tools and threads. Every lead, interaction, and engagement detail lives in one centralized dashboard.',
-      features: ['Complete prospect timelines', 'Communication history', 'Smart segmentation', 'Real-time updates'],
+      title: 'Centralized Lead Management for Complete Visibility',
+      description: 'Your prospects shouldn\'t be scattered across tabs, tools, and notes. With 360Airo\'s Prospect CRM, every interaction and engagement detail is stored inside one organized dashboard powered by robust CRM lead management capabilities.',
+      features: [
+        'View complete timelines and communication history',
+        'Segment contacts based on behavior, campaign, or funnel stage',
+        'Add custom notes, tags, and deal stages with ease',
+        <>Sync seamlessly with Email Sequences and <Link href="/features/linkedin-automation" className="text-[#ad60f8] hover:text-white transition-colors duration-300 underline underline-offset-2">LinkedIn outreach</Link> workflows</>
+      ],
       color: 'from-blue-500 to-cyan-400'
     },
     {
       icon: BarChart3,
-      title: 'Data-Driven Insights',
-      description: 'Our AI-powered analytics help you understand which prospects are most engaged, what\'s driving conversions, and where to focus next.',
-      features: ['AI lead scoring', 'Engagement analytics', 'Campaign effectiveness', 'Pipeline tracking'],
+      title: 'Data-Driven Insights That Move Deals Forward',
+      description: 'This CRM does more than store information—it guides decisions. Through detailed analytics and measurable insights, you can understand which leads are highly engaged and where to concentrate your energy across your CRM software programs.',
+      features: [
+        'Identify high-intent leads with engagement insights',
+        'Use activity indicators based on opens, clicks, and replies',
+        'Measure the performance of campaigns and follow-ups',
+        'Track deal progress across your pipeline with confidence'
+      ],
       color: 'from-purple-500 to-pink-400'
     },
     {
       icon: Workflow,
-      title: 'Automation That Keeps You Ahead',
-      description: 'Let automation do the heavy lifting. Connect seamlessly with your outreach workflows to automate repetitive actions.',
-      features: ['Smart tagging', 'Auto follow-ups', 'Activity summaries', 'Workflow rules'],
+      title: 'Automation That Works While You Work',
+      description: 'Stop wasting time on repetitive tasks. 360Airo\'s Prospect CRM connects directly to your outreach workflows to automate actions across your entire lead management system.',
+      features: [
+        'Set behavior-based rules for lead progression and re-engagement',
+        'Auto-update contact details and workflow triggers',
+        <>Maintain smooth communication handoffs within the <Link href="/features/unified-inbox" className="text-[#3B82F6] hover:text-white transition-colors duration-300 underline underline-offset-2">Unified Inbox</Link></>
+      ],
       color: 'from-green-500 to-emerald-400'
     },
     {
       icon: Shield,
-      title: 'Unified Collaboration',
-      description: 'Real-time collaboration for sales and marketing teams with full visibility and actionable insights.',
-      features: ['Team collaboration', 'Unified database', 'Seamless integration', 'Actionable insights'],
+      title: 'Why Teams Choose 360Airo\'s Prospect CRM',
+      description: '360Airo\'s Prospect CRM helps teams sell smarter, follow up faster, and build relationships that convert consistently.',
+      features: [
+        'Unified database for complete prospect visibility',
+        'Advanced tracking across campaigns and conversations',
+        'Predictive insights that support smarter follow-ups',
+        'Seamless coordination across outreach channels',
+        'Collaboration tools that keep sales and marketing aligned'
+      ],
       color: 'from-orange-500 to-red-400'
     }
   ];
@@ -864,17 +879,51 @@ export default function ProspectCRMPage() {
 
   return (
     <>
-  
+      <Head>
+        <title>Prospect CRM | 360Airo - Smarter Relationships, Stronger Conversions</title>
+        <meta name="description" content="Turn every lead into a meaningful connection with 360Airo's Prospect CRM. Manage, track, and nurture leads from first contact to conversion with intelligent automation." />
+        <meta name="keywords" content="prospect CRM, lead management, sales CRM, customer relationship management, lead tracking, sales automation" />
+        <link rel="canonical" href="https://360airo.com/features/prospect-crm" />
+      </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950/50 to-slate-950 overflow-x-hidden">
-         {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/prospect-crm" />
-      
-
         <Navbar />
 
         {/* Enhanced Hero Section */}
         <HeroSection />
+
+        {/* FEATURES SECTION - Mobile optimized */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            variants={containerVariants} 
+            className="max-w-6xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2">
+                <span className="text-green-400 font-semibold text-xs lg:text-sm tracking-wider uppercase">Key Features</span>
+              </div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4"
+              >
+                Why Teams Choose <span className="text-green-400">360Airo's Prospect CRM</span>
+              </motion.h2>
+              <SectionDivider />
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
+                {features.map((feature, index) => (
+                  <FeatureCard key={index} feature={feature} index={index} />
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
 
         {/* CENTRALIZED LEAD MANAGEMENT SECTION - Mobile optimized */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-blue-950/30 to-white/2">
@@ -902,7 +951,7 @@ export default function ProspectCRMPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4"
               >
-                Centralized Lead Management for <span className="text-blue-400">Maximum Visibility</span>
+                Centralized Lead Management for Complete Visibility
               </motion.h2>
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
@@ -924,15 +973,15 @@ export default function ProspectCRMPage() {
                 className="space-y-4 lg:space-y-6"
               >
                 <p className="text-base lg:text-lg text-white/80 leading-relaxed">
-                  No more losing track of potential customers across tools and threads. With 360Airo's Prospect CRM, every lead, interaction, and engagement detail lives in one centralized dashboard.
+                  Your prospects shouldn't be scattered across tabs, tools, and notes. With 360Airo's Prospect CRM, every interaction and engagement detail is stored inside one organized dashboard powered by robust CRM <Link href="/features/lead-management-software" className="text-blue-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management software</Link> capabilities.
                 </p>
                 
                 <div className="space-y-3 lg:space-y-4">
                   {[
-                    'View complete prospect timelines and communication history',
+                    'View complete timelines and communication history',
                     'Segment contacts based on behavior, campaign, or funnel stage',
-                    'Add custom notes, tags, and deal stages effortlessly',
-                    'Sync automatically with your email sequences and LinkedIn automation tools'
+                    'Add custom notes, tags, and deal stages with ease',
+                    'Sync seamlessly with Email Sequences and LinkedIn outreach workflows'
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -966,7 +1015,7 @@ export default function ProspectCRMPage() {
                   transition={{ delay: 0.5 }}
                   className="text-white/60 text-xs lg:text-sm italic"
                 >
-                  Every update happens in real time — so your team always has the full picture before hitting send.
+                  Every update appears instantly, giving your team the full context needed before taking the next step in lead management software.
                 </motion.p>
               </motion.div>
 
@@ -1048,7 +1097,7 @@ export default function ProspectCRMPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4"
               >
-                Data-Driven Insights That <span className="text-purple-400">Close Deals</span>
+                Data-Driven Insights That <span className="text-purple-400">Move Deals Forward</span>
               </motion.h2>
               <SectionDivider />
               <motion.p 
@@ -1058,7 +1107,7 @@ export default function ProspectCRMPage() {
                 transition={{ delay: 0.2 }}
                 className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto mb-6 lg:mb-8"
               >
-                360Airo's CRM isn't just about storage — it's built for strategy. Our AI-powered analytics help you understand which prospects are most engaged, what's driving conversions, and where to focus next.
+                This CRM does more than store information—it guides decisions. Through detailed analytics and measurable insights, you can understand which leads are highly engaged and where to concentrate your energy across your CRM software programs.
               </motion.p>
               
               {/* Bullet Points Section */}
@@ -1071,29 +1120,19 @@ export default function ProspectCRMPage() {
               >
                 <div className="grid md:grid-cols-2 gap-6 lg:gap-8 text-left">
                   <div className="space-y-4 lg:space-y-6">
-                    <motion.p 
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true, margin: '-50px' }}
-                      transition={{ delay: 0.5 }}
-                      className="text-white/90 leading-relaxed text-sm lg:text-base"
-                    >
-                      Our AI-powered analytics help you understand which prospects are most engaged, what's driving conversions, and where to focus next.
-                    </motion.p>
-                    
                     <div className="space-y-3 lg:space-y-4">
                       {[
-                        'Identify high-intent leads automatically',
-                        'Get engagement scores based on opens, clicks, and replies',
-                        'Measure the effectiveness of your email campaigns and follow-ups',
-                        'Track every deal through your pipeline with precision'
+                        'Identify high-intent leads with engagement insights',
+                        'Use activity indicators based on opens, clicks, and replies',
+                        'Measure the performance of campaigns and follow-ups',
+                        'Track deal progress across your pipeline with confidence'
                       ].map((item, index) => (
                         <motion.div
                           key={index}
                           initial={{ opacity: 0, x: -15 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true, margin: '-50px' }}
-                          transition={{ delay: 0.6 + index * 0.08 }}
+                          transition={{ delay: 0.5 + index * 0.08 }}
                           className="flex items-start space-x-3 group"
                         >
                           <motion.div
@@ -1112,6 +1151,16 @@ export default function ProspectCRMPage() {
                         </motion.div>
                       ))}
                     </div>
+                    
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ delay: 0.8 }}
+                      className="text-white/60 text-xs lg:text-sm italic"
+                    >
+                      With powerful visibility and predictive lead scoring, follow-ups become strategic and timely—not guesswork.
+                    </motion.p>
                   </div>
                   
                   <motion.div
@@ -1259,7 +1308,7 @@ export default function ProspectCRMPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4"
               >
-                Automation That <span className="text-cyan-400">Keeps You Ahead</span>
+                Automation That <span className="text-cyan-400">Works While You Work</span>
               </motion.h2>
               <SectionDivider />
               <motion.p 
@@ -1269,7 +1318,7 @@ export default function ProspectCRMPage() {
                 transition={{ delay: 0.2 }}
                 className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto mb-6 lg:mb-8"
               >
-                Let automation do the heavy lifting. 360Airo's Prospect CRM connects seamlessly with your outreach workflows to automate repetitive actions like tagging, follow-ups, and reminders.
+                Stop wasting time on repetitive tasks. 360Airo's Prospect CRM connects directly to your outreach workflows to automate actions across your entire <Link href="/features/lead-management-software" className="text-cyan-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management system</Link>.
               </motion.p>
               
               {/* Bullet Points Section */}
@@ -1284,9 +1333,9 @@ export default function ProspectCRMPage() {
                   <div className="space-y-4 lg:space-y-6">
                     <div className="space-y-3 lg:space-y-4">
                       {[
-                        'Set rules for lead scoring and re-engagement',
-                        'Auto-update contact details and sequence triggers',
-                        'Save time with AI-assisted note-taking and activity summaries'
+                        'Set behavior-based rules for lead progression and re-engagement',
+                        'Auto-update contact details and workflow triggers',
+                        <>Maintain smooth communication handoffs within the Unified Inbox</>
                       ].map((item, index) => (
                         <motion.div
                           key={index}
@@ -1312,6 +1361,16 @@ export default function ProspectCRMPage() {
                         </motion.div>
                       ))}
                     </div>
+                    
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ delay: 0.8 }}
+                      className="text-white/60 text-xs lg:text-sm italic"
+                    >
+                      Your CRM becomes a dependable teammate—organizing data, managing tasks, and keeping momentum strong while your team focuses on closing.
+                    </motion.p>
                   </div>
                   
                   <motion.div
@@ -1438,9 +1497,76 @@ export default function ProspectCRMPage() {
                 className="text-center mt-6 lg:mt-8"
               >
                 <p className="text-white/70 text-xs lg:text-sm">
-                  Your CRM becomes your silent teammate — managing relationships while you focus on closing deals.
+                  Your CRM becomes a dependable teammate—organizing data, managing tasks, and keeping momentum strong while your team focuses on closing.
                 </p>
               </motion.div>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* BENEFITS SECTION - Mobile optimized */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-blue-950/30 to-white/2">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            variants={containerVariants} 
+            className="max-w-6xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2">
+                <span className="text-orange-400 font-semibold text-xs lg:text-sm tracking-wider uppercase">Key Benefits</span>
+              </div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4"
+              >
+                Transform Your <span className="text-orange-400">Lead Management</span>
+              </motion.h2>
+              <SectionDivider />
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                {benefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ delay: index * 0.1, type: "spring" }}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    className="bg-white/5 rounded-xl lg:rounded-2xl p-6 lg:p-8 border border-white/10 hover:border-orange-500/30 transition-all duration-300 group text-center"
+                  >
+                    <motion.div
+                      className={`w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-r ${benefit.color} rounded-xl lg:rounded-2xl flex items-center justify-center mb-4 lg:mb-6 mx-auto group-hover:scale-110 transition-transform duration-300`}
+                    >
+                      <benefit.icon className="h-6 w-6 lg:h-8 lg:w-8 text-white" />
+                    </motion.div>
+                    <motion.div
+                      className="text-2xl lg:text-3xl font-bold text-white mb-2 group-hover:text-orange-300 transition-colors"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: '-50px' }}
+                      transition={{ delay: index * 0.15 }}
+                    >
+                      {benefit.metric}
+                    </motion.div>
+                    <h4 className="text-lg lg:text-xl font-bold text-white mb-2 lg:mb-3 group-hover:text-orange-300 transition-colors">
+                      {benefit.title}
+                    </h4>
+                    <p className="text-white/70 text-sm lg:text-base leading-relaxed">
+                      {benefit.description}
+                    </p>
+                    <div className="mt-3 lg:mt-4">
+                      <span className="text-orange-400 text-xs lg:text-sm font-medium px-3 py-1 bg-orange-500/10 rounded-full">
+                        {benefit.label}
+                      </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         </section>
@@ -1466,17 +1592,17 @@ export default function ProspectCRMPage() {
                 transition={{ duration: 0.5 }}
                 className="text-2xl lg:text-3xl md:text-4xl md:text-5xl font-bold text-white"
               >
-                Why Teams Choose 360Airo's Prospect CRM
+                360Airo's Prospect CRM helps teams <span className="text-blue-400">sell smarter, follow up faster</span>, and build relationships that convert consistently.
               </motion.h2>
               <SectionDivider />
               
               <div className="grid md:grid-cols-2 gap-4 lg:gap-6 text-left max-w-3xl mx-auto">
                 {[
-                  'Unified prospect database with full visibility',
-                  'AI-powered lead scoring and engagement tracking',
-                  'Seamless integration with email, LinkedIn, and automation tools',
-                  'Real-time collaboration for sales and marketing teams',
-                  'Actionable insights that turn outreach into conversions'
+                  'Unified database for complete prospect visibility',
+                  'Advanced tracking across campaigns and conversations',
+                  'Predictive insights that support smarter follow-ups',
+                  'Seamless coordination across outreach channels',
+                  'Collaboration tools that keep sales and marketing aligned'
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -1509,7 +1635,7 @@ export default function ProspectCRMPage() {
                 transition={{ delay: 0.5 }}
                 className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto"
               >
-                360Airo's Prospect CRM helps you sell smarter, follow up faster, and build relationships that actually convert.
+                Build meaningful connections, automate repetitive tasks, and close more deals with the intelligent CRM built for modern outreach teams.
               </motion.p>
 
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
