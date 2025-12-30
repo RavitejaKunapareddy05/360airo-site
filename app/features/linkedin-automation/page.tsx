@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Link from 'next/link';
 
 import {
   Linkedin,
@@ -571,20 +572,13 @@ const HeroSection = () => {
               className="space-y-3 sm:space-y-5 max-w-xl"
             >
               <p className="text-base sm:text-lg text-white/90 leading-relaxed font-light">
-                Automate Outreach Without Losing{' '}
-                <motion.span
-                  animate={{ color: ['#0077B5', '#ad60f8', '#ffffff', '#0077B5'] }}
-                  transition={{ duration: 3.4, repeat: Infinity }}
-                  className="font-semibold"
-                >
-                  the Human Touch
-                </motion.span>
+                Automate outreach without losing the human touch.
               </p>
               <p className="text-sm sm:text-base text-white/75">
-                Building meaningful connections on LinkedIn takes time — and consistency. 360Airo's LinkedIn automation tool helps you scale your network, engage prospects, and manage outreach campaigns with precision.
+                Building meaningful relationships on LinkedIn takes consistency, timing, and well-crafted messaging. 360Airo's LinkedIn automation tool helps you scale your network, engage prospects, and manage outreach campaigns with precision.
               </p>
               <p className="text-sm sm:text-base text-white/75">
-                Designed to mimic genuine human behavior, it automates routine tasks while keeping every interaction personal and authentic.
+                Designed to support authentic communication, it streamlines routine tasks while keeping every interaction personal and relevant.
               </p>
             </motion.div>
 
@@ -615,8 +609,7 @@ const HeroSection = () => {
                   className="relative bg-transparent text-white px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl w-full sm:w-auto"
                   onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
-                  <span>Start Automating LinkedIn Outreach</span>
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <span>Start Automating LinkedIn Outreach →</span>
                 </Button>
               </motion.div>
             </motion.div>
@@ -852,38 +845,39 @@ export default function LinkedInAutomationPage() {
     {
       icon: Send,
       title: "Simplify and Scale Your LinkedIn Outreach",
-      description: "With 360Airo, you can automate the entire LinkedIn prospecting process without risking your account or reputation.",
+      description: "With 360Airo, you can automate the entire LinkedIn prospecting process while maintaining safe usage and professional credibility. The platform supports essential actions across linkedin automated connections, automated LinkedIn messaging, and structured linkedin outreach automation workflows.",
       features: [
-        "Send personalized connection requests and follow-up messages automatically",
-        "Schedule multi-step LinkedIn campaigns to nurture leads over time",
-        "Track engagement metrics such as acceptance, reply, and response rates",
-        "Maintain compliance with LinkedIn's activity limits for safe, consistent automation"
+        "Send personalized connection requests and automate LinkedIn messages with tailored follow-ups",
+        "Schedule multi-step LinkedIn campaigns that nurture prospects over time",
+        "Track acceptance, reply, and response rates with full visibility",
+        "Maintain compliance with LinkedIn's activity guidelines for safe, steady automation",
+        <>Sync LinkedIn leads directly into <Link href="/features/prospect-crm" className="text-[#ad60f8] hover:text-white transition-colors duration-300 underline underline-offset-2">Prospect CRM</Link> for streamlined management</>
       ],
-      note: "This combination of smart scheduling and personalization ensures your LinkedIn outreach is both scalable and genuine."
+      note: "This blend of personalization and automation ensures your LinkedIn outreach remains both scalable and genuine."
     },
     {
       icon: MessageCircle,
-      title: "AI-Driven Personalization at Scale",
-      description: "No more copy-pasting generic messages. 360Airo's AI analyses your target audience's profiles, industries, and interests to craft customized LinkedIn messages that sound human, relevant, and professional.",
+      title: "Personalization and Engagement at Scale",
+      description: "No more generic messaging or manual copy-pasting. 360Airo supports AI email automation across your outreach strategy by helping you build consistent, relevant communication flows that complement your LinkedIn efforts.",
       features: [
-        "Profile-based message personalization",
-        "Industry-specific content generation",
-        "Context-aware conversation starters",
-        "Professional tone maintenance"
+         <>Generate tailored message variations using <Link href="/features/ai-email-generator" className="text-[#ad60f8] hover:text-white transition-colors duration-300 underline underline-offset-2">AI Email Generator</Link></>,
+        "Create behavior-based follow-ups that feel human and meaningful",
+        "Increase acceptance and reply rates with contextual, profile-aware messaging",
+        "Use contextual details such as industry, role, and interests to craft tailored messages that resonate"
       ],
-      note: "By using contextual data, it personalizes every message — helping you increase acceptance and reply rates while keeping engagement authentic."
+      note: "Your conversations become more targeted, more consistent, and far more effective."
     },
     {
       icon: BarChart3,
       title: "Unified Dashboard for Outreach Management",
-      description: "Manage all your campaigns in one place with 360Airo's LinkedIn automation dashboard.",
+      description: "Manage everything from one clean, organized workspace. 360Airo's dashboard lets you monitor campaign progress, engagement trends, and performance metrics in real time—across both LinkedIn and email.",
       features: [
-        "View campaign progress, engagement, and performance in real time",
-        "Monitor connection growth, reply tracking, and message performance easily",
-        "Integrate your LinkedIn data with email outreach campaigns",
-        "Get comprehensive analytics for data-driven decisions"
+        "View campaign performance, connection growth, and message outcomes instantly",
+        "Analyze connection rates, reply trends, and message insights in Email Campaign Analytics",
+        "Integrate LinkedIn activity with your email campaigns for cohesive automated LinkedIn outreach",
+        "Monitor engagement trends and performance metrics in real time"
       ],
-      note: "This unified view gives you complete control over both your email and LinkedIn engagement efforts."
+      note: "This unified view gives you complete control over how prospects move through your outreach ecosystem."
     }
   ];
 
@@ -975,9 +969,14 @@ export default function LinkedInAutomationPage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
               Ready to Transform Your LinkedIn Outreach?
             </h2>
-            <p className="text-base sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Join thousands of professionals using 360Airo's LinkedIn automation to build meaningful connections and grow their network smarter.
-            </p>
+            <div className="text-base sm:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed space-y-4">
+              <p>
+                Join thousands of professionals using 360Airo's LinkedIn automation to build meaningful connections and grow their network smarter.
+              </p>
+              <p className="font-semibold text-[#ad60f8]">
+                Your conversations become more targeted, more consistent, and far more effective.
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4 sm:pt-6">
               <motion.div
@@ -989,7 +988,7 @@ export default function LinkedInAutomationPage() {
                   className="bg-gradient-to-r from-[#0077B5] to-[#ad60f8] hover:from-[#0077B5]/90 hover:to-[#ad60f8]/90 px-6 py-2.5 sm:px-8 sm:py-3 text-sm sm:text-lg font-semibold rounded-xl shadow-lg shadow-[#0077B5]/30 w-full sm:w-auto"
                   onClick={() => window.open('https://app.360airo.com/', '_blank')}
                 >
-                  Start Automating LinkedIn Outreach
+                  Start Automating LinkedIn Outreach →
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </motion.div>
