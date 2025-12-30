@@ -315,7 +315,7 @@ export default function EmailWarmupPage() {
   return (
     <>
       <Head>
-        <title>Email Warmup Get Your Emails Into the Inbox, Not Spam | 360Airo</title>
+        <title>Email Warmup: Email Warmup, Get Your Emails Into the Inbox, Not Spam | 360Airo</title>
         <meta name="description" content="Turn cold domains into trusted senders with 360Airo's email warmup tool. Guaranteed inbox delivery, higher open rates, and better ROI for your outreach campaigns." />
         <meta name="keywords" content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" />
         
@@ -323,7 +323,7 @@ export default function EmailWarmupPage() {
         <link rel="canonical" href="https://360airo.com/features/email-warmup" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Email Warmup: Get Your Emails Into the Inbox, Not Spam | 360Airo" />
+        <meta property="og:title" content="Email Warmup: Email Warmup, Get Your Emails Into the Inbox, Not Spam | 360Airo" />
         <meta property="og:description" content="The reason 360Airo is known as one of the best email warmup tools for serious outreach. Turn cold domains into trusted senders." />
         <meta property="og:url" content="https://360airo.com/features/email-warmup" />
         <meta property="og:type" content="website" />
