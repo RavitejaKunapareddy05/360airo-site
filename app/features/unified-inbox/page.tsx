@@ -542,7 +542,7 @@ export default function UnifiedInboxRadialPage() {
               transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.1 }}
               className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-7xl'} font-black text-white mb-4 lg:mb-6`}
             >
-              Unified Shared Inbox
+              Unified Inbox
             </motion.h1>
             
             <motion.h2
@@ -569,7 +569,7 @@ export default function UnifiedInboxRadialPage() {
               transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.7 }}
               className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-6 lg:mb-8 max-w-3xl mx-auto leading-relaxed`}
             >
-              Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's Unified Shared Inbox, every message from your email sequences, LinkedIn outreach, and campaign replies lands in one clean, centralized workspace.
+              Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's Unified Inbox, every message from your email sequences, LinkedIn outreach, and campaign replies lands in one clean, centralized workspace.
             </motion.p>
 
             <motion.p
