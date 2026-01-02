@@ -24,20 +24,9 @@ import {
   Filter,
   Download,
   Share2,
-  Layers, 
+  Layers,
   Brain,
-  Sparkles,
-  MessageSquare,
-  Search,
-  RefreshCw,
-  Shield,
-  Settings,
-  Bell,
-  FileText,
-  TrendingDown,
-  Target as TargetIcon,
-  Zap as ZapIcon,
-  Lock
+  Sparkles
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -383,72 +372,20 @@ const visualizations = [
   }
 ];
 
-const realTimeFeatures = [
-  {
-    icon: ZapIcon,
-    title: 'Real-Time Monitoring',
-    description: 'Metrics update instantly — spot delivery issues early and adjust strategy immediately.',
-    benefit: 'No waiting for exports'
-  },
-  {
-    icon: Shield,
-    title: 'Sender Reputation Protection',
-    description: 'Combine analytics with Email Warmup to maintain consistent inbox placement.',
-    benefit: 'Proactive protection'
-  },
-  {
-    icon: Bell,
-    title: 'Instant Alerts',
-    description: 'Get notified immediately when campaigns need attention or optimization.',
-    benefit: 'Always informed'
-  },
-  {
-    icon: RefreshCw,
-    title: 'Live Adjustments',
-    description: 'Evaluate cold outreach performance and make real-time strategy changes.',
-    benefit: 'Adapt on the fly'
-  }
-];
-
-const teamBenefits = [
-  {
-    icon: Users,
-    title: 'Cross-Team Alignment',
-    description: 'Share reports and insights easily across sales and marketing departments.',
-    stat: 'One shared dashboard'
-  },
-  {
-    icon: FileText,
-    title: 'Stakeholder Reports',
-    description: 'Generate accurate performance reports for stakeholders in one click.',
-    stat: 'Professional exports'
-  },
-  {
-    icon: Settings,
-    title: 'Custom Views',
-    description: 'Each team member can customize their dashboard view for their specific needs.',
-    stat: 'Personalized insights'
-  },
-  {
-    icon: Share2,
-    title: 'Easy Sharing',
-    description: 'Share specific insights or full reports with team members or external partners.',
-    stat: 'Seamless collaboration'
-  }
-];
-
 export default function ReportsAnalyticsPage() {
   return (
     <>
       <Head>
-        <title>Email Campaign Analytics | 360Airo - Turn Every Email Into Insight</title>
-        <meta name="description" content="360Airo's email campaign analytics dashboard turns raw campaign data into clear, actionable insights — helping teams optimize performance, improve deliverability, and make smarter decisions with every send." />
-        <meta name="keywords" content="email analytics, campaign reports, email tracking, performance insights, outreach analytics, email deliverability, email marketing analytics" />
-        <link rel="canonical" href="https://360airo.com/features/email-campaign-analytics" />
+        <title>Reports & Analytics | 360Airo - Advanced Email Analytics Dashboard</title>
+        <meta name="description" content="360Airo's advanced analytics dashboard provides real-time insights into your email campaigns. Track opens, clicks, replies, and optimize performance with AI-powered recommendations." />
+        <meta name="keywords" content="email analytics, campaign reports, email tracking, performance insights, outreach analytics" />
+        <link rel="canonical" href="https://360airo.com/features/reports-analytics" />
+        <link rel="canonical" href="https://360airo.com/features/email-warmup" />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
-        <link rel="canonical" href="https://360airo.com/features/email-campaign-analytics" />
+    {/* Canonical URL for SEO */}
+      <link rel="canonical" href="https://360airo.com/features/report-analytics" />
         <Navbar />
 
         {/* HERO SECTION */}
@@ -533,7 +470,7 @@ export default function ReportsAnalyticsPage() {
                       >
                         <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7]" />
                       </motion.div>
-                      <span>Email Campaign Analytics</span>
+                      <span>Reports & Analytics</span>
                     </span>
                   </div>
                 </motion.div>
@@ -551,7 +488,7 @@ export default function ReportsAnalyticsPage() {
                       transition={{ delay: 0.7, duration: 0.6 }}
                       className="block"
                     >
-                      Email Campaign Analytics
+                      Turn Every Email
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -559,7 +496,7 @@ export default function ReportsAnalyticsPage() {
                       transition={{ delay: 0.9, duration: 0.6 }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent"
                     >
-                      Turn Every Email Into Insight
+                      Into Insight
                     </motion.span>
                   </motion.h1>
 
@@ -594,7 +531,7 @@ export default function ReportsAnalyticsPage() {
                     Improve What Works.
                   </h2>
                   <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-                    When it comes to outreach, guessing is not a strategy. 360Airo's email campaign analytics dashboard turns raw campaign data into clear, actionable insights — helping teams optimize performance, improve deliverability, and make smarter decisions with every send.
+                    When it comes to outreach, guessing is not a strategy. 360Airo's analytics dashboard transforms campaign data into clear, actionable insights — helping you optimize performance and make smarter decisions with every send.
                   </p>
                 </motion.div>
 
@@ -624,7 +561,7 @@ export default function ReportsAnalyticsPage() {
                       className="relative bg-transparent text-[#480056] px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl w-full"
                       onClick={() => window.open('https://app.360airo.com/', '_blank')}
                     >
-                      <span>Explore Email Campaign Analytics</span>
+                      <span>Explore Reports & Analytics</span>
                       <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>
@@ -644,7 +581,7 @@ export default function ReportsAnalyticsPage() {
           </motion.div>
         </section>
 
-        {/* STORY BEHIND EVERY SEND SECTION */}
+        {/* INSIGHTS SECTION */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -655,14 +592,14 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Understand the Story Behind Every Send</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Understand Every Send</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Your Campaigns Are <span className="text-[#8B5CF6]">Sending Signals</span> — Are You Listening?
+                Your Campaigns Are <span className="text-[#8B5CF6]">Talking</span> — Are You Listening?
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                Your email campaigns are constantly sending signals — 360Airo's email campaign analytics helps you interpret them correctly. We give you a complete view of outreach performance so you can understand what resonates, what stalls conversations, and where refinement is needed.
+                360Airo's analytics dashboard provides a complete view of your outreach performance metrics, helping you uncover what resonates with your audience and what needs refinement.
               </p>
             </motion.div>
 
@@ -699,34 +636,10 @@ export default function ReportsAnalyticsPage() {
                 </GlowCard>
               ))}
             </div>
-
-            {/* Additional Insight Points */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12 sm:mt-16 bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10"
-            >
-              <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Track Engagement Trends</h3>
-                  <p className="text-white/80 text-sm sm:text-base leading-relaxed">
-                    Monitor open and click rates to measure engagement trends and understand what content resonates with your audience.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Monitor Conversation Quality</h3>
-                  <p className="text-white/80 text-sm sm:text-base leading-relaxed">
-                    Assess reply rates to understand conversation quality and identify opportunities for improvement in your outreach strategy.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </section>
 
-        {/* REAL-TIME INSIGHTS SECTION */}
+        {/* VISUALIZATIONS SECTION */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -737,87 +650,14 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Real-Time Insights</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Beautiful Data Visualization</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Real-Time Insights for <span className="text-[#8B5CF6]">Smarter Outreach</span>
+                Your Data, <span className="text-[#8B5CF6]">Visualized Beautifully</span>
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                With 360Airo's email analytics tool, metrics update in real time — giving you immediate visibility into campaign health. Spot delivery issues early, evaluate cold outreach performance, and adjust strategy without waiting for reports to export.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-              {realTimeFeatures.map((feature, index) => (
-                <GlowCard key={index} className="group cursor-pointer rounded-xl sm:rounded-2xl">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    whileHover={{ y: -3 }}
-                    whileTap={{ scale: 0.98 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.12 }}
-                    className="relative bg-white/5 backdrop-blur-sm p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-white/10 text-center transition-all duration-400 group-hover:bg-white/10 group-hover:border-[#8B5CF6]/50 h-full"
-                  >
-                    <motion.div
-                      className={`bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center mx-auto mb-4 sm:mb-6`}
-                      whileHover={{ rotate: 360, scale: 1.05 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <feature.icon className="h-5 w-5 sm:h-6 sm:w-6 lg:h-8 lg:w-8 text-white" />
-                    </motion.div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4 transition-colors group-hover:text-[#A855F7]">{feature.title}</h3>
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-3 sm:mb-4" />
-                    <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4">{feature.description}</p>
-                    <div className="text-xs sm:text-sm text-emerald-400 font-semibold">{feature.benefit}</div>
-                  </motion.div>
-                </GlowCard>
-              ))}
-            </div>
-
-            {/* Email Warmup Integration */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12 sm:mt-16 bg-gradient-to-r from-[#8B5CF6]/10 via-[#A855F7]/5 to-[#C084FC]/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-[#8B5CF6]/30"
-            >
-              <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-                <div className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] w-16 h-16 sm:w-20 sm:h-20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Shield className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Protect Your Sender Reputation</h3>
-                  <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-                    Use analytics alongside Email Warmup to protect sender reputation and maintain consistent inbox placement across campaigns. Proactively monitor deliverability metrics and inbox placement before issues escalate.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </section>
-
-        {/* DATA VISUALIZATION SECTION */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, amount: 0.2 }} 
-            variants={containerVariants} 
-            className="max-w-6xl mx-auto"
-          >
-            <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
-              <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Your Data, Clearly Visualized</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                No Spreadsheets. <span className="text-[#8B5CF6]">No Guesswork.</span>
-              </h2>
-              <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
-              <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                360Airo's email marketing analytics tool presents performance through clean charts and trend views that make patterns easy to spot. Review individual message performance, analyze overall campaign trends, and generate accurate email campaign performance reports for stakeholders — all from one dashboard.
+                No more spreadsheets or confusing exports. Our dashboard presents your data through clear graphs and trends so you can focus on strategy, not sorting numbers.
               </p>
             </motion.div>
 
@@ -847,35 +687,11 @@ export default function ReportsAnalyticsPage() {
                 </GlowCard>
               ))}
             </div>
-
-            {/* Dashboard Benefits */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 sm:mt-16"
-            >
-              <div className="grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-[#A855F7] mb-2">One Dashboard</div>
-                  <p className="text-white/80 text-sm sm:text-base">Everything you need to evaluate outreach success lives in one intuitive dashboard.</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-[#A855F7] mb-2">Clear Patterns</div>
-                  <p className="text-white/80 text-sm sm:text-base">Spot trends and patterns instantly with our clean, visual data presentation.</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-[#A855F7] mb-2">Easy Reporting</div>
-                  <p className="text-white/80 text-sm sm:text-base">Generate stakeholder-ready reports with one click — no manual data compilation.</p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </section>
 
-        {/* WHY TEAMS RELY ON ANALYTICS SECTION */}
-        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+        {/* FEATURES SECTION */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
@@ -885,14 +701,14 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Why Teams Rely on 360Airo</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Why 360Airo Reports & Analytics</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
                 From Data to <span className="text-[#8B5CF6]">Decisions</span>
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                Numbers alone don't drive results — understanding does. With 360Airo's email campaign analytics, you don't just track performance; you learn what's working and why. Test new approaches, refine follow-ups, and scale outreach confidently with insights you can trust.
+                Numbers alone don't drive success — clarity does. With 360Airo's analytics, you don't just track performance; you understand the why behind it.
               </p>
             </motion.div>
 
@@ -923,29 +739,6 @@ export default function ReportsAnalyticsPage() {
                 </GlowCard>
               ))}
             </div>
-
-            {/* Team Collaboration Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-12 sm:mt-16"
-            >
-              <h3 className="text-2xl sm:text-3xl font-bold text-white text-center mb-8 sm:mb-12">Team Alignment & Collaboration</h3>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-                {teamBenefits.map((benefit, index) => (
-                  <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-white/10 text-center">
-                    <div className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                      <benefit.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                    </div>
-                    <h4 className="text-lg font-bold text-white mb-2">{benefit.title}</h4>
-                    <p className="text-white/70 text-sm sm:text-base mb-3">{benefit.description}</p>
-                    <div className="text-xs text-emerald-400 font-semibold">{benefit.stat}</div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </motion.div>
         </section>
 
@@ -964,11 +757,11 @@ export default function ReportsAnalyticsPage() {
                 <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Start Measuring What Matters</span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Stop guessing. Start improving.
+                Stop guessing and start growing
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-                360Airo's email campaign analytics gives you the clarity to see performance, understand impact, and act decisively — all from one intuitive platform.
+                360Airo's Reports & Analytics feature gives you everything you need to see, learn, and act — all in one intuitive platform.
               </p>
               <div className="pt-2 sm:pt-4">
                 <motion.div 
@@ -982,11 +775,11 @@ export default function ReportsAnalyticsPage() {
                     className="relative bg-white text-[#480056] hover:bg-transparent px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg lg:text-xl font-semibold rounded-xl sm:rounded-2xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20 w-full"
                     onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
-                    Explore Email Campaign Analytics
+                    Explore Reports & Analytics
                     <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
-              </div>  
+              </div>
               <motion.div
                 className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mt-6 sm:mt-8 mb-3 sm:mb-4"
                 initial={{ width: 0 }}
