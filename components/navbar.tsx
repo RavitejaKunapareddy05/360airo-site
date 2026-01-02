@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -252,9 +251,6 @@ const features = [
 ];
 
 export function Navbar() {
-  const pathname = usePathname();
-  const isFreToolsPage = pathname === '/free-tools' || pathname === '/free-tools/';
-  
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
@@ -363,7 +359,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-20 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-white/10 backdrop-blur-xl border-b border-white/20 shadow-2xl'
             : 'bg-transparent'
@@ -636,7 +632,9 @@ export function Navbar() {
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-xl pointer-events-none" />
                       
                       {/* Scrollable Container */}
-                      <div className="free-tools-dropdown relative overflow-y-auto p-3 max-h-[300px]">
+                      <div className="free-tools-dropdown relative overflow-y-auto p-3 max-h-[300px]" style={{
+                        scrollBehavior: 'smooth'
+                      }}>
                         <div className="grid grid-cols-3 gap-2">
                           {freeTools.map((tool, index) => (
                             <motion.div
@@ -730,7 +728,7 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA Buttons */}
-            <div className={`hidden lg:flex items-center space-x-3 ${isFreToolsPage ? '-ml-32' : ''}`}>
+            <div className="hidden lg:flex items-center space-x-3">
               <Button
                 variant="ghost"
                 className="text-white/90 hover:text-white hover:bg-white/10 transition-all duration-300"
