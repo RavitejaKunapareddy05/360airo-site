@@ -138,7 +138,7 @@ const features = [
     tag: null
   },
   { 
-    name: 'AI & Annual Campaigns', 
+    name: 'Email Campaigns', 
     href: '/features/email-campaigns',
     description: 'Plan, execute, and optimize year-long email strategies',
     icon: Target,
@@ -146,8 +146,8 @@ const features = [
     tag: 'New'
   },
   { 
-    name: 'AI Content Generation', 
-    href: '/features/ai-pitch-generation',
+    name: 'AI Email Generator', 
+    href: '/features/ai-email-generator',
     description: 'Generate personalized, high-converting email content',
     icon: Sparkles,
     color: 'from-orange-500 to-red-400',
@@ -162,8 +162,8 @@ const features = [
     tag: 'New'
   },
   { 
-    name: 'Unified Shared Inbox', 
-    href: '/features/unified-shared-inbox',
+    name: 'Unified Inbox', 
+    href: '/features/unified-inbox',
     description: 'Centralized inbox for team collaboration and customer communication',
     icon: Inbox,
     color: 'from-violet-500 to-purple-400',
@@ -178,8 +178,8 @@ const features = [
     tag: 'Automation'
   },
   { 
-    name: 'AI Automation', 
-    href: '/features/ai-automation',
+    name: 'Ai Email Automation', 
+    href: '/features/ai-email-automation',
     description: 'Intelligent workflow automation powered by artificial intelligence',
     icon: Rocket,
     color: 'from-amber-500 to-orange-400',
@@ -194,8 +194,8 @@ const features = [
     tag: 'Social'
   },
   { 
-    name: 'Reports & Analytics', 
-    href: '/features/report-analytics',
+    name: 'Email Campaign Analytics', 
+    href: '/features/email-campaign-analytics',
     description: 'Deep insights and performance analytics dashboard',
     icon: BarChart3,
     color: 'from-violet-500 to-purple-400',
@@ -226,7 +226,7 @@ const features = [
     tag: 'Demo'
   },
   { 
-    name: 'Multi-Channel', 
+    name: 'Multi-Channel Platform', 
     href: '/features/multi-channel-platform',
     description: 'Reach customers across multiple channels seamlessly',
     icon: Share2,
@@ -242,8 +242,8 @@ const features = [
     tag: 'New'
   },
   {
-    name: 'Prospect Management',
-    href: '/features/prospect-management',
+    name: 'Lead Managment Software',
+    href: '/features/lead-management-software',
     description: 'Centralize, organize, and track all your leads efficiently',
     icon: Database,
     color: 'from-indigo-500 to-purple-400',
