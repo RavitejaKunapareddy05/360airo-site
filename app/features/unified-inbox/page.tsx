@@ -6,6 +6,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import {
   MessageSquare,
@@ -34,6 +35,18 @@ import {
   Workflow,
   MessageCircleReply
 } from 'lucide-react';
+
+/* Internal Link Component */
+const InternalLink = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
+  return (
+    <Link 
+      href={href}
+      className={`text-[#b45ecf] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+};
 
 // Circular Connection Animation - Mobile optimized
 const CircularConnections = () => {
@@ -377,45 +390,52 @@ export default function UnifiedInboxRadialPage() {
 
   const featureSections = [
     {
-      title: "All Your Accounts, Perfectly Synced",
-      description: "Say goodbye to switching tabs or logging into multiple accounts. 360Airo connects all your domains and emails into one shared inbox, syncing every thread instantly. Whether you're managing multiple campaigns or working with a distributed sales team, everyone stays on the same page — literally.",
-      features: [
-        "Manage multiple sender accounts in one dashboard",
-        "Assign conversations to specific team members",
-        "Track message history and response timelines",
-        "Keep complete visibility over all client interactions"
-      ],
-      note: "Your outreach becomes smoother, faster, and perfectly coordinated."
+      title: "Unified Inbox — Every Conversation, One View",
+      description: "Collaborate effortlessly across all your outreach channels. Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's unified inbox, every message from your email sequences, LinkedIn outreach, and campaign replies appears in one clean, centralized workspace. Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. <InternalLink href='/features/team-collaboration'>Team Collaboration</InternalLink> becomes seamless and organized.",
+      features: [],
+      note: ""
     },
     {
-      title: "Smarter Collaboration with AI Assistance",
-      description: "360Airo's AI-powered inbox management helps your team respond faster and smarter. It detects message intent, flags high-priority replies, and even suggests personalized responses — all while maintaining your brand's tone.",
+      title: "All Your Accounts, Perfectly Synced",
+      description: "Say goodbye to switching tabs or logging into multiple platforms. 360Airo connects all your domains and emails into a single, synchronized inbox that updates every thread instantly. Whether you're handling multiple campaigns or coordinating across a distributed team, everyone stays aligned — literally. Your outreach becomes smoother, faster, and far more coordinated.",
       features: [
-        "Get AI-suggested replies for faster follow-ups",
-        "Categorize and prioritize messages automatically", 
-        "Never lose track of client communications or leads"
+        "Manage multiple sender accounts in one dashboard",
+        "Assign conversations to the right team members",
+        "Track complete message history and response timelines",
+        "Maintain full visibility over all prospect interactions through <InternalLink href='/features/prospect-crm'>Prospect CRM</InternalLink>",
+        "Connect Gmail, Outlook & SMTP for a multi-channel inbox"
       ],
-      note: "The result? You save hours every week while delivering a seamless experience to every prospect."
+      note: ""
+    },
+    {
+      title: "Smarter Collaboration with Intelligent Assistance",
+      description: "Respond faster and stay organized with enhanced inbox management. 360Airo supports intelligent sorting and prioritization to help your team handle conversations efficiently while keeping communication personal and consistent.",
+      features: [
+        "Suggested replies for quicker, more accurate follow-ups",
+        "Automatic categorization and prioritization of messages",
+        "Clear visibility into client communication across the entire team",
+        "Manage all team communication using our Team Collaboration tools"
+      ],
+      note: "The result? You save hours each week while delivering a unified, professional experience to every prospect."
     },
     {
       title: "Transparency Without Overlap",
-      description: "No more duplicate replies or missed handoffs. Each team member knows who's handling what, with clear ownership and visibility over every conversation thread.",
+      description: "No more duplicate replies. No missed handoffs. Every conversation has clear ownership, ensuring that team members always know who is handling which thread. This shared structure is designed for sales, marketing, and success teams that need clarity, not chaos.",
       features: [
-        "Real-time team visibility",
-        "Clear conversation ownership",
-        "No duplicate responses",
-        "Seamless team handoffs"
+        "Organized collaborative inbox workflows",
+        "Full transparency for every message and sender",
+        "Streamlined communication across shared email channels"
       ],
-      note: "360Airo's unified communication system is built for sales, marketing, and customer success teams that need clarity, not chaos."
+      note: ""
     }
   ];
 
   const benefits = [
-    "One inbox for all campaigns and accounts",
-    "Team collaboration made easy with real-time updates",
-    "AI-assisted response suggestions and prioritization", 
-    "Complete message history and transparency",
-    "Improved response times and customer satisfaction"
+    "One inbox for all campaigns, accounts, and platforms",
+    "Real-time updates that make team collaboration effortless",
+    "Smart response suggestions and message prioritization",
+    "Complete message history with clear ownership",
+    "Faster response times and higher customer satisfaction"
   ];
 
   return (
@@ -436,7 +456,7 @@ export default function UnifiedInboxRadialPage() {
         
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
-        <meta property="og:description" content="360Airo’s Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." />
+        <meta property="og:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." />
         <meta property="og:url" content="https://360airo.com/features/unified-shared-inbox" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -558,7 +578,7 @@ export default function UnifiedInboxRadialPage() {
               transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.9 }}
               className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed`}
             >
-              Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. Collaboration just became effortless.
+              Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. <InternalLink href="/features/team-collaboration">Team Collaboration</InternalLink> becomes seamless and organized.
             </motion.p>
 
             <motion.div
@@ -628,25 +648,29 @@ export default function UnifiedInboxRadialPage() {
                     className="space-y-3 lg:space-y-4"
                   >
                     <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{section.title}</h3>
-                    <p className={`text-white/70 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{section.description}</p>
+                    <p className={`text-white/70 leading-relaxed ${isMobile ? 'text-sm' : ''}`} dangerouslySetInnerHTML={{ __html: section.description }} />
                     
-                    <div className="space-y-2">
-                      {section.features.map((feature, featureIndex) => (
-                        <motion.div
-                          key={feature}
-                          initial={{ opacity: 0, x: isMobile ? 15 : 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true, margin: '-50px' }}
-                          transition={{ delay: index * (isMobile ? 0.15 : 0.2) + featureIndex * (isMobile ? 0.08 : 0.1) }}
-                          className="flex items-center space-x-3 text-white/80"
-                        >
-                          <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full flex-shrink-0" />
-                          <span className={isMobile ? 'text-sm' : ''}>{feature}</span>
-                        </motion.div>
-                      ))}
-                    </div>
+                    {section.features.length > 0 && (
+                      <div className="space-y-2">
+                        {section.features.map((feature, featureIndex) => (
+                          <motion.div
+                            key={feature}
+                            initial={{ opacity: 0, x: isMobile ? 15 : 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: '-50px' }}
+                            transition={{ delay: index * (isMobile ? 0.15 : 0.2) + featureIndex * (isMobile ? 0.08 : 0.1) }}
+                            className="flex items-center space-x-3 text-white/80"
+                          >
+                            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full flex-shrink-0" />
+                            <span className={isMobile ? 'text-sm' : ''} dangerouslySetInnerHTML={{ __html: feature }} />
+                          </motion.div>
+                        ))}
+                      </div>
+                    )}
                     
-                    <p className="text-white/60 italic text-sm">{section.note}</p>
+                    {section.note && (
+                      <p className="text-white/60 italic text-sm">{section.note}</p>
+                    )}
                   </motion.div>
                 ))}
               </div>
@@ -663,7 +687,7 @@ export default function UnifiedInboxRadialPage() {
               viewport={{ once: true, margin: '-50px' }}
               className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-white mb-8 lg:mb-12`}
             >
-              Why Choose 360Airo's Unified Shared Inbox
+              Why Choose 360Airo's Unified Inbox
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
@@ -691,7 +715,7 @@ export default function UnifiedInboxRadialPage() {
               className="space-y-4 lg:space-y-6"
             >
               <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto leading-relaxed`}>
-                Manage outreach like a team, not a crowd. With 360Airo's Unified Shared Inbox, every reply, every lead, and every opportunity stays right where it belongs — in one place.
+                Manage outreach like a team, not a crowd. With 360Airo's unified inbox, every reply, every lead, and every opportunity stays exactly where it belongs — in one place.
               </p>
 
               <Button 
