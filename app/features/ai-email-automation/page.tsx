@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -44,7 +44,9 @@ import {
   Database,
   Cloud,
   Wifi,
-  Activity
+  Activity,
+  Plus,
+  Minus
 } from 'lucide-react';
 
 // Color constants
@@ -55,6 +57,194 @@ const COLORS = {
   dark: '#000000', // Black
   light: '#1A1A1A', // Dark gray
   white: '#FFFFFF'
+};
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const faqs = [
+    {
+      question: "What is AI email automation, and how does it work for email marketing?",
+      answer: "AI email automation uses intelligent systems to create, schedule, and optimize email campaigns. It automates repetitive tasks while adjusting messaging, timing, and follow-ups based on engagement and campaign performance."
+    },
+    {
+      question: "How does AI email automation improve email marketing performance?",
+      answer: "AI email automation improves performance by increasing consistency, optimizing send times, and reducing manual effort. It helps teams focus on strategy while emails are sent and adjusted based on real engagement data."
+    },
+    {
+      question: "What types of emails can be automated using AI email automation?",
+      answer: "AI email automation can handle cold outreach emails, follow-ups, nurturing sequences, re-engagement campaigns, and transactional messages, ensuring communication remains timely and aligned with campaign objectives."
+    },
+    {
+      question: "Can AI-generated emails be customized to match brand voice and audience?",
+      answer: "Yes. AI-generated emails can be customized for tone, structure, and messaging style, allowing teams to maintain brand consistency while adapting content to different audiences and outreach goals."
+    },
+    {
+      question: "Does AI email automation analyze user behavior to send smarter emails?",
+      answer: "Yes. AI email automation analyzes opens, clicks, replies, and timing patterns to adjust follow-ups and messaging, helping teams send more relevant emails instead of relying on fixed, static sequences."
+    },
+    {
+      question: "How does AI email automation impact inbox placement and deliverability?",
+      answer: "AI email automation improves deliverability by supporting controlled sending, consistent engagement, and smarter sequencing. When combined with proper domain warmup, it helps protect sender reputation and inbox placement."
+    },
+    {
+      question: "Is customer data safe when using AI to automate emails?",
+      answer: "Yes, when using platforms with secure data handling practices. 360Airo follows strict data protection standards to ensure customer and prospect data remains private and securely managed."
+    },
+    {
+      question: "How do you set up AI email automation for your business?",
+      answer: "Setting up AI email automation involves connecting email accounts, defining campaign goals, creating sequences, and enabling automation rules. Once configured, the system manages outreach while teams monitor performance."
+    },
+    {
+      question: "How does 360Airo's AI email automation differ from other automation tools?",
+      answer: "360Airo combines AI email automation with deliverability protection, multichannel coordination, and centralized analytics, offering a unified system rather than disconnected tools for email, LinkedIn, and outreach management."
+    },
+    {
+      question: "What AI automation features are included in 360Airo's pricing plans?",
+      answer: "360Airo's pricing plans include AI-powered email generation, automated sequences, engagement-based follow-ups, analytics, and multichannel coordination, allowing teams to scale outreach efficiently without adding operational complexity."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about AI email automation with 360Airo
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: COLORS.primary }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Still have questions? Our team is here to help you succeed with AI email automation.
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: COLORS.primary }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Start Your Free Trial
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 };
 
 // AI Brain Animation Component - Mobile optimized
@@ -1082,6 +1272,13 @@ export default function AIEmailAutomationPage() {
                 </Button>
               </motion.div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-r from-white/2 via-[#ad60f8]/10 to-white/2">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
           </div>
         </section>
 
