@@ -715,7 +715,7 @@ const AnalyticsFeatures = () => {
   );
 };
 
-// Pulse Wave Section
+// Pulse Wave Section - Fixed to remove id prop
 const PulseWaveSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -1264,8 +1264,8 @@ export default function ReferralProgramPage() {
         </section>
 
         {/* FAQ SECTION - Added before final CTA */}
-        <PulseWaveSection id="faq" className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
-          <div className="max-w-4xl mx-auto">
+        <section id="faq" className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056] relative overflow-hidden">
+          <div className="max-w-4xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1324,7 +1324,7 @@ export default function ReferralProgramPage() {
               </motion.div>
             </motion.div>
           </div>
-        </PulseWaveSection>
+        </section>
 
         {/* Final CTA Section */}
         <PulseWaveSection className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
