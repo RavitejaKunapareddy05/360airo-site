@@ -753,7 +753,7 @@ export default function ReportsAnalyticsPage() {
                   <p className="text-base sm:text-lg text-white/75 leading-relaxed">
                     When it comes to outreach, guessing is not a strategy.
                     360Airo's Email campaign analytics dashboard transforms your campaign data into clear, actionable insights — helping you optimize performance, improve email deliverability, and make smarter decisions with every send.
-                    For increased inbox reach, pair it with our Email Warmup feature.
+                   <span>For increased inbox reach, pair it with our <a href="/features/email-warmup " className="text-[#b45ecf] hover:text-white transition-colors">Email Warmup </a> feature</span>
                   </p>
                 </motion.div>
 
