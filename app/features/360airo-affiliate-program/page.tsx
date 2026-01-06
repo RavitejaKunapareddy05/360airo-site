@@ -40,7 +40,9 @@ import {
   GraduationCap,
   MonitorPlay,
   Megaphone,
-  HeartHandshake
+  HeartHandshake,
+  Plus,
+  Minus
 } from 'lucide-react';
 
 // Color constants
@@ -51,6 +53,179 @@ const COLORS = {
   white: '#ffffff',
   dark: '#0A0A0A',
   light: '#1A1A1A'
+};
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "What is the 360Airo Affiliate Program, and how does it work?",
+      answer: "The 360Airo Affiliate Program allows individuals and businesses to earn commissions by referring new users. Affiliates share unique tracking links, and commissions are earned when referred users subscribe. The program is designed to be transparent, scalable, and rewarding for long term partnerships."
+    },
+    {
+      question: "Who is eligible to join the affiliate program?",
+      answer: "Anyone including marketers, agencies, consultants, creators, and sales professionals can join the 360Airo affiliate program. No prior experience is required, making it accessible for anyone interested in promoting a sales and outreach automation platform."
+    },
+    {
+      question: "Is it free to sign up for the affiliate program?",
+      answer: "Yes, signing up for the 360Airo affiliate program is completely free. There are no hidden fees or commitments, allowing affiliates to start promoting the platform and earning commissions without upfront investment."
+    },
+    {
+      question: "How much commission can affiliates earn with 360Airo?",
+      answer: "Affiliates can earn competitive commissions based on successful referrals. Commission rates are designed to reward long term value, making it possible to generate recurring income as referred users continue their subscriptions."
+    },
+    {
+      question: "Do affiliates earn lifetime or recurring commissions?",
+      answer: "360Airo offers recurring commissions for active subscriptions. This means affiliates continue earning as long as their referred customers remain subscribed, creating predictable and sustainable income opportunities."
+    },
+    {
+      question: "How does the affiliate tracking and dashboard work?",
+      answer: "The affiliate dashboard provides real time visibility into clicks, signups, conversions, and earnings. Affiliates can easily track performance, monitor payouts, and optimize promotion strategies using accurate and transparent reporting."
+    },
+    {
+      question: "When and how are affiliate commissions paid?",
+      answer: "Affiliate commissions are paid on a regular schedule through supported payout methods. Once minimum payout thresholds are met, earnings are processed automatically, ensuring timely and hassle free payments."
+    },
+    {
+      question: "What marketing resources are available for affiliates?",
+      answer: "360Airo provides affiliates with promotional assets such as banners, messaging guidelines, and product information. These resources help affiliates market the platform effectively while maintaining brand consistency and clarity."
+    },
+    {
+      question: "What makes the 360Airo affiliate program different from others?",
+      answer: "The 360Airo affiliate program stands out due to recurring commissions, transparent tracking, and a high value product. Affiliates promote a platform that solves real outreach challenges, making conversions easier and earnings more consistent."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about the 360Airo Affiliate Program
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: COLORS.purpleLight }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Ready to start earning with 360Airo? Join our affiliate program today!
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: COLORS.purpleLight }}
+            onClick={() => window.open('https://app.360airo.com', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Become an Affiliate
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 };
 
 // Handle redirects
@@ -1002,6 +1177,13 @@ export default function AffiliateProgramPage() {
 
               <BouncingIconGrid />
             </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
           </div>
         </section>
 
