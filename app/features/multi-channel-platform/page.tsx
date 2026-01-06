@@ -32,7 +32,9 @@ import {
   Network,
   Radio,
   Layers,
-  Brain
+  Brain,
+  Plus,
+  Minus
 } from 'lucide-react';
 
 const COLORS = {
@@ -494,6 +496,171 @@ const PlatformBenefits = () => {
           </motion.div>
         ))}
       </div>
+    </div>
+  );
+};
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "What is a multichannel marketing campaign, and how does it work across channels?",
+      answer: "A multichannel marketing campaign engages prospects through multiple platforms such as email and LinkedIn. Each channel supports the others, ensuring consistent follow-ups and better visibility without relying on a single communication path."
+    },
+    {
+      question: "How can multichannel outreach improve lead engagement and conversions?",
+      answer: "Multichannel outreach increases visibility by reaching prospects where they are most responsive. When email and LinkedIn work together, engagement improves, conversations feel more natural, and conversion rates rise through repeated, contextual touchpoints."
+    },
+    {
+      question: "How does AI personalization enhance multichannel outreach performance?",
+      answer: "AI personalization adapts messaging based on prospect behavior and engagement across channels. It ensures communication remains relevant, timely, and consistent, helping teams avoid repetitive messaging and deliver more context-aware follow-ups."
+    },
+    {
+      question: "Can I track and analyze all multichannel campaign metrics from one dashboard?",
+      answer: "Yes. A unified dashboard consolidates email and LinkedIn metrics into a single view, allowing teams to analyze engagement, replies, and performance trends across channels without switching tools or losing context."
+    },
+    {
+      question: "How does multichannel automation coordinate email and LinkedIn outreach?",
+      answer: "Multichannel automation synchronizes actions across platforms. Engagement on one channel can trigger or pause outreach on another, ensuring follow-ups stay coordinated, relevant, and free from duplication or over-messaging."
+    },
+    {
+      question: "How can I optimize multichannel campaigns using 360Airo tools?",
+      answer: "360Airo helps optimize multichannel campaigns by combining deliverability tools, performance analytics, and automated sequences. Teams can refine timing, messaging, and channel order using real engagement data instead of guesswork."
+    },
+    {
+      question: "What's the difference between multichannel and omnichannel marketing?",
+      answer: "Multichannel marketing coordinates outreach across selected platforms like email and LinkedIn, while omnichannel marketing integrates every customer touchpoint. Multichannel is simpler, faster to deploy, and better suited for B2B outreach and sales teams."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about multichannel outreach with 360Airo
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: COLORS.purpleLight }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Still have questions? Our team is here to help you succeed with multichannel outreach.
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: COLORS.purpleLight }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Start Your Free Trial
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
@@ -1259,6 +1426,13 @@ export default function MultiChannelPage() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <FAQSection />
         </div>
       </section>
 
