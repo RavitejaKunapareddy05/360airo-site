@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -20,7 +20,9 @@ import {
   MessageCircle,
   Users,
   TrendingUp,
-  Shield
+  Shield,
+  Plus,
+  Minus
 } from 'lucide-react';
 
 // Color constants
@@ -30,6 +32,182 @@ const COLORS = {
   deepPurple: '#19001d',
   white: '#ffffff',
   black: '#000000'
+};
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const faqs = [
+    {
+      question: "What are email sequences, and how do they work for outreach campaigns?",
+      answer: "Email sequences are automated series of emails sent based on time or recipient actions. They help maintain consistent follow-ups, nurture prospects, and ensure outreach continues without manual reminders or missed opportunities."
+    },
+    {
+      question: "What makes 360Airo's email sequences better than other tools?",
+      answer: "360Airo's email sequences combine deliverability awareness, behavior-based triggers, and centralized tracking, allowing teams to run flexible, data-driven campaigns instead of rigid, one-size-fits-all email flows."
+    },
+    {
+      question: "What is the best way to warm up an email before launching a sequence?",
+      answer: "The best method is gradually increasing sending volume while generating genuine engagement. Proper warmup builds sender reputation and ensures email sequences begin with strong inbox placement and stable deliverability."
+    },
+    {
+      question: "How many emails should a cold email sequence include for best results?",
+      answer: "Most effective cold email sequences include four to six emails spaced over two to three weeks, providing multiple touchpoints without overwhelming prospects or harming sender reputation."
+    },
+    {
+      question: "What results do users typically see with 360Airo's email sequences?",
+      answer: "Users typically experience higher reply rates, more consistent follow-ups, improved engagement, and predictable campaign performance by replacing manual outreach with structured, automated email sequences."
+    },
+    {
+      question: "What key features should you look for in an email sequence software?",
+      answer: "Key features include automated follow-ups, behavior-based triggers, deliverability controls, analytics, personalization options, and seamless integration with CRM and multichannel outreach tools."
+    },
+    {
+      question: "Will email sequence software affect inbox placement or deliverability?",
+      answer: "Yes, poorly configured email sequence software can harm deliverability. Platforms like 360Airo use pacing controls, warmup integration, and engagement tracking to help protect inbox placement."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about email sequences with 360Airo
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: COLORS.primary }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Still have questions? Our team is here to help you succeed with email sequences.
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: COLORS.primary }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Start Your Free Trial
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 };
 
 // Animated Email Flow Visualization - Mobile Optimized
@@ -994,6 +1172,13 @@ export default function EmailSequencesPage() {
                 <ArrowRight className="ml-1.5 lg:ml-2 h-4 w-4 lg:h-5 lg:w-5" />
               </Button>
             </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-[#19001d]">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
           </div>
         </section>
 
