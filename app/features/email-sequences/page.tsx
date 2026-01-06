@@ -602,7 +602,7 @@ export default function EmailSequencesPage() {
       description: "Crafting messages that resonate shouldn't slow you down. 360Airo supports large-scale personalization by analyzing engagement patterns, refining tone, and helping you build the best email sequences for cold outreach, nurturing, and re-engagement.",
       features: [
         "Create email copy instantly via" ,
-        <span><a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors"> AI Email Generator</a> </span>,
+        <span><a href="/features/ai-email-generator" className="text-[#b45ecf] hover:text-white transition-colors"> AI Email Generator</a> </span>,
         "Build targeted follow-up journeys for every lead type",
         "Optimize send windows for maximum impact",
         "Strengthen every cold email sequence with smart insights"
