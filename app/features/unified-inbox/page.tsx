@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -33,9 +33,7 @@ import {
   PhoneCall,
   GitMerge,
   Workflow,
-  MessageCircleReply,
-  Plus,
-  Minus
+  MessageCircleReply
 } from 'lucide-react';
 
 /* Internal Link Component */
@@ -50,9 +48,89 @@ const InternalLink = ({ href, children, className = "" }: { href: string; childr
   );
 };
 
-// FAQ Component
+/* FAQ Toggle Item Component - Updated to match your UI */
+const FAQToggleItem = ({ faq, index, isMobile }: { faq: any, index: number, isMobile: boolean }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: index * 0.05 }}
+      className="cursor-pointer rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden hover:border-[#b45ecf]/50 transition-all duration-300"
+      whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
+    >
+      <button
+        className="w-full text-left p-4 lg:p-6 flex items-center justify-between group"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-start gap-3 lg:gap-4 flex-1">
+          <motion.div
+            className="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 rounded-lg bg-gradient-to-r from-[#b45ecf] to-[#3B82F6] flex items-center justify-center"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-white font-bold text-xs lg:text-sm">
+              Q
+            </div>
+          </motion.div>
+          <div className="flex-1">
+            <h3 className={`text-white font-bold mb-2 transition-colors group-hover:text-[#b45ecf] ${isMobile ? 'text-base' : 'text-lg'}`}>
+              {faq.question}
+            </h3>
+          </div>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0 text-[#b45ecf] ml-3"
+        >
+          <svg 
+            className="w-5 h-5 lg:w-6 lg:h-6" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M19 9l-7 7-7-7" 
+            />
+          </svg>
+        </motion.div>
+      </button>
+      
+      <motion.div
+        initial={false}
+        animate={{ 
+          height: isOpen ? 'auto' : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="overflow-hidden"
+      >
+        <div className="px-4 lg:px-6 pb-4 lg:pb-6 pt-0">
+          <motion.div
+            className="h-px bg-gradient-to-r from-[#b45ecf]/20 via-white/10 to-transparent mb-3 lg:mb-4"
+            initial={{ width: 0 }}
+            whileInView={{ width: '100%' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ delay: index * 0.05 + 0.1, duration: 0.4 }}
+          />
+          <p className={`text-white/80 leading-relaxed pl-9 lg:pl-12 ${isMobile ? 'text-sm' : 'text-base'}`}>
+            {faq.answer}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* FAQ Section Component - Updated to match your UI */
 const FAQSection = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -105,132 +183,46 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-8 sm:mb-12 lg:mb-16"
-      >
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
-        >
-          Frequently Asked Questions
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
-        >
-          Get answers to common questions about Unified Inbox with 360Airo
-        </motion.p>
-      </motion.div>
+    <motion.div 
+      className="max-w-4xl mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+    >
+      <div className="text-center mb-12 lg:mb-16">
+        <div className="inline-block mb-2">
+          <span className="text-[#b45ecf] font-semibold text-xs lg:text-sm tracking-wider uppercase">Common Questions</span>
+        </div>
+        <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white mb-3 lg:mb-4`}>
+          Unified Inbox <span className="text-[#b45ecf]">FAQs</span>
+        </h2>
+        <div className="flex items-center justify-center mb-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-[#b45ecf]/40 flex-1 max-w-8" />
+          <div className="mx-3 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-[#b45ecf] to-[#3B82F6]" />
+          <div className="h-px bg-gradient-to-r from-[#b45ecf]/40 via-white/20 to-transparent flex-1 max-w-8" />
+        </div>
+        <p className={`text-white/80 ${isMobile ? 'text-sm' : 'text-lg'}`}>
+          Everything you need to know about managing team conversations in one unified workspace.
+        </p>
+      </div>
 
-      <div className="space-y-3 sm:space-y-4">
+      <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
-          >
-            <button
-              className="w-full text-left p-4 sm:p-6 focus:outline-none"
-              onClick={() => setOpenFaq(openFaq === index ? null : index)}
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
-                  {faq.question}
-                </h3>
-                <motion.div
-                  animate={{ rotate: openFaq === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
-                  style={{ background: '#3B82F6' }}
-                >
-                  {openFaq === index ? (
-                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-                  ) : (
-                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
-                  )}
-                </motion.div>
-              </div>
-            </button>
-            
-            <AnimatePresence>
-              {openFaq === index && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 }}
-                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
-                    >
-                      {faq.answer}
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+          <FAQToggleItem key={index} faq={faq} index={index} isMobile={isMobile} />
         ))}
       </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="mt-8 sm:mt-12 text-center"
+        viewport={{ once: true, margin: '-50px' }}
+        className="text-center mt-12 lg:mt-16"
       >
-        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
-          Still have questions? Our team is here to help you succeed with Unified Inbox.
+        <p className={`text-white/70 ${isMobile ? 'text-sm' : 'text-base'}`}>
+          Still have questions? <InternalLink href="/contact">Contact our team collaboration experts</InternalLink> for personalized advice.
         </p>
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
-        >
-          <Button 
-            size="lg" 
-            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
-            style={{ background: '#3B82F6' }}
-            onClick={() => window.open('https://app.360airo.com/', '_blank')}
-          >
-            <motion.span
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-              className="absolute inset-0 bg-white/20 rounded-xl"
-            />
-            <span className="relative z-10 flex items-center justify-center">
-              Start Your Free Trial
-              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -916,11 +908,9 @@ export default function UnifiedInboxRadialPage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 via-[#3B82F6]/10 to-white/5">
-          <div className="max-w-6xl mx-auto">
-            <FAQSection />
-          </div>
+        {/* FAQ SECTION - Using your existing UI design */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 to-transparent">
+          <FAQSection />
         </section>
 
         {/* Final CTA */}
