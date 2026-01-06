@@ -26,13 +26,168 @@ import {
   Share2,
   Layers,
   Brain,
-  Sparkles
+  Sparkles,
+  Plus,
+  Minus
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "What key features does 360Airo's email campaign analytics include?",
+      answer: "360Airo's email campaign analytics includes real-time tracking of opens, clicks, replies, bounce rates, and conversions. It also provides sender health insights, inbox placement indicators, and performance comparisons across campaigns. These features help businesses understand what is working, identify bottlenecks, and make data-backed decisions to improve outreach effectiveness and overall email campaign performance."
+    },
+    {
+      question: "What metrics can I track using 360Airo's email campaign analytics?",
+      answer: "With 360Airo, you can track key metrics such as open rate, reply rate, click rate, bounce rate, spam complaints, and conversion activity. You can also monitor performance by campaign, sender, or sequence. This level of visibility helps teams refine messaging, improve targeting, and optimize sending strategies for better engagement and ROI."
+    },
+    {
+      question: "How does real-time email performance tracking improve my campaigns?",
+      answer: "Real-time tracking allows you to identify issues or opportunities as they happen. You can quickly adjust subject lines, pause underperforming sequences, or double down on high performing campaigns. This agility helps prevent deliverability problems, improve response rates, and ensure outreach efforts stay aligned with audience behavior."
+    },
+    {
+      question: "How does 360Airo turn email marketing data into actionable insights?",
+      answer: "360Airo analyzes campaign data and highlights trends, patterns, and performance gaps. Instead of raw numbers, it provides clear insights on what content, timing, and audience segments perform best. These insights help teams make smarter decisions, optimize future campaigns, and continuously improve outreach results."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about email campaign analytics with 360Airo
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: '#8B5CF6' }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Still have questions? Our team is here to help you succeed with email campaign analytics.
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: '#8B5CF6' }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Start Your Free Trial
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
 
 // Enhanced GlowCard with cursor-reactive glow
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -852,6 +1007,13 @@ export default function ReportsAnalyticsPage() {
               ))}
             </div>
           </motion.div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
+          </div>
         </section>
 
         {/* START MEASURING WHAT MATTERS CTA SECTION */}
