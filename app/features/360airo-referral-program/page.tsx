@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -50,7 +50,9 @@ import {
   MessageSquare,
   Sparkle,
   GraduationCap,
-  MonitorPlay
+  MonitorPlay,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 // Color constants
@@ -59,6 +61,88 @@ const COLORS = {
   darkPurple: '#480056',
   darkest: '#19001d',
   white: '#ffffff'
+};
+
+/* FAQ Item Component */
+const FAQItem = ({ 
+  question, 
+  answer, 
+  isOpen, 
+  onClick 
+}: { 
+  question: string; 
+  answer: string; 
+  isOpen: boolean; 
+  onClick: () => void 
+}) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative bg-gradient-to-br from-[#19001d] to-black rounded-2xl border border-[#480056] overflow-hidden group cursor-pointer"
+      onClick={onClick}
+    >
+      <div className={`transition-all duration-300 ${isOpen ? 'bg-white/5' : 'hover:bg-white/3'}`}>
+        <div className="p-6">
+          <div className="flex items-start justify-between">
+            <h3 className="text-lg font-semibold text-white pr-8 leading-relaxed">
+              {question}
+            </h3>
+            <motion.div
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex-shrink-0 ml-4"
+            >
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-r from-[#b45ecf] to-[#480056] flex items-center justify-center">
+                {isOpen ? (
+                  <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                )}
+              </div>
+            </motion.div>
+          </div>
+          
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
+                <p className="text-white/80 text-base leading-relaxed">
+                  {answer}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+      
+      {/* Animated border effect */}
+      <div className={`absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300 ${
+        isOpen 
+          ? 'border-2 border-[#b45ecf]/50 shadow-[0_0_30px_rgba(180,94,207,0.3)]' 
+          : 'border border-[#480056] group-hover:border-[#b45ecf]/30'
+      }`} />
+    </motion.div>
+  );
 };
 
 // Floating Particles Background
@@ -717,6 +801,50 @@ const AnimatedGrid = () => {
   );
 };
 
+// FAQ Data
+const faqData = [
+  {
+    question: "What is the 360Airo Referral Program, and how does it work?",
+    answer: "The 360Airo Referral Program rewards existing users for referring new customers. Users share referral links, and when someone signs up and subscribes, rewards are credited. The program is designed to be simple, transparent, and mutually beneficial.",
+    id: "what-is-program"
+  },
+  {
+    question: "Who is eligible to join the 360Airo referral program?",
+    answer: "Any active 360Airo user can participate in the referral program. There are no restrictions, allowing customers, partners, and teams to earn rewards by recommending the platform to their network.",
+    id: "eligibility"
+  },
+  {
+    question: "Are referral rewards recurring for active subscriptions?",
+    answer: "Referral rewards may be recurring depending on the plan and referral structure. This encourages users to refer high quality customers and benefit from long term engagement rather than one time rewards.",
+    id: "recurring-rewards"
+  },
+  {
+    question: "How can I track clicks, signups, and earnings from referrals?",
+    answer: "360Airo provides a referral dashboard that tracks clicks, registrations, conversions, and rewards in real time. This transparency helps users understand performance and optimize their referral efforts easily.",
+    id: "tracking"
+  },
+  {
+    question: "What payout options are available for referral rewards?",
+    answer: "Referral rewards are paid using supported payout methods once eligibility criteria are met. The payout process is streamlined and reliable, ensuring users receive rewards without unnecessary delays or complexity.",
+    id: "payout-options"
+  },
+  {
+    question: "Is there any limit on the number of referrals I can make?",
+    answer: "There is no limit on the number of referrals you can make with 360Airo. Users can refer as many people as they want, allowing unlimited earning potential based on their network and reach.",
+    id: "referral-limits"
+  },
+  {
+    question: "How transparent is the 360Airo referral tracking and payout system?",
+    answer: "The referral system is fully transparent, with real time tracking and clear payout rules. Users can see exactly how referrals convert into rewards, building trust and confidence in the program.",
+    id: "transparency"
+  },
+  {
+    question: "Is it free to sign up for the referral program?",
+    answer: "Yes, the 360Airo referral program is completely free to join. Existing users can start referring immediately without any additional costs or commitments.",
+    id: "free-signup"
+  }
+];
+
 // Main Component
 export default function ReferralProgramPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -727,6 +855,11 @@ export default function ReferralProgramPage() {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
+
+  const handleFaqClick = (id: string) => {
+    setOpenFaq(openFaq === id ? null : id);
+  };
 
   return (
     <>
@@ -1129,6 +1262,69 @@ export default function ReferralProgramPage() {
             </motion.div>
           </div>
         </section>
+
+        {/* FAQ SECTION - Added before final CTA */}
+        <PulseWaveSection id="faq" className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12 lg:mb-16"
+            >
+              <motion.div className="inline-block mb-3 lg:mb-4">
+                <span className="text-[#b45ecf] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              </motion.div>
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
+                Frequently Asked <span className="text-[#b45ecf]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about the 360Airo Referral Program and how you can start earning rewards today.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 lg:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-white/60 text-sm lg:text-base mb-6">
+                Still have questions? We're here to help.
+              </p>
+              <motion.div 
+                whileHover={{ scale: 1.04, y: -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-block"
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#b45ecf]/30 transition-all duration-300"
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                >
+                  Contact Support
+                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </PulseWaveSection>
 
         {/* Final CTA Section */}
         <PulseWaveSection className="py-12 lg:py-20 px-6 bg-gradient-to-br from-[#19001d] via-[#19001d] to-[#480056]">
