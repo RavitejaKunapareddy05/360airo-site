@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { 
@@ -24,7 +24,9 @@ import {
   Clock,
   Send,
   Inbox,
-  UserCheck
+  UserCheck,
+  Plus,
+  Minus
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -88,83 +90,126 @@ const GlowCard = ({ children, className = '', ...props }: any) => {
   );
 };
 
-/* FAQ Toggle Item Component */
-const FAQToggleItem = ({ faq, index, isMobile }: { faq: any, index: number, isMobile: boolean }) => {
-  const [isOpen, setIsOpen] = useState(false);
+/* FAQ Component */
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const faqs = [
+    {
+      question: "What is an email warmup, and why is it necessary for cold email outreach?",
+      answer: "Email warmup is the process of gradually increasing sending volume to build sender reputation. It is necessary because new or inactive inboxes are more likely to trigger spam filters without proper warmup."
+    },
+    {
+      question: "How long should you warm up an email domain before sending campaigns?",
+      answer: "Most email domains require two to four weeks of warmup, depending on their age and reputation, to establish trust with inbox providers before launching full-scale campaigns."
+    },
+    {
+      question: "How does the 360Airo email warmup process work?",
+      answer: "360Airo's email warmup sends emails within a trusted network, gradually increasing volume while generating real opens and replies to strengthen sender reputation automatically."
+    },
+    {
+      question: "What happens if I send cold emails without warming up my inbox first?",
+      answer: "Sending cold emails without warmup often results in spam placement, low engagement, and long-term damage to sender reputation, making future campaigns less effective."
+    },
+    {
+      question: "How many emails can I safely send during the warmup phase?",
+      answer: "During warmup, sending begins at very low volumes and increases gradually each day. Safe limits depend on domain history, but controlled ramp-up is essential to avoid spam filters."
+    },
+    {
+      question: "What are the key features of 360Airo's email warmup tool?",
+      answer: "Key features include automated volume ramp-up, real engagement simulation, inbox placement monitoring, and direct integration with email sequences for smooth campaign launches."
+    },
+    {
+      question: "Why should I choose 360Airo's email warmup tool over other warmup tools?",
+      answer: "360Airo combines email warmup, sequences, analytics, and outreach workflows in one platform, providing better visibility and eliminating the need for multiple disconnected tools."
+    },
+    {
+      question: "What is the best email warm-up tool in 2026?",
+      answer: "The best email warm-up tool in 2026 is one that offers automated warmup, real engagement, deliverability insights, and native integration with outreach campaigns, making 360Airo a future-ready solution."
+    }
+  ];
 
   return (
-    <GlowCard className="cursor-pointer rounded-xl">
-      <motion.div
-        variants={itemVariants}
-        className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
-        whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
-      >
-        <button
-          className="w-full text-left p-4 lg:p-6 flex items-center justify-between group"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-expanded={isOpen}
-        >
-          <div className="flex items-start gap-3 lg:gap-4 flex-1">
-            <motion.div
-              className="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 rounded-lg bg-gradient-to-r from-[#FF6432] to-[#FF8A65] flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="text-white font-bold text-xs lg:text-sm">
-                Q
-              </div>
-            </motion.div>
-            <div className="flex-1">
-              <h3 className="text-base lg:text-lg font-bold text-white mb-2 transition-colors group-hover:text-[#FF8A65]">
-                {faq.question}
-              </h3>
-            </div>
-          </div>
+    <div className="space-y-4">
+      {faqs.map((faq, index) => (
+        <GlowCard key={index} className="cursor-pointer rounded-xl">
           <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex-shrink-0 text-[#FF6432] ml-3"
+            variants={itemVariants}
+            className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
+            whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
           >
-            <svg 
-              className="w-5 h-5 lg:w-6 lg:h-6" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
+            <button
+              className="w-full text-left p-4 lg:p-6 flex items-center justify-between group"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+              aria-expanded={openFaq === index}
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M19 9l-7 7-7-7" 
-              />
-            </svg>
+              <div className="flex items-start gap-3 lg:gap-4 flex-1">
+                <motion.div
+                  className="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 rounded-lg bg-gradient-to-r from-[#FF6432] to-[#FF8A65] flex items-center justify-center"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="text-white font-bold text-xs lg:text-sm">
+                    Q
+                  </div>
+                </motion.div>
+                <div className="flex-1">
+                  <h3 className="text-base lg:text-lg font-bold text-white mb-2 transition-colors group-hover:text-[#FF8A65]">
+                    {faq.question}
+                  </h3>
+                </div>
+              </div>
+              <motion.div
+                animate={{ rotate: openFaq === index ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                style={{ background: '#FF6432' }}
+              >
+                {openFaq === index ? (
+                  <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                ) : (
+                  <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                )}
+              </motion.div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6 pl-9 lg:pl-12"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
-        </button>
-        
-        <motion.div
-          initial={false}
-          animate={{ 
-            height: isOpen ? 'auto' : 0,
-            opacity: isOpen ? 1 : 0
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="overflow-hidden"
-        >
-          <div className="px-4 lg:px-6 pb-4 lg:pb-6 pt-0">
-            <motion.div
-              className="h-px bg-gradient-to-r from-[#FF6432]/20 via-white/10 to-transparent mb-3 lg:mb-4"
-              initial={{ width: 0 }}
-              whileInView={{ width: '100%' }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: index * 0.05 + 0.1, duration: 0.4 }}
-            />
-            <p className="text-white/80 text-sm lg:text-base leading-relaxed pl-9 lg:pl-12">
-              {faq.answer}
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
-    </GlowCard>
+        </GlowCard>
+      ))}
+    </div>
   );
 };
 
@@ -1110,7 +1155,7 @@ export default function EmailWarmupPage() {
         </section>
 
         {/* FAQ SECTION */}
-        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
@@ -1131,52 +1176,42 @@ export default function EmailWarmupPage() {
               </p>
             </motion.div>
 
-            <div className="space-y-4">
-              {[
-                {
-                  question: "What is an email warmup, and why is it necessary for cold email outreach?",
-                  answer: "Email warmup is the process of gradually increasing sending volume to build sender reputation. It is necessary because new or inactive inboxes are more likely to trigger spam filters without proper warmup."
-                },
-                {
-                  question: "How long should you warm up an email domain before sending campaigns?",
-                  answer: "Most email domains require two to four weeks of warmup, depending on their age and reputation, to establish trust with inbox providers before launching full-scale campaigns."
-                },
-                {
-                  question: "How does the 360Airo email warmup process work?",
-                  answer: "360Airo's email warmup sends emails within a trusted network, gradually increasing volume while generating real opens and replies to strengthen sender reputation automatically."
-                },
-                {
-                  question: "What happens if I send cold emails without warming up my inbox first?",
-                  answer: "Sending cold emails without warmup often results in spam placement, low engagement, and long-term damage to sender reputation, making future campaigns less effective."
-                },
-                {
-                  question: "How many emails can I safely send during the warmup phase?",
-                  answer: "During warmup, sending begins at very low volumes and increases gradually each day. Safe limits depend on domain history, but controlled ramp-up is essential to avoid spam filters."
-                },
-                {
-                  question: "What are the key features of 360Airo's email warmup tool?",
-                  answer: "Key features include automated volume ramp-up, real engagement simulation, inbox placement monitoring, and direct integration with email sequences for smooth campaign launches."
-                },
-                {
-                  question: "Why should I choose 360Airo's email warmup tool over other warmup tools?",
-                  answer: "360Airo combines email warmup, sequences, analytics, and outreach workflows in one platform, providing better visibility and eliminating the need for multiple disconnected tools."
-                },
-                {
-                  question: "What is the best email warm-up tool in 2026?",
-                  answer: "The best email warm-up tool in 2026 is one that offers automated warmup, real engagement, deliverability insights, and native integration with outreach campaigns, making 360Airo a future-ready solution."
-                }
-              ].map((faq, index) => (
-                <FAQToggleItem key={index} faq={faq} index={index} isMobile={isMobile} />
-              ))}
-            </div>
+            <FAQSection />
 
             <motion.div
               variants={itemVariants}
               className="text-center mt-12 lg:mt-16"
             >
-              <p className="text-white/70 text-sm lg:text-base">
+              <p className="text-white/70 text-sm lg:text-base mb-6 sm:mb-8">
                 Still have questions? Contact our deliverability experts for personalized advice.
               </p>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block"
+              >
+                <Button 
+                  size="lg" 
+                  className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+                  style={{ background: '#FF6432' }}
+                  onClick={() => window.open('https://app.360airo.com/', '_blank')}
+                >
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                    }}
+                    className="absolute inset-0 bg-white/20 rounded-xl"
+                  />
+                  <span className="relative z-10 flex items-center justify-center">
+                    Start Your Free Trial
+                    <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
         </section>
