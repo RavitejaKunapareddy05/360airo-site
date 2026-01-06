@@ -613,7 +613,7 @@ export default function EmailWarmupPage() {
                       transition={{ delay: 0.5, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Get Your Emails
+                      Get Your Emails Warmup 
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
