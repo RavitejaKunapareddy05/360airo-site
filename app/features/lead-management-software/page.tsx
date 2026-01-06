@@ -33,7 +33,9 @@ import {
   Play,
   Pause,
   Star,
-  Hexagon
+  Hexagon,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 
 const COLORS = {
@@ -43,6 +45,90 @@ const COLORS = {
   white: '#ffffff',
   dark: '#0A0A0A',
   light: '#1A1A1A'
+};
+
+/* FAQ Item Component */
+const FAQItem = ({ 
+  question, 
+  answer, 
+  isOpen, 
+  onClick 
+}: { 
+  question: string; 
+  answer: string; 
+  isOpen: boolean; 
+  onClick: () => void 
+}) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <div className="relative">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-white/10 overflow-hidden group cursor-pointer"
+        onClick={onClick}
+      >
+        <div className={`transition-all duration-300 ${isOpen ? 'bg-white/10' : 'hover:bg-white/8'}`}>
+          <div className="p-5 lg:p-6">
+            <div className="flex items-start justify-between">
+              <h3 className="text-lg font-semibold text-white pr-8 leading-relaxed">
+                {question}
+              </h3>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex-shrink-0 ml-4"
+              >
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-r from-[#b45ecf] to-[#480056] flex items-center justify-center">
+                  {isOpen ? (
+                    <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                  )}
+                </div>
+              </motion.div>
+            </div>
+            
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
+                  <p className="text-white/80 text-base leading-relaxed">
+                    {answer}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+        
+        {/* Animated border effect */}
+        <div className={`absolute inset-0 rounded-xl lg:rounded-2xl pointer-events-none transition-all duration-300 ${
+          isOpen 
+            ? 'border-2 border-[#b45ecf]/50 shadow-[0_0_30px_rgba(180,94,207,0.3)]' 
+            : 'border border-white/10 group-hover:border-[#b45ecf]/30'
+        }`} />
+      </motion.div>
+    </div>
+  );
 };
 
 // Floating Particles Background
@@ -678,7 +764,7 @@ const MultiChannelSection = () => {
             {channels.map((channel, index) => (
               <motion.button
                 key={channel.name}
-                className={`p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 transition-all duration-300 relative overflow-hidden ${
+                className={`p-3 sm:p-4 lg:p-6 rounded-xl sm:rounded-2xl lg:rounded-3xl border-2 transition-all duration-300 ${
                   activeChannel === index 
                     ? 'border-purple-500 shadow-lg sm:shadow-xl shadow-purple-500/25' 
                     : 'border-gray-700 hover:border-purple-400'
@@ -888,6 +974,45 @@ const BenefitsGrid = () => {
   );
 };
 
+/* FAQ Data */
+const faqData = [
+  {
+    question: "What is lead management software, and how does it work?",
+    answer: "Lead management software helps businesses capture, organize, track, and nurture leads from first contact to conversion. It centralizes lead data, logs interactions, and automates follow ups. This ensures no leads are missed and sales teams can focus on engaging prospects instead of managing spreadsheets or manual processes.",
+    id: "what-is-lead-management"
+  },
+  {
+    question: "What key features should a lead management software include?",
+    answer: "A strong lead management software should include lead tracking, automated follow ups, activity history, reminders, reporting, and CRM integration. These features help teams stay organized, respond faster, and move leads through the sales funnel efficiently while maintaining visibility across outreach and engagement stages.",
+    id: "key-features"
+  },
+  {
+    question: "Which tools are commonly used for lead follow-up and nurturing?",
+    answer: "Businesses commonly use email automation tools, CRM systems, LinkedIn outreach platforms, and lead management software for follow up and nurturing. 360Airo combines these tools into one platform, making it easier to manage conversations, automate follow ups, and nurture leads across multiple channels.",
+    id: "tools-for-followup"
+  },
+  {
+    question: "Who typically uses lead management software in a business?",
+    answer: "Lead management software is used by sales teams, marketing teams, agencies, founders, and customer success teams. Any team responsible for handling inquiries, outbound outreach, or deal progression benefits from having a structured system to track leads and maintain consistent communication.",
+    id: "who-uses"
+  },
+  {
+    question: "What is the difference between lead management software and a CRM?",
+    answer: "Lead management software focuses on capturing and nurturing prospects until conversion, while a CRM manages long term customer relationships after a deal closes. 360Airo bridges this gap by offering Prospect CRM features that support both lead nurturing and relationship tracking in one system.",
+    id: "difference-crm"
+  },
+  {
+    question: "How does lead management software help move leads from first contact to closed deals?",
+    answer: "Lead management software automates follow ups, tracks engagement, and prioritizes active prospects. This ensures timely responses and consistent communication. By maintaining visibility into every interaction, sales teams can focus on high intent leads and move them smoothly toward conversion.",
+    id: "move-leads-to-deals"
+  },
+  {
+    question: "Can lead follow-up and reminders be automated using lead management software?",
+    answer: "Yes, lead management software like 360Airo automates follow ups and reminders based on lead activity or timelines. This prevents missed opportunities, ensures consistent outreach, and allows sales teams to stay proactive without relying on manual tracking or memory.",
+    id: "automated-followups"
+  }
+];
+
 export default function ProspectManagementPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -898,6 +1023,22 @@ export default function ProspectManagementPage() {
   const headerScale = useTransform(scrollYProgress, [0, 0.1], [1, 0.9]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
   const headerY = useTransform(scrollYProgress, [0, 0.1], [0, 40]);
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleFaqClick = (id: string) => {
+    setOpenFaq(openFaq === id ? null : id);
+  };
 
   return (
     <>
@@ -1512,6 +1653,71 @@ export default function ProspectManagementPage() {
           </div>
         </section>
 
+        {/* FAQ SECTION - Added before Why Teams Choose */}
+        <section id="faq" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
+          <FloatingParticles />
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div className="text-center mb-12 sm:mb-16 lg:mb-20">
+              <div className="inline-block mb-2 lg:mb-3">
+                <span className="text-[#b45ecf] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              </div>
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
+                Frequently Asked <span className="text-[#b45ecf]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about 360Airo's Lead Management Software and how it can transform your sales process.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 lg:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-white/60 text-sm lg:text-base mb-6">
+                Still have questions? We're here to help.
+              </p>
+              <motion.div 
+                whileHover={{ scale: isMobile ? 1.04 : 1.05, y: isMobile ? -2 : -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-block"
+                onClick={() => window.open('https://app.360airo.com/', '_blank')}
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#b45ecf]/30 transition-all duration-300"
+                >
+                  Contact Support
+                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </section>
+
         {/* Why Teams Choose Section */}
         <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
           <FloatingParticles />
@@ -1693,4 +1899,4 @@ export default function ProspectManagementPage() {
       </div>
     </>
   );
-}
+} 
