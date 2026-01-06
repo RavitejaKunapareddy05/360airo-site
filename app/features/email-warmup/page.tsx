@@ -440,7 +440,7 @@ export default function EmailWarmupPage() {
   return (
     <>
       <Head>
-        <title>Email Warmup: Get Your Emails Warmup Into the Inbox, Not Spam | 360Airo</title>
+        <title>Email Warmup: Get Your Email Warmup Into the Inbox, Not Spam | 360Airo</title>
         <meta name="description" content="Turn cold domains into trusted senders with 360Airo's email warmup tool. Guaranteed inbox delivery, higher open rates, and better ROI for your outreach campaigns." />
         <meta name="keywords" content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" />
         
