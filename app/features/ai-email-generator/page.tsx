@@ -1078,7 +1078,7 @@ export default function AIContentGenerationPage() {
                       >
                         <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 text-[#A855F7]" />
                       </motion.div>
-                      <span>AI Email Generator — Write Better Emails in Seconds</span>
+                      <span>AI Email Generator </span>
                     </span>
                   </div>
                 </motion.div>
