@@ -591,7 +591,8 @@ export default function EmailSequencesPage() {
         "Set triggers based on opens, clicks, or replies",
         "Pause or skip contacts instantly when they engage",
         "Improve deliverability using Email Warmup",
-        "Sync effortlessly with AI Email Automation"
+        "Sync effortlessly with ",
+        <span><a href="/features/ai-email-automation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Automation</a></span>
       ],
       note: "Your outreach stays natural — never pushy — while your response rates steadily rise."
     },
@@ -600,7 +601,8 @@ export default function EmailSequencesPage() {
       title: "Scalable Personalization for the Best Email Sequences",
       description: "Crafting messages that resonate shouldn't slow you down. 360Airo supports large-scale personalization by analyzing engagement patterns, refining tone, and helping you build the best email sequences for cold outreach, nurturing, and re-engagement.",
       features: [
-        "Create email copy instantly via AI Email Generation",
+        "Create email copy instantly via" ,
+        <span><a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors"> AI Email Generator</a> </span>,
         "Build targeted follow-up journeys for every lead type",
         "Optimize send windows for maximum impact",
         "Strengthen every cold email sequence with smart insights"
@@ -1232,7 +1234,7 @@ export default function EmailSequencesPage() {
                       </li>
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
-                        <span>Sync effortlessly with <a href="/features/ai-email-automation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Automation</a></span>
+                        <span>Sync effortlessly with AI Email Automation</span>
                       </li>
                     </ul>
                     <p className="text-[#b45ecf] italic mt-4 lg:mt-6 text-sm lg:text-base">
@@ -1248,7 +1250,7 @@ export default function EmailSequencesPage() {
                     <ul className="space-y-2">
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
-                        <span>Create email copy instantly via <a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Generation</a></span>
+                        <span>Create email copy instantly via AI Email Generator </span>
                       </li>
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
