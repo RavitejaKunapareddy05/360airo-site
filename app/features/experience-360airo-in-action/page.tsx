@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useRef, useState } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -37,7 +37,9 @@ import {
   MonitorPlay,
   CalendarDays,
   Clock4,
-  Gift
+  Gift,
+  Plus,
+  Minus
 } from 'lucide-react';
 
 // Color constants
@@ -48,6 +50,179 @@ const COLORS = {
   white: '#ffffff',
   dark: '#0A0A0A',
   light: '#1A1A1A'
+};
+
+// FAQ Component
+const FAQSection = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "What is a live product demo, and how does it work?",
+      answer: "A live product demo is an interactive walkthrough of the 360Airo platform led by a product expert. During the session, users see real use cases, core features, and workflows in action. The demo helps businesses understand how 360Airo fits their outreach needs and how to use it effectively."
+    },
+    {
+      question: "What will I learn during a live demo of 360Airo?",
+      answer: "During a live demo, you will learn how to set up email campaigns, LinkedIn automation, warmup, AI personalization, and analytics. The session also explains best practices for safe outreach and shows how different features work together to generate leads and improve conversions."
+    },
+    {
+      question: "Who should book a 360Airo demo to evaluate the platform?",
+      answer: "Founders, sales leaders, marketers, agencies, and outreach teams should book a 360Airo demo. It is especially useful for businesses planning cold outreach or multichannel campaigns and wanting to evaluate deliverability, automation, and scalability before committing to a platform."
+    },
+    {
+      question: "How long does a typical 360Airo live demo session last?",
+      answer: "A typical 360Airo live demo lasts between thirty and forty five minutes. This duration allows enough time to explore key features, ask questions, and understand workflows without being overwhelming, making it ideal for busy teams and decision makers."
+    },
+    {
+      question: "Can the demo be customized based on my outreach goals?",
+      answer: "Yes, 360Airo demos can be customized based on your business goals. Whether you focus on cold email, LinkedIn outreach, lead management, or automation, the demo can highlight the most relevant features and workflows for your specific use case."
+    },
+    {
+      question: "Does the demo showcase key features like email warmup, AI automation, and outreach?",
+      answer: "Yes, the live demo covers core features including email warmup, AI email generation, LinkedIn automation, multichannel campaigns, and analytics. This gives a complete view of how 360Airo supports safe, scalable, and data driven outbound outreach."
+    },
+    {
+      question: "Does the live demo include LinkedIn outreach and multichannel campaign walkthroughs?",
+      answer: "The live demo includes walkthroughs of LinkedIn outreach and multichannel campaign setup. Users can see how email and LinkedIn workflows connect, how automation works, and how engagement is tracked across channels from one dashboard."
+    },
+    {
+      question: "What analytics and reports are shown during the 360Airo demo?",
+      answer: "During the demo, users are shown campaign performance reports, inbox health metrics, reply rates, and conversion tracking. These analytics demonstrate how 360Airo turns outreach data into actionable insights that help optimize future campaigns."
+    },
+    {
+      question: "What happens after I complete the live demo?",
+      answer: "After the demo, users receive next steps based on their goals. This may include trial access, onboarding guidance, or plan recommendations. The 360Airo team ensures businesses have clarity on how to get started and succeed with the platform."
+    }
+  ];
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-8 sm:mb-12 lg:mb-16"
+      >
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white mb-4 sm:mb-6"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-sm sm:text-base lg:text-xl text-white/70 max-w-3xl mx-auto"
+        >
+          Get answers to common questions about 360Airo demos
+        </motion.p>
+      </motion.div>
+
+      <div className="space-y-3 sm:space-y-4">
+        {faqs.map((faq, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="bg-[#1A1A1A] rounded-xl sm:rounded-2xl border-2 border-gray-800 overflow-hidden"
+          >
+            <button
+              className="w-full text-left p-4 sm:p-6 focus:outline-none"
+              onClick={() => setOpenFaq(openFaq === index ? null : index)}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-white font-bold text-sm sm:text-base lg:text-lg pr-4">
+                  {faq.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openFaq === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center"
+                  style={{ background: COLORS.purpleLight }}
+                >
+                  {openFaq === index ? (
+                    <Minus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  ) : (
+                    <Plus className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
+                  )}
+                </motion.div>
+              </div>
+            </button>
+            
+            <AnimatePresence>
+              {openFaq === index && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="text-white/80 text-sm sm:text-base leading-relaxed border-t border-gray-800 pt-4 sm:pt-6"
+                    >
+                      {faq.answer}
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 sm:mt-12 text-center"
+      >
+        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
+          Still have questions? Book a demo to get all your questions answered in real-time.
+        </p>
+        <motion.div
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-block"
+        >
+          <Button 
+            size="lg" 
+            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
+            style={{ background: COLORS.purpleLight }}
+            onClick={() => window.open('https://app.360airo.com/', '_blank')}
+          >
+            <motion.span
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+              className="absolute inset-0 bg-white/20 rounded-xl"
+            />
+            <span className="relative z-10 flex items-center justify-center">
+              Book Your Live Demo
+              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+            </span>
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 };
 
 // Floating Demo Elements
@@ -967,6 +1142,13 @@ export default function DemoPage() {
                 </p>
               </motion.div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-r from-[#0A0A0A] via-purple-900/10 to-[#0A0A0A]">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
           </div>
         </section>
 
