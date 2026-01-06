@@ -1228,7 +1228,7 @@ export default function EmailSequencesPage() {
                       </li>
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
-                        <span>Improve deliverability using <a href="/features/email-warmup" className="text-[#b45ecf] hover:text-white transition-colors">Email Warmup</a></span>
+                        <span>Improve deliverability using Email Warmup </span>
                       </li>
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
