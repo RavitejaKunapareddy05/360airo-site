@@ -1112,7 +1112,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-6xl"
                     >
-                      Emails Instantly.
+                      AI Email Generator.
                     </motion.span>
                   </motion.h1>
 
