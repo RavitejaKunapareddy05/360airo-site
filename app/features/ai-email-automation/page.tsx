@@ -784,7 +784,7 @@ const AIEmailAutomationHero = () => {
             transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.7 }}
             className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/70 leading-relaxed`}
           >
-            Whether you're running cold campaigns, <a href="/features/linkedin-automation" className="text-[#3B82F6] hover:text-white transition-colors">LinkedIn Automation</a>, or <a href="/features/multi-channel-campaigns" className="text-[#ad60f8] hover:text-white transition-colors">Multi-Channel</a> outreach, your workflows become faster, cleaner, and more strategic.
+            Whether you're running cold campaigns, <a href="/features/linkedin-automation" className="text-[#3B82F6] hover:text-white transition-colors">LinkedIn Automation</a>, or Multi-Channel outreach, your workflows become faster, cleaner, and more strategic.
           </motion.p>
         </div>
 
@@ -865,7 +865,7 @@ export default function AIEmailAutomationPage() {
     "Automate campaign scheduling, follow-ups, and data syncing",
     "Activate behavior-based triggers such as open, reply, or no response",
     "Use insights from <a href='/features/email-sequences' class='text-[#ad60f8] hover:text-white transition-colors'>Email Sequences</a> to refine performance continuously",
-    "Run cross-channel workflows with <a href='/features/multi-channel-campaigns' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> automation",
+    "Run cross-channel workflows with Multi-Channel automation",
     "Automate LinkedIn messaging using LinkedIn Automation"
   ];
 
@@ -880,7 +880,7 @@ export default function AIEmailAutomationPage() {
     "Craft high-performing content with AI email marketing tools",
     "Deliver timing-optimized follow-ups across every stage",
     "Build context-aware sequences that adapt to recipient behavior",
-    "Maintain consistency across all <a href='/features/multi-channel-campaigns' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> touchpoints"
+    "Maintain consistency across all Multi-Channel touchpoints"
   ];
 
   const emailAutomationFeatures = [
