@@ -1248,7 +1248,7 @@ export default function EmailSequencesPage() {
                     <ul className="space-y-2">
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
-                        <span>Create email copy instantly via <a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Generation</a></span>
+                        <span>Create email copy instantly via <a href="/features/ai-email-generation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Generator</a></span>
                       </li>
                       <li className="flex items-start space-x-2 text-white/80">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#b45ecf] flex-shrink-0 mt-0.5" />
