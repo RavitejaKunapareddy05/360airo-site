@@ -1,8 +1,7 @@
-// app/team-collaboration/page.tsx
 "use client";
 
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,9 @@ import {
   Layers,
   Cpu,
   GitBranch,
-  TrendingUp
+  TrendingUp,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 import Head from 'next/head';
 import Link from 'next/link';
@@ -39,8 +40,127 @@ const InternalLink = ({ href, children, className = "" }: { href: string; childr
   );
 };
 
+/* FAQ Item Component */
+const FAQItem = ({ 
+  question, 
+  answer, 
+  isOpen, 
+  onClick 
+}: { 
+  question: string; 
+  answer: string; 
+  isOpen: boolean; 
+  onClick: () => void 
+}) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount
+  if (typeof window !== 'undefined') {
+    useState(() => {
+      setIsMobile(window.innerWidth < 768);
+    });
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-white/10 overflow-hidden group cursor-pointer"
+      onClick={onClick}
+    >
+      <div className={`transition-all duration-300 ${isOpen ? 'bg-white/10' : 'hover:bg-white/8'}`}>
+        <div className="p-5 lg:p-6">
+          <div className="flex items-start justify-between">
+            <h3 className="text-lg font-semibold text-white pr-8 leading-relaxed">
+              {question}
+            </h3>
+            <motion.div
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex-shrink-0 ml-4"
+            >
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-r from-[#b45ecf] to-[#d67ef2] flex items-center justify-center">
+                {isOpen ? (
+                  <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                ) : (
+                  <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                )}
+              </div>
+            </motion.div>
+          </div>
+          
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
+                <p className="text-white/80 text-base leading-relaxed">
+                  {answer}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+      
+      {/* Animated border effect */}
+      <div className={`absolute inset-0 rounded-xl lg:rounded-2xl pointer-events-none transition-all duration-300 ${
+        isOpen 
+          ? 'border-2 border-[#b45ecf]/50 shadow-[0_0_30px_rgba(180,94,207,0.3)]' 
+          : 'border border-white/10 group-hover:border-[#b45ecf]/30'
+      }`} />
+    </motion.div>
+  );
+};
+
+/* FAQ Data */
+const faqData = [
+  {
+    question: "What is a team collaboration tool, and how does it work?",
+    answer: "A team collaboration tool allows multiple team members to work together from a shared platform. It enables shared access to campaigns, inboxes, and lead data while maintaining visibility and accountability. This improves coordination, reduces duplicate work, and ensures smoother communication across sales and marketing teams.",
+    id: "what-is-collaboration-tool"
+  },
+  {
+    question: "How can teams collaborate effectively using a shared workspace?",
+    answer: "Teams can collaborate effectively by assigning conversations, sharing internal notes, and tracking activity in a shared workspace. 360Airo ensures everyone has context on each lead, reducing confusion and allowing teams to respond faster with consistent and aligned messaging.",
+    id: "effective-collaboration"
+  },
+  {
+    question: "Can teams manage campaigns, tasks, and conversations from one platform?",
+    answer: "Yes, 360Airo allows teams to manage outreach campaigns, lead conversations, and follow ups from one centralized platform. This eliminates tool switching, improves efficiency, and ensures all outreach activities remain organized and easy to track.",
+    id: "unified-platform"
+  },
+  {
+    question: "How does a shared inbox help teams respond faster and stay aligned?",
+    answer: "A shared inbox centralizes all incoming messages and prevents overlap. Team members can see who is responding, add internal notes, and prioritize replies. This improves response times, avoids duplicate replies, and ensures consistent communication with prospects.",
+    id: "shared-inbox-benefits"
+  },
+  {
+    question: "How does AI improve team productivity and decision-making?",
+    answer: "AI helps teams by prioritizing conversations, highlighting high intent leads, and providing performance insights. It reduces manual analysis and surfaces actionable recommendations, allowing teams to focus on meaningful conversations and make faster, smarter decisions.",
+    id: "ai-productivity"
+  },
+  {
+    question: "Can teams collaborate on email and LinkedIn campaigns from one platform?",
+    answer: "Yes, 360Airo enables teams to collaborate on both email and LinkedIn campaigns from a single dashboard. Campaigns, sequences, and analytics are shared, ensuring alignment across channels and making it easier to scale outreach efforts collectively.",
+    id: "multi-channel-collaboration"
+  },
+  {
+    question: "How does 360Airo enable collaboration across sales, marketing, and customer success teams?",
+    answer: "360Airo centralizes lead data, conversations, and campaign insights, allowing different teams to work from the same information. This alignment improves handoffs, ensures consistent messaging, and helps teams collaborate efficiently throughout the customer journey.",
+    id: "cross-team-collaboration"
+  }
+];
+
 export default function TeamCollaboration() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
 
   // Optimized animations for mobile
   const fadeInUp = {
@@ -153,6 +273,10 @@ export default function TeamCollaboration() {
       description: "Streamlined team collaboration processes"
     }
   ];
+
+  const handleFaqClick = (id: string) => {
+    setOpenFaq(openFaq === id ? null : id);
+  };
 
   return (
     <>
@@ -652,6 +776,76 @@ export default function TeamCollaboration() {
               ))}
             </motion.div>
           </div>
+        </section>
+
+        {/* FAQ SECTION - Added before final CTA */}
+        <section id="faq" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
+            >
+              <div className="inline-block mb-2 sm:mb-3">
+                <span className="text-[#b45ecf] font-semibold text-xs sm:text-sm tracking-wider uppercase">FAQs</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
+                Frequently Asked <span className="text-[#b45ecf]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about 360Airo's Team Collaboration tools and how they can transform your team workflow.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 sm:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-white/60 text-sm sm:text-base mb-6">
+                Still have questions? We're here to help.
+              </p>
+              <motion.div 
+                whileHover={{ scale: 1.04, y: -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-block"
+                onClick={() => window.open('https://app.360airo.com/', '_blank')}
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#b45ecf] to-[#d67ef2] text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl sm:rounded-2xl hover:shadow-lg hover:shadow-[#b45ecf]/30 transition-all duration-300"
+                >
+                  Contact Support
+                  <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Optimized Final CTA for Mobile */}
