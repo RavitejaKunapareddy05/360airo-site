@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { 
@@ -24,7 +24,9 @@ import {
   Award,
   Layers,
   FileCheck,
-  Wifi
+  Wifi,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -87,6 +89,144 @@ const GlowCard = ({ children, className = '', ...props }: any) => {
     </div>
   );
 };
+
+/* FAQ Item Component */
+const FAQItem = ({ 
+  question, 
+  answer, 
+  isOpen, 
+  onClick 
+}: { 
+  question: string; 
+  answer: string; 
+  isOpen: boolean; 
+  onClick: () => void 
+}) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <GlowCard className="rounded-xl lg:rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl border border-white/10 overflow-hidden group cursor-pointer"
+        onClick={onClick}
+      >
+        <div className={`transition-all duration-300 ${isOpen ? 'bg-white/10' : 'hover:bg-white/8'}`}>
+          <div className="p-5 lg:p-6">
+            <div className="flex items-start justify-between">
+              <h3 className="text-lg font-semibold text-white pr-8 leading-relaxed">
+                {question}
+              </h3>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex-shrink-0 ml-4"
+              >
+                <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-r from-[#3B82F6] to-[#6366F1] flex items-center justify-center">
+                  {isOpen ? (
+                    <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5 text-white" />
+                  )}
+                </div>
+              </motion.div>
+            </div>
+            
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent my-4" />
+                  <p className="text-white/80 text-base leading-relaxed">
+                    {answer}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+        
+        {/* Animated border effect */}
+        <div className={`absolute inset-0 rounded-xl lg:rounded-2xl pointer-events-none transition-all duration-300 ${
+          isOpen 
+            ? 'border-2 border-[#3B82F6]/50 shadow-[0_0_30px_rgba(59,130,246,0.3)]' 
+            : 'border border-white/10 group-hover:border-[#3B82F6]/30'
+        }`} />
+      </motion.div>
+    </GlowCard>
+  );
+};
+
+/* FAQ Data */
+const faqData = [
+  {
+    question: "What are email domains, and why are they important for cold email outreach?",
+    answer: "Email domains represent your sender identity and directly impact deliverability. A healthy domain builds trust with email providers, increasing inbox placement. For cold outreach, using properly configured and warmed domains is essential to avoid spam filters and protect long term sending reputation.",
+    id: "email-domains-importance"
+  },
+  {
+    question: "How can domain authentication help emails land in the inbox instead of spam?",
+    answer: "Domain authentication using SPF, DKIM, and DMARC verifies that your emails are legitimate. This reduces spoofing risks and increases trust with inbox providers. Authenticated domains are more likely to land in the inbox rather than spam folders.",
+    id: "domain-authentication"
+  },
+  {
+    question: "Why is email authentication important?",
+    answer: "Email authentication protects your domain from misuse and improves deliverability. It signals to email providers that your messages are genuine, reducing spam flags and improving inbox placement. Authentication is a foundational step for any successful cold email strategy.",
+    id: "email-authentication-importance"
+  },
+  {
+    question: "What is domain warmup, and why does it matter for deliverability?",
+    answer: "Domain warmup gradually builds sending reputation by increasing email volume over time. This helps email providers trust your domain and prevents sudden spikes that trigger spam filters. Proper warmup is critical for maintaining consistent inbox placement.",
+    id: "domain-warmup"
+  },
+  {
+    question: "How does 360Airo help protect domain reputation over time?",
+    answer: "360Airo monitors sending behavior, enforces safe limits, and includes automated warmup tools. These features ensure consistent engagement and prevent risky activity, helping maintain strong domain reputation even as outreach volume scales.",
+    id: "protect-domain-reputation"
+  },
+  {
+    question: "How does email warmup work when adding a new domain or email account?",
+    answer: "When a new domain or email account is added, email warmup gradually increases sending volume while generating real engagement through replies and opens. This signals positive behavior to inbox providers. 360Airo automates this entire process, ensuring the domain builds trust safely over time and is fully prepared for outbound campaigns without risking spam placement or account blocks.",
+    id: "email-warmup-process"
+  },
+  {
+    question: "How can I check the health and reputation of my email domains?",
+    answer: "Email domain health can be evaluated by monitoring bounce rates, spam complaints, open rates, and blacklist status. 360Airo provides built in monitoring tools that track these signals continuously. This allows businesses to identify potential issues early, take corrective action, and maintain strong sender reputation for long term email outreach success.",
+    id: "check-domain-health"
+  },
+  {
+    question: "Can multiple domains and sender accounts be managed from one dashboard?",
+    answer: "Yes, 360Airo allows you to manage multiple domains and sender accounts from a single dashboard. This is especially useful for teams running large scale outreach or agencies managing multiple clients. Centralized control ensures consistent warmup, monitoring, and campaign management while protecting deliverability across all connected accounts.",
+    id: "multi-domain-management"
+  },
+  {
+    question: "Can I safely add new domains and email accounts without hurting deliverability?",
+    answer: "360Airo makes it safe to add new domains and accounts by automatically applying warmup, authentication checks, and sending limits. This structured approach prevents sudden spikes in activity that trigger spam filters and ensures new senders build reputation gradually without affecting existing outreach performance.",
+    id: "safe-domain-addition"
+  },
+  {
+    question: "What is a good bounce rate for cold email campaigns?",
+    answer: "A healthy bounce rate for cold email campaigns is typically below two percent. Higher bounce rates can signal poor list quality or domain issues and may harm deliverability. 360Airo helps reduce bounce rates by validating lists, monitoring performance, and alerting users to potential risks early.",
+    id: "bounce-rate-standards"
+  }
+];
 
 /* Motion variants - Mobile optimized */
 const containerVariants: Variants = {
@@ -270,6 +410,12 @@ const InternalLink = ({ href, children, className = "" }: { href: string; childr
 export default function DomainsEmailsPage() {
   const redirectToApp = () => {
     window.open('https://app.360airo.com/', '_blank');
+  };
+
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
+
+  const handleFaqClick = (id: string) => {
+    setOpenFaq(openFaq === id ? null : id);
   };
 
   return (
@@ -944,6 +1090,70 @@ export default function DomainsEmailsPage() {
                 </GlowCard>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* FAQ SECTION - Mobile Optimized */}
+        <section id="faq" className="py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            variants={containerVariants} 
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2 lg:mb-3">
+                <span className="text-[#3B82F6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              </div>
+              <h2 className="text-2xl lg:text-4xl font-bold text-white mb-3 lg:mb-4 leading-tight">
+                Frequently Asked <span className="text-[#3B82F6]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about domain management, email authentication, and deliverability.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 lg:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-white/60 text-sm lg:text-base mb-6">
+                Still have questions about domain management? We're here to help.
+              </p>
+              <motion.div 
+                whileHover={{ scale: 1.04, y: -2 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-block"
+                onClick={redirectToApp}
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#3B82F6] to-[#6366F1] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#3B82F6]/30 transition-all duration-300"
+                >
+                  Contact Support
+                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </section>
 
