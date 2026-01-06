@@ -1093,7 +1093,44 @@ export default function DomainsEmailsPage() {
           </motion.div>
         </section>
 
-        {/* FAQ SECTION - Mobile Optimized */}
+        {/* STATS SECTION - Mobile Optimized */}
+        <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            variants={containerVariants} 
+            className="max-w-6xl mx-auto"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+              {stats.map((stat, index) => (
+                <GlowCard key={index} className="group cursor-pointer rounded-xl lg:rounded-2xl">
+                  <div className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl p-6 lg:p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#3B82F6]/50">
+                    <motion.div
+                      className="bg-white/15 w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#3B82F6]/30"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <stat.icon className="h-5 w-5 lg:h-6 lg:w-6 text-[#3B82F6] transition-colors group-hover:text-white" />
+                    </motion.div>
+                    <motion.div
+                      className="text-2xl lg:text-4xl font-black text-white mb-1 lg:mb-2"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, margin: '-20px' }}
+                      transition={{ delay: index * 0.06, duration: 0.4 }}
+                    >
+                      {stat.value}
+                    </motion.div>
+                    <div className="text-white/80 font-semibold text-xs lg:text-sm">{stat.label}</div>
+                  </div>
+                </GlowCard>
+              ))}
+            </div>
+          </motion.div>
+        </section>
+
+        {/* FAQ SECTION - Mobile Optimized - POSITIONED BEFORE FINAL CTA */}
         <section id="faq" className="py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -1104,14 +1141,14 @@ export default function DomainsEmailsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2 lg:mb-3">
-                <span className="text-[#3B82F6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+                <span className="text-[#3B82F6] font-semibold text-xs lg:text-sm tracking-wider uppercase">COMMON QUESTIONS</span>
               </div>
               <h2 className="text-2xl lg:text-4xl font-bold text-white mb-3 lg:mb-4 leading-tight">
-                Frequently Asked <span className="text-[#3B82F6]">Questions</span>
+                Domain & Email Management FAQs
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Get answers to the most common questions about domain management, email authentication, and deliverability.
+                Everything you need to know about setting up, authenticating, and managing your email domains for successful outreach.
               </p>
             </motion.div>
 
@@ -1154,43 +1191,6 @@ export default function DomainsEmailsPage() {
                 </Button>
               </motion.div>
             </motion.div>
-          </motion.div>
-        </section>
-
-        {/* STATS SECTION - Mobile Optimized */}
-        <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
-            variants={containerVariants} 
-            className="max-w-6xl mx-auto"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-              {stats.map((stat, index) => (
-                <GlowCard key={index} className="group cursor-pointer rounded-xl lg:rounded-2xl">
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl p-6 lg:p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#3B82F6]/50">
-                    <motion.div
-                      className="bg-white/15 w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#3B82F6]/30"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <stat.icon className="h-5 w-5 lg:h-6 lg:w-6 text-[#3B82F6] transition-colors group-hover:text-white" />
-                    </motion.div>
-                    <motion.div
-                      className="text-2xl lg:text-4xl font-black text-white mb-1 lg:mb-2"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, margin: '-20px' }}
-                      transition={{ delay: index * 0.06, duration: 0.4 }}
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-white/80 font-semibold text-xs lg:text-sm">{stat.label}</div>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
           </motion.div>
         </section>
 
