@@ -851,7 +851,7 @@ export default function AIEmailAutomationPage() {
     "Craft high-performing content with AI email marketing tools",
     "Deliver timing-optimized follow-ups across every stage",
     "Build context-aware sequences that adapt to recipient behavior",
-    "Maintain consistency across all <a href='/features/multi-channel-platform' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> touchpoints"
+    "Maintain consistency across all <a href='/features/multi-channel-campaign' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> touchpoints"
   ];
 
   const emailAutomationFeatures = [
