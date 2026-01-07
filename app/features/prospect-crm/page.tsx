@@ -674,7 +674,7 @@ const HeroSection = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="block transform-gpu"
                 >
-                 Smarter Relationships,
+                  Smarter Relationships,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
@@ -712,7 +712,7 @@ const HeroSection = () => {
                 Turn every lead into a meaningful connection.
               </p>
               <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                360Airo's Prospect CRM helps you manage, track, and nurture leads from first contact to conversion using a streamlined <Link href="/features/lead-management-software" className="text-blue-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management system</Link> built for clarity and performance. It gives modern outreach teams the structure of advanced sales CRM software without the clutter—so you can focus on conversations that move deals forward while the system handles everything behind the scenes.
+                360Airo's Prospect CRM helps you manage, track, and nurture leads from first contact to conversion using a streamlined lead management system built for clarity and performance. It gives modern outreach teams the structure of advanced sales CRM software without the clutter—so you can focus on conversations that move deals forward while the system handles everything behind the scenes.
               </p>
               <p className="text-sm lg:text-base text-white/75 leading-relaxed">
                 Designed for modern outreach teams that want clarity, not clutter — so you can focus on building genuine relationships while our CRM automates the rest.
@@ -793,7 +793,7 @@ export default function ProspectCRMPage() {
         'View complete timelines and communication history',
         'Segment contacts based on behavior, campaign, or funnel stage',
         'Add custom notes, tags, and deal stages with ease',
-        <>Sync seamlessly with Email Sequences and <Link href="/features/linkedin-automation" className="text-[#ad60f8] hover:text-white transition-colors duration-300 underline underline-offset-2">LinkedIn outreach</Link> workflows</>
+        'Sync seamlessly with Email Sequences and LinkedIn outreach workflows'
       ],
       color: 'from-blue-500 to-cyan-400'
     },
@@ -1318,7 +1318,7 @@ export default function ProspectCRMPage() {
                 transition={{ delay: 0.2 }}
                 className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto mb-6 lg:mb-8"
               >
-                Stop wasting time on repetitive tasks. 360Airo's Prospect CRM connects directly to your outreach workflows to automate actions across your entire <Link href="/features/lead-management-software" className="text-cyan-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management system</Link>.
+                Stop wasting time on repetitive tasks. 360Airo's Prospect CRM connects directly to your outreach workflows to automate actions across your entire lead management system.
               </motion.p>
               
               {/* Bullet Points Section */}
@@ -1335,7 +1335,7 @@ export default function ProspectCRMPage() {
                       {[
                         'Set behavior-based rules for lead progression and re-engagement',
                         'Auto-update contact details and workflow triggers',
-                        <>Maintain smooth communication handoffs within the Unified Inbox</>
+                        'Maintain smooth communication handoffs within the Unified Inbox'
                       ].map((item, index) => (
                         <motion.div
                           key={index}
