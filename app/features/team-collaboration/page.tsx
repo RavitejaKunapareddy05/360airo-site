@@ -493,7 +493,7 @@ export default function TeamCollaboration() {
                 >
                   Great outreach requires great teamwork.
                   360Airo's team collaboration tools help sales, marketing, and customer success teams work in sync, ensuring every campaign runs smoothly. Manage email sequences, LinkedIn outreach, and{' '}
-                   <InternalLink href="/features/multi-channel-platform">multi-channel</InternalLink>.  campaigns
+                   <InternalLink href="/features/multi-channel-campaign">multi-channel</InternalLink>.  campaigns
                   {' '}from one unified workspace and keep everyone aligned, informed, and productive.
                   No more overlapping efforts, missed follow-ups, or lost conversations — just clear communication and streamlined workflows powered by tools like your Unified Inbox and integrated <InternalLink href="/features/lead-management-software">lead management software</InternalLink>.
                 </motion.p>
