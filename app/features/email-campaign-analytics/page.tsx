@@ -154,36 +154,6 @@ const FAQSection = () => {
         transition={{ delay: 0.8, duration: 0.6 }}
         className="mt-8 sm:mt-12 text-center"
       >
-        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
-          Still have questions? Our team is here to help you succeed with email campaign analytics.
-        </p>
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
-        >
-          <Button 
-            size="lg" 
-            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
-            style={{ background: '#8B5CF6' }}
-            onClick={() => window.open('https://app.360airo.com/', '_blank')}
-          >
-            <motion.span
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-              className="absolute inset-0 bg-white/20 rounded-xl"
-            />
-            <span className="relative z-10 flex items-center justify-center">
-              Start Your Free Trial
-              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </motion.div>
       </motion.div>
     </div>
   );
@@ -948,7 +918,7 @@ export default function ReportsAnalyticsPage() {
               className="mt-12 text-center"
             >
               <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-4xl mx-auto leading-relaxed">
-                Track success at a glance with visual trend graphs, real-time engagement charts, deliverability insights, and complete email campaign tracking across all campaigns.
+                Track success at a glance with visual trend graphs, real-time engagement charts, deliverability insights, and complete <a href="/features/email-campaigns " className="text-[#b45ecf] hover:text-white transition-colors">email campaign </a> tracking across all campaigns.
                 All powered by a sleek, intuitive Email marketing analytics tool built for speed and clarity.
               </p>
             </motion.div>
