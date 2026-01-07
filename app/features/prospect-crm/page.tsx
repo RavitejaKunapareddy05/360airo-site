@@ -666,7 +666,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.7, type: 'spring', stiffness: 80 }}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-4xl font-black text-white leading-tight lg:leading-[0.95] tracking-tight"
+                className="text-3xl sm:text-4xl lg:text-4xl xl:text-4xl font-black text-white leading-tight lg:leading-[0.95] tracking-tight"
               >
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
@@ -674,7 +674,7 @@ const HeroSection = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="block transform-gpu"
                 >
-                  Prospect CRM, Smarter Relationships,
+                   Prospect CRM,Smarter Relationships,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
