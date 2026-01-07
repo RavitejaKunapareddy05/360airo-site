@@ -167,45 +167,6 @@ const FAQSection = () => {
           </motion.div>
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="mt-8 sm:mt-12 text-center"
-      >
-        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
-          Still have questions? Our team is here to help you succeed with email sequences.
-        </p>
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
-        >
-          <Button 
-            size="lg" 
-            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
-            style={{ background: COLORS.primary }}
-            onClick={() => window.open('https://app.360airo.com/', '_blank')}
-          >
-            <motion.span
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-              className="absolute inset-0 bg-white/20 rounded-xl"
-            />
-            <span className="relative z-10 flex items-center justify-center">
-              Start Your Free Trial
-              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </motion.div>
-      </motion.div>
     </div>
   );
 };
@@ -420,9 +381,9 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
         <p className="text-white/70 mb-3 lg:mb-4 leading-relaxed text-sm lg:text-base">{description}</p>
         
         <div className="space-y-1.5 lg:space-y-2">
-          {features.map((feature: string, index: number) => (
+          {features.map((feature: any, index: number) => (
             <motion.div
-              key={feature}
+              key={index}
               initial={{ opacity: 0, x: -8 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: delay + index * 0.06 }}
@@ -430,7 +391,7 @@ const FeatureCard = ({ icon: Icon, title, description, features, delay, note }: 
               className="flex items-center space-x-2 text-white/80 text-xs lg:text-sm"
             >
               <div className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full flex-shrink-0" />
-              <span>{feature}</span>
+              <span>{typeof feature === 'string' ? feature : feature}</span>
             </motion.div>
           ))}
         </div>
@@ -591,7 +552,6 @@ export default function EmailSequencesPage() {
         "Set triggers based on opens, clicks, or replies",
         "Pause or skip contacts instantly when they engage",
         "Improve deliverability using Email Warmup",
-        "Sync effortlessly with ",
         <span><a href="/features/ai-email-automation" className="text-[#b45ecf] hover:text-white transition-colors">AI Email Automation</a></span>
       ],
       note: "Your outreach stays natural — never pushy — while your response rates steadily rise."
@@ -601,7 +561,6 @@ export default function EmailSequencesPage() {
       title: "Scalable Personalization for the Best Email Sequences",
       description: "Crafting messages that resonate shouldn't slow you down. 360Airo supports large-scale personalization by analyzing engagement patterns, refining tone, and helping you build the best email sequences for cold outreach, nurturing, and re-engagement.",
       features: [
-        "Create email copy instantly via" ,
         <span><a href="/features/ai-email-generator" className="text-[#b45ecf] hover:text-white transition-colors"> AI Email Generator</a> </span>,
         "Build targeted follow-up journeys for every lead type",
         "Optimize send windows for maximum impact",
@@ -1177,13 +1136,6 @@ export default function EmailSequencesPage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-[#19001d]">
-          <div className="max-w-6xl mx-auto">
-            <FAQSection />
-          </div>
-        </section>
-
         {/* Content Summary Section */}
         <section className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-[#19001d]">
           <div className="max-w-4xl mx-auto">
@@ -1328,6 +1280,65 @@ export default function EmailSequencesPage() {
                   <ArrowRight className="ml-1.5 lg:ml-2 h-4 w-4 lg:h-5 lg:w-5" />
                 </Button>
               </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* FAQ Section - MOVED TO LAST SECTION BEFORE FOOTER */}
+        <section id="faq" className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-[#19001d] to-black">
+          <div className="max-w-6xl mx-auto">
+            <FAQSection />
+          </div>
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-[#19001d] to-black">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              className="space-y-6 lg:space-y-8"
+            >
+              <h2 className="text-2xl lg:text-4xl font-bold text-white mb-4 lg:mb-6">
+                Ready to Transform Your Email Outreach?
+              </h2>
+              
+              <p className="text-lg lg:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed mb-6 lg:mb-8">
+                Join thousands of teams using 360Airo's Email Sequences to automate conversations, nurture leads, and drive conversions.
+              </p>
+
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block"
+              >
+                <Button 
+                  size="lg" 
+                  className="bg-[#b45ecf] hover:bg-[#b45ecf]/90 px-8 py-4 lg:px-10 lg:py-6 text-lg lg:text-xl font-bold rounded-xl shadow-xl shadow-[#b45ecf]/30 border-0 relative overflow-hidden group"
+                  onClick={redirectToApp}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+                    animate={{
+                      x: ['-100%', '200%'],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: 0.5,
+                    }}
+                  />
+                  <span className="relative z-10 flex items-center">
+                    Start Building Your Sequences
+                    <ArrowRight className="ml-2 h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Button>
+              </motion.div>
+
+              <p className="text-white/50 text-sm lg:text-base mt-4 lg:mt-6">
+                No credit card required • 14-day free trial • Cancel anytime
+              </p>
             </motion.div>
           </div>
         </section>
