@@ -755,7 +755,7 @@ const AIEmailAutomationHero = () => {
             transition={{ duration: isMobile ? 0.5 : 0.6, delay: 0.7 }}
             className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/70 leading-relaxed`}
           >
-            Whether you're running cold campaigns, <a href="/features/linkedin-automation" className="text-[#3B82F6] hover:text-white transition-colors">LinkedIn Automation</a>, or Multi-Channel outreach, your workflows become faster, cleaner, and more strategic.
+            Whether you're running cold campaigns,LinkedIn Automation, or Multi-Channel outreach, your workflows become faster, cleaner, and more strategic.
           </motion.p>
         </div>
 
@@ -837,7 +837,7 @@ export default function AIEmailAutomationPage() {
     "Activate behavior-based triggers such as open, reply, or no response",
     "Use insights from Email Sequences to refine performance continuously",
     "Run cross-channel workflows with Multi-Channel automation",
-    "Automate LinkedIn messaging using LinkedIn Automation"
+    'Automate LinkedIn messaging using <a href="/features/linkedin-automation" className="text-[#3B82F6] hover:text-white transition-colors"> LinkedIn Automation</a>'
   ];
 
   const automationGoalsFeatures = [
