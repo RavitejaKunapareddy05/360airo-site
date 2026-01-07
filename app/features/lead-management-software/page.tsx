@@ -1653,71 +1653,6 @@ export default function ProspectManagementPage() {
           </div>
         </section>
 
-        {/* FAQ SECTION - Added before Why Teams Choose */}
-        <section id="faq" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
-          <FloatingParticles />
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <motion.div className="text-center mb-12 sm:mb-16 lg:mb-20">
-              <div className="inline-block mb-2 lg:mb-3">
-                <span className="text-[#b45ecf] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
-              </div>
-              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Frequently Asked <span className="text-[#b45ecf]">Questions</span>
-              </h2>
-              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
-              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Get answers to the most common questions about 360Airo's Lead Management Software and how it can transform your sales process.
-              </p>
-            </motion.div>
-
-            <div className="space-y-4 lg:space-y-6">
-              {faqData.map((faq, index) => (
-                <div key={faq.id} id={faq.id}>
-                  <FAQItem
-                    question={faq.question}
-                    answer={faq.answer}
-                    isOpen={openFaq === faq.id}
-                    onClick={() => handleFaqClick(faq.id)}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Additional FAQ Resources */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-12 text-center"
-            >
-              <p className="text-white/60 text-sm lg:text-base mb-6">
-                Still have questions? We're here to help.
-              </p>
-              <motion.div 
-                whileHover={{ scale: isMobile ? 1.04 : 1.05, y: isMobile ? -2 : -4 }} 
-                whileTap={{ scale: 0.95 }} 
-                className="inline-block"
-                onClick={() => window.open('https://app.360airo.com/', '_blank')}
-              >
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#b45ecf]/30 transition-all duration-300"
-                >
-                  Contact Support
-                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </section>
-
         {/* Why Teams Choose Section */}
         <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-[#0A0A0A] relative overflow-hidden">
           <FloatingParticles />
@@ -1895,8 +1830,73 @@ export default function ProspectManagementPage() {
           </div>
         </section>
 
+        {/* FAQ SECTION - NOW AT THE VERY END BEFORE FOOTER */}
+        <section id="faq" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-black relative overflow-hidden">
+          <FloatingParticles />
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div className="text-center mb-12 sm:mb-16 lg:mb-20">
+              <div className="inline-block mb-2 lg:mb-3">
+                <span className="text-[#b45ecf] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              </div>
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
+                Frequently Asked <span className="text-[#b45ecf]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about 360Airo's Lead Management Software and how it can transform your sales process.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 lg:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-white/60 text-sm lg:text-base mb-6">
+                Still have questions? We're here to help.
+              </p>
+              <motion.div 
+                whileHover={{ scale: isMobile ? 1.04 : 1.05, y: isMobile ? -2 : -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="inline-block"
+                onClick={() => window.open('https://app.360airo.com/', '_blank')}
+              >
+                <Button 
+                  size="lg"
+                  className="bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#b45ecf]/30 transition-all duration-300"
+                >
+                  Contact Support
+                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </section>
+
         <Footer />
       </div>
     </>
   );
-} 
+}  
