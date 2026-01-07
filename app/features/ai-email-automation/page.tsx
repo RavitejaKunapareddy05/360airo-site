@@ -212,36 +212,7 @@ const FAQSection = () => {
         transition={{ delay: 0.8, duration: 0.6 }}
         className="mt-8 sm:mt-12 text-center"
       >
-        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
-          Still have questions? Our team is here to help you succeed with AI email automation.
-        </p>
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
-        >
-          <Button 
-            size="lg" 
-            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
-            style={{ background: COLORS.primary }}
-            onClick={() => window.open('https://app.360airo.com/', '_blank')}
-          >
-            <motion.span
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-              className="absolute inset-0 bg-white/20 rounded-xl"
-            />
-            <span className="relative z-10 flex items-center justify-center">
-              Start Your Free Trial
-              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </motion.div>
+        
       </motion.div>
     </div>
   );
@@ -864,7 +835,7 @@ export default function AIEmailAutomationPage() {
   const intelligentWorkflowFeatures = [
     "Automate campaign scheduling, follow-ups, and data syncing",
     "Activate behavior-based triggers such as open, reply, or no response",
-    "Use insights from <a href='/features/email-sequences' class='text-[#ad60f8] hover:text-white transition-colors'>Email Sequences</a> to refine performance continuously",
+    "Use insights from Email Sequences to refine performance continuously",
     "Run cross-channel workflows with Multi-Channel automation",
     "Automate LinkedIn messaging using LinkedIn Automation"
   ];
@@ -880,7 +851,7 @@ export default function AIEmailAutomationPage() {
     "Craft high-performing content with AI email marketing tools",
     "Deliver timing-optimized follow-ups across every stage",
     "Build context-aware sequences that adapt to recipient behavior",
-    "Maintain consistency across all Multi-Channel touchpoints"
+    "Maintain consistency across all <a href='/features/multi-channel-platform' class='text-[#3B82F6] hover:text-white transition-colors'>Multi-Channel</a> touchpoints"
   ];
 
   const emailAutomationFeatures = [
