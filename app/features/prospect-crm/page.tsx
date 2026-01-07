@@ -674,7 +674,7 @@ const HeroSection = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="block transform-gpu"
                 >
-                   Prospect CRM,Smarter Relationships,
+                   Prospect CRM for Smarter Relationships,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
@@ -973,7 +973,7 @@ export default function ProspectCRMPage() {
                 className="space-y-4 lg:space-y-6"
               >
                 <p className="text-base lg:text-lg text-white/80 leading-relaxed">
-                  Your prospects shouldn't be scattered across tabs, tools, and notes. With 360Airo's Prospect CRM, every interaction and engagement detail is stored inside one organized dashboard powered by robust CRM <Link href="/features/lead-management-software" className="text-blue-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management software</Link> capabilities.
+                  Your prospects shouldn't be scattered across tabs, tools, and notes. With 360Airo's Prospect CRM, every interaction and engagement detail is stored inside one organized dashboard powered by robust CRM  lead management software capabilities.
                 </p>
                 
                 <div className="space-y-3 lg:space-y-4">
@@ -1015,7 +1015,7 @@ export default function ProspectCRMPage() {
                   transition={{ delay: 0.5 }}
                   className="text-white/60 text-xs lg:text-sm italic"
                 >
-                  Every update appears instantly, giving your team the full context needed before taking the next step in lead management software.
+                  Every update appears instantly, giving your team the full context needed before taking the next step in <Link href="/features/lead-management-software" className="text-blue-400 hover:text-white transition-colors duration-300 underline underline-offset-2">lead management software</Link>.
                 </motion.p>
               </motion.div>
 
