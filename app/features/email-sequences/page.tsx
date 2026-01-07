@@ -771,7 +771,7 @@ export default function EmailSequencesPage() {
                   <div className="w-5 h-5 lg:w-6 lg:h-6 bg-[#b45ecf] rounded-full flex items-center justify-center">
                     <Mail className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" />
                   </div>
-                  <span className="text-white/80 font-medium text-xs lg:text-sm">Email Automation</span>
+                   <span className="text-white/80 font-medium text-xs lg:text-sm">Email sequence software</span>
                 </motion.div>
 
                 {/* Main Heading */}
