@@ -648,7 +648,7 @@ export default function DomainsEmailsPage() {
                       Deliverability Worries
                     </motion.span>
                   </p>
-                  <p className="text-sm sm:text-base text-white/75 leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/55 leading-relaxed">
                     Every great outreach campaign starts with a trusted foundation — your domain and email setup.
                     360Airo's Domains & Emails feature ensures your communication is backed by verified, secure, and reputation-safe infrastructure.
                     From authentication to monitoring, it's designed to help your messages reach inboxes confidently and consistently.
