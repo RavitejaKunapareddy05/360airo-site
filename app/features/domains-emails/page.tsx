@@ -1166,7 +1166,7 @@ export default function DomainsEmailsPage() {
             </div>
 
             {/* Additional FAQ Resources */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1190,7 +1190,7 @@ export default function DomainsEmailsPage() {
                   <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </motion.div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </section>
 
@@ -1208,7 +1208,7 @@ export default function DomainsEmailsPage() {
               <div className="inline-block">
                 <span className="text-[#3B82F6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Your Foundation for Reliable Outreach</span>
               </div>
-              <h2 className="text-2xl lg:text-5xl font-bold text-white leading-tight">
+              <h2 className="text-2xl lg:text-4xl font-bold text-white leading-tight">
                 From setup to scalability, 360Airo's Domains & Emails feature does more than manage your technical framework — it builds long-term reliability.
               </h2>
               <SectionDivider variant="gradient" />
