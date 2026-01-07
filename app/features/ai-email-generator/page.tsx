@@ -1078,17 +1078,17 @@ export default function AIContentGenerationPage() {
                       >
                         <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 text-[#A855F7]" />
                       </motion.div>
-                      <span>AI Email Generator </span>
+                      <span>AI Email Generator</span>
                     </span>
                   </div>
                 </motion.div>
 
-                <div className="space-y-4 lg:space-y-5">
+                <div className="space-y-3 lg:space-y-4">
                   <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.7, type: 'spring', stiffness: 80 }}
-                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight lg:leading-[0.95] tracking-tight"
+                    className="text-3xl sm:text-2xl lg:text-5xl xl:text-5xl font-black text-white leading-tight lg:leading-[0.95] tracking-tight"
                   >
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -1110,9 +1110,9 @@ export default function AIContentGenerationPage() {
                       initial={{ opacity: 0, scale: 0.7 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
-                      className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-6xl"
+                      className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-5xl"
                     >
-                      AI Email Generator.
+                     AI Emails Generator.
                     </motion.span>
                   </motion.h1>
 
@@ -1295,7 +1295,7 @@ export default function AIContentGenerationPage() {
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
-                        <span>Write follow-ups that stay aligned to <Link href="/features/email-sequences" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">Email Sequences</Link></span>
+                        <span>Write follow-ups that stay aligned to Email Sequences </span>
                       </li>
                       <li className="flex items-start">
                         <CheckCircle2 className="h-4 w-4 lg:h-5 lg:w-5 text-[#8B5CF6] mr-2 mt-0.5 flex-shrink-0" />
@@ -1748,7 +1748,7 @@ export default function AIContentGenerationPage() {
                   {[
                     "Consistent messaging across every campaign",
                     "High-quality, professional copy produced instantly",
-                    `Seamless connection to <Link href="/features/linkedin-automation" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">LinkedIn Automation and LinkedIn flows`,
+                    `Seamless connection to <Link href="/features/linkedin-automation" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">LinkedIn Automation and LinkedIn flows</Link>`,
                     "Enhanced deliverability and engagement",
                     "Designed for teams that need quality communication at scale",
                     "Save hours of manual writing every week"
@@ -2042,70 +2042,6 @@ export default function AIContentGenerationPage() {
           </motion.div>
         </section>
 
-        {/* FAQ SECTION - Added before final CTA */}
-        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
-            variants={containerVariants} 
-            className="max-w-4xl mx-auto"
-          >
-            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
-              <div className="inline-block mb-2 lg:mb-3">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
-              </div>
-              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Frequently Asked <span className="text-[#8B5CF6]">Questions</span>
-              </h2>
-              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
-              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Get answers to the most common questions about 360Airo's AI Email Generator and how it can transform your email outreach.
-              </p>
-            </motion.div>
-
-            <div className="space-y-4 lg:space-y-6">
-              {faqData.map((faq, index) => (
-                <div key={faq.id} id={faq.id}>
-                  <FAQItem
-                    question={faq.question}
-                    answer={faq.answer}
-                    isOpen={openFaq === faq.id}
-                    onClick={() => handleFaqClick(faq.id)}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Additional FAQ Resources */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-12 text-center"
-            >
-              <p className="text-white/60 text-sm lg:text-base mb-6">
-                Still have questions? We're here to help.
-              </p>
-              <motion.div 
-                whileHover={{ scale: isMobile ? 1.04 : 1.05, y: isMobile ? -2 : -4 }} 
-                whileTap={{ scale: 0.95 }} 
-                className="inline-block"
-                onClick={handleCTAClick}
-              >
-                <Button 
-                  size="lg"
-                  className="bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white px-6 lg:px-8 py-3 lg:py-4 text-base lg:text-lg font-semibold rounded-xl lg:rounded-2xl hover:shadow-lg hover:shadow-[#8B5CF6]/30 transition-all duration-300"
-                >
-                  Contact Support
-                  <ArrowRight className="ml-2 lg:ml-3 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </section>
-
         {/* STATS SECTION - Mobile optimized */}
         <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
           <motion.div 
@@ -2149,7 +2085,47 @@ export default function AIContentGenerationPage() {
           </motion.div>
         </section>
 
-        {/* FINAL CTA - Mobile optimized */}
+        {/* FAQ SECTION - MOVED TO LAST SECTION BEFORE FOOTER */}
+        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            variants={containerVariants} 
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2 lg:mb-3">
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              </div>
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
+                Frequently Asked <span className="text-[#8B5CF6]">Questions</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to the most common questions about 360Airo's AI Email Generator and how it can transform your email outreach.
+              </p>
+            </motion.div>
+
+            <div className="space-y-4 lg:space-y-6">
+              {faqData.map((faq, index) => (
+                <div key={faq.id} id={faq.id}>
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                    isOpen={openFaq === faq.id}
+                    onClick={() => handleFaqClick(faq.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Additional FAQ Resources */}
+            
+          </motion.div>
+        </section>
+
+        {/* FINAL CTA - AFTER FAQ SECTION */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/20 via-[#19001d]/40 to-[#A855F7]/20" />
           <motion.div 
@@ -2204,4 +2180,4 @@ export default function AIContentGenerationPage() {
       </div>
     </>
   );
-}
+} 
