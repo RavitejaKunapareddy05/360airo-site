@@ -1,6 +1,6 @@
 'use client';
 
-import { motion ,AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Head from 'next/head';
@@ -46,7 +46,9 @@ import {
   MailOpen,
   UserCheck,
   CalendarDays,
-  Inbox
+  Inbox,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -105,6 +107,165 @@ const GlowCard = ({ children, className = '', ...props }: any) => {
       />
       {children}
     </div>
+  );
+};
+
+/* FAQ Item Component */
+const FAQItem = ({ faq, index, isMobile }: { faq: any, index: number, isMobile: boolean }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: index * 0.05 }}
+      className="cursor-pointer rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden hover:border-blue-500/50 transition-all duration-300"
+      whileHover={{ scale: isMobile ? 1.02 : 1.03 }}
+    >
+      <button
+        className="w-full text-left p-4 lg:p-6 flex items-center justify-between group"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <div className="flex items-start gap-3 lg:gap-4 flex-1">
+          <motion.div
+            className="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="text-white font-bold text-xs lg:text-sm">
+              Q
+            </div>
+          </motion.div>
+          <div className="flex-1">
+            <h3 className={`text-white font-bold mb-2 transition-colors group-hover:text-blue-400 ${isMobile ? 'text-base' : 'text-lg'}`}>
+              {faq.question}
+            </h3>
+          </div>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0 text-blue-400 ml-3"
+        >
+          {isOpen ? (
+            <ChevronUp className="w-5 h-5 lg:w-6 lg:h-6" />
+          ) : (
+            <ChevronDown className="w-5 h-5 lg:w-6 lg:h-6" />
+          )}
+        </motion.div>
+      </button>
+      
+      <motion.div
+        initial={false}
+        animate={{ 
+          height: isOpen ? 'auto' : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="overflow-hidden"
+      >
+        <div className="px-4 lg:px-6 pb-4 lg:pb-6 pt-0">
+          <motion.div
+            className="h-px bg-gradient-to-r from-blue-500/20 via-white/10 to-transparent mb-3 lg:mb-4"
+            initial={{ width: 0 }}
+            whileInView={{ width: '100%' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ delay: index * 0.05 + 0.1, duration: 0.4 }}
+          />
+          <p className={`text-white/80 leading-relaxed pl-9 lg:pl-12 ${isMobile ? 'text-sm' : 'text-base'}`}>
+            {faq.answer}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* FAQ Section Component */
+const FAQSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const faqs = [
+    {
+      question: "How do I use 360Airo's Prospect CRM to manage and track leads?",
+      answer: "Connect your leads into the Prospect CRM dashboard, where you can view full communication history, add notes and tags, segment leads by behavior or stage, and monitor engagement. Update statuses and trigger follow-ups directly within the CRM."
+    },
+    {
+      question: "What pricing plans are available for 360Airo's Prospect CRM?",
+      answer: "360Airo's pricing varies by plan tier and typically includes options that support core CRM features, multi-user access, advanced analytics, and integration capabilities. Detailed pricing is available on the 360Airo pricing page, where you can compare plans and features."
+    },
+    {
+      question: "What is the difference between a CRM and a lead management system?",
+      answer: "A CRM (Customer Relationship Management) system organizes and tracks all interactions with leads and customers. A lead management system focuses specifically on capturing, tracking, and nurturing new leads. 360Airo's Prospect CRM combines both, turning lead management into ongoing relationship tracking."
+    },
+    {
+      question: "What key features and functionalities does 360Airo's Prospect CRM offer?",
+      answer: "Core features include centralized lead tracking, communication timelines, tagging and segmentation, engagement metrics, assignment and ownership, workflow automation, and visibility across teams. The CRM also integrates with outreach tools to align conversations with campaign performance."
+    },
+    {
+      question: "Who should use 360Airo's Prospect CRM?",
+      answer: "Prospect CRM is ideal for early-stage SaaS teams, sales reps, sales managers, agencies, and growth teams that need structured lead tracking, automated workflows, and shared visibility into prospect interactions across outreach channels."
+    },
+    {
+      question: "Can 360Airo's Prospect CRM integrate with other tools and platforms?",
+      answer: "Yes. Prospect CRM can integrate with email systems, LinkedIn outreach tools, and other platforms (such as calendar and messaging tools). Integrated workflows help ensure updates and interactions sync across systems, reducing manual work."
+    },
+    {
+      question: "Can I automate lead progression, follow-ups, and workflow triggers in Prospect CRM?",
+      answer: "Yes. Prospect CRM supports workflow automation, letting you trigger actions like task reminders, sequence starts, and status changes based on lead behavior, timeline events, or campaign engagement."
+    },
+    {
+      question: "Is 360Airo's Prospect CRM suitable for startups, sales teams, and agencies?",
+      answer: "Yes. The CRM is designed to support a range of users, from founders and small teams to full sales organizations and agencies managing multiple clients, by providing visibility, structure, and collaboration tools."
+    },
+    {
+      question: "Can Prospect CRM automatically sync email and campaign activity with leads?",
+      answer: "Yes. Prospect CRM can automatically sync email activity and campaign engagement, ensuring lead records reflect the latest interactions and replies, so follow-ups and reporting remain accurate and up to date."
+    }
+  ];
+
+  return (
+    <motion.div 
+      className="max-w-4xl mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+    >
+      <div className="text-center mb-12 lg:mb-16">
+        <div className="inline-block mb-2">
+          <span className="text-blue-400 font-semibold text-xs lg:text-sm tracking-wider uppercase">Common Questions</span>
+        </div>
+        <h2 className={`${isMobile ? 'text-2xl' : 'text-3xl md:text-4xl'} font-bold text-white mb-3 lg:mb-4`}>
+          Prospect CRM <span className="text-blue-400">FAQs</span>
+        </h2>
+        <div className="flex items-center justify-center mb-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-blue-500/40 flex-1 max-w-8" />
+          <div className="mx-3 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+          <div className="h-px bg-gradient-to-r from-blue-500/40 via-white/20 to-transparent flex-1 max-w-8" />
+        </div>
+        <p className={`text-white/80 ${isMobile ? 'text-sm' : 'text-lg'}`}>
+          Everything you need to know about managing prospects and leads with 360Airo's CRM.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        {faqs.map((faq, index) => (
+          <FAQItem key={index} faq={faq} index={index} isMobile={isMobile} />
+        ))}
+      </div>
+    </motion.div>
   );
 };
 
@@ -674,7 +835,7 @@ const HeroSection = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="block transform-gpu"
                 >
-                   Prospect CRM for Smarter Relationships,
+                   Prospect CRM,Smarter Relationships,
                 </motion.span>
                 <motion.span
                   initial={{ opacity: 0, rotateX: -90 }}
@@ -816,7 +977,7 @@ export default function ProspectCRMPage() {
       features: [
         'Set behavior-based rules for lead progression and re-engagement',
         'Auto-update contact details and workflow triggers',
-        <>Maintain smooth communication handoffs within the <Link href="/features/unified-inbox" className="text-[#3B82F6] hover:text-white transition-colors duration-300 underline underline-offset-2">Unified Inbox</Link></>
+        'Maintain smooth communication handoffs within the Unified Inbox'
       ],
       color: 'from-green-500 to-emerald-400'
     },
@@ -1569,6 +1730,11 @@ export default function ProspectCRMPage() {
               </div>
             </motion.div>
           </motion.div>
+        </section>
+
+        {/* FAQ SECTION - Added before the final CTA */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 to-transparent">
+          <FAQSection />
         </section>
 
         {/* FINAL CTA - Mobile optimized */}
