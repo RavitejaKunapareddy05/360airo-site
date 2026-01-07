@@ -622,45 +622,6 @@ const FAQSection = () => {
           </motion.div>
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="mt-8 sm:mt-12 text-center"
-      >
-        <p className="text-white text-base sm:text-lg lg:text-xl font-light max-w-2xl mx-auto mb-6 sm:mb-8">
-          Still have questions? Our team is here to help you succeed with multichannel outreach.
-        </p>
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-block"
-        >
-          <Button 
-            size="lg" 
-            className="px-6 py-3 sm:px-8 sm:py-4 lg:px-10 lg:py-5 text-base sm:text-lg lg:text-xl font-bold rounded-xl shadow-xl border-0 relative overflow-hidden group"
-            style={{ background: COLORS.purpleLight }}
-            onClick={() => window.open('https://app.360airo.com/', '_blank')}
-          >
-            <motion.span
-              animate={{
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-              className="absolute inset-0 bg-white/20 rounded-xl"
-            />
-            <span className="relative z-10 flex items-center justify-center">
-              Start Your Free Trial
-              <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
-            </span>
-          </Button>
-        </motion.div>
-      </motion.div>
     </div>
   );
 };
@@ -741,7 +702,7 @@ export default function MultiChannelPage() {
                 >
                   <span className="text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center">
                     <Layers className="h-3 w-3 sm:h-4 w-4 mr-2" />
-                    Multi-Channel Platform
+                    Multi-Channel-Campaign
                   </span>
                 </div>
               </motion.div>
@@ -751,9 +712,9 @@ export default function MultiChannelPage() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight"
+                className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-black text-white leading-tight"
               >
-                <span className="block">Engage Smarter</span>
+                <span className="block">Engage Smarter </span>
                 <motion.span
                   style={{ color: COLORS.purpleLight }}
                   animate={{
@@ -768,7 +729,7 @@ export default function MultiChannelPage() {
                 >
                   Across Every
                 </motion.span>
-                <span className="block">Channel</span>
+                <span className="block">Multi Channel Campaign</span>
               </motion.h1>
 
               <motion.p
