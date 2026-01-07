@@ -562,7 +562,7 @@ export default function DomainsEmailsPage() {
                         ],
                       }}
                       transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/30 via-[#6366F1]/20 to-[#8B5CF6]/30 rounded-full blur-lg"
+                      className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/10 via-[#6366F1]/20 to-[#8B5CF6]/30 rounded-full blur-lg"
                     />
                     <span className="relative inline-flex items-center px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-[#3B82F6]/50 text-white font-semibold text-xs sm:text-sm">
                       <motion.div
