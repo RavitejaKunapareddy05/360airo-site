@@ -35,7 +35,25 @@ import {
   Target as TargetIcon,
   LineChart as LineChartIcon,
   MailCheck,
-  Settings
+  Settings,
+  Send,
+  Workflow,
+  Layout,
+  Palette,
+  Sliders,
+  User,
+  Bot,
+  Award,
+  Server,
+  Database,
+  Cloud,
+  ExternalLink,
+  Play,
+  Rocket,
+  BarChart,
+  Shield as ShieldIcon,
+  Grid as GridIcon,
+  Check
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -189,8 +207,8 @@ const AnalyticsDashboard = () => {
         >
           <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
         </motion.div>
-        <h3 className="text-base sm:text-lg font-bold text-white mb-1">Analytics Dashboard</h3>
-        <p className="text-white/60 text-xs sm:text-sm">Real-time performance insights</p>
+        <h3 className="text-base sm:text-lg font-bold text-white mb-1">Campaign Analytics Dashboard</h3>
+        <p className="text-white/60 text-xs sm:text-sm">Real-time campaign performance</p>
       </div>
 
       {/* Main Dashboard */}
@@ -231,7 +249,7 @@ const AnalyticsDashboard = () => {
           {/* Clean Chart Visualization */}
           <div className="mb-3 sm:mb-4">
             <div className="flex items-center justify-between mb-2 sm:mb-3">
-              <h4 className="text-xs sm:text-sm font-semibold text-white">Performance Trends</h4>
+              <h4 className="text-xs sm:text-sm font-semibold text-white">Campaign Performance</h4>
               <button
                 onClick={triggerAnimation}
                 className="text-xs text-[#A855F7] hover:text-white transition-colors"
@@ -346,32 +364,32 @@ const itemVariants: Variants = {
 
 const features = [
   {
-    icon: BarChart3,
-    title: 'Precision Data',
-    description: 'Every interaction is logged, analyzed, and visualized with complete accuracy.',
+    icon: Send,
+    title: 'Create Campaigns',
+    description: 'Plan, launch, and manage high-impact email campaigns from one platform.',
     color: 'from-[#8B5CF6] to-[#7C3AED]',
-    stat: '99.9% Accurate'
+    stat: '5,000+ Campaigns'
   },
   {
-    icon: Brain,
-    title: 'Actionable Insights',
-    description: 'Move from awareness to improvement with one-click, AI-backed recommendations.',
+    icon: Workflow,
+    title: 'Automate Workflows',
+    description: 'Build automated sequences for onboarding, nurturing, and follow-ups.',
     color: 'from-[#7C3AED] to-[#A855F7]',
-    stat: 'AI-backed'
+    stat: '12M+ Actions'
   },
   {
-    icon: Users,
-    title: 'Team Collaboration',
-    description: 'Share results instantly across marketing and sales teams to keep everyone aligned.',
+    icon: Layout,
+    title: 'Visual Builder',
+    description: 'Design professional emails without technical expertise.',
     color: 'from-[#A855F7] to-[#C084FC]',
-    stat: 'Instant Sharing'
+    stat: '500+ Templates'
   },
   {
-    icon: TrendingUp,
-    title: 'Continuous Optimization',
-    description: 'Use insights to fine-tune your next outreach campaign automatically.',
+    icon: Filter,
+    title: 'Smart Segmentation',
+    description: 'Divide contacts based on behavior and engagement history.',
     color: 'from-[#C084FC] to-[#8B5CF6]',
-    stat: 'Auto-Optimize'
+    stat: '98% Accuracy'
   },
 ];
 
@@ -379,7 +397,7 @@ const insights = [
   {
     icon: Eye,
     title: 'Track Engagement',
-    description: 'Track open and click rates to gauge engagement',
+    description: 'Track open and click rates to gauge campaign performance',
     metric: '42.8%',
     trend: '+8.2%'
   },
@@ -409,12 +427,12 @@ const insights = [
 const visualizations = [
   {
     icon: LineChart,
-    title: 'Visual Trend Graphs',
+    title: 'Campaign Trends',
     description: 'Track success at a glance with visual trend graphs'
   },
   {
     icon: PieChart,
-    title: 'Real-time Engagement Charts',
+    title: 'Engagement Charts',
     description: 'Monitor audience interaction with real-time engagement charts'
   },
   {
@@ -424,7 +442,7 @@ const visualizations = [
   },
   {
     icon: Globe,
-    title: 'Complete Campaign Tracking',
+    title: 'Complete Tracking',
     description: 'Complete email campaign tracking across all campaigns'
   }
 ];
@@ -464,7 +482,7 @@ const faqs = [
   }
 ];
 
-export default function ReportsAnalyticsPage() {
+export default function EmailCampaignPage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const handleFaqClick = (index: number) => {
@@ -474,35 +492,35 @@ export default function ReportsAnalyticsPage() {
   return (
     <>
       <Head>
-        <title>Email Campaign Analytics Dashboard - Turn Every Email Into Insight | 360Airo</title>
+        <title>Email Campaign - Create, Automate & Optimize High-Performing Campaigns | 360Airo</title>
         <meta 
           name="description" 
-          content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." 
+          content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." 
         />
         <meta 
           name="keywords" 
-          content="email campaign analytics, campaign analytics dashboard, email deliverability, campaign performance, outreach analytics, cold email analytics" 
+          content="email campaign software, email marketing campaigns, campaign management, email automation, email segmentation, campaign analytics" 
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/report-analytics" />
+        <link rel="canonical" href="https://360airo.com/features/email-campaign" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Email Campaign Analytics Dashboard - Turn Every Email Into Insight" />
-        <meta property="og:description" content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." />
-        <meta property="og:url" content="https://360airo.com/features/report-analytics" />
+        <meta property="og:title" content="Email Campaign - Create, Automate & Optimize High-Performing Campaigns" />
+        <meta property="og:description" content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." />
+        <meta property="og:url" content="https://360airo.com/features/email-campaign" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-reports-analytics.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-email-campaign.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Email Campaign Analytics Dashboard - Turn Every Email Into Insight | 360Airo" />
-        <meta name="twitter:description" content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-reports-analytics.jpg" />
+        <meta name="twitter:title" content="Email Campaign - Create, Automate & Optimize High-Performing Campaigns | 360Airo" />
+        <meta name="twitter:description" content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-email-campaign.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -518,9 +536,9 @@ export default function ReportsAnalyticsPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo Email Campaign Analytics Dashboard",
-              "description": "Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability.",
-              "url": "https://360airo.com/features/report-analytics",
+              "name": "360Airo Email Campaign Software",
+              "description": "Advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns.",
+              "url": "https://360airo.com/features/email-campaign",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -532,11 +550,12 @@ export default function ReportsAnalyticsPage() {
                 "availability": "https://schema.org/OnlineOnly"
               },
               "featureList": [
-                "Email campaign analytics dashboard",
-                "Campaign performance reporting",
-                "Email deliverability insights",
-                "Real-time engagement tracking",
-                "Cold email analytics"
+                "Email campaign creation and management",
+                "Automated email sequences",
+                "Visual email builder",
+                "Advanced audience segmentation",
+                "Campaign analytics and tracking",
+                "High deliverability tools"
               ]
             })
           }}
@@ -545,13 +564,13 @@ export default function ReportsAnalyticsPage() {
 
       {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/report-analytics">360Airo Email Campaign Analytics</a>
+        <a rel="canonical" href="https://360airo.com/features/email-campaign">360Airo Email Campaign Software</a>
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
         <Navbar />
 
-        {/* HERO SECTION */}
+        {/* HERO SECTION - UPDATED CONTENT */}
         <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -603,7 +622,7 @@ export default function ReportsAnalyticsPage() {
             className="max-w-7xl mx-auto relative z-10 w-full"
           >
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-screen py-16 sm:py-20">
-              {/* LEFT CONTENT */}
+              {/* LEFT CONTENT - UPDATED */}
               <div className="space-y-6 sm:space-y-8">
                 <motion.div
                   initial={{ opacity: 0, y: 40 }}
@@ -631,9 +650,9 @@ export default function ReportsAnalyticsPage() {
                         transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
                         className="mr-2 sm:mr-3"
                       >
-                        <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7]" />
+                        <Send className="h-4 w-4 sm:h-5 sm:w-5 text-[#A855F7]" />
                       </motion.div>
-                      <span>Email Campaign Analytics</span>
+                      <span>Email Campaign Software</span>
                     </span>
                   </div>
                 </motion.div>
@@ -651,7 +670,7 @@ export default function ReportsAnalyticsPage() {
                       transition={{ delay: 0.7, duration: 0.6 }}
                       className="block"
                     >
-                      Email Campaign Analytics
+                      Email Campaign
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -659,7 +678,7 @@ export default function ReportsAnalyticsPage() {
                       transition={{ delay: 0.9, duration: 0.6 }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent"
                     >
-                      Turn Every Email Into Insight
+                      Create, Automate, Optimize
                     </motion.span>
                   </motion.h1>
 
@@ -689,14 +708,13 @@ export default function ReportsAnalyticsPage() {
                       transition={{ duration: 4, repeat: Infinity }}
                       className="font-semibold"
                     >
-                      Measure What Matters.
+                      High-Performing Campaigns.
                     </motion.span>{' '}
-                    Improve What Works.
+                    Consistent Results.
                   </h2>
                   <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-                    When it comes to outreach, guessing is not a strategy.
-                    360Airo's Email campaign analytics dashboard transforms your campaign data into clear, actionable insights — helping you optimize performance, improve email deliverability, and make smarter decisions with every send.
-                    For increased inbox reach, pair it with our Email Warmup feature.
+                    360Airo is an advanced email campaign software built to help businesses plan, launch, and manage high-impact email marketing campaigns from one centralized platform. Whether you're running promotional emails, lead nurturing sequences, or automated follow-ups, our email campaign management software ensures every message reaches the right audience at the right time.
+                    Designed for scalability and performance, 360Airo helps marketing and sales teams turn emails into a consistent revenue-generating channel.
                   </p>
                 </motion.div>
 
@@ -726,7 +744,7 @@ export default function ReportsAnalyticsPage() {
                       className="relative bg-transparent text-[#480056] px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg font-bold rounded-xl sm:rounded-2xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl w-full"
                       onClick={() => window.open('https://app.360airo.com/', '_blank')}
                     >
-                      <span>Explore Email Campaign Analytics</span>
+                      <span>Start Your Campaign</span>
                       <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>
@@ -746,7 +764,7 @@ export default function ReportsAnalyticsPage() {
           </motion.div>
         </section>
 
-        {/* UNDERSTAND THE STORY BEHIND EVERY SEND SECTION */}
+        {/* RUN SMARTER EMAIL MARKETING CAMPAIGNS SECTION - UPDATED */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -757,16 +775,17 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Understand Every Send</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Smarter Marketing</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Understand the Story Behind Every Send
+                Run Smarter Email Marketing Campaigns
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                Your email campaigns are talking — are you listening?
-                360Airo's advanced Email campaign reporting gives you a complete view of your outreach performance, helping you uncover what resonates with your audience and what needs refinement.
-                All insights are structured into a clear Email campaign performance report that guides better decision-making.
+                Successful email marketing campaigns are not about sending more emails—they're about sending relevant ones. 360Airo enables you to manage your entire email campaign workflow, from audience segmentation to automation and analytics, without switching between tools.
+              </p>
+              <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed mt-4">
+                With a unified dashboard, you can create targeted campaigns, automate repetitive tasks, and maintain consistent communication across your customer journey.
               </p>
             </motion.div>
 
@@ -806,7 +825,7 @@ export default function ReportsAnalyticsPage() {
           </motion.div>
         </section>
 
-        {/* REAL-TIME INSIGHTS, SMARTER OUTREACH SECTION */}
+        {/* POWERFUL EMAIL CAMPAIGN MANAGEMENT SECTION - UPDATED */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -817,22 +836,24 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Real-time Analytics</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Unified Platform</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Real-Time Insights, <span className="text-[#8B5CF6]">Smarter Outreach</span>
+                Powerful Email Campaign Management in One Platform
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                With 360Airo's live email analytics tool, every metric updates instantly — giving you the visibility to react when it matters most.
-                Spot deliverability issues before they slow your campaign, analyze cold email analytics, and continuously improve using data-driven decisions.
-                Scale your multi-platform outreach even further with LinkedIn Automation and AI Automation.
+                Managing multiple email campaigns can quickly become complex. 360Airo simplifies email campaign management by giving you full visibility into campaign performance, audience engagement, and deliverability.
+                From draft to deployment, every stage of your email marketing campaign is organized, trackable, and optimized for better results.
+              </p>
+              <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed mt-4">
+                Try out our <Link href="/features/ai-email-generator" className="text-[#A855F7] hover:text-white hover:underline transition-all">AI Email Generator</Link> for better responses from your prospective clients.
               </p>
             </motion.div>
           </motion.div>
         </section>
 
-        {/* YOUR DATA, VISUALIZED BEAUTIFULLY SECTION */}
+        {/* DESIGN EMAILS SECTION - UPDATED */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
@@ -843,15 +864,15 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Beautiful Data Visualization</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Email Design</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                Your Data, <span className="text-[#8B5CF6]">Visualized Beautifully</span>
+                Design Emails That Drive Engagement
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                No spreadsheets. No confusion. Just clarity.
-                360Airo's performance visualization dashboard presents your data through clean graphs and trends — letting you focus on strategy, not sorting numbers.
+                Create visually appealing and responsive emails without technical expertise. 360Airo's intuitive email builder allows you to design professional emails that look great across devices and inboxes.
+                Maintain brand consistency, test different layouts, and launch campaigns faster using flexible templates built for modern email marketing software needs.
               </p>
             </motion.div>
 
@@ -882,23 +903,107 @@ export default function ReportsAnalyticsPage() {
               ))}
             </div>
 
-            {/* Additional text */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-12 text-center"
-            >
-              <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-4xl mx-auto leading-relaxed">
-                Track success at a glance with visual trend graphs, real-time engagement charts, deliverability insights, and complete email campaign tracking across all campaigns.
-                All powered by a sleek, intuitive Email marketing analytics tool built for speed and clarity. For better email content creation, try our <Link href="/features/ai-email-generator" className="text-[#A855F7] hover:text-white hover:underline transition-all">AI email generator</Link> to get better responses from your prospective clients.
-              </p>
-            </motion.div>
+            {/* Additional content sections */}
+            <div className="mt-12 space-y-8">
+              {/* Segmentation Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Advanced Audience Segmentation for Targeted Campaigns</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  Relevance drives results. With advanced segmentation, 360Airo allows you to divide your contact lists based on behavior, demographics, engagement history, and custom attributes.
+                  This ensures your email campaigns reach highly targeted audiences, improving open rates, click-through rates, and overall campaign effectiveness.
+                </p>
+                <div className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10">
+                  <p className="text-white/70 text-sm italic">
+                    "Tracking your Email Campaign Analytics gives you a better idea of how effective your emails are. Once you've understood, you can tweak and make changes to your strategies accordingly."
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Personalization Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Personalized Email Campaigns at Scale</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  Modern customers expect personalization. 360Airo enables you to create personalized email campaigns using dynamic content, tailored subject lines, and behavior-based triggers.
+                  Send one-to-one experiences at scale with data-driven personalization that strengthens relationships and increases conversions.
+                </p>
+              </motion.div>
+
+              {/* Automation Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Automated Email Campaigns That Convert</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  Automation is at the core of scalable email marketing. With 360Airo's email automation software, you can build and deploy automated email campaigns for onboarding, lead nurturing, follow-ups, re-engagement, and more.
+                  Set workflows once and let your email campaign software handle consistent communication—ensuring no lead or customer is missed.
+                </p>
+              </motion.div>
+
+              {/* Analytics Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Email Campaign Analytics and Performance Tracking</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  Measure what matters with real-time email campaign analytics. Track open rates, click-through rates, bounce rates, conversions, and unsubscribe trends from a single dashboard.
+                  These insights help you refine messaging, optimize timing, and continuously improve your email marketing campaign performance.
+                </p>
+              </motion.div>
+
+              {/* Deliverability Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">High Deliverability and Compliance-Ready Email Campaigns</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  Protect your sender reputation with built-in best practices for email deliverability. 360Airo supports list hygiene, opt-in management, and unsubscribe handling to ensure compliance with email regulations.
+                  This helps your bulk email campaigns land in inboxes—not spam folders.
+                </p>
+              </motion.div>
+
+              {/* Integration Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">Seamless Integration with Your Marketing Ecosystem</h3>
+                <p className="text-white/80 text-base leading-relaxed">
+                  360Airo integrates seamlessly with your lead management software, Prospect CRM, and multichannel outreach tools. Connect email campaigns with sales pipelines and customer data for a unified engagement strategy.
+                  Run consistent campaigns across email, WhatsApp, SMS, and other channels from one platform.
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
         </section>
 
-        {/* WHY 360AIRO EMAIL CAMPAIGN ANALYTICS SECTION */}
+        {/* WHO SHOULD USE SECTION - UPDATED */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
@@ -909,16 +1014,75 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
               <div className="inline-block mb-3 sm:mb-4">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Why 360Airo Email Campaign Analytics</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Target Audience</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                From Data to <span className="text-[#8B5CF6]">Decisions</span>
+                Who Should Use 360Airo's Email Campaign Software?
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
-                Numbers alone don't drive growth — clarity does.
-                With 360Airo's <Link href="/features/email-campaign-analytics" className="text-[#A855F7] hover:text-white hover:underline transition-all">email campaigns analytics</Link> and engagement reports, you don't just track performance; you understand the why behind it.
-                Test new strategies, refine your messaging, and scale winning campaigns with confidence.
+                This email campaign software is ideal for:
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+                <ul className="space-y-4">
+                  {[
+                    "Marketing teams running large-scale email marketing campaigns",
+                    "Sales teams using email for lead nurturing and follow-ups",
+                    "Startups and SMBs scaling outreach efficiently",
+                    "Enterprises managing complex audience segments"
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <CheckCircle2 className="h-5 w-5 text-[#A855F7] mt-0.5 mr-3 flex-shrink-0" />
+                      <span className="text-white/80">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 border border-[#8B5CF6]/20 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4">Why Choose 360Airo for Email Campaigns?</h3>
+                <p className="text-white/80 mb-4">
+                  360Airo combines automation, personalization, analytics, and scalability into one powerful email marketing software. Instead of juggling multiple tools, you get a unified platform that supports your entire email campaign management process.
+                </p>
+                <p className="text-white/80">
+                  From strategy to execution and optimization, 360Airo helps you drive measurable engagement and revenue growth.
+                </p>
+              </div>
+            </div>
+
+            {/* Final CTA Section */}
+            <div className="bg-gradient-to-r from-white/5 to-white/2 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">Launch High-Impact Email Campaigns with 360Airo</h3>
+              <p className="text-white/80 mb-6 max-w-3xl mx-auto">
+                Turn email into a predictable growth channel. With 360Airo's email campaign software, you can create targeted, automated, and data-driven email campaigns that deliver real business results.
+                Start your email marketing journey with 360Airo and take full control of your outreach strategy.
+              </p>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* FEATURES SECTION - UPDATED */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2 }} 
+            variants={containerVariants} 
+            className="max-w-6xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+              <div className="inline-block mb-3 sm:mb-4">
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">360Airo Features</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+                Everything You Need in <span className="text-[#8B5CF6]">One Platform</span>
+              </h2>
+              <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
+              <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
+                From campaign creation to performance optimization, 360Airo provides all the tools you need to succeed with email marketing.
               </p>
             </motion.div>
 
@@ -952,7 +1116,7 @@ export default function ReportsAnalyticsPage() {
           </motion.div>
         </section>
 
-        {/* START MEASURING WHAT MATTERS CTA SECTION */}
+        {/* START CREATING CAMPAIGNS CTA SECTION - UPDATED */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/20 via-[#19001d]/40 to-[#A855F7]/20" />
           <motion.div 
@@ -964,15 +1128,15 @@ export default function ReportsAnalyticsPage() {
           >
             <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8">
               <div className="inline-block">
-                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Start Measuring What Matters</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Ready to Launch</span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Stop guessing and start growing
+                Start Creating High-Impact Email Campaigns
               </h2>
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-                360Airo's Email campaign analytics gives you everything you need to see, learn, and act — all in one intuitive platform.
-                ✨ Transform data into decisions with intelligent analytics
+                360Airo gives you everything you need to create, automate, and optimize email campaigns—all in one intuitive platform.
+                ✨ Transform your outreach with powerful email campaign software
               </p>
               <div className="pt-2 sm:pt-4">
                 <motion.div 
@@ -986,7 +1150,7 @@ export default function ReportsAnalyticsPage() {
                     className="relative bg-white text-[#480056] hover:bg-transparent px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg lg:text-xl font-semibold rounded-xl sm:rounded-2xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20 w-full"
                     onClick={() => window.open('https://app.360airo.com/', '_blank')}
                   >
-                    Explore Email Campaign Analytics
+                    Start Your First Campaign
                     <ArrowRight className="ml-2 sm:ml-3 h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -1003,7 +1167,7 @@ export default function ReportsAnalyticsPage() {
           </motion.div>
         </section>
 
-        {/* FAQ SECTION */}
+        {/* FAQ SECTION - KEPT SAME */}
         <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
