@@ -26,13 +26,23 @@ import {
   Share2,
   Layers,
   Brain,
-  Sparkles
+  Sparkles,
+  ChevronDown,
+  ChevronUp,
+  MessageSquare,
+  Inbox,
+  Shield,
+  Target as TargetIcon,
+  LineChart as LineChartIcon,
+  MailCheck,
+  Settings
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 // Enhanced GlowCard with cursor-reactive glow
 const GlowCard = ({ children, className = '', ...props }: any) => {
@@ -72,6 +82,53 @@ const GlowCard = ({ children, className = '', ...props }: any) => {
       />
       {children}
     </div>
+  );
+};
+
+// FAQ Item Component
+const FAQItem = ({ question, answer, isOpen, onClick, index }: any) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="border-b border-white/10 last:border-b-0"
+    >
+      <button
+        onClick={onClick}
+        className="w-full py-6 text-left flex items-start justify-between hover:bg-white/5 transition-all duration-300 rounded-lg px-4"
+      >
+        <div className="flex items-start space-x-4">
+          <div className="mt-1">
+            {isOpen ? (
+              <ChevronUp className="h-5 w-5 text-[#8B5CF6]" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-white/50" />
+            )}
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-semibold text-white mb-2 text-left">{question}</h3>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-2">
+                    <div className="h-px bg-gradient-to-r from-[#8B5CF6]/30 to-transparent w-full mb-4" />
+                    <p className="text-white/70 text-base leading-relaxed">{answer}</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+      </button>
+    </motion.div>
   );
 };
 
@@ -372,7 +429,48 @@ const visualizations = [
   }
 ];
 
+const faqs = [
+  {
+    question: "What is an email campaign, and how does 360Airo automate it end-to-end?",
+    answer: "An email campaign is a structured outreach effort using planned emails and follow-ups. 360Airo automates campaign creation, scheduling, sequencing, tracking, and optimization from initial send to performance analysis."
+  },
+  {
+    question: "Who should use an email campaign tool for outreach and lead generation?",
+    answer: "Email campaign tools are ideal for sales teams, agencies, and SaaS businesses that rely on outbound outreach to generate leads, nurture prospects, and book meetings consistently at scale."
+  },
+  {
+    question: "How can email campaign software improve campaign performance and results?",
+    answer: "Email campaign software improves performance by ensuring consistent follow-ups, optimized timing, personalization, and visibility into engagement metrics, helping teams refine outreach instead of relying on manual guesswork."
+  },
+  {
+    question: "How does 360Airo ensure emails land in the inbox and not the spam folder?",
+    answer: "360Airo protects inbox placement through controlled sending, email warmup, engagement monitoring, and deliverability-focused workflows that help maintain sender reputation and reduce spam-related risks."
+  },
+  {
+    question: "How do email campaigns help increase replies, meetings, and conversions?",
+    answer: "Email campaigns create structured, repeated touchpoints that build familiarity and trust. Timely follow-ups and relevant messaging increase response rates, leading to more conversations, meetings, and conversions."
+  },
+  {
+    question: "How can your email campaign analytics help optimize future campaigns?",
+    answer: "Email campaign analytics reveal what messaging, timing, and sequences perform best. Teams use these insights to adjust future campaigns, improve reply rates, and make data-driven outreach decisions."
+  },
+  {
+    question: "Can I run cold email campaigns safely using 360Airo?",
+    answer: "Yes. 360Airo enables safe cold email campaigns through email warmup, pacing controls, engagement tracking, and deliverability monitoring, reducing the risk of spam placement or sender reputation damage."
+  },
+  {
+    question: "How many emails can be safely sent per day in an email campaign?",
+    answer: "Safe daily sending limits depend on domain reputation and warmup status. 360Airo helps manage volume gradually, ensuring campaigns scale responsibly without triggering spam filters."
+  }
+];
+
 export default function ReportsAnalyticsPage() {
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const handleFaqClick = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
   return (
     <>
       <Head>
@@ -794,7 +892,7 @@ export default function ReportsAnalyticsPage() {
             >
               <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-4xl mx-auto leading-relaxed">
                 Track success at a glance with visual trend graphs, real-time engagement charts, deliverability insights, and complete email campaign tracking across all campaigns.
-                All powered by a sleek, intuitive Email marketing analytics tool built for speed and clarity.
+                All powered by a sleek, intuitive Email marketing analytics tool built for speed and clarity. For better email content creation, try our <Link href="/features/ai-email-generator" className="text-[#A855F7] hover:text-white hover:underline transition-all">AI email generator</Link> to get better responses from your prospective clients.
               </p>
             </motion.div>
           </motion.div>
@@ -819,7 +917,7 @@ export default function ReportsAnalyticsPage() {
               <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
               <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-4xl mx-auto leading-relaxed">
                 Numbers alone don't drive growth — clarity does.
-                With 360Airo's campaign analytics and engagement reports, you don't just track performance; you understand the why behind it.
+                With 360Airo's <Link href="/features/email-campaign-analytics" className="text-[#A855F7] hover:text-white hover:underline transition-all">email campaigns analytics</Link> and engagement reports, you don't just track performance; you understand the why behind it.
                 Test new strategies, refine your messaging, and scale winning campaigns with confidence.
               </p>
             </motion.div>
@@ -902,6 +1000,51 @@ export default function ReportsAnalyticsPage() {
                 style={{ maxWidth: '150px sm:200px' }}
               />
             </motion.div>
+          </motion.div>
+        </section>
+
+        {/* FAQ SECTION */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, amount: 0.2 }} 
+            variants={containerVariants} 
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+              <div className="inline-flex items-center justify-center mb-3 sm:mb-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] rounded-lg flex items-center justify-center mr-3">
+                  <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                </div>
+                <span className="text-[#8B5CF6] font-semibold text-xs sm:text-sm tracking-wider uppercase">Common Questions</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+                Frequently Asked <span className="text-[#8B5CF6]">Questions</span>
+              </h2>
+              <div className="h-1 bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent mx-auto mb-6 sm:mb-8" style={{ maxWidth: '150px sm:200px' }} />
+              <p className="text-base sm:text-lg lg:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+                Get answers to common questions about email campaigns, automation, deliverability, and how 360Airo helps you scale outreach safely and effectively.
+              </p>
+            </motion.div>
+
+            {/* FAQ Items */}
+            <GlowCard className="rounded-xl sm:rounded-2xl">
+              <div className="bg-gradient-to-br from-white/5 via-white/2 to-white/5 rounded-xl sm:rounded-2xl border border-white/10 p-4 sm:p-8 shadow-xl backdrop-blur-lg">
+                <div className="space-y-2">
+                  {faqs.map((faq, index) => (
+                    <FAQItem
+                      key={index}
+                      index={index}
+                      question={faq.question}
+                      answer={faq.answer}
+                      isOpen={openFaqIndex === index}
+                      onClick={() => handleFaqClick(index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </GlowCard>
           </motion.div>
         </section>
 
