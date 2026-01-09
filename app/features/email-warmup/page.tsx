@@ -407,11 +407,6 @@ const SectionDivider = ({ variant = 'center' }: { variant?: 'center' | 'left' | 
   );
 };
 
-/* Mobile optimized button handler */
-const handleCTAClick = () => {
-  window.open('https://app.360airo.com/', '_blank');
-};
-
 /* Internal Link Component */
 const InternalLink = ({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) => {
   return (
@@ -420,6 +415,59 @@ const InternalLink = ({ href, children, className = "" }: { href: string; childr
       className={`text-[#FF8A65] font-semibold hover:text-white transition-colors duration-300 underline underline-offset-2 ${className}`}
     >
       {children}
+    </Link>
+  );
+};
+
+/* Demo Button Component */
+const DemoButton = ({ isMobile, className = "" }: { isMobile: boolean; className?: string }) => {
+  return (
+    <Link href="/demo-form" className={className}>
+      <motion.div 
+        whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+        whileTap={{ scale: 0.95 }} 
+        className="group relative overflow-hidden rounded-xl cursor-pointer"
+      >
+        <motion.div
+          animate={{
+            background: [
+              'linear-gradient(45deg, #ffffff, #f8f9fa)',
+              'linear-gradient(45deg, #f8f9fa, #ffffff)',
+            ],
+          }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="absolute inset-0"
+        />
+        <Button 
+          size="lg" 
+          className="relative bg-transparent text-[#480056] w-full px-6 py-4 lg:px-8 lg:py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl"
+        >
+          <span>Start Free Trial</span>
+          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+        </Button>
+      </motion.div>
+    </Link>
+  );
+};
+
+/* Final CTA Demo Button Component */
+const FinalCTADemoButton = ({ isMobile, className = "" }: { isMobile: boolean; className?: string }) => {
+  return (
+    <Link href="/demo-form" className={className}>
+      <motion.div 
+        whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+        whileTap={{ scale: 0.95 }} 
+        className="group relative overflow-hidden rounded-xl cursor-pointer"
+      >
+        <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <Button 
+          size="lg" 
+          className="relative bg-white text-[#480056] hover:bg-transparent w-full px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-white border-2 border-transparent group-hover:border-white/20"
+        >
+          Start Free Trial
+          <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+        </Button>
+      </motion.div>
     </Link>
   );
 };
@@ -672,30 +720,7 @@ export default function EmailWarmupPage() {
                   transition={{ delay: 1.1, duration: 0.5 }}
                   className="flex flex-col sm:flex-row gap-3 lg:gap-4 pt-2"
                 >
-                  <motion.div 
-                    whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
-                    whileTap={{ scale: 0.95 }} 
-                    className="group relative overflow-hidden rounded-xl w-full sm:w-auto"
-                    onClick={handleCTAClick}
-                  >
-                    <motion.div
-                      animate={{
-                        background: [
-                          'linear-gradient(45deg, #ffffff, #f8f9fa)',
-                          'linear-gradient(45deg, #f8f9fa, #ffffff)',
-                        ],
-                      }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                      className="absolute inset-0"
-                    />
-                    <Button 
-                      size="lg" 
-                      className="relative bg-transparent text-[#480056] w-full sm:w-auto px-6 py-4 lg:px-8 lg:py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl"
-                    >
-                      <span>Get Started with Email Warmup</span>
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </motion.div>
+                  <DemoButton isMobile={isMobile} className="w-full sm:w-auto" />
                 </motion.div>
               </div>
 
@@ -1217,21 +1242,7 @@ export default function EmailWarmupPage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
-                <motion.div 
-                  whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
-                  whileTap={{ scale: 0.95 }} 
-                  className="group relative overflow-hidden rounded-xl w-full sm:w-auto"
-                  onClick={handleCTAClick}
-                >
-                  <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <Button 
-                    size="lg" 
-                    className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-purple border-2 border-transparent group-hover:border-white/20"
-                  >
-                    Get Started with Email Warmup
-                    <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </motion.div>
+                <FinalCTADemoButton isMobile={isMobile} className="w-full sm:w-auto" />
               </div>
               <motion.div
                 className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-4 lg:mt-6 mb-1 lg:mb-2"
