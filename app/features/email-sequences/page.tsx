@@ -1334,11 +1334,7 @@ export default function EmailSequencesPage() {
                     <ArrowRight className="ml-2 h-5 w-5 lg:h-6 lg:w-6 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Button>
-              </motion.div>
-
-              <p className="text-white/50 text-sm lg:text-base mt-4 lg:mt-6">
-                No credit card required • 14-day free trial • Cancel anytime
-              </p>
+             </motion.div>
             </motion.div>
           </div>
         </section>
