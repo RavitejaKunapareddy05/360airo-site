@@ -890,7 +890,7 @@ export default function EmailSequencesPage() {
                     className="flex items-center space-x-1.5 text-[#b45ecf] text-xs lg:text-sm"
                   >
                     <div className="w-1.5 h-1.5 bg-[#b45ecf] rounded-full animate-pulse" />
-                    <span>No credit card required</span>
+    
                   </motion.div>
                 </motion.div>
               </div>
