@@ -47,13 +47,6 @@ type CalendarDay = {
   available: boolean;
 };
 
-// Add missing Video icon component
-const Video = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-  </svg>
-);
-
 export default function DemoFormPage() {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -78,22 +71,6 @@ export default function DemoFormPage() {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
   const [selectedTimezone, setSelectedTimezone] = useState<'us' | 'india'>('us');
   const [tempFormData, setTempFormData] = useState<any>(null);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-
-  // Handle window resize for confetti
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    };
-    
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Generate calendar days for current month
   const generateCalendar = (date: Date) => {
@@ -286,7 +263,7 @@ export default function DemoFormPage() {
         day: 'numeric'
       });
       
-      const [hour] = selectedTime.split(':').map(Number);
+      const [hour, minute] = selectedTime.split(':').map(Number);
       const timeSlot = timeSlots.find(slot => {
         const [slotHour] = slot.value.split(':').map(Number);
         return slotHour === hour;
@@ -638,7 +615,7 @@ export default function DemoFormPage() {
                                   {selectedTimezone === 'us' ? slot.usFormatted.split(' ')[0] : slot.indiaFormatted.split(' ')[0]}
                                 </div>
                                 <div className="text-xs mt-1 text-white/70">
-                                  {selectedTimezone === 'us' ? slot.indiaFormatted : slot.usFormatted}
+                                  {selectedTimezone === 'us' ? slot.usFormatted : slot.indiaFormatted}
                                 </div>
                               </motion.button>
                             ))}
@@ -755,8 +732,8 @@ export default function DemoFormPage() {
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] relative overflow-hidden">
         {showConfetti && (
           <Confetti
-            width={windowSize.width}
-            height={windowSize.height}
+            width={window.innerWidth}
+            height={window.innerHeight}
             recycle={false}
             numberOfPieces={500}
             gravity={0.15}
@@ -923,8 +900,8 @@ export default function DemoFormPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
       {showConfetti && (
         <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
+          width={window.innerWidth}
+          height={window.innerHeight}
           recycle={false}
           numberOfPieces={500}
           gravity={0.15}
@@ -1186,3 +1163,10 @@ export default function DemoFormPage() {
     </div>
   );
 }
+
+// Add missing Video icon component
+const Video = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+  </svg>
+);
