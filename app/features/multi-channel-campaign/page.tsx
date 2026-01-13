@@ -941,7 +941,7 @@ export default function MultiChannelPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black mb-4 sm:mb-6"
-              style={{ color: COLORS.purpleDark }}
+              style={{ color: COLORS.purple }}
             >
               Track, Analyze, and Optimize Every Channel
             </motion.h2>
