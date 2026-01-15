@@ -5,7 +5,6 @@ import { ArrowRight, Calendar, Clock, User, Eye, Share2, BookOpen } from 'lucide
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
-
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
