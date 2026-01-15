@@ -61,20 +61,6 @@ const blogPosts = [
     views: "2.4K",
     tags: ["Cold Email", "Sales Tools", "Automation"]
   },
-  
-  {
-    id: 4,
-    title: "Email Marketing Metrics That Actually Matter in 2025",
-    excerpt: "Stop tracking vanity metrics. Here are the key performance indicators that truly impact your bottom line and how to optimize them.",
-    slug: "email-marketing-metrics-2025",
-    author: "David Park",
-    date: "October 12, 2025",
-    readTime: "9 min read",
-    category: "Email Marketing",
-    image: "https://images.unsplash.com/photo-1601379327927-c60e6f7d7c38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    views: "2.7K",
-    tags: ["Email Marketing", "Analytics", "ROI"]
-  }
 ];
 
 const categories = [
