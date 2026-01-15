@@ -5,6 +5,7 @@ import { ArrowRight, Calendar, Clock, User, Eye, Share2, BookOpen } from 'lucide
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -18,10 +19,24 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Enhanced blog data with proper images and categories - INCLUDING FREE EMAIL VERIFICATION
+// Enhanced blog data with proper images and categories - INCLUDING BOTH BLOG POSTS
 const blogPosts = [
   {
     id: 1,
+    title: "10 Cheapest Cold Email Software Tools for Startups & Agencies (2026 Guide)",
+    excerpt: "Cold email remains one of the most cost-effective growth channels for startups and agencies — but only if the tooling makes sense. Discover the 10 most affordable tools.",
+    slug: "cheapest-cold-email-software",
+    author: "360Airo Team",
+    date: "November 15, 2025",
+    readTime: "10 min read",
+    category: "Cold Email",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    featured: true,
+    views: "4.1K",
+    tags: ["Cold Email", "Software Tools", "Startups", "Agencies", "Budget"]
+  },
+  {
+    id: 2,
     title: "Free Email Verification: How to Verify Email Addresses for Free with 360Airo",
     excerpt: "Clean your email lists, protect sender reputation, and improve outreach results before sending a single email. Learn how 360Airo's free email verification works.",
     slug: "free-email-verification",
@@ -35,7 +50,7 @@ const blogPosts = [
     tags: ["Email Verification", "Email Deliverability", "Free Tools", "360Airo"]
   },
   {
-    id: 2,
+    id: 3,
     title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
     excerpt: "LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Learn the exact playbook that's generating 3x more meetings.",
     slug: "linkedin-outreach-strategy",
@@ -48,7 +63,7 @@ const blogPosts = [
     tags: ["LinkedIn", "Outreach", "B2B Sales"]
   },
   {
-    id: 3,
+    id: 4,
     title: "Top Cold Email Tools in 2025: Which One Actually Delivers Replies?",
     excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Discover the tools that actually get responses.",
     slug: "top-cold-email-tools",
@@ -118,7 +133,7 @@ export default function BlogsPage() {
           </motion.div>
         </section>
 
-        {/* Featured Blog Post - FREE EMAIL VERIFICATION */}
+        {/* Featured Blog Post - LATEST BLOG (10 Cheapest Cold Email Software) */}
         <section className="pb-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -132,9 +147,9 @@ export default function BlogsPage() {
                 <div className="space-y-6">
                   <div className="inline-flex items-center gap-2">
                     <div className="px-3 py-1 rounded-full bg-[#b45ecf]/20 text-[#b45ecf] text-sm font-medium">
-                      Featured Post
+                      Latest Post
                     </div>
-                    <div className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
+                    <div className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-400 text-sm font-medium border border-purple-500/30">
                       <div className="flex items-center gap-1">
                         <BookOpen className="h-3 w-3" />
                         <span>Guide</span>
@@ -178,7 +193,7 @@ export default function BlogsPage() {
                       whileTap={{ scale: 0.95 }}
                       className="group inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold transition-all shadow-lg shadow-[#b45ecf]/25"
                     >
-                      Read Free Email Verification Guide
+                      Read Cold Email Software Guide
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </motion.button>
                   </Link>
@@ -196,7 +211,7 @@ export default function BlogsPage() {
                   <div className="absolute bottom-4 left-4 right-4">
                     <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/10">
                       <p className="text-white text-sm font-medium">
-                        Master email verification to protect your sender reputation and improve deliverability
+                        Find affordable cold email software that supports deliverability without burning budget
                       </p>
                     </div>
                   </div>
@@ -206,7 +221,7 @@ export default function BlogsPage() {
           </div>
         </section>
 
-        {/* Blog Posts Grid - SHOW ALL POSTS INCLUDING FREE EMAIL VERIFICATION */}
+        {/* Blog Posts Grid - SHOW ALL POSTS */}
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.div
@@ -227,11 +242,11 @@ export default function BlogsPage() {
                     whileHover={{ y: -8, scale: 1.02 }}
                     className="group bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300 shadow-lg hover:shadow-[#b45ecf]/10"
                   >
-                    {/* Show Featured Badge for Free Email Verification post */}
+                    {/* Show Featured Badge for featured posts */}
                     {post.featured && (
                       <div className="absolute top-4 right-4 z-10">
                         <div className="px-2 py-1 bg-[#b45ecf]/20 text-[#b45ecf] text-xs font-medium rounded-full border border-[#b45ecf]/30">
-                          Featured
+                          {post.id === 1 ? "Latest" : "Featured"}
                         </div>
                       </div>
                     )}
@@ -300,7 +315,7 @@ export default function BlogsPage() {
                             whileTap={{ scale: 0.95 }}
                             className="group flex items-center gap-2 py-2 px-4 bg-white/10 hover:bg-[#b45ecf]/20 text-white rounded-lg text-sm font-medium transition-all"
                           >
-                            {post.featured ? "Read Guide" : "Read More"}
+                            Read {post.id === 1 ? "Guide" : "More"}
                             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                           </motion.button>
                         </Link>
