@@ -913,35 +913,35 @@ export default function AIContentGenerationPage() {
   return (
     <>
       <Head>
-        <title>AI Email Generator — Write Better Emails in Seconds | 360Airo</title>
+        <title>Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo</title>
         <meta 
           name="description" 
-          content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." 
+          content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." 
         />
         <meta 
           name="keywords" 
-          content="AI email generator, email generator AI, best AI email generator, email writer AI, AI email writing, generate emails, email content generation, 360Airo AI" 
+          content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" 
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/ai-email-generator" />
+        <link rel="canonical" href="https://360airo.com/features/email-warmup" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
-        <meta property="og:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." />
-        <meta property="og:url" content="https://360airo.com/features/ai-email-generator" />
+        <meta property="og:title" content="Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo" />
+        <meta property="og:description" content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." />
+        <meta property="og:url" content="https://360airo.com/features/email-warmup" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-ai-email-generator.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-email-warmup.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
-        <meta name="twitter:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-generator.jpg" />
+        <meta name="twitter:title" content="Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo" />
+        <meta name="twitter:description" content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-email-warmup.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -957,9 +957,9 @@ export default function AIContentGenerationPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo AI Email Generator",
-              "description": "Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals.",
-              "url": "https://360airo.com/features/ai-email-generator",
+              "name": "360Airo Email Warmup Tool",
+              "description": "Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach.",
+              "url": "https://360airo.com/features/email-warmup",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -970,16 +970,11 @@ export default function AIContentGenerationPage() {
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/OnlineOnly"
               },
-              "featureList": [
-                "AI-powered email generation",
-                "Personalized message creation",
-                "Cold outreach optimization",
-                "Follow-up automation",
-                "LinkedIn message generation",
-                "A/B testing variations",
-                "Tone consistency",
-                "Grammar and readability correction"
-              ]
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "1000"
+              }
             })
           }}
         />
@@ -987,7 +982,7 @@ export default function AIContentGenerationPage() {
 
       {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo AI Email Generator</a>
+        <a rel="canonical" href="https://360airo.com/features/email-warmup">360Airo Email Warmup Tool - Best Email Warmup Service</a>
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
