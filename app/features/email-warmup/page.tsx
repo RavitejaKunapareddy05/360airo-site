@@ -1286,7 +1286,6 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow - Mobile optimized */
@@ -1693,7 +1692,8 @@ export default function EmailWarmupPage() {
 
   return (
     <>
-      <Head>
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
         <title>Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo</title>
         <meta name="description" content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." />
         <meta name="keywords" content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" />
@@ -1724,36 +1724,7 @@ export default function EmailWarmupPage() {
         <meta name="theme-color" content="#FF6432" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
-        {/* Structured Data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "360Airo Email Warmup Tool",
-              "description": "Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach.",
-              "url": "https://360airo.com/features/email-warmup",
-              "brand": {
-                "@type": "Brand",
-                "name": "360Airo"
-              },
-              "offers": {
-                "@type": "Offer",
-                "url": "https://app.360airo.com/",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/OnlineOnly"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "1000"
-              }
-            })
-          }}
-        />
-      </Head>
+      </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
         
