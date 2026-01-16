@@ -1041,10 +1041,65 @@ export default function ProspectCRMPage() {
   return (
     <>
       <Head>
-        <title>Prospect CRM | 360Airo - Smarter Relationships, Stronger Conversions</title>
-        <meta name="description" content="Turn every lead into a meaningful connection with 360Airo's Prospect CRM. Manage, track, and nurture leads from first contact to conversion with intelligent automation." />
+        <title>Prospect CRM Software for Lead Management & Sales | 360Airo</title>
+        <meta name="description" content="360Airo's Prospect CRM helps you organize leads, monitor interactions, and automate workflows. Turn more prospects into customers with data-driven insights." />
         <meta name="keywords" content="prospect CRM, lead management, sales CRM, customer relationship management, lead tracking, sales automation" />
+        
+        {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/prospect-crm" />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content="Prospect CRM Software for Lead Management & Sales | 360Airo" />
+        <meta property="og:description" content="360Airo's Prospect CRM helps you organize leads, monitor interactions, and automate workflows. Turn more prospects into customers with data-driven insights." />
+        <meta property="og:url" content="https://360airo.com/features/prospect-crm" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="360Airo" />
+        <meta property="og:image" content="https://360airo.com/og-prospect-crm.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Prospect CRM Software for Lead Management & Sales | 360Airo" />
+        <meta name="twitter:description" content="360Airo's Prospect CRM helps you organize leads, monitor interactions, and automate workflows. Turn more prospects into customers with data-driven insights." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-prospect-crm.jpg" />
+        
+        {/* Additional SEO Meta Tags */}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#3B82F6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "360Airo Prospect CRM",
+              "description": "360Airo's Prospect CRM helps you organize leads, monitor interactions, and automate workflows. Turn more prospects into customers with data-driven insights.",
+              "url": "https://360airo.com/features/prospect-crm",
+              "brand": {
+                "@type": "Brand",
+                "name": "360Airo"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://app.360airo.com/",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/OnlineOnly"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "1000"
+              }
+            })
+          }}
+        />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950/50 to-slate-950 overflow-x-hidden">
@@ -1743,7 +1798,7 @@ export default function ProspectCRMPage() {
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
-            viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
+            viewport={{ once: true, margin: '-50px' }} 
             variants={containerVariants} 
             className="max-w-4xl mx-auto text-center relative z-10"
           >
