@@ -913,22 +913,22 @@ export default function AIContentGenerationPage() {
   return (
     <>
       <Head>
-        <title>AI Email Generator — Write Better Emails in Seconds | 360Airo</title>
+        <title>Free AI Email Generator for Cold Outreach & Sales | 360Airo</title>
         <meta 
           name="description" 
-          content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." 
+          content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." 
         />
         <meta 
           name="keywords" 
-          content="AI email generator, email generator AI, best AI email generator, email writer AI, AI email writing, generate emails, email content generation, 360Airo AI" 
+          content="AI email generator, email generator AI, best AI email generator, email writer AI, AI email writing, generate emails, email content generation, 360Airo AI, free AI email generator, cold email generator" 
         />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/ai-email-generator" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
-        <meta property="og:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals." />
+        <meta property="og:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta property="og:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
         <meta property="og:url" content="https://360airo.com/features/ai-email-generator" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -939,8 +939,8 @@ export default function AIContentGenerationPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Email Generator — Write Better Emails in Seconds | 360Airo" />
-        <meta name="twitter:description" content="Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator." />
+        <meta name="twitter:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta name="twitter:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
         <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-generator.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -957,8 +957,8 @@ export default function AIContentGenerationPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo AI Email Generator",
-              "description": "Craft clear, compelling, and high-performing emails instantly with 360Airo's AI email generator. Create polished, professional messages tailored to your prospects and goals.",
+              "name": "360Airo Free AI Email Generator",
+              "description": "Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.",
               "url": "https://360airo.com/features/ai-email-generator",
               "brand": {
                 "@type": "Brand",
@@ -968,17 +968,19 @@ export default function AIContentGenerationPage() {
                 "@type": "Offer",
                 "url": "https://app.360airo.com/",
                 "priceCurrency": "USD",
-                "availability": "https://schema.org/OnlineOnly"
+                "price": "0",
+                "availability": "https://schema.org/OnlineOnly",
+                "priceValidUntil": "2025-12-31"
               },
               "featureList": [
-                "AI-powered email generation",
-                "Personalized message creation",
+                "Free AI-powered email generation",
+                "Personalized cold email creation",
+                "Follow-up message generation",
+                "LinkedIn message creation",
                 "Cold outreach optimization",
-                "Follow-up automation",
-                "LinkedIn message generation",
-                "A/B testing variations",
-                "Tone consistency",
-                "Grammar and readability correction"
+                "Time-saving automation",
+                "Scale outreach effortlessly",
+                "Boost reply rates"
               ]
             })
           }}
@@ -987,7 +989,7 @@ export default function AIContentGenerationPage() {
 
       {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo AI Email Generator</a>
+        <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo Free AI Email Generator</a>
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
@@ -1078,7 +1080,7 @@ export default function AIContentGenerationPage() {
                       >
                         <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 text-[#A855F7]" />
                       </motion.div>
-                      <span>AI Email Generator</span>
+                      <span>Free AI Email Generator</span>
                     </span>
                   </div>
                 </motion.div>
@@ -1096,7 +1098,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.5, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Craft Clear, Compelling,
+                      Free AI Email Generator
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -1104,7 +1106,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.6, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      and High-Performing
+                      for Cold Outreach &
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, scale: 0.7 }}
@@ -1112,7 +1114,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-5xl"
                     >
-                     AI Emails Generator.
+                     Sales.
                     </motion.span>
                   </motion.h1>
 
@@ -1137,7 +1139,7 @@ export default function AIContentGenerationPage() {
                   className="space-y-4 lg:space-y-5 max-w-xl"
                 >
                   <p className="text-base lg:text-lg text-white/90 leading-relaxed font-light">
-                    360Airo's AI email generator helps you create polished, professional messages tailored to your prospects, your campaigns, and your goals. Whether you're drafting cold outreach, follow-ups, LinkedIn messages, or nurture flows, it delivers ready-to-send copy that boosts engagement and saves hours of manual writing.
+                    Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.
                   </p>
                   <p className="text-sm lg:text-base text-white/75 leading-relaxed">
                     Build stronger outreach with messaging optimized for tone, clarity, and conversion — all from one intuitive workspace.
@@ -1170,7 +1172,7 @@ export default function AIContentGenerationPage() {
                       size="lg" 
                       className="relative bg-transparent text-[#480056] w-full sm:w-auto px-6 py-4 lg:px-8 lg:py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl"
                     >
-                      <span>Generate Better Emails Instantly →</span>
+                      <span>Generate Free AI Emails Instantly →</span>
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>
@@ -1198,13 +1200,13 @@ export default function AIContentGenerationPage() {
                             <Brain className="h-6 w-6 text-white" />
                           </motion.div>
                           <div>
-                            <h3 className="text-xl font-bold text-white">AI Email Generator</h3>
-                            <p className="text-sm text-white/60">Creating personalized emails</p>
+                            <h3 className="text-xl font-bold text-white">Free AI Email Generator</h3>
+                            <p className="text-sm text-white/60">Creating personalized emails for free</p>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-xs text-green-400">Active</span>
+                          <span className="text-xs text-green-400">Free to Use</span>
                         </div>
                       </div>
 
@@ -1215,8 +1217,8 @@ export default function AIContentGenerationPage() {
                             <div className="text-sm text-white font-medium">Cold Outreach</div>
                           </div>
                           <div className="bg-white/5 rounded-lg p-3">
-                            <div className="text-xs text-white/60 mb-1">Tone</div>
-                            <div className="text-sm text-white font-medium">Professional</div>
+                            <div className="text-xs text-white/60 mb-1">Cost</div>
+                            <div className="text-sm text-green-400 font-medium">FREE</div>
                           </div>
                         </div>
 
@@ -1243,12 +1245,12 @@ export default function AIContentGenerationPage() {
                             <div className="text-sm font-bold text-white">90%</div>
                           </div>
                           <div className="bg-[#A855F7]/10 rounded-lg p-2">
-                            <div className="text-xs text-white/60">Engagement</div>
+                            <div className="text-xs text-white/60">Reply Rate</div>
                             <div className="text-sm font-bold text-white">3x Higher</div>
                           </div>
-                          <div className="bg-[#C084FC]/10 rounded-lg p-2">
-                            <div className="text-xs text-white/60">Quality</div>
-                            <div className="text-sm font-bold text-white">94/100</div>
+                          <div className="bg-green-500/10 rounded-lg p-2">
+                            <div className="text-xs text-white/60">Price</div>
+                            <div className="text-sm font-bold text-green-400">FREE</div>
                           </div>
                         </div>
                       </div>
@@ -1280,10 +1282,10 @@ export default function AIContentGenerationPage() {
                   <PenTool className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                 </motion.div>
                 <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
-                  Generate Emails That Persuade
+                  Generate Emails That Persuade - For Free
                 </h3>
                 <p className="text-white/80 text-base lg:text-lg leading-relaxed">
-                  Writing outreach shouldn't slow you down. With 360Airo's email generator, you can create high-quality messages that feel personal, relevant, and aligned to each lead's context across your entire workflow.
+                  Writing outreach shouldn't slow you down. With 360Airo's free email generator, you can create high-quality messages that feel personal, relevant, and aligned to each lead's context across your entire workflow.
                 </p>
                 
                 <div className="space-y-3">
@@ -1311,7 +1313,7 @@ export default function AIContentGenerationPage() {
                       </li>
                     </ul>
                     <p className="text-white font-medium text-sm lg:text-base mt-4">
-                      Your team sends better emails — faster — without compromising personalization or quality.
+                      Your team sends better emails — faster — without compromising personalization or quality. All for free.
                     </p>
                   </div>
                 </div>
@@ -1321,7 +1323,7 @@ export default function AIContentGenerationPage() {
                 <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#8B5CF6]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#8B5CF6]/50 group-hover:scale-105">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-white font-semibold text-lg">Email Generator Dashboard</div>
+                      <div className="text-white font-semibold text-lg">Free Email Generator Dashboard</div>
                       <div className="text-white/60 text-sm">Real-time AI Generation</div>
                     </div>
                     
@@ -1377,7 +1379,7 @@ export default function AIContentGenerationPage() {
                               <span className="text-white text-sm">{item.name}</span>
                             )}
                           </div>
-                          <div className="text-white/40 text-sm">✓ Integrated</div>
+                          <div className="text-green-400 text-sm font-semibold">FREE</div>
                         </motion.div>
                       ))}
                     </div>
@@ -1385,10 +1387,10 @@ export default function AIContentGenerationPage() {
                     <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 p-4 rounded-lg border border-[#8B5CF6]/20">
                       <div className="flex items-center space-x-2 mb-2">
                         <Brain className="h-4 w-4 text-[#8B5CF6]" />
-                        <span className="text-white font-semibold text-sm">AI Analysis Complete</span>
+                        <span className="text-white font-semibold text-sm">Free AI Analysis Complete</span>
                       </div>
                       <div className="text-white/80 text-sm">
-                        Ready to generate persuasive emails that convert at scale
+                        Ready to generate persuasive emails that convert at scale - completely free
                       </div>
                     </div>
                   </div>
@@ -1413,10 +1415,10 @@ export default function AIContentGenerationPage() {
                   <Brain className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                 </motion.div>
                 <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
-                  Smarter Writing with Email Generator AI
+                  Smarter Writing with Free Email Generator AI
                 </h3>
                 <p className="text-white/80 text-base lg:text-lg leading-relaxed">
-                  360Airo enhances your writing with advanced email generator AI capabilities that analyze tone, structure, and recipient behavior.
+                  360Airo enhances your writing with advanced free email generator AI capabilities that analyze tone, structure, and recipient behavior - no cost required.
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1440,7 +1442,7 @@ export default function AIContentGenerationPage() {
                 
                 <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#C084FC]/10 p-4 rounded-xl border border-[#A855F7]/20">
                   <p className="text-white/80 text-sm lg:text-base">
-                    Perfect for SDRs, marketers, customer success teams, and founders who need polished emails without endless editing.
+                    Perfect for SDRs, marketers, customer success teams, and founders who need polished emails without endless editing - completely free.
                   </p>
                 </div>
               </div>
@@ -1449,8 +1451,8 @@ export default function AIContentGenerationPage() {
                 <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#A855F7]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#A855F7]/50 group-hover:scale-105">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-white font-semibold text-lg">AI Writing Assistant</div>
-                      <div className="text-white/60 text-sm">Real-time Optimization</div>
+                      <div className="text-white font-semibold text-lg">Free AI Writing Assistant</div>
+                      <div className="text-green-400 font-semibold text-sm">FREE</div>
                     </div>
                     
                     <div className="space-y-4">
@@ -1472,9 +1474,9 @@ export default function AIContentGenerationPage() {
                       </div>
                       
                       <div className="bg-gradient-to-r from-[#A855F7]/10 to-[#C084FC]/10 p-4 rounded-lg border border-[#A855F7]/20">
-                        <div className="text-xs text-[#A855F7] mb-2">AI-Enhanced Version</div>
+                        <div className="text-xs text-[#A855F7] mb-2">Free AI-Enhanced Version</div>
                         <div className="text-sm text-white font-semibold">
-                          "Our AI email generator can increase your outreach engagement by 85% while saving 90% on content creation time"
+                          "Our free AI email generator can increase your outreach engagement by 85% while saving 90% on content creation time"
                         </div>
                       </div>
                     </div>
@@ -1489,8 +1491,8 @@ export default function AIContentGenerationPage() {
                         <div className="text-sm font-bold text-[#A855F7]">94%</div>
                       </div>
                       <div className="space-y-1">
-                        <div className="text-xs text-white/60">Readability</div>
-                        <div className="text-sm font-bold text-yellow-400">A+</div>
+                        <div className="text-xs text-white/60">Cost</div>
+                        <div className="text-sm font-bold text-green-400">FREE</div>
                       </div>
                     </div>
                   </div>
@@ -1515,10 +1517,10 @@ export default function AIContentGenerationPage() {
                   <Zap className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                 </motion.div>
                 <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
-                  Scale Outreach with the Best AI Email Generator Tools
+                  Scale Outreach with Free AI Email Generator
                 </h3>
                 <p className="text-white/80 text-base lg:text-lg leading-relaxed">
-                  Whether you're reaching cold leads, nurturing warm contacts, or delivering onboarding messages, the system helps you produce consistent, effective communication at scale. Ideal for organizations looking for the best AI email generator to streamline their daily workflow.
+                  Whether you're reaching cold leads, nurturing warm contacts, or delivering onboarding messages, our free system helps you produce consistent, effective communication at scale. Ideal for organizations looking for the best free AI email generator to streamline their daily workflow.
                 </p>
                 
                 <div className="space-y-3">
@@ -1533,7 +1535,7 @@ export default function AIContentGenerationPage() {
                       <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
                         <CheckCircle2 className="h-3 w-3 text-white" />
                       </div>
-                      <span className="text-white/80 text-sm">Strengthen multi-step campaigns with refined copy</span>
+                      <span className="text-white/80 text-sm">Strengthen multi-step campaigns with refined copy - free</span>
                     </div>
                     <div className="flex items-start">
                       <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
@@ -1545,11 +1547,11 @@ export default function AIContentGenerationPage() {
                       <div className="w-5 h-5 bg-gradient-to-r from-[#C084FC] to-[#8B5CF6] rounded-full flex items-center justify-center mr-2 mt-0.5 flex-shrink-0">
                         <CheckCircle2 className="h-3 w-3 text-white" />
                       </div>
-                      <span className="text-white/80 text-sm">Generate unlimited variations for testing and optimization</span>
+                      <span className="text-white/80 text-sm">Generate unlimited variations for testing and optimization - free</span>
                     </div>
                   </div>
                   <p className="text-white font-medium text-sm mt-3">
-                    Every email becomes a high-performing asset in your outbound strategy.
+                    Every email becomes a high-performing asset in your outbound strategy. All for free.
                   </p>
                 </div>
               </div>
@@ -1558,8 +1560,8 @@ export default function AIContentGenerationPage() {
                 <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#C084FC]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#C084FC]/50 group-hover:scale-105">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-white font-semibold text-lg">Scale Dashboard</div>
-                      <div className="text-white/60 text-sm">Unlimited Generation</div>
+                      <div className="text-white font-semibold text-lg">Free Scale Dashboard</div>
+                      <div className="text-green-400 font-semibold text-sm">FREE PLAN</div>
                     </div>
                     
                     <div className="space-y-4">
@@ -1578,7 +1580,7 @@ export default function AIContentGenerationPage() {
                         >
                           <div className="flex items-center justify-between">
                             <span className="text-white text-sm">{item.label}</span>
-                            <span className="text-white/60 text-sm">{item.value} emails</span>
+                            <span className="text-white/60 text-sm">{item.value} free emails</span>
                           </div>
                           <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                             <motion.div
@@ -1594,8 +1596,8 @@ export default function AIContentGenerationPage() {
                     
                     <div className="bg-gradient-to-r from-[#C084FC]/10 to-purple-500/10 p-4 rounded-lg border border-[#C084FC]/20">
                       <div className="text-center">
-                        <div className="text-white font-semibold text-sm mb-1">Scale Unlimited</div>
-                        <div className="text-white/60 text-xs">Generate thousands of personalized emails</div>
+                        <div className="text-white font-semibold text-sm mb-1">Scale Unlimited - Free</div>
+                        <div className="text-white/60 text-xs">Generate thousands of personalized emails for free</div>
                       </div>
                     </div>
                   </div>
@@ -1620,16 +1622,16 @@ export default function AIContentGenerationPage() {
                   <FileText className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                 </motion.div>
                 <h3 className="text-xl lg:text-2xl xl:text-3xl font-bold text-white mb-3 lg:mb-4">
-                  Professional Messaging in Every Scenario
+                  Free Professional Messaging in Every Scenario
                 </h3>
                 <p className="text-white/80 text-base lg:text-lg leading-relaxed">
-                  From sales to support, prospecting to retention, the email writer AI engine creates messages that feel crafted by experts — not templates.
+                  From sales to support, prospecting to retention, our free email writer AI engine creates messages that feel crafted by experts — not templates.
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="bg-white/5 p-3 rounded-lg border border-white/10">
                     <div className="text-white font-medium text-sm mb-1">Cold outreach and introductions</div>
-                    <div className="text-white/60 text-xs">First-contact professional messages</div>
+                    <div className="text-white/60 text-xs">First-contact professional messages - free</div>
                   </div>
                   <div className="bg-white/5 p-3 rounded-lg border border-white/10">
                     <div className="text-white font-medium text-sm mb-1">Follow-up reminders and nudges</div>
@@ -1637,7 +1639,7 @@ export default function AIContentGenerationPage() {
                   </div>
                   <div className="bg-white/5 p-3 rounded-lg border border-white/10">
                     <div className="text-white font-medium text-sm mb-1">Meeting confirmations and scheduling</div>
-                    <div className="text-white/60 text-xs">Professional coordination emails</div>
+                    <div className="text-white/60 text-xs">Professional coordination emails - free</div>
                   </div>
                   <div className="bg-white/5 p-3 rounded-lg border border-white/10">
                     <div className="text-white font-medium text-sm mb-1">Proposal messages</div>
@@ -1645,13 +1647,13 @@ export default function AIContentGenerationPage() {
                   </div>
                   <div className="bg-white/5 p-3 rounded-lg border border-white/10 md:col-span-2">
                     <div className="text-white font-medium text-sm mb-1">Re-engagement messages for inactive leads</div>
-                    <div className="text-white/60 text-xs">Revive dormant conversations professionally</div>
+                    <div className="text-white/60 text-xs">Revive dormant conversations professionally - free</div>
                   </div>
                 </div>
                 
                 <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#7C3AED]/10 p-4 rounded-xl border border-[#8B5CF6]/20">
                   <p className="text-white font-semibold text-center text-sm lg:text-base">
-                    Fast, polished, professional — every time.
+                    Fast, polished, professional — every time. And completely free.
                   </p>
                 </div>
               </div>
@@ -1660,18 +1662,18 @@ export default function AIContentGenerationPage() {
                 <Card className="relative bg-[#1a0b2e] backdrop-blur-sm p-6 lg:p-8 h-full border border-[#7C3AED]/30 rounded-2xl transition-all duration-500 group-hover:bg-[#1a0b2e]/80 group-hover:border-[#7C3AED]/50 group-hover:scale-105">
                   <div className="space-y-6">
                     <div className="flex items-center justify-between">
-                      <div className="text-white font-semibold text-lg">Scenario Templates</div>
-                      <div className="text-white/60 text-sm">Professional Use Cases</div>
+                      <div className="text-white font-semibold text-lg">Free Scenario Templates</div>
+                      <div className="text-green-400 font-semibold text-sm">ALL FREE</div>
                     </div>
                     
                     <div className="space-y-3">
                       {[
-                        { scenario: 'Cold Outreach', status: 'active', icon: '📧' },
-                        { scenario: 'Follow-up Sequence', status: 'active', icon: '🔄', url: '/features/email-sequences' },
-                        { scenario: 'Meeting Scheduling', status: 'active', icon: '📅' },
-                        { scenario: 'Proposal Delivery', status: 'active', icon: '📄' },
-                        { scenario: 'Re-engagement', status: 'active', icon: '⚡' },
-                        { scenario: 'LinkedIn Messaging', status: 'active', icon: '💼', url: '/features/linkedin-automation' },
+                        { scenario: 'Cold Outreach', status: 'active', icon: '📧', price: 'free' },
+                        { scenario: 'Follow-up Sequence', status: 'active', icon: '🔄', url: '/features/email-sequences', price: 'free' },
+                        { scenario: 'Meeting Scheduling', status: 'active', icon: '📅', price: 'free' },
+                        { scenario: 'Proposal Delivery', status: 'active', icon: '📄', price: 'free' },
+                        { scenario: 'Re-engagement', status: 'active', icon: '⚡', price: 'free' },
+                        { scenario: 'LinkedIn Messaging', status: 'active', icon: '💼', url: '/features/linkedin-automation', price: 'free' },
                       ].map((item, i) => (
                         <motion.div
                           key={i}
@@ -1694,8 +1696,7 @@ export default function AIContentGenerationPage() {
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                            <span className="text-green-400 text-xs">{item.status}</span>
+                            <div className="text-green-400 text-xs font-semibold">{item.price}</div>
                           </div>
                         </motion.div>
                       ))}
@@ -1703,8 +1704,8 @@ export default function AIContentGenerationPage() {
                     
                     <div className="bg-gradient-to-r from-[#7C3AED]/10 to-[#8B5CF6]/10 p-4 rounded-lg border border-[#7C3AED]/20">
                       <div className="text-center">
-                        <div className="text-white font-semibold text-sm mb-1">Ready for Every Scenario</div>
-                        <div className="text-white/60 text-xs">Professional templates for all business needs</div>
+                        <div className="text-white font-semibold text-sm mb-1">Ready for Every Scenario - Free</div>
+                        <div className="text-white/60 text-xs">Professional templates for all business needs - no cost</div>
                       </div>
                     </div>
                   </div>
@@ -1714,7 +1715,7 @@ export default function AIContentGenerationPage() {
           </div>
         </section>
 
-        {/* Why Teams Choose 360Airo's AI Email Generator */}
+        {/* Why Teams Choose 360Airo's Free AI Email Generator */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1733,7 +1734,7 @@ export default function AIContentGenerationPage() {
                 <Award className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
               </motion.div>
               <h3 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 lg:mb-6">
-                Why Teams Choose 360Airo's <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#A855F7]">AI Email Generator</span>
+                Why Teams Choose 360Airo's <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#A855F7]">Free AI Email Generator</span>
               </h3>
             </div>
 
@@ -1746,12 +1747,12 @@ export default function AIContentGenerationPage() {
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                   {[
-                    "Consistent messaging across every campaign",
+                    "Consistent messaging across every campaign - free",
                     "High-quality, professional copy produced instantly",
                     `Seamless connection to <Link href="/features/linkedin-automation" className="text-[#A855F7] hover:text-white underline underline-offset-2 transition-colors">LinkedIn Automation and LinkedIn flows</Link>`,
                     "Enhanced deliverability and engagement",
-                    "Designed for teams that need quality communication at scale",
-                    "Save hours of manual writing every week"
+                    "Designed for teams that need quality communication at scale - free",
+                    "Save hours of manual writing every week at no cost"
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -1770,7 +1771,7 @@ export default function AIContentGenerationPage() {
                 
                 <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 p-4 rounded-xl border border-[#8B5CF6]/20">
                   <p className="text-white font-semibold text-lg lg:text-xl">
-                    With 360Airo, your outreach becomes faster, clearer, and far more persuasive — without the manual writing burden.
+                    With 360Airo's free plan, your outreach becomes faster, clearer, and far more persuasive — without the manual writing burden or cost.
                   </p>
                 </div>
               </motion.div>
@@ -1791,7 +1792,7 @@ export default function AIContentGenerationPage() {
                     size="lg" 
                     className="relative bg-white text-[#480056] hover:bg-white/90 px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300"
                   >
-                    Generate Better Emails Instantly →
+                    Generate Free AI Emails Instantly →
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -1817,7 +1818,7 @@ export default function AIContentGenerationPage() {
                 transition={{ duration: 0.5 }}
                 className="inline-block mb-2 lg:mb-3"
               >
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">AI Content Generation Interface</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Free AI Content Generation Interface</span>
               </motion.div>
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
@@ -1826,7 +1827,7 @@ export default function AIContentGenerationPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-xl lg:text-2xl md:text-3xl font-bold text-white mb-3 lg:mb-4"
               >
-                Watch AI Create <span className="text-[#8B5CF6]">Perfect Emails</span> in Real-Time
+                Watch AI Create <span className="text-[#8B5CF6]">Perfect Emails</span> in Real-Time - Free
               </motion.h2>
               <motion.div
                 initial={{ opacity: 0, scaleX: 0 }}
@@ -1854,18 +1855,18 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block mb-2">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Smart, Personalized Email Content</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Free Smart, Personalized Email Content</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Our AI analyzes your audience, campaign goals, and past performance
+                Our free AI analyzes your audience, campaign goals, and past performance
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <div className="text-left space-y-4 lg:space-y-6 text-base lg:text-lg text-white/80 leading-relaxed">
                 <p>
-                  Our AI analyzes your audience, campaign goals, and past performance to produce tailored messages that resonate. Whether it's subject lines, follow-ups, or drip sequences, 360Airo ensures every email is optimized for open rates, click-through rates, and responses.
+                  Our free AI analyzes your audience, campaign goals, and past performance to produce tailored messages that resonate. Whether it's subject lines, follow-ups, or drip sequences, 360Airo ensures every email is optimized for open rates, click-through rates, and responses.
                 </p>
                 <p>
-                  This helps you <span className="text-[#8B5CF6] font-semibold">scale cold email campaigns without sacrificing quality</span>, maintaining consistency while personalizing each message for maximum impact.
+                  This helps you <span className="text-[#8B5CF6] font-semibold">scale cold email campaigns without sacrificing quality</span>, maintaining consistency while personalizing each message for maximum impact. All for free.
                 </p>
               </div>
             </motion.div>
@@ -1883,14 +1884,14 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Automated Copy, Maximum Efficiency</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Free Automated Copy, Maximum Efficiency</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Generate Multiple <span className="text-[#8B5CF6]">Content Types</span> Instantly
+                Generate Multiple <span className="text-[#8B5CF6]">Content Types</span> Instantly - Free
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                From cold outreach to follow-up sequences, our AI generates the exact content you need for every stage of your email campaign.
+                From cold outreach to follow-up sequences, our free AI generates the exact content you need for every stage of your email campaign.
               </p>
             </motion.div>
 
@@ -1920,6 +1921,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: index * 0.06, duration: 0.4 }}
                     />
                     <p className="text-white/80 text-xs lg:text-sm leading-relaxed">{type.description}</p>
+                    <div className="mt-2 text-green-400 text-xs font-semibold">FREE</div>
                   </motion.div>
                 </GlowCard>
               ))}
@@ -1938,14 +1940,14 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Data-Driven Optimization</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Free Data-Driven Optimization</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                AI That Gets <span className="text-[#8B5CF6]">Smarter Over Time</span>
+                Free AI That Gets <span className="text-[#8B5CF6]">Smarter Over Time</span>
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                360Airo doesn't just generate content — it helps improve it with analytics-backed recommendations and continuous learning.
+                360Airo doesn't just generate content — it helps improve it with analytics-backed recommendations and continuous learning. All for free.
               </p>
             </motion.div>
 
@@ -1978,6 +1980,7 @@ export default function AIContentGenerationPage() {
                         />
                         <p className="text-white/80 text-xs lg:text-sm leading-relaxed mb-1 lg:mb-2">{feature.description}</p>
                         <div className="text-xs text-[#8B5CF6] font-semibold">{feature.label}</div>
+                        <div className="mt-1 text-green-400 text-xs font-semibold">FREE FEATURE</div>
                       </div>
                     </Card>
                   </motion.div>
@@ -1998,14 +2001,14 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
               <div className="inline-block mb-2">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Why 360Airo AI Content Generation</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Why 360Airo Free AI Content Generation</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Transform Your Email <span className="text-[#8B5CF6]">Content Strategy</span>
+                Transform Your Email <span className="text-[#8B5CF6]">Content Strategy</span> - Free
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
-                With AI-driven suggestions, your email content creation becomes faster, smarter, and more impactful, freeing your team to focus on strategy instead of drafting.
+                With free AI-driven suggestions, your email content creation becomes faster, smarter, and more impactful, freeing your team to focus on strategy instead of drafting.
               </p>
             </motion.div>
 
@@ -2035,6 +2038,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: index * 0.06, duration: 0.4 }}
                     />
                     <p className="text-white/80 text-xs lg:text-sm leading-relaxed">{benefit.description}</p>
+                    <div className="mt-2 text-green-400 text-xs font-semibold">FREE BENEFIT</div>
                   </motion.div>
                 </GlowCard>
               ))}
@@ -2078,6 +2082,7 @@ export default function AIContentGenerationPage() {
                       {stat.value}
                     </motion.div>
                     <div className="text-white/80 font-semibold text-xs lg:text-sm">{stat.label}</div>
+                    <div className="mt-1 text-green-400 text-xs font-semibold">FREE TOOL</div>
                   </motion.div>
                 </GlowCard>
               ))}
@@ -2099,11 +2104,11 @@ export default function AIContentGenerationPage() {
                 <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
-                Frequently Asked <span className="text-[#8B5CF6]">Questions</span>
+                Frequently Asked <span className="text-[#8B5CF6]">Questions</span> About Free AI Email Generator
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
               <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Get answers to the most common questions about 360Airo's AI Email Generator and how it can transform your email outreach.
+                Get answers to the most common questions about 360Airo's Free AI Email Generator and how it can transform your email outreach at no cost.
               </p>
             </motion.div>
 
@@ -2137,14 +2142,14 @@ export default function AIContentGenerationPage() {
           >
             <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
               <div className="inline-block">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Ready to Transform Your Email Outreach?</span>
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Ready to Transform Your Email Outreach for Free?</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl md:text-5xl font-bold text-white">
-                Generate Better Emails Instantly with AI
+                Generate Better Emails Instantly with Free AI
               </h2>
               <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6 lg:mb-8" style={{ maxWidth: '120px' }} />
               <p className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
-                Start creating high-performing, personalized emails in seconds. Join thousands of teams using 360Airo's AI Email Generator to streamline their outreach and boost engagement.
+                Start creating high-performing, personalized emails in seconds - completely free. Join thousands of teams using 360Airo's Free AI Email Generator to streamline their outreach and boost engagement at no cost.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
                 <motion.div 
@@ -2158,7 +2163,7 @@ export default function AIContentGenerationPage() {
                     size="lg" 
                     className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-[#480056] border-2 border-transparent group-hover:border-white/20"
                   >
-                    Generate Better Emails Instantly →
+                    Generate Free AI Emails Instantly →
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -2171,7 +2176,7 @@ export default function AIContentGenerationPage() {
                 transition={{ duration: 0.7 }}
                 style={{ maxWidth: '100px' }}
               />
-              <p className="text-white/80 text-xs lg:text-sm">✨ Transform your email outreach with AI-powered generation</p>
+              <p className="text-white/80 text-xs lg:text-sm">✨ Transform your email outreach with free AI-powered generation</p>
             </motion.div>
           </motion.div>
         </section>
@@ -2180,4 +2185,4 @@ export default function AIContentGenerationPage() {
       </div>
     </>
   );
-} 
+}
