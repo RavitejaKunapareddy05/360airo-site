@@ -913,10 +913,11 @@ export default function AIContentGenerationPage() {
   return (
     <>
       <Head>
-        <title>Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo</title>
+        <title>Free AI Email Generator for Cold Outreach & Sales | 360Airo
+</title>
         <meta 
           name="description" 
-          content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." 
+          content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." 
         />
         <meta 
           name="keywords" 
@@ -927,8 +928,8 @@ export default function AIContentGenerationPage() {
         <link rel="canonical" href="https://360airo.com/features/email-warmup" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo" />
-        <meta property="og:description" content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." />
+        <meta property="og:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta property="og:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
         <meta property="og:url" content="https://360airo.com/features/email-warmup" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -939,8 +940,9 @@ export default function AIContentGenerationPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Email Warmup Tool to Improve Deliverability & Inbox Placement | 360airo" />
-        <meta name="twitter:description" content="Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach." />
+        <meta name="twitter:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta name="twitter:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.
+" />
         <meta name="twitter:image" content="https://360airo.com/twitter-email-warmup.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -958,7 +960,7 @@ export default function AIContentGenerationPage() {
               "@context": "https://schema.org",
               "@type": "Product",
               "name": "360Airo Email Warmup Tool",
-              "description": "Our AI-powered email warmup tool that builds sender reputation, prevents spam issues, and improve email deliverability for cold outreach.",
+              "description": "Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.",
               "url": "https://360airo.com/features/email-warmup",
               "brand": {
                 "@type": "Brand",
