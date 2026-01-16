@@ -913,37 +913,35 @@ export default function AIContentGenerationPage() {
   return (
     <>
       <Head>
-        <title>Free AI Email Generator for Cold Outreach & Sales | 360Airo
-</title>
+        <title>AI Email Generator - Free AI Email Generator for Cold Outreach & Sales | 360Airo</title>
         <meta 
           name="description" 
-          content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." 
+          content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." 
         />
         <meta 
           name="keywords" 
-          content="email warmup, best email warmup tool, inbox delivery, sender reputation, email deliverability, cold email, spam avoidance" 
+          content="AI email generator, free AI email generator, email generator AI, best AI email generator, email writer AI, AI email writing, generate emails, email content generation, cold email generator, outreach automation, 360Airo AI" 
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/email-warmup" />
+        <link rel="canonical" href="https://360airo.com/features/ai-email-generator" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
-        <meta property="og:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
-        <meta property="og:url" content="https://360airo.com/features/email-warmup" />
+        <meta property="og:title" content="AI Email Generator - Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta property="og:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
+        <meta property="og:url" content="https://360airo.com/features/ai-email-generator" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-email-warmup.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-ai-email-generator.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
-        <meta name="twitter:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.
-" />
-        <meta name="twitter:image" content="https://360airo.com/twitter-email-warmup.jpg" />
+        <meta name="twitter:title" content="AI Email Generator - Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
+        <meta name="twitter:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
+        <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-generator.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -959,9 +957,9 @@ export default function AIContentGenerationPage() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Product",
-              "name": "360Airo Email Warmup Tool",
-              "description": "Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo’s AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.",
-              "url": "https://360airo.com/features/email-warmup",
+              "name": "360Airo AI Email Generator",
+              "description": "Free AI Email Generator for Cold Outreach & Sales. Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.",
+              "url": "https://360airo.com/features/ai-email-generator",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -972,11 +970,16 @@ export default function AIContentGenerationPage() {
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/OnlineOnly"
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "1000"
-              }
+              "featureList": [
+                "AI-powered email generation",
+                "Personalized message creation",
+                "Cold outreach optimization",
+                "Follow-up automation",
+                "LinkedIn message generation",
+                "A/B testing variations",
+                "Tone consistency",
+                "Grammar and readability correction"
+              ]
             })
           }}
         />
@@ -984,7 +987,7 @@ export default function AIContentGenerationPage() {
 
       {/* Hidden link for SEO */}
       <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/email-warmup">360Airo Email Warmup Tool - Best Email Warmup Service</a>
+        <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo AI Email Generator - Free AI Email Generator for Cold Outreach & Sales</a>
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014] overflow-x-hidden">
@@ -1075,7 +1078,7 @@ export default function AIContentGenerationPage() {
                       >
                         <Sparkles className="h-3 w-3 lg:h-4 lg:w-4 text-[#A855F7]" />
                       </motion.div>
-                      <span>AI Email Generator</span>
+                      <span>Free AI Email Generator</span>
                     </span>
                   </div>
                 </motion.div>
@@ -1093,7 +1096,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.5, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      Craft Clear, Compelling,
+                      Free AI Email Generator
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, rotateX: -90 }}
@@ -1101,7 +1104,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.6, duration: 0.5 }}
                       className="block transform-gpu"
                     >
-                      and High-Performing
+                      for Cold Outreach & Sales
                     </motion.span>
                     <motion.span
                       initial={{ opacity: 0, scale: 0.7 }}
@@ -1109,7 +1112,7 @@ export default function AIContentGenerationPage() {
                       transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
                       className="block bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-white bg-clip-text text-transparent transform-gpu text-4xl sm:text-5xl lg:text-5xl"
                     >
-                     AI Emails Generator.
+                      | 360Airo
                     </motion.span>
                   </motion.h1>
 
@@ -1134,10 +1137,10 @@ export default function AIContentGenerationPage() {
                   className="space-y-4 lg:space-y-5 max-w-xl"
                 >
                   <p className="text-base lg:text-lg text-white/90 leading-relaxed font-light">
-                    360Airo's AI email generator helps you create polished, professional messages tailored to your prospects, your campaigns, and your goals. Whether you're drafting cold outreach, follow-ups, LinkedIn messages, or nurture flows, it delivers ready-to-send copy that boosts engagement and saves hours of manual writing.
+                    Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.
                   </p>
                   <p className="text-sm lg:text-base text-white/75 leading-relaxed">
-                    Build stronger outreach with messaging optimized for tone, clarity, and conversion — all from one intuitive workspace.
+                    Generate high-converting emails in seconds with AI that understands your audience, adapts to your tone, and optimizes for maximum engagement.
                   </p>
                 </motion.div>
 
@@ -1167,7 +1170,7 @@ export default function AIContentGenerationPage() {
                       size="lg" 
                       className="relative bg-transparent text-[#480056] w-full sm:w-auto px-6 py-4 lg:px-8 lg:py-3 text-sm lg:text-base font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl"
                     >
-                      <span>Generate Better Emails Instantly →</span>
+                      <span>Try Free AI Email Generator →</span>
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </motion.div>
@@ -1195,7 +1198,7 @@ export default function AIContentGenerationPage() {
                             <Brain className="h-6 w-6 text-white" />
                           </motion.div>
                           <div>
-                            <h3 className="text-xl font-bold text-white">AI Email Generator</h3>
+                            <h3 className="text-xl font-bold text-white">Free AI Email Generator</h3>
                             <p className="text-sm text-white/60">Creating personalized emails</p>
                           </div>
                         </div>
@@ -1788,7 +1791,7 @@ export default function AIContentGenerationPage() {
                     size="lg" 
                     className="relative bg-white text-[#480056] hover:bg-white/90 px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300"
                   >
-                    Generate Better Emails Instantly →
+                    Try Free AI Email Generator →
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -2155,7 +2158,7 @@ export default function AIContentGenerationPage() {
                     size="lg" 
                     className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-[#480056] border-2 border-transparent group-hover:border-white/20"
                   >
-                    Generate Better Emails Instantly →
+                    Try Free AI Email Generator →
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
@@ -2177,4 +2180,4 @@ export default function AIContentGenerationPage() {
       </div>
     </>
   );
-} 
+}
