@@ -459,6 +459,4 @@ export default function FreeEmailVerificationGuide() {
       </div>
     </>
   );
-}
-
-
+} 
