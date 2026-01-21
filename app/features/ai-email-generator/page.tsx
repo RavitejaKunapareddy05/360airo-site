@@ -2184,7 +2184,6 @@
 
 
 
-
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -2239,7 +2238,6 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import type { Variants } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 
 /* GlowCard with cursor-reactive glow - Mobile optimized */
@@ -3099,80 +3097,6 @@ export default function AIContentGenerationPage() {
 
   return (
     <>
-      <Head>
-        {/* UPDATED TITLE AND DESCRIPTION */}
-        <title>Free AI Email Generator for Cold Outreach & Sales | 360Airo</title>
-        <meta 
-          name="description" 
-          content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." 
-        />
-        <meta 
-          name="keywords" 
-          content="free AI email generator, cold email generator, sales outreach, AI email writer, email automation, cold outreach, LinkedIn automation, free email templates, AI email writing, generate emails, email content generation, 360Airo AI" 
-        />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/ai-email-generator" />
-        
-        {/* Open Graph Meta Tags - UPDATED */}
-        <meta property="og:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
-        <meta property="og:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
-        <meta property="og:url" content="https://360airo.com/features/ai-email-generator" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-ai-email-generator.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter Card Meta Tags - UPDATED */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free AI Email Generator for Cold Outreach & Sales | 360Airo" />
-        <meta name="twitter:description" content="Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-generator.jpg" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#8B5CF6" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
-        {/* Structured Data for SEO - UPDATED DESCRIPTION */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "360Airo AI Email Generator",
-              "description": "Create personalized cold emails, follow-ups, and LinkedIn messages for free. 360Airo's AI Email Generator helps you boost replies, save time, and scale outreach effortlessly.",
-              "url": "https://360airo.com/features/ai-email-generator",
-              "brand": {
-                "@type": "Brand",
-                "name": "360Airo"
-              },
-              "offers": {
-                "@type": "Offer",
-                "url": "https://app.360airo.com/",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/OnlineOnly"
-              },
-              "featureList": [
-                "AI-powered email generation",
-                "Personalized message creation",
-                "Cold outreach optimization",
-                "Follow-up automation",
-                "LinkedIn message generation",
-                "A/B testing variations",
-                "Tone consistency",
-                "Grammar and readability correction"
-              ]
-            })
-          }}
-        />
-      </Head>
-
       {/* Hidden link for SEO */}
       <div className="hidden">
         <a rel="canonical" href="https://360airo.com/features/ai-email-generator">360Airo AI Email Generator</a>
@@ -4216,13 +4140,13 @@ export default function AIContentGenerationPage() {
                     </motion.div>
                     <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4 transition-colors group-hover:text-[#A855F7]">{benefit.title}</h3>
                     <motion.div
-                      className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-3 lg:mb-4"
+                      className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-4"
                       initial={{ width: 0 }}
                       whileInView={{ width: '100%' }}
                       viewport={{ once: true, margin: '-50px' }}
                       transition={{ delay: index * 0.06, duration: 0.4 }}
                     />
-                    <p className="text-white/80 text-xs lg:text-sm leading-relaxed">{benefit.description}</p>
+                    <p className="text-white/80 text-sm lg:text-base leading-relaxed">{benefit.description}</p>
                   </motion.div>
                 </GlowCard>
               ))}
@@ -4231,7 +4155,7 @@ export default function AIContentGenerationPage() {
         </section>
 
         {/* STATS SECTION - Mobile optimized */}
-        <section className="py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
@@ -4239,42 +4163,77 @@ export default function AIContentGenerationPage() {
             variants={containerVariants} 
             className="max-w-6xl mx-auto"
           >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
+              <div className="inline-block mb-2">
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Proven Results</span>
+              </div>
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
+                Email Content That <span className="text-[#8B5CF6]">Actually Performs</span>
+              </h2>
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
+                Businesses using 360Airo's AI content generation see significant improvements across all key email metrics.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {stats.map((stat, index) => (
-                <GlowCard key={index} className="group cursor-pointer rounded-xl lg:rounded-2xl">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                <GlowCard key={index} className="group cursor-pointer rounded-xl">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
-                    className="relative bg-white/5 backdrop-blur-sm rounded-xl lg:rounded-2xl p-6 lg:p-8 text-center border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#8B5CF6]/50"
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="relative bg-white/5 backdrop-blur-sm p-6 lg:p-8 rounded-xl border border-white/10 text-center transition-all duration-300 group-hover:bg-white/10 group-hover:border-[#8B5CF6]/50 group-hover:scale-105"
                   >
                     <motion.div
-                      className="bg-white/15 w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-3 lg:mb-4 transition-all duration-300 group-hover:bg-[#8B5CF6]/30"
-                      whileHover={{ scale: isMobile ? 1.1 : 1.2 }}
+                      className={`bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center mx-auto mb-4 lg:mb-6`}
+                      whileHover={{ scale: isMobile ? 1.1 : 1.2, boxShadow: '0 0 25px rgba(139,92,246,0.4)' }}
                       transition={{ duration: 0.6 }}
                     >
-                      <stat.icon className="h-5 w-5 lg:h-8 lg:w-8 text-[#8B5CF6] transition-colors group-hover:text-white" />
+                      <stat.icon className="h-5 w-5 lg:h-8 lg:w-8 text-white" />
                     </motion.div>
+                    <div className="text-2xl lg:text-3xl font-black text-[#8B5CF6] mb-2 lg:mb-3">{stat.value}</div>
+                    <h3 className="text-base lg:text-lg font-bold text-white mb-2 lg:mb-3 transition-colors group-hover:text-[#A855F7]">{stat.label}</h3>
                     <motion.div
-                      className="text-2xl lg:text-3xl md:text-4xl font-black text-white mb-1 lg:mb-2"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: '100%' }}
                       viewport={{ once: true, margin: '-50px' }}
-                      transition={{ delay: index * 0.06, duration: 0.4 }}
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-white/80 font-semibold text-xs lg:text-sm">{stat.label}</div>
+                      transition={{ delay: index * 0.1, duration: 0.4 }}
+                    />
                   </motion.div>
                 </GlowCard>
               ))}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-12 lg:mt-16 text-center"
+            >
+              <motion.div 
+                whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+                whileTap={{ scale: 0.95 }} 
+                className="group relative overflow-hidden rounded-xl inline-block"
+                onClick={handleCTAClick}
+              >
+                <Button 
+                  size="lg" 
+                  className="relative bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white hover:from-[#7C3AED] hover:to-[#9333EA] px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-[#8B5CF6]/20"
+                >
+                  <span>Start Generating Better Emails →</span>
+                  <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </section>
 
-        {/* FAQ SECTION - MOVED TO LAST SECTION BEFORE FOOTER */}
-        <section id="faq" className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
+        {/* FAQ SECTION - Mobile optimized */}
+        <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-white/2 via-[#19001d]/30 to-white/2">
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
@@ -4283,83 +4242,156 @@ export default function AIContentGenerationPage() {
             className="max-w-4xl mx-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-12 lg:mb-16">
-              <div className="inline-block mb-2 lg:mb-3">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">FAQs</span>
+              <div className="inline-block mb-2">
+                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Common Questions</span>
               </div>
               <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-3 lg:mb-4">
                 Frequently Asked <span className="text-[#8B5CF6]">Questions</span>
               </h2>
-              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
-              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Get answers to the most common questions about 360Airo's AI Email Generator and how it can transform your email outreach.
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6" style={{ maxWidth: '100px' }} />
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
+                Everything you need to know about 360Airo's AI Email Generator and how it transforms your outreach.
               </p>
             </motion.div>
 
             <div className="space-y-4 lg:space-y-6">
               {faqData.map((faq, index) => (
-                <div key={faq.id} id={faq.id}>
+                <motion.div
+                  key={faq.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                >
                   <FAQItem
                     question={faq.question}
                     answer={faq.answer}
                     isOpen={openFaq === faq.id}
                     onClick={() => handleFaqClick(faq.id)}
                   />
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            {/* Additional FAQ Resources */}
-            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-12 lg:mt-16 text-center"
+            >
+              <div className="bg-gradient-to-r from-[#8B5CF6]/10 to-[#A855F7]/10 rounded-2xl p-6 lg:p-8 border border-[#8B5CF6]/20">
+                <h3 className="text-lg lg:text-xl font-bold text-white mb-3 lg:mb-4">Still have questions?</h3>
+                <p className="text-white/80 text-base lg:text-lg mb-4 lg:mb-6 max-w-2xl mx-auto">
+                  Our team is here to help you get the most out of 360Airo's AI Email Generator.
+                </p>
+                <motion.div 
+                  whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+                  whileTap={{ scale: 0.95 }} 
+                  className="group relative overflow-hidden rounded-xl inline-block"
+                  onClick={handleCTAClick}
+                >
+                  <Button 
+                    size="lg" 
+                    className="relative bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white hover:from-[#7C3AED] hover:to-[#9333EA] px-6 py-3 lg:px-8 lg:py-4 text-sm lg:text-base font-semibold rounded-xl transition-all duration-300"
+                  >
+                    <span>Get Started Now →</span>
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
         </section>
 
-        {/* FINAL CTA - AFTER FAQ SECTION */}
+        {/* FINAL CTA SECTION - Mobile optimized */}
         <section className="py-12 lg:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/20 via-[#19001d]/40 to-[#A855F7]/20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#8B5CF6]/5 via-[#A855F7]/3 to-[#C084FC]/5 pointer-events-none" />
+          
           <motion.div 
             initial="hidden" 
             whileInView="visible" 
             viewport={{ once: true, amount: 0.2, margin: '-50px' }} 
             variants={containerVariants} 
-            className="max-w-4xl mx-auto text-center relative z-10"
+            className="max-w-4xl mx-auto relative z-10"
           >
-            <motion.div variants={itemVariants} className="space-y-6 lg:space-y-8">
-              <div className="inline-block">
-                <span className="text-[#8B5CF6] font-semibold text-xs lg:text-sm tracking-wider uppercase">Ready to Transform Your Email Outreach?</span>
-              </div>
-              <h2 className="text-2xl lg:text-3xl md:text-4xl md:text-5xl font-bold text-white">
-                Generate Better Emails Instantly with AI
+            <motion.div variants={itemVariants} className="text-center">
+              <motion.div 
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 200 }}
+                className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-[#8B5CF6] to-[#A855F7] rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-2xl shadow-[#8B5CF6]/25"
+              >
+                <Sparkles className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+              </motion.div>
+              
+              <h2 className="text-2xl lg:text-3xl md:text-4xl font-bold text-white mb-4 lg:mb-6">
+                Ready to Transform Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8B5CF6] to-[#A855F7]">Email Outreach</span>?
               </h2>
-              <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mx-auto mb-6 lg:mb-8" style={{ maxWidth: '120px' }} />
-              <p className="text-white/90 text-base lg:text-lg max-w-2xl mx-auto">
-                Start creating high-performing, personalized emails in seconds. Join thousands of teams using 360Airo's AI Email Generator to streamline their outreach and boost engagement.
+              
+              <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-6 lg:mb-8" style={{ maxWidth: '100px' }} />
+              
+              <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto mb-8 lg:mb-12 leading-relaxed">
+                Join thousands of teams using 360Airo's AI Email Generator to create compelling, personalized emails that drive engagement and conversions. Start generating better emails in minutes, not hours.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center pt-2">
+              
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center">
                 <motion.div 
                   whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
                   whileTap={{ scale: 0.95 }} 
-                  className="group relative overflow-hidden rounded-xl w-full sm:w-auto"
+                  className="group relative overflow-hidden rounded-xl"
                   onClick={handleCTAClick}
                 >
-                  <motion.div className="absolute inset-0 bg-gradient-to-r from-white via-[#f8f9fa] to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <motion.div
+                    animate={{
+                      background: [
+                        'linear-gradient(45deg, #8B5CF6, #A855F7)',
+                        'linear-gradient(45deg, #A855F7, #C084FC)',
+                        'linear-gradient(45deg, #C084FC, #8B5CF6)',
+                      ],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="absolute inset-0"
+                  />
                   <Button 
                     size="lg" 
-                    className="relative bg-white text-[#480056] hover:bg-transparent w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-sm lg:text-lg font-semibold rounded-xl transition-all duration-300 group-hover:text-[#480056] border-2 border-transparent group-hover:border-white/20"
+                    className="relative bg-transparent text-white w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-bold rounded-xl transition-all duration-300 border-2 border-transparent group-hover:shadow-xl group-hover:shadow-[#8B5CF6]/30"
                   >
-                    Generate Better Emails Instantly →
+                    <span>Generate Better Emails Instantly →</span>
                     <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </motion.div>
+                
+                <motion.div 
+                  whileHover={{ scale: isMobile ? 1.02 : 1.05, y: isMobile ? -2 : -4 }} 
+                  whileTap={{ scale: 0.95 }} 
+                  className="group relative overflow-hidden rounded-xl"
+                >
+                  <Link href="/pricing" className="block">
+                    <Button 
+                      size="lg" 
+                      variant="outline"
+                      className="relative bg-white/5 text-white border-white/20 hover:bg-white/10 hover:border-white/30 w-full sm:w-auto px-8 py-4 lg:px-10 lg:py-6 text-base lg:text-lg font-semibold rounded-xl transition-all duration-300"
+                    >
+                      <span>View Pricing</span>
+                      <ArrowRight className="ml-2 h-4 w-4 lg:h-5 lg:w-5 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </motion.div>
               </div>
+              
               <motion.div
-                className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mt-4 lg:mt-6 mb-1 lg:mb-2"
-                initial={{ width: 0 }}
-                whileInView={{ width: '100px' }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.7 }}
-                style={{ maxWidth: '100px' }}
-              />
-              <p className="text-white/80 text-xs lg:text-sm">✨ Transform your email outreach with AI-powered generation</p>
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="mt-8 lg:mt-12"
+              >
+                <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+                  <CheckCircle2 className="h-4 w-4 text-green-400" />
+                  <span className="text-white/70 text-sm">No credit card required • Free trial available</span>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
         </section>
