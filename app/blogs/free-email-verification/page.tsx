@@ -467,13 +467,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -488,7 +486,6 @@ import {
   Sparkles,
   ArrowRight,
   ExternalLink,
-  Copy,
   ThumbsUp,
   MessageSquare,
   Share2,
@@ -496,60 +493,36 @@ import {
   Eye,
   ChevronRight,
   Verified,
-  Filter,
-  Search,
-  Download,
-  Upload,
   AlertTriangle,
-  Bell,
-  Target,
-  Lock,
   Globe,
   MailCheck,
   RefreshCw,
   Cpu,
-  Database,
   Workflow,
   LineChart,
   Rocket,
   Star,
   Award,
   Lightbulb,
-  Palette,
   ZapOff,
   MailWarning,
   MailOpen,
-  MailX,
   Check,
   X,
   HelpCircle,
-  Info,
   Calendar,
   User,
-  Hash,
-  Percent,
-  Timer,
   DollarSign,
   Play
 } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
-// Remove use-toast import and use a custom solution
-import { Toaster } from '@/components/ui/toaster';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-// Create a simple toast function since use-toast might not be available
+// Simple toast function
 const showToast = (title: string, description: string) => {
-  // This is a simple implementation. In a real project, you'd use a proper toast library.
-  console.log(`Toast: ${title} - ${description}`);
-  // You can also create a custom toast component or use a different toast library
+  if (typeof window !== 'undefined') {
+    console.log(`Toast: ${title} - ${description}`);
+  }
 };
 
 // Blog Metadata
@@ -567,7 +540,7 @@ const blogMetadata = {
   tags: ["Email Verification", "Deliverability", "Cold Email", "Free Tools", "360Airo"]
 };
 
-// Blog Sections
+// Simplified Blog Sections
 const blogSections = [
   {
     id: "intro",
@@ -598,70 +571,7 @@ const blogSections = [
       "Keep lists clean without exporting or re-importing data",
       "Improve deliverability across campaigns without manual intervention"
     ]
-  },
-  {
-    id: "how-it-works",
-    title: "How 360Airo's Free Email Verification Works",
-    icon: Workflow,
-    content: "360Airo's email verification tool runs multiple checks behind the scenes to ensure accuracy and reliability.",
-    steps: [
-      {
-        title: "Syntax & Format Validation",
-        description: "Checks whether the email follows proper formatting standards",
-        icon: Check
-      },
-      {
-        title: "Domain Validation",
-        description: "Confirms the domain exists and can receive emails",
-        icon: Globe
-      },
-      {
-        title: "Mailbox Verification",
-        description: "Verifies whether the mailbox itself is active",
-        icon: Mail
-      },
-      {
-        title: "Risk Detection",
-        description: "Identifies disposable emails and high-risk patterns",
-        icon: AlertTriangle
-      }
-    ]
-  },
-  {
-    id: "process",
-    title: "How to Verify Email Addresses for Free Using 360Airo",
-    icon: Cpu,
-    content: "Using 360Airo's Free Email Verification is designed to be straightforward and fast.",
-    process: [
-      "Upload or sync your email list into 360Airo",
-      "Run free email verification instantly inside the platform",
-      "Review results categorized as verified, risky, or invalid",
-      "Exclude problematic addresses before sending campaigns",
-      "Launch outreach with confidence"
-    ]
-  },
-  {
-    id: "benefits",
-    title: "How Free Email Verification Improves Campaign Performance",
-    icon: LineChart,
-    content: "Verifying emails before sending has a compounding effect on outreach performance.",
-    benefits: [
-      { label: "Fewer bounces", improvement: "85% reduction", icon: ZapOff },
-      { label: "Better inbox placement", improvement: "94% success", icon: MailOpen },
-      { label: "Higher reply rates", improvement: "3x increase", icon: MessageSquare },
-      { label: "Lower spam complaints", improvement: "90% decrease", icon: MailWarning }
-    ]
   }
-];
-
-// Email Verification Demo Data
-const verificationResults = [
-  { email: "john.doe@company.com", status: "verified", confidence: 98, lastChecked: "2 hours ago" },
-  { email: "jane.smith@gmail.com", status: "verified", confidence: 95, lastChecked: "1 hour ago" },
-  { email: "contact@startup.io", status: "risky", confidence: 65, lastChecked: "30 minutes ago" },
-  { email: "temp123@tempmail.com", status: "invalid", confidence: 10, lastChecked: "15 minutes ago" },
-  { email: "sales@legitbusiness.com", status: "verified", confidence: 99, lastChecked: "5 minutes ago" },
-  { email: "info@disposable-email.org", status: "invalid", confidence: 5, lastChecked: "Just now" }
 ];
 
 // Stats Data
@@ -694,226 +604,6 @@ const relatedArticles = [
   }
 ];
 
-// Custom Component: GlowCard
-const GlowCard = ({ children, className = '', glowColor = 'rgba(59, 130, 246, 0.2)', ...props }: any) => {
-  return (
-    <div className={`relative overflow-hidden rounded-2xl border border-white/10 ${className}`} {...props}>
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          background: `radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), ${glowColor}, transparent 40%)`,
-        }}
-      />
-      <div className="relative z-10">{children}</div>
-    </div>
-  );
-};
-
-// Custom Component: InteractiveProgress
-const InteractiveProgress = ({ value, label, description, color = "bg-blue-500" }: any) => {
-  const [animatedValue, setAnimatedValue] = useState(0);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimatedValue(value);
-    }, 300);
-    return () => clearTimeout(timer);
-  }, [value]);
-
-  return (
-    <div className="space-y-3">
-      <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-white/80">{label}</span>
-        <span className="text-sm font-bold text-white">{value}%</span>
-      </div>
-      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${animatedValue}%` }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className={`h-full ${color} rounded-full relative`}
-        >
-          <motion.div
-            animate={{ x: ['0%', '100%', '0%'] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 bg-white/30 rounded-full"
-          />
-        </motion.div>
-      </div>
-      {description && (
-        <p className="text-xs text-white/60">{description}</p>
-      )}
-    </div>
-  );
-};
-
-// Custom Component: VerificationDemo
-const VerificationDemo = () => {
-  const [verificationStep, setVerificationStep] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [results, setResults] = useState(verificationResults);
-
-  const steps = [
-    "Uploading email list...",
-    "Checking syntax and format...",
-    "Validating domains...",
-    "Verifying mailboxes...",
-    "Analyzing risk factors...",
-    "Generating verification report..."
-  ];
-
-  const startVerification = () => {
-    setIsVerifying(true);
-    setVerificationStep(0);
-    setProgress(0);
-
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsVerifying(false);
-          // Shuffle results for demo effect
-          setResults([...results].sort(() => Math.random() - 0.5));
-          return 100;
-        }
-        const newProgress = prev + 10;
-        if (newProgress % 20 === 0) {
-          setVerificationStep(prevStep => Math.min(prevStep + 1, steps.length - 1));
-        }
-        return newProgress;
-      });
-    }, 200);
-  };
-
-  const getStatusColor = (status: string) => {
-    switch(status) {
-      case 'verified': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'risky': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'invalid': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch(status) {
-      case 'verified': return <Check className="h-3 w-3" />;
-      case 'risky': return <AlertTriangle className="h-3 w-3" />;
-      case 'invalid': return <X className="h-3 w-3" />;
-      default: return <HelpCircle className="h-3 w-3" />;
-    }
-  };
-
-  return (
-    <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <MailCheck className="h-5 w-5 text-blue-400" />
-          Live Email Verification Demo
-        </CardTitle>
-        <CardDescription>See how 360Airo verifies emails in real-time</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Verification Progress */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label>Verification Progress</Label>
-            <span className="text-sm font-medium">{progress}%</span>
-          </div>
-          <Progress value={progress} className="h-2" />
-          
-          {isVerifying && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-2 text-sm text-blue-400"
-            >
-              <RefreshCw className="h-3 w-3 animate-spin" />
-              {steps[verificationStep]}
-            </motion.div>
-          )}
-        </div>
-
-        {/* Results Table */}
-        <div className="space-y-4">
-          <Label>Verification Results</Label>
-          <ScrollArea className="h-64 rounded-lg border border-gray-800">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-gray-800">
-                  <TableHead className="text-gray-400">Email Address</TableHead>
-                  <TableHead className="text-gray-400">Status</TableHead>
-                  <TableHead className="text-gray-400">Confidence</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {results.map((result, index) => (
-                  <TableRow key={index} className="border-gray-800 hover:bg-gray-900/50">
-                    <TableCell className="font-medium text-sm">{result.email}</TableCell>
-                    <TableCell>
-                      <Badge className={`flex items-center gap-1 ${getStatusColor(result.status)}`}>
-                        {getStatusIcon(result.status)}
-                        {result.status.charAt(0).toUpperCase() + result.status.slice(1)}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <div className="w-16 h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                          <div 
-                            className={`h-full ${
-                              result.confidence > 80 ? 'bg-green-500' : 
-                              result.confidence > 50 ? 'bg-yellow-500' : 'bg-red-500'
-                            } rounded-full`}
-                            style={{ width: `${result.confidence}%` }}
-                          />
-                        </div>
-                        <span className="text-sm">{result.confidence}%</span>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
-        </div>
-
-        {/* Stats Summary */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2 p-3 bg-gray-900/30 rounded-lg">
-            <div className="text-sm text-gray-400">Verified</div>
-            <div className="text-2xl font-bold text-green-400">4</div>
-            <div className="text-xs text-gray-500">Emails</div>
-          </div>
-          <div className="space-y-2 p-3 bg-gray-900/30 rounded-lg">
-            <div className="text-sm text-gray-400">Invalid/Risky</div>
-            <div className="text-2xl font-bold text-red-400">2</div>
-            <div className="text-xs text-gray-500">Emails filtered</div>
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button 
-          onClick={startVerification}
-          disabled={isVerifying}
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-        >
-          {isVerifying ? (
-            <>
-              <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-              Verifying...
-            </>
-          ) : (
-            <>
-              <Zap className="mr-2 h-4 w-4" />
-              Run Free Verification Demo
-            </>
-          )}
-        </Button>
-      </CardFooter>
-    </Card>
-  );
-};
-
 // Custom Component: AnimatedStatCard
 const AnimatedStatCard = ({ stat }: any) => {
   const [count, setCount] = useState(0);
@@ -943,7 +633,7 @@ const AnimatedStatCard = ({ stat }: any) => {
   const Icon = stat.icon;
   
   return (
-    <GlowCard className="group p-6 cursor-pointer hover:scale-[1.02] transition-transform duration-300">
+    <div className="relative overflow-hidden rounded-2xl border border-white/10 p-6 group cursor-pointer hover:scale-[1.02] transition-transform duration-300">
       <div className="flex items-start justify-between mb-4">
         <div className={`p-3 rounded-xl ${stat.color.replace('text', 'bg')}/10`}>
           <Icon className={`h-6 w-6 ${stat.color}`} />
@@ -958,7 +648,7 @@ const AnimatedStatCard = ({ stat }: any) => {
         </div>
         <p className="text-sm text-gray-400">{stat.label}</p>
       </div>
-    </GlowCard>
+    </div>
   );
 };
 
@@ -1022,17 +712,6 @@ export default function EmailVerificationBlog() {
                 ease: "linear"
               }}
               className="absolute left-1/4 top-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"
-            />
-            <motion.div
-              animate={{
-                rotate: -360,
-              }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="absolute right-1/4 bottom-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"
             />
           </div>
 
@@ -1100,53 +779,32 @@ export default function EmailVerificationBlog() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={handleLike}
-                            className={`border-gray-700 hover:border-red-500 hover:bg-red-500/10 ${liked ? 'border-red-500 bg-red-500/10 text-red-500' : ''}`}
-                          >
-                            <ThumbsUp className="h-4 w-4" />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Like this article</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleLike}
+                      className={`border-gray-700 hover:border-red-500 hover:bg-red-500/10 ${liked ? 'border-red-500 bg-red-500/10 text-red-500' : ''}`}
+                    >
+                      <ThumbsUp className="h-4 w-4" />
+                    </Button>
 
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={handleBookmark}
-                            className={`border-gray-700 hover:border-yellow-500 hover:bg-yellow-500/10 ${bookmarked ? 'border-yellow-500 bg-yellow-500/10 text-yellow-500' : ''}`}
-                          >
-                            <Bookmark className="h-4 w-4" />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Save for later</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleBookmark}
+                      className={`border-gray-700 hover:border-yellow-500 hover:bg-yellow-500/10 ${bookmarked ? 'border-yellow-500 bg-yellow-500/10 text-yellow-500' : ''}`}
+                    >
+                      <Bookmark className="h-4 w-4" />
+                    </Button>
 
-                    <TooltipProvider>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={handleShare}
-                            className="border-gray-700 hover:border-blue-500 hover:bg-blue-500/10"
-                          >
-                            <Share2 className="h-4 w-4" />
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Share article</TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={handleShare}
+                      className="border-gray-700 hover:border-blue-500 hover:bg-blue-500/10"
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
 
                     <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                       Try Free Verification
@@ -1176,51 +834,49 @@ export default function EmailVerificationBlog() {
 
               {/* Stats Sidebar */}
               <div className="space-y-6">
-                <GlowCard className="p-6">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 p-6">
                   <h3 className="text-lg font-semibold text-white mb-4">Article Impact</h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-gray-400">Helpfulness</span>
                       <span className="text-green-400 font-semibold">96%</span>
                     </div>
-                    <InteractiveProgress value={96} label="Reader Satisfaction" color="bg-green-500" />
+                    <Progress value={96} className="h-2" />
                     
                     <div className="flex items-center justify-between mt-6">
                       <span className="text-gray-400">Share Rate</span>
                       <span className="text-blue-400 font-semibold">{shares}</span>
                     </div>
-                    <InteractiveProgress value={Math.min(shares, 100)} label="Social Shares" color="bg-blue-500" />
+                    <Progress value={Math.min(shares, 100)} className="h-2" />
                   </div>
-                </GlowCard>
+                </div>
 
                 {/* Table of Contents */}
-                <GlowCard className="p-6">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 p-6">
                   <h3 className="text-lg font-semibold text-white mb-4">Table of Contents</h3>
-                  <ScrollArea className="h-64">
-                    <div className="space-y-2">
-                      {blogSections.map((section) => {
-                        const Icon = section.icon;
-                        return (
-                          <button
-                            key={section.id}
-                            onClick={() => {
-                              document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' });
-                              setActiveSection(section.id);
-                            }}
-                            className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
-                              activeSection === section.id
-                                ? 'bg-blue-500/20 border border-blue-500/30'
-                                : 'hover:bg-gray-800/50 border border-transparent'
-                            }`}
-                          >
-                            <Icon className="h-4 w-4 text-blue-400" />
-                            <span className="text-sm text-left text-white">{section.title}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </ScrollArea>
-                </GlowCard>
+                  <div className="space-y-2">
+                    {blogSections.map((section) => {
+                      const Icon = section.icon;
+                      return (
+                        <button
+                          key={section.id}
+                          onClick={() => {
+                            document.getElementById(section.id)?.scrollIntoView({ behavior: 'smooth' });
+                            setActiveSection(section.id);
+                          }}
+                          className={`w-full flex items-center gap-3 p-3 rounded-lg transition-all ${
+                            activeSection === section.id
+                              ? 'bg-blue-500/20 border border-blue-500/30'
+                              : 'hover:bg-gray-800/50 border border-transparent'
+                          }`}
+                        >
+                          <Icon className="h-4 w-4 text-blue-400" />
+                          <span className="text-sm text-left text-white">{section.title}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1291,61 +947,6 @@ export default function EmailVerificationBlog() {
                               <div key={idx} className="flex items-start gap-3">
                                 <CheckCircle2 className="h-5 w-5 text-green-400 mt-1 flex-shrink-0" />
                                 <span className="text-gray-300">{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Process Steps */}
-                        {section.steps && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                            {section.steps.map((step, idx) => {
-                              const StepIcon = step.icon;
-                              return (
-                                <GlowCard key={idx} className="p-5 hover:scale-[1.02] transition-transform">
-                                  <div className="flex items-start gap-4">
-                                    <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
-                                      <StepIcon className="h-5 w-5 text-blue-400" />
-                                    </div>
-                                    <div>
-                                      <h4 className="font-semibold text-white mb-1">{step.title}</h4>
-                                      <p className="text-sm text-gray-400">{step.description}</p>
-                                    </div>
-                                  </div>
-                                </GlowCard>
-                              );
-                            })}
-                          </div>
-                        )}
-
-                        {/* Benefits Grid */}
-                        {section.benefits && (
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                            {section.benefits.map((benefit, idx) => {
-                              const BenefitIcon = benefit.icon;
-                              return (
-                                <div key={idx} className="p-4 bg-gray-900/30 rounded-xl border border-gray-800 hover:border-blue-500/30 transition-colors">
-                                  <div className="flex items-center gap-3 mb-3">
-                                    <BenefitIcon className="h-5 w-5 text-blue-400" />
-                                    <span className="text-lg font-semibold text-white">{benefit.label}</span>
-                                  </div>
-                                  <div className="text-2xl font-bold text-green-400">{benefit.improvement}</div>
-                                  <div className="text-sm text-gray-500 mt-1">Improvement</div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-
-                        {/* Process List */}
-                        {section.process && (
-                          <div className="space-y-3 pt-4">
-                            {section.process.map((item, idx) => (
-                              <div key={idx} className="flex items-center gap-4 p-4 bg-gray-900/30 rounded-lg border border-gray-800 hover:border-blue-500/30 transition-colors">
-                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
-                                  <span className="text-sm font-semibold text-blue-300">{idx + 1}</span>
-                                </div>
-                                <span className="text-gray-300">{item}</span>
                               </div>
                             ))}
                           </div>
@@ -1434,9 +1035,6 @@ export default function EmailVerificationBlog() {
 
               {/* Sidebar */}
               <div className="space-y-8">
-                {/* Verification Demo */}
-                <VerificationDemo />
-
                 {/* Stats Cards */}
                 <div className="grid grid-cols-2 gap-4">
                   {verificationStats.map((stat, index) => (
@@ -1445,40 +1043,40 @@ export default function EmailVerificationBlog() {
                 </div>
 
                 {/* FAQ */}
-                <GlowCard className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Common Questions</h3>
-                  <Accordion type="single" collapsible className="space-y-2">
-                    <AccordionItem value="item-1" className="border-gray-800">
-                      <AccordionTrigger className="text-sm hover:text-blue-300">
-                        Is email verification really free?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-sm text-gray-400">
+                <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800">
+                  <CardHeader>
+                    <CardTitle className="text-white">Common Questions</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-white text-sm">Is email verification really free?</h4>
+                      <p className="text-sm text-gray-400">
                         Yes! 360Airo includes Free Email Verification as part of our platform. No hidden costs or limits for basic verification.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2" className="border-gray-800">
-                      <AccordionTrigger className="text-sm hover:text-blue-300">
-                        How many emails can I verify?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-sm text-gray-400">
+                      </p>
+                    </div>
+                    <Separator className="bg-gray-800" />
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-white text-sm">How many emails can I verify?</h4>
+                      <p className="text-sm text-gray-400">
                         Free verification supports up to 1,000 emails per month. Higher volumes available with premium plans.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-3" className="border-gray-800">
-                      <AccordionTrigger className="text-sm hover:text-blue-300">
-                        Does verification affect sender reputation?
-                      </AccordionTrigger>
-                      <AccordionContent className="text-sm text-gray-400">
+                      </p>
+                    </div>
+                    <Separator className="bg-gray-800" />
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-white text-sm">Does verification affect sender reputation?</h4>
+                      <p className="text-sm text-gray-400">
                         No, our verification process is completely passive and doesn't send any emails to the addresses being verified.
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </GlowCard>
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
 
                 {/* Related Articles */}
-                <GlowCard className="p-6">
-                  <h3 className="text-lg font-semibold text-white mb-4">Related Articles</h3>
-                  <div className="space-y-4">
+                <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800">
+                  <CardHeader>
+                    <CardTitle className="text-white">Related Articles</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
                     {relatedArticles.map((article, index) => (
                       <div key={index} className="group p-4 rounded-lg border border-gray-800 hover:border-blue-500/30 hover:bg-gray-900/30 transition-all cursor-pointer">
                         <div className="flex items-center justify-between mb-2">
@@ -1497,8 +1095,8 @@ export default function EmailVerificationBlog() {
                         </div>
                       </div>
                     ))}
-                  </div>
-                </GlowCard>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
@@ -1507,7 +1105,7 @@ export default function EmailVerificationBlog() {
         {/* Author Bio */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/20">
           <div className="max-w-4xl mx-auto">
-            <GlowCard className="p-8">
+            <Card className="bg-gradient-to-br from-gray-900/50 to-black/50 border-gray-800 p-8">
               <div className="flex flex-col md:flex-row items-start gap-6">
                 <Avatar className="h-20 w-20 border-4 border-blue-500/30">
                   <AvatarImage src={blogMetadata.author.avatar} />
@@ -1540,7 +1138,7 @@ export default function EmailVerificationBlog() {
                   </div>
                 </div>
               </div>
-            </GlowCard>
+            </Card>
           </div>
         </section>
 
