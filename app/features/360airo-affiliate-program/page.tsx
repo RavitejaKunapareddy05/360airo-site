@@ -812,32 +812,43 @@ export default function AffiliateProgramPage() {
 
   return (
     <>
-      <Head>
-        <title>360Airo Affiliate Program | Earn Recurring Commissions | AI Outreach Platform</title>
-        <meta name="description" content="Join the 360Airo Affiliate Program and earn up to 30% recurring commissions. Partner with the leading AI-powered outreach platform for email warmup, LinkedIn automation, and sales outreach." />
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>360Airo Affiliate Program | Partner & Earn with AI Sales Automation</title>
+        <meta name="description" content=" Partner with 360Airo. Earn high commissions promoting an all-in-one AI platform for email warmup, LinkedIn automation, and smart prospecting. Start earning today.
+" />
         <meta name="keywords" content="360Airo affiliate program, email warmup affiliate, AI outreach affiliate, recurring commissions, affiliate marketing, SaaS affiliate program, email deliverability affiliate" />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/360airo-affiliate-program" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="360Airo Affiliate Program | Earn Recurring Commissions" />
-        <meta property="og:description" content="Join our affiliate program and earn up to 30% recurring commissions by promoting the leading AI-powered outreach platform." />
+        <meta property="og:title" content="360Airo Affiliate Program | Partner & Earn with AI Sales Automation" />
+        <meta property="og:description" content=" Partner with 360Airo. Earn high commissions promoting an all-in-one AI platform for email warmup, LinkedIn automation, and smart prospecting. Start earning today.
+" />
         <meta property="og:url" content="https://360airo.com/features/360airo-affiliate-program" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
         <meta property="og:image" content="https://360airo.com/og-affiliate-program.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="360Airo Affiliate Program - Earn Recurring Commissions" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="360Airo Affiliate Program | Earn Recurring Commissions" />
-        <meta name="twitter:description" content="Join our affiliate program and earn up to 30% recurring commissions by promoting the leading AI-powered outreach platform." />
+        <meta name="twitter:title" content="3360Airo Affiliate Program | Partner & Earn with AI Sales Automation" />
+        <meta name="twitter:description" content=" Partner with 360Airo. Earn high commissions promoting an all-in-one AI platform for email warmup, LinkedIn automation, and smart prospecting. Start earning today.
+." />
+        <meta name="twitter:image" content="https://360airo.com/og-affiliate-program.jpg" />
+        <meta name="twitter:site" content="@360Airo" />
+        <meta name="twitter:creator" content="@360Airo" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#b45ecf" />
-      </Head>
+        
+        </div>
 
       <AnimatePresence>
         {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
