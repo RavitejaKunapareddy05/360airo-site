@@ -721,11 +721,12 @@ export default function DemoPage() {
 
   return (
     <>
-      <Head>
-        <title>Discover How 360Airo's Smart Outreach Transforms Results</title>
+       {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>360Airo Live Demo | AI Email & LinkedIn Outreach Platform</title>
         <meta 
           name="description" 
-          content="See how our powerful AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." 
+          content="Join a live demo of 360Airo to explore email warmup, AI automation, LinkedIn outreach, CRM, and real-time analytics in one powerful platform." 
         />
         <meta 
           name="keywords" 
@@ -736,8 +737,8 @@ export default function DemoPage() {
         <link rel="canonical" href="https://360airo.com/features/experience-360airo-in-action" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content=" Discover How 360Airo's Smart Outreach Transforms Results" />
-        <meta property="og:description" content="See how our powerful AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." />
+        <meta property="og:title" content=" 360Airo Live Demo | AI Email & LinkedIn Outreach Platform" />
+        <meta property="og:description" content="Join a live demo of 360Airo to explore email warmup, AI automation, LinkedIn outreach, CRM, and real-time analytics in one powerful platform." />
         <meta property="og:url" content="https://360airo.com/features/experience-360airo-in-action" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -749,7 +750,7 @@ export default function DemoPage() {
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Discover How 360Airo's Smart Outreach Transforms Results" />
-        <meta name="twitter:description" content="See how our AI-powered outreach platform helps teams build stronger connections, automate engagement, and scale measurable results." />
+        <meta name="twitter:description" content="Join a live demo of 360Airo to explore email warmup, AI automation, LinkedIn outreach, CRM, and real-time analytics in one powerful platform." />
         <meta name="twitter:image" content="https://360airo.com/twitter-demo-page.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -758,7 +759,7 @@ export default function DemoPage() {
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -790,7 +791,6 @@ export default function DemoPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
