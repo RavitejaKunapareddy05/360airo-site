@@ -863,17 +863,20 @@ export default function ReferralProgramPage() {
 
   return (
     <>
-      <Head>
-        <title>360Airo Referral Program | Earn Rewards | AI Outreach Platform</title>
-        <meta name="description" content="Join the 360Airo Referral Program and earn recurring rewards. Share our AI-powered outreach platform and get paid for every successful referral. Track performance in real-time dashboard." />
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>360Airo Referral Program | Earn Recurring Rewards for Referrals</title>
+        <meta name="description" content="Join the 360Airo Referral Program to introduce your network to a powerful outreach platform & earn exciting rewards every time someone signs up through your link.
+" />
         <meta name="keywords" content="360Airo referral program, earn rewards, referral marketing, AI outreach platform, email warmup referral, recurring commissions, affiliate program" />
         
         {/* Canonical URL - This tells search engines this is the original page */}
         <link rel="canonical" href="https://360airo.com/features/360airo-affiliate-program" />
         
         {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="360Airo Referral Program | Earn Rewards for Sharing" />
-        <meta property="og:description" content="Join our referral program and earn recurring rewards by sharing the 360Airo AI-powered outreach platform with your network." />
+        <meta property="og:title" content="360Airo Referral Program | Earn Recurring Rewards for Referrals" />
+        <meta property="og:description" content="Join the 360Airo Referral Program to introduce your network to a powerful outreach platform & earn exciting rewards every time someone signs up through your link.
+" />
         <meta property="og:url" content="https://360airo.com/features/360airo-affiliate-program" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -884,8 +887,9 @@ export default function ReferralProgramPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="360Airo Referral Program | Earn Rewards" />
-        <meta name="twitter:description" content="Join our referral program and earn recurring rewards by sharing the 360Airo AI-powered outreach platform." />
+        <meta name="twitter:title" content="360Airo Referral Program | Earn Recurring Rewards for Referrals" />
+        <meta name="twitter:description" content="Join the 360Airo Referral Program to introduce your network to a powerful outreach platform & earn exciting rewards every time someone signs up through your link.
+" />
         <meta name="twitter:image" content="https://360airo.com/twitter-referral-program.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -894,7 +898,7 @@ export default function ReferralProgramPage() {
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -918,7 +922,6 @@ export default function ReferralProgramPage() {
             })
           }}
         />
-      </Head>
 
       <div ref={containerRef} className="min-h-screen bg-[#19001d] overflow-hidden">
         <Navbar />
