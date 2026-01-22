@@ -1042,23 +1042,28 @@ export default function ProspectManagementPage() {
 
   return (
     <>
-      <Head>
-        <title>Lead Management Software to Organize, Track, and Convert Leads | 360Airo</title>
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Lead Management Software for Sales Pipeline Visibility | 360Airo
+</title>
         <meta 
           name="description" 
-          content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." 
-        />
+          content="360Airo's AI-powered lead management software centralizes & tracks every lead in one dashboard. Automate follow-ups, gain AI insights & close more deals. Start free.
+"/>
         <meta 
           name="keywords" 
-          content="lead management software, lead tracking, prospect management, sales pipeline, lead conversion, CRM software, 360Airo" 
+          content="  360Airo's AI-powered lead management software centralizes & tracks every lead in one dashboard. Automate follow-ups, gain AI insights & close more deals. Start free.
+" 
         />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/lead-management-software" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Lead Management Software to Organize, Track, and Convert Leads | 360Airo" />
-        <meta property="og:description" content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." />
+        <meta property="og:title" content="Lead Management Software for Sales Pipeline Visibility | 360Airo
+" />
+        <meta property="og:description" content="360Airo's AI-powered lead management software centralizes & tracks every lead in one dashboard. Automate follow-ups, gain AI insights & close more deals. Start free.
+" />
         <meta property="og:url" content="https://360airo.com/features/lead-management-software" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -1069,7 +1074,8 @@ export default function ProspectManagementPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Lead Management Software to Organize, Track, and Convert Leads | 360Airo" />
+        <meta name="twitter:title" content="Lead Management Software for Sales Pipeline Visibility | 360Airo
+" />
         <meta name="twitter:description" content="Centralize all your leads in one place with 360Airo's lead management software. Track, organize, and convert leads efficiently across all channels." />
         <meta name="twitter:image" content="https://360airo.com/twitter-lead-management.jpg" />
         
@@ -1079,7 +1085,7 @@ export default function ProspectManagementPage() {
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
