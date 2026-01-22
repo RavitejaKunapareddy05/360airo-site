@@ -1117,7 +1117,7 @@ export default function ProspectManagementPage() {
             })
           }}
         />
-      </Head>
+    
 
       {/* Hidden link for SEO */}
       <div className="hidden">
