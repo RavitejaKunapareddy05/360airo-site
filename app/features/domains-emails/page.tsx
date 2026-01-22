@@ -420,17 +420,18 @@ export default function DomainsEmailsPage() {
 
   return (
     <>
-      <Head>
-        <title>Domains & Emails | 360Airo - Build Trust Before You Hit Send</title>
-        <meta name="description" content="Establish, authenticate, and scale your email domains without deliverability worries. 360Airo's Domains & Emails feature ensures verified, secure, and reputation-safe infrastructure." />
+       {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Domain & Email Management Software for Deliverability | 360Airo</title>
+        <meta name="description" content="Manage domains and emails with confidence. Authenticate SPF, DKIM & DMARC, monitor sender reputation, and scale outreach safely with 360Airo’s domain & email management platform." />
         <meta name="keywords" content="domain authentication, email setup, SPF DKIM DMARC, email deliverability, domain management, sender reputation" />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/domains-emails" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Domains & Emails | 360Airo - Build Trust Before You Hit Send" />
-        <meta property="og:description" content="Establish, authenticate, and scale without deliverability worries. 360Airo's Domains & Emails feature ensures verified, secure, and reputation-safe infrastructure." />
+        <meta property="og:title" content="Domain & Email Management Software for Deliverability | 360Airo" />
+        <meta property="og:description" content="Manage domains and emails with confidence. Authenticate SPF, DKIM & DMARC, monitor sender reputation, and scale outreach safely with 360Airo’s domain & email management platform."/>
         <meta property="og:url" content="https://360airo.com/features/domains-emails" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -451,7 +452,7 @@ export default function DomainsEmailsPage() {
         <meta name="theme-color" content="#3B82F6" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -475,7 +476,6 @@ export default function DomainsEmailsPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
