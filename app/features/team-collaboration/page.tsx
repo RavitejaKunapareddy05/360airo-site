@@ -280,17 +280,20 @@ export default function TeamCollaboration() {
 
   return (
     <>
-      <Head>
-        <title>Team Collaboration | 360Airo - Work Smarter, Together</title>
-        <meta name="description" content="Unify your sales, marketing, and customer success teams with 360Airo's collaboration tools. Centralized workspace with AI-powered productivity features." />
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>AI-Powered Team Collaboration Platform | 360Airo</title>
+        <meta name="description" content="AI-powered team collaboration for outreach campaigns. Centralized workspace, shared inbox, real-time collaboration across email & LinkedIn. Try 360Airo today.
+" />
         <meta name="keywords" content="team collaboration, team collaboration tools, unified workspace, AI team productivity, multi-channel campaigns, sales team coordination" />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/team-collaboration" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Team Collaboration | 360Airo - Work Smarter, Together" />
-        <meta property="og:description" content="Unify your teams with 360Airo's collaboration tools. Centralized workspace, AI-powered productivity, and seamless multi-channel campaign coordination." />
+        <meta property="og:title" content="AI-Powered Team Collaboration Platform | 360Airo" />
+        <meta property="og:description" content="AI-powered team collaboration for outreach campaigns. Centralized workspace, shared inbox, real-time collaboration across email & LinkedIn. Try 360Airo today.
+" />
         <meta property="og:url" content="https://360airo.com/features/team-collaboration" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -301,7 +304,7 @@ export default function TeamCollaboration() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Team Collaboration | 360Airo" />
+        <meta name="twitter:title" content="AI-Powered Team Collaboration Platform | 360Airo" />
         <meta name="twitter:description" content="Work smarter, together. Unified team collaboration tools for sales, marketing, and customer success teams." />
         <meta name="twitter:image" content="https://360airo.com/twitter-team-collaboration.jpg" />
         
@@ -311,7 +314,7 @@ export default function TeamCollaboration() {
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -335,8 +338,6 @@ export default function TeamCollaboration() {
             })
           }}
         />
-      </Head>
-
       {/* Hidden link for SEO */}
       <div className="hidden">
         <a rel="canonical" href="https://360airo.com/features/team-collaboration">360Airo Team Collaboration Tools - Work Smarter Together</a>
