@@ -592,11 +592,13 @@ export default function EmailSequencesPage() {
 
   return (
     <>
-      <Head>
-        <title>Email Sequences | 360Airo - Automated Email Outreach That Converts</title>
+        {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Email Sequence Software for Automated Follow-Ups | 360Airo</title>
         <meta 
           name="description" 
-          content="360Airo's email sequences automate your outreach with AI-powered personalization. Create multi-touch campaigns that nurture leads and drive conversions automatically." 
+          content="Build high-converting AI email sequences. 360Airo automates personalized follow-ups and boosts reply rates while protecting your sender reputation. For modern outreach teams
+." 
         />
         <meta 
           name="keywords" 
@@ -607,8 +609,9 @@ export default function EmailSequencesPage() {
         <link rel="canonical" href="https://360airo.com/features/email-sequences" />
         
         {/* Open Graph Meta Tags for Social Sharing */}
-        <meta property="og:title" content="Email Sequences | 360Airo - Automated Email Outreach That Converts" />
-        <meta property="og:description" content="360Airo's email sequences automate your outreach with AI-powered personalization. Create multi-touch campaigns that nurture leads and drive conversions automatically." />
+        <meta property="og:title" content="Email Sequence Software for Automated Follow-Ups | 360Airo" />
+        <meta property="og:description" content="Build high-converting AI email sequences. 360Airo automates personalized follow-ups and boosts reply rates while protecting your sender reputation. For modern outreach teams.
+" />
         <meta property="og:url" content="https://360airo.com/features/email-sequences" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -619,8 +622,9 @@ export default function EmailSequencesPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Email Sequences | 360Airo" />
-        <meta name="twitter:description" content="Automate conversations that convert with 360Airo's AI-powered email sequences. Multi-touch campaigns that nurture leads and drive conversions." />
+        <meta name="twitter:title" content="Email Sequence Software for Automated Follow-Ups | 360Airo" />
+        <meta name="twitter:description" content="Build high-converting AI email sequences. 360Airo automates personalized follow-ups and boosts reply rates while protecting your sender reputation. For modern outreach teams.
+" />
         <meta name="twitter:image" content="https://360airo.com/twitter-email-sequences.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -629,6 +633,7 @@ export default function EmailSequencesPage() {
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+         </div>
         
         {/* Structured Data for SEO */}
         <script
@@ -653,7 +658,6 @@ export default function EmailSequencesPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO - helps search engines discover the URL */}
       <div className="hidden">
