@@ -491,11 +491,13 @@ export default function EmailCampaignPage() {
 
   return (
     <>
-      <Head>
-        <title>Email Campaign - Create, Automate & Optimize High-Performing Campaigns | 360Airo</title>
+       {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>AI Email Campaign Software | Automate & Personalize Emails – 360Airo</title>
         <meta 
           name="description" 
-          content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." 
+          content="360Airo enables AI-driven email campaigns with automation, personalization, and performance tracking—helping teams convert emails into revenue.
+" 
         />
         <meta 
           name="keywords" 
@@ -503,15 +505,17 @@ export default function EmailCampaignPage() {
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/email-campaign" />
+        <link rel="canonical" href="https://360airo.com/features/email-campaigns" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Email Campaign - Create, Automate & Optimize High-Performing Campaigns" />
-        <meta property="og:description" content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." />
-        <meta property="og:url" content="https://360airo.com/features/email-campaign" />
+        <meta property="og:title" content="AI Email Campaign Software | Automate & Personalize Emails – 360Airo
+" />
+        <meta property="og:description" content="360Airo enables AI-driven email campaigns with automation, personalization, and performance tracking—helping teams convert emails into revenue.
+" />
+        <meta property="og:url" content="https://360airo.com/features/email-campaigns" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-email-campaign.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-email-campaigns.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
@@ -519,8 +523,9 @@ export default function EmailCampaignPage() {
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Email Campaign - Create, Automate & Optimize High-Performing Campaigns | 360Airo" />
-        <meta name="twitter:description" content="360Airo is advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns from one centralized platform." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-email-campaign.jpg" />
+        <meta name="twitter:description" content="360Airo enables AI-driven email campaigns with automation, personalization, and performance tracking—helping teams convert emails into revenue.
+" />
+        <meta name="twitter:image" content="https://360airo.com/twitter-email-campaigns.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -528,6 +533,7 @@ export default function EmailCampaignPage() {
         <meta name="theme-color" content="#8B5CF6" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        </div>
         
         {/* Structured Data for SEO */}
         <script
@@ -538,7 +544,7 @@ export default function EmailCampaignPage() {
               "@type": "Product",
               "name": "360Airo Email Campaign Software",
               "description": "Advanced email campaign software to plan, launch, and manage high-impact email marketing campaigns.",
-              "url": "https://360airo.com/features/email-campaign",
+              "url": "https://360airo.com/features/email-campaigns",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -560,7 +566,6 @@ export default function EmailCampaignPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
