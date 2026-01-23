@@ -1,713 +1,955 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { useRef, useState, useEffect } from 'react';
-import { Navbar } from '@/components/navbar';
-import { Footer } from '@/components/footer';
-import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-import {
-  MessageSquare,
-  Users,
-  Inbox,
-  Mail,
-  Link2,
-  MessageCircle,
-  Zap,
-  Brain,
-  Shield,
-  Clock,
-  ArrowRight,
-  CheckCircle2,
-  Target,
-  FolderSync,
-  Lightbulb,
-  UserCheck,
-  Bot,
-  Network,
-  Layers,
-  MailOpen,
-  Eye,
-  PhoneCall,
-  GitMerge,
-  Workflow,
-  MessageCircleReply
-} from 'lucide-react';
-
-// Circular Connection Animation - Mobile optimized
-const CircularConnections = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none">
-      <svg className="w-full h-full" viewBox="0 0 400 400">
-        {/* Outer Ring */}
-        <motion.circle
-          cx="200"
-          cy="200"
-          r={isMobile ? 120 : 150}
-          stroke="url(#outerGradient)"
-          strokeWidth={isMobile ? 1.5 : 2}
-          fill="none"
-          initial={{ pathLength: 0, rotate: 0 }}
-          animate={{ pathLength: 1, rotate: 360 }}
-          transition={{ duration: isMobile ? 6 : 8, repeat: Infinity, ease: "linear" }}
-        />
-        
-        {/* Middle Ring */}
-        <motion.circle
-          cx="200"
-          cy="200"
-          r={isMobile ? 80 : 100}
-          stroke="url(#middleGradient)"
-          strokeWidth={isMobile ? 1 : 1.5}
-          fill="none"
-          initial={{ pathLength: 0, rotate: 0 }}
-          animate={{ pathLength: 1, rotate: -360 }}
-          transition={{ duration: isMobile ? 4 : 6, repeat: Infinity, ease: "linear" }}
-        />
-        
-        {/* Inner Ring */}
-        <motion.circle
-          cx="200"
-          cy="200"
-          r={isMobile ? 40 : 50}
-          stroke="url(#innerGradient)"
-          strokeWidth={isMobile ? 0.8 : 1}
-          fill="none"
-          initial={{ pathLength: 0, rotate: 0 }}
-          animate={{ pathLength: 1, rotate: 360 }}
-          transition={{ duration: isMobile ? 3 : 4, repeat: Infinity, ease: "linear" }}
-        />
-        
-        {/* Connection Lines - Reduced on mobile */}
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, index) => (
-          <motion.line
-            key={angle}
-            x1="200"
-            y1="200"
-            x2={200 + (isMobile ? 120 : 150) * Math.cos((angle * Math.PI) / 180)}
-            y2={200 + (isMobile ? 120 : 150) * Math.sin((angle * Math.PI) / 180)}
-            stroke="rgba(59, 130, 246, 0.3)"
-            strokeWidth="0.5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.5, 0] }}
-            transition={{ 
-              duration: isMobile ? 1.5 : 2, 
-              delay: index * (isMobile ? 0.15 : 0.2), 
-              repeat: Infinity 
-            }}
-          />
-        ))}
-        
-        <defs>
-          <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#8B5CF6" />
-          </linearGradient>
-          <linearGradient id="middleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#8B5CF6" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-          <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#06B6D4" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-  );
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
-// Floating Platform Icons - Mobile optimized
-const FloatingPlatforms = () => {
-  const [isMobile, setIsMobile] = useState(false);
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+// Glass card component
+const GlassCard = ({ children, className = '', hover = false }: { children: React.ReactNode; className?: string; hover?: boolean }) => (
+  <div className={`
+    bg-gradient-to-br from-white/5 to-white/10 
+    backdrop-blur-xl border border-white/20 
+    shadow-2xl shadow-purple-500/10 rounded-3xl
+    ${hover ? 'hover:border-[#b45ecf]/40 hover:shadow-purple-500/20 transition-all duration-300' : ''}
+    ${className}
+  `}>
+    {children}
+  </div>
+);
 
-  const platforms = [
-    { icon: Mail, name: "Email", delay: 0 },
-    { icon: Link2, name: "LinkedIn", delay: isMobile ? 0.3 : 0.5 },
-    { icon: MessageCircle, name: "Campaigns", delay: isMobile ? 0.6 : 1 },
-    { icon: MessageSquare, name: "Team Chat", delay: isMobile ? 0.9 : 1.5 }
+// Navbar Component
+const Navbar = ({ activeSection }: { activeSection: string }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'channels', label: 'Multi-Channel' },
+    { id: 'personalization', label: 'AI Personalization' },
+    { id: 'automation', label: 'Automation' },
+    { id: 'inbox', label: 'Unified Inbox' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'pricing', label: 'Pricing' },
   ];
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
-      {platforms.map((platform, index) => (
-        <motion.div
-          key={platform.name}
-          className="absolute"
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{
-            scale: [0, 1, 1, 0],
-            opacity: [0, 1, 1, 0],
-            x: [
-              Math.cos(index * 90) * (isMobile ? 60 : 100),
-              Math.cos(index * 90 + 45) * (isMobile ? 90 : 150),
-              Math.cos(index * 90 + 90) * (isMobile ? 60 : 100)
-            ],
-            y: [
-              Math.sin(index * 90) * (isMobile ? 60 : 100),
-              Math.sin(index * 90 + 45) * (isMobile ? 90 : 150),
-              Math.sin(index * 90 + 90) * (isMobile ? 60 : 100)
-            ]
-          }}
-          transition={{
-            duration: isMobile ? 4 : 6,
-            delay: platform.delay,
-            repeat: Infinity,
-            repeatType: "loop"
-          }}
-          style={{
-            left: '50%',
-            top: '50%',
-            marginLeft: -20,
-            marginTop: -20
-          }}
-        >
-          <div className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} bg-blue-500/20 rounded-lg border border-blue-500/30 flex items-center justify-center`}>
-            <platform.icon className={`${isMobile ? 'h-4 w-4' : 'h-5 w-5'} text-blue-400`} />
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-// Radial Feature Display - Mobile optimized
-const RadialFeature = ({ icon: Icon, title, description, angle, delay }: any) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const radius = isMobile ? 120 : 200;
-  const x = Math.cos((angle * Math.PI) / 180) * radius;
-  const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-  return (
-    <motion.div
-      className="absolute"
-      initial={{ scale: 0, opacity: 0, x: 0, y: 0 }}
-      whileInView={{ scale: 1, opacity: 1, x, y }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: isMobile ? 0.6 : 0.8, delay, type: "spring" }}
-      style={{
-        left: '50%',
-        top: '50%',
-        marginLeft: isMobile ? -60 : -80,
-        marginTop: isMobile ? -60 : -80
-      }}
-    >
-      <div className={`${isMobile ? 'w-32' : 'w-40'} text-center`}>
-        <motion.div
-          whileHover={{ scale: isMobile ? 1.05 : 1.1, rotate: 360 }}
-          className={`${isMobile ? 'w-12 h-12' : 'w-16 h-16'} bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl ${isMobile ? 'rounded-lg' : 'rounded-2xl'} flex items-center justify-center mx-auto mb-3`}
-        >
-          <Icon className={`${isMobile ? 'h-5 w-5' : 'h-8 w-8'} text-white`} />
-        </motion.div>
-        <h3 className={`text-white font-bold mb-2 ${isMobile ? 'text-sm' : ''}`}>{title}</h3>
-        <p className="text-white/70 text-xs leading-relaxed">{description}</p>
-      </div>
-    </motion.div>
-  );
-};
-
-// Conversation Timeline - Mobile optimized
-const ConversationTimeline = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const messages = [
-    {
-      time: "2 hours ago",
-      platform: "Email",
-      message: "Interested in your enterprise plan",
-      icon: MailOpen,
-      status: "new"
-    },
-    {
-      time: "4 hours ago", 
-      platform: "LinkedIn",
-      message: "Connected and messaged",
-      icon: Link2,
-      status: "replied"
-    },
-    {
-      time: "1 day ago",
-      platform: "Campaign",
-      message: "Requested pricing details",
-      icon: MessageCircle,
-      status: "pending"
-    }
-  ];
-
-  return (
-    <div className="relative">
-      <div className={`absolute ${isMobile ? 'left-4' : 'left-6'} top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500`} />
-      
-      {messages.map((msg, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: isMobile ? -30 : -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ delay: index * (isMobile ? 0.15 : 0.2) }}
-          className={`relative flex items-start ${isMobile ? 'space-x-3' : 'space-x-4'} mb-6 last:mb-0`}
-        >
-          <div className="relative z-10">
-            <motion.div
-              whileHover={{ scale: isMobile ? 1.1 : 1.2 }}
-              className={`${isMobile ? 'w-10 h-10' : 'w-12 h-12'} bg-white/10 rounded-lg ${isMobile ? 'rounded-lg' : 'rounded-xl'} border border-white/20 flex items-center justify-center`}
-            >
-              <msg.icon className={`${isMobile ? 'h-4 w-4' : 'h-6 w-6'} text-blue-400`} />
-            </motion.div>
-          </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/90 to-transparent backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-[#b45ecf] to-[#d67bff] bg-clip-text text-transparent">
+            Outreach360
+          </Link>
           
-          <div className="flex-1 pt-0.5">
-            <div className="flex items-center justify-between mb-1">
-              <span className={`text-white font-semibold ${isMobile ? 'text-sm' : ''}`}>{msg.platform}</span>
-              <span className="text-white/40 text-xs">{msg.time}</span>
-            </div>
-            <p className={`text-white/70 mb-2 ${isMobile ? 'text-sm' : ''}`}>{msg.message}</p>
-            <span className={`inline-block px-2 py-1 rounded text-xs ${
-              msg.status === 'new' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-              msg.status === 'replied' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
-              'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-            }`}>
-              {msg.status}
-            </span>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-// Button click handler
-const handleCTAClick = () => {
-  window.open('https://app.360airo.com/', '_blank');
-};
-
-// Main Component - Mobile optimized
-export default function UnifiedInboxRadialPage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
-
-  const coreFeatures = [
-    {
-      icon: FolderSync,
-      title: "All Accounts Synced",
-      description: "Connect all domains and emails into one shared inbox",
-      angle: 0
-    },
-    {
-      icon: Brain,
-      title: "AI Assistance", 
-      description: "Smart replies and priority detection",
-      angle: 90
-    },
-    {
-      icon: UserCheck,
-      title: "Team Collaboration",
-      description: "Clear ownership and no overlap",
-      angle: 180
-    },
-    {
-      icon: Workflow,
-      title: "Unified View",
-      description: "Every conversation in one workspace",
-      angle: 270
-    }
-  ];
-
-  const featureSections = [
-    {
-      title: "All Your Accounts, Perfectly Synced",
-      description: "Say goodbye to switching tabs or logging into multiple accounts. 360Airo connects all your domains and emails into one shared inbox, syncing every thread instantly. Whether you're managing multiple campaigns or working with a distributed sales team, everyone stays on the same page — literally.",
-      features: [
-        "Manage multiple sender accounts in one dashboard",
-        "Assign conversations to specific team members",
-        "Track message history and response timelines",
-        "Keep complete visibility over all client interactions"
-      ],
-      note: "Your outreach becomes smoother, faster, and perfectly coordinated."
-    },
-    {
-      title: "Smarter Collaboration with AI Assistance",
-      description: "360Airo's AI-powered inbox management helps your team respond faster and smarter. It detects message intent, flags high-priority replies, and even suggests personalized responses — all while maintaining your brand's tone.",
-      features: [
-        "Get AI-suggested replies for faster follow-ups",
-        "Categorize and prioritize messages automatically", 
-        "Never lose track of client communications or leads"
-      ],
-      note: "The result? You save hours every week while delivering a seamless experience to every prospect."
-    },
-    {
-      title: "Transparency Without Overlap",
-      description: "No more duplicate replies or missed handoffs. Each team member knows who's handling what, with clear ownership and visibility over every conversation thread.",
-      features: [
-        "Real-time team visibility",
-        "Clear conversation ownership",
-        "No duplicate responses",
-        "Seamless team handoffs"
-      ],
-      note: "360Airo's unified communication system is built for sales, marketing, and customer success teams that need clarity, not chaos."
-    }
-  ];
-
-  const benefits = [
-    "One inbox for all campaigns and accounts",
-    "Team collaboration made easy with real-time updates",
-    "AI-assisted response suggestions and prioritization", 
-    "Complete message history and transparency",
-    "Improved response times and customer satisfaction"
-  ];
-
-  return (
-    <>
-      <Head>
-        <title>Unified Shared Inbox for Team Collaboration | 360Airo</title>
-        <meta 
-          name="description" 
-          content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." 
-        />
-        <meta 
-          name="keywords" 
-          content="unified inbox, shared inbox, team collaboration, email management, LinkedIn replies, campaign messages, 360Airo inbox" 
-        />
-        
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/unified-shared-inbox" />
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
-        <meta property="og:description" content="360Airo’s Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." />
-        <meta property="og:url" content="https://360airo.com/features/unified-shared-inbox" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-unified-inbox.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:locale" content="en_US" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
-        <meta name="twitter:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-unified-inbox.jpg" />
-        
-        {/* Additional SEO Meta Tags */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#3B82F6" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
-        {/* Structured Data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "360Airo Unified Shared Inbox",
-              "description": "360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication.",
-              "url": "https://360airo.com/features/unified-shared-inbox",
-              "brand": {
-                "@type": "Brand",
-                "name": "360Airo"
-              },
-              "offers": {
-                "@type": "Offer",
-                "url": "https://app.360airo.com/",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/OnlineOnly"
-              },
-              "featureList": [
-                "Unified email management",
-                "Team collaboration tools",
-                "LinkedIn message integration",
-                "Campaign message centralization",
-                "AI-powered response suggestions"
-              ]
-            })
-          }}
-        />
-      </Head>
-
-      {/* Hidden link for SEO */}
-      <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/unified-shared-inbox">360Airo Unified Shared Inbox</a>
-      </div>
-
-      <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/30 to-blue-950/50 overflow-hidden">
-        <Navbar />
-
-        {/* Hero Section with Radial Design - Mobile optimized */}
-        <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 pt-16 lg:pt-20 overflow-hidden">
-          <CircularConnections />
-          <FloatingPlatforms />
-          
-          <motion.div 
-            className="max-w-4xl mx-auto text-center relative z-10"
-            style={{ opacity, scale }}
-          >
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, type: "spring" }}
-              className={`${isMobile ? 'w-16 h-16' : 'w-24 h-24'} bg-gradient-to-r from-blue-500 to-purple-500 ${isMobile ? 'rounded-2xl' : 'rounded-3xl'} flex items-center justify-center mx-auto mb-6 lg:mb-8`}
-            >
-              <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white`} />
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.1 }}
-              className={`${isMobile ? 'text-3xl' : 'text-5xl md:text-7xl'} font-black text-white mb-4 lg:mb-6`}
-            >
-              Unified Shared Inbox
-            </motion.h1>
-            
-            <motion.h2
-              initial={{ opacity: 0, y: isMobile ? 15 : 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.3 }}
-              className={`${isMobile ? 'text-lg' : 'text-2xl md:text-3xl'} text-blue-400 mb-6 lg:mb-8 font-semibold`}
-            >
-              Every Conversation, One View
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.5 }}
-              className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed`}
-            >
-              Collaborate Effortlessly Across All Your Outreach Channels
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.7 }}
-              className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-6 lg:mb-8 max-w-3xl mx-auto leading-relaxed`}
-            >
-              Managing multiple inboxes shouldn't feel like juggling fire. With 360Airo's Unified Shared Inbox, every message from your email sequences, LinkedIn outreach, and campaign replies lands in one clean, centralized workspace.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 0.9 }}
-              className={`${isMobile ? 'text-sm' : 'text-lg'} text-white/60 mb-8 lg:mb-12 max-w-3xl mx-auto leading-relaxed`}
-            >
-              Your entire team can view, respond, and manage conversations in real time — without overlapping replies, missed messages, or confusion. Collaboration just became effortless.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: isMobile ? 0.6 : 0.8, delay: 1.1 }}
-            >
-              <Button 
-                size="lg" 
-                className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
-                onClick={handleCTAClick}
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`text-sm font-medium transition-colors ${
+                  activeSection === item.id
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-white'
+                }`}
               >
-                Simplify Your Inbox
-                <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
-              </Button>
-            </motion.div>
-          </motion.div>
-        </section>
+                {item.label}
+              </a>
+            ))}
+            <button className="px-6 py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-[#b45ecf]/25 transition-all">
+              Start Free Trial
+            </button>
+          </div>
 
-        {/* Radial Features Section - Mobile optimized */}
-        <section className="py-16 lg:py-32 px-4 sm:px-6 relative">
-          <div className="max-w-6xl mx-auto">
-            <div className={`relative ${isMobile ? 'h-64' : 'h-96'} mb-16 lg:mb-20`}>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: isMobile ? 0.6 : 0.8 }}
-                  className={`${isMobile ? 'w-32 h-32' : 'w-48 h-48'} bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full border border-white/10 backdrop-blur-sm flex items-center justify-center`}
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white"
+          >
+            <div className="w-6 h-6 relative">
+              <span className={`absolute h-0.5 w-6 bg-current transform transition-all ${isMenuOpen ? 'rotate-45 top-3' : 'top-1'}`} />
+              <span className={`absolute h-0.5 w-6 bg-current top-3 transition-all ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+              <span className={`absolute h-0.5 w-6 bg-current transform transition-all ${isMenuOpen ? '-rotate-45 top-3' : 'top-5'}`} />
+            </div>
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4">
+            <div className="flex flex-col space-y-3">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`text-sm font-medium transition-colors ${
+                    activeSection === item.id
+                      ? 'text-white'
+                      : 'text-white/70 hover:text-white'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <div className="text-center">
-                    <Inbox className={`${isMobile ? 'h-8 w-8' : 'h-12 w-12'} text-white mx-auto mb-1 lg:mb-2`} />
-                    <div className={`text-white font-bold ${isMobile ? 'text-sm' : ''}`}>All Platforms</div>
-                    <div className={`text-white/60 ${isMobile ? 'text-xs' : 'text-sm'}`}>Connected</div>
-                  </div>
-                </motion.div>
-              </div>
-              
-              {coreFeatures.map((feature, index) => (
-                <RadialFeature
-                  key={feature.title}
-                  {...feature}
-                  delay={index * (isMobile ? 0.15 : 0.2)}
-                />
+                  {item.label}
+                </a>
               ))}
+              <button className="mt-2 px-6 py-2 bg-gradient-to-r from-[#b45ecf] to-[#480056] text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-[#b45ecf]/25 transition-all">
+                Start Free Trial
+              </button>
             </div>
           </div>
-        </section>
+        )}
+      </div>
+    </nav>
+  );
+};
 
-        {/* Features with Timeline - Mobile optimized */}
-        <section className="py-12 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-white/5 to-transparent">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-              <div className={isMobile ? 'mb-8' : ''}>
-                <ConversationTimeline />
+// Footer Component
+const Footer = () => (
+  <footer className="bg-gradient-to-t from-black/80 to-transparent border-t border-white/10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div className="text-2xl font-bold bg-gradient-to-r from-[#b45ecf] to-[#d67bff] bg-clip-text text-transparent mb-4">
+            Outreach360
+          </div>
+          <p className="text-white/70 text-sm">
+            Everything you need to power high-performance outreach and drive revenue growth.
+          </p>
+        </div>
+        
+        <div>
+          <h3 className="text-white font-semibold mb-4">Product</h3>
+          <ul className="space-y-2">
+            <li><a href="#overview" className="text-white/70 hover:text-white text-sm">Features</a></li>
+            <li><a href="#pricing" className="text-white/70 hover:text-white text-sm">Pricing</a></li>
+            <li><a href="#integrations" className="text-white/70 hover:text-white text-sm">Integrations</a></li>
+            <li><a href="/docs" className="text-white/70 hover:text-white text-sm">Documentation</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 className="text-white font-semibold mb-4">Company</h3>
+          <ul className="space-y-2">
+            <li><a href="/about" className="text-white/70 hover:text-white text-sm">About</a></li>
+            <li><a href="/careers" className="text-white/70 hover:text-white text-sm">Careers</a></li>
+            <li><a href="/contact" className="text-white/70 hover:text-white text-sm">Contact</a></li>
+            <li><a href="/blog" className="text-white/70 hover:text-white text-sm">Blog</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 className="text-white font-semibold mb-4">Legal</h3>
+          <ul className="space-y-2">
+            <li><a href="/privacy" className="text-white/70 hover:text-white text-sm">Privacy Policy</a></li>
+            <li><a href="/terms" className="text-white/70 hover:text-white text-sm">Terms of Service</a></li>
+            <li><a href="/cookies" className="text-white/70 hover:text-white text-sm">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div className="border-t border-white/10 mt-8 pt-8 text-center">
+        <p className="text-white/50 text-sm">© 2024 Outreach360. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+);
+
+// Hero Section
+const HeroSection = () => (
+  <section id="overview" className="relative min-h-screen flex items-center justify-center px-4 py-20">
+    <div className="absolute inset-0 bg-gradient-to-br from-[#b45ecf]/10 via-transparent to-[#480056]/10"></div>
+    <div className="max-w-6xl mx-auto text-center relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-12"
+      >
+        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#b45ecf]/20 to-[#480056]/20 rounded-full px-4 py-2 mb-6 border border-[#b45ecf]/30">
+          <span className="text-[#b45ecf] text-sm font-medium">✨ Intelligent Outreach Platform</span>
+        </div>
+        
+        <h1 className="text-3xl md:text-3xl lg:text-3xl font-bold text-white mb-8 leading-tight">
+          Everything You Need to Power
+          <span className="block bg-gradient-to-r from-[#b45ecf] via-[#d67bff] to-[#ff6b9d] bg-clip-text text-transparent">
+            High-Performance Outreach
+          </span>
+        </h1>
+        
+        <p className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-12 leading-relaxed">
+          Our platform brings together every tool modern sales and marketing teams need to plan, personalize, 
+          and automate outreach that actually converts.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button className="px-8 py-4 bg-gradient-to-r from-[#b45ecf] to-[#805ad5] text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 text-lg">
+            Start Free Trial
+          </button>
+          <button className="px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-colors duration-300 text-lg">
+            Schedule Demo
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Platform Preview */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="relative max-w-5xl mx-auto"
+      >
+        <GlassCard className="p-4">
+          <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/20 to-[#480056]/20"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center p-8">
+                <div className="text-5xl mb-6">🚀</div>
+                <div className="text-3xl font-bold text-white mb-4">All-in-One Outreach Platform</div>
+                <div className="text-white/70">See everything in action with a live demo</div>
               </div>
-              
-              <div className="space-y-8 lg:space-y-12">
-                {featureSections.map((section, index) => (
+            </div>
+          </div>
+        </GlassCard>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Multi-Channel Section
+const MultiChannelSection = () => (
+  <section id="channels" className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0014]/50">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full px-4 py-2 mb-6 border border-blue-500/30">
+              <span className="text-blue-400 text-sm font-medium">Multi-Channel Outreach</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Connect With Prospects
+              <span className="block text-blue-400">On Their Preferred Channels</span>
+            </h2>
+            
+            <p className="text-lg text-white/70 mb-8 leading-relaxed">
+              Your leads live across multiple platforms. With Outreach360, so does your outreach. 
+              Connect with your audience on Email, LinkedIn, WhatsApp, SMS, and Calls — all managed 
+              from one clean, unified dashboard.
+            </p>
+            
+            <ul className="space-y-4">
+              {[
+                "Build multi-step sequences that automatically switch between channels",
+                "Match engagement style to how your prospects prefer to communicate",
+                "Maintain consistent messaging across all touchpoints",
+                "Achieve higher reply rates and stronger relationships"
+              ].map((item, index) => (
+                <li key={index} className="flex items-start">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mr-3 mt-1">
+                    <div className="text-white text-sm">✓</div>
+                  </div>
+                  <span className="text-white/80">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="lg:w-1/2">
+            <GlassCard className="p-8">
+              <div className="grid grid-cols-3 gap-4">
+                {[
+                  { icon: "📧", label: "Email", color: "from-blue-500 to-cyan-500" },
+                  { icon: "💼", label: "LinkedIn", color: "from-purple-500 to-pink-500" },
+                  { icon: "💬", label: "WhatsApp", color: "from-green-500 to-emerald-500" },
+                  { icon: "📱", label: "SMS", color: "from-yellow-500 to-orange-500" },
+                  { icon: "📞", label: "Calls", color: "from-red-500 to-pink-500" },
+                  { icon: "🔄", label: "Sequences", color: "from-indigo-500 to-purple-500" }
+                ].map((channel, index) => (
                   <motion.div
-                    key={section.title}
-                    initial={{ opacity: 0, x: isMobile ? 30 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: '-50px' }}
-                    transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.15 : 0.2) }}
-                    className="space-y-3 lg:space-y-4"
+                    key={index}
+                    whileHover={{ y: -5 }}
+                    className="text-center"
                   >
-                    <h3 className={`${isMobile ? 'text-xl' : 'text-2xl'} font-bold text-white`}>{section.title}</h3>
-                    <p className={`text-white/70 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{section.description}</p>
-                    
-                    <div className="space-y-2">
-                      {section.features.map((feature, featureIndex) => (
-                        <motion.div
-                          key={feature}
-                          initial={{ opacity: 0, x: isMobile ? 15 : 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true, margin: '-50px' }}
-                          transition={{ delay: index * (isMobile ? 0.15 : 0.2) + featureIndex * (isMobile ? 0.08 : 0.1) }}
-                          className="flex items-center space-x-3 text-white/80"
-                        >
-                          <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-blue-400 rounded-full flex-shrink-0" />
-                          <span className={isMobile ? 'text-sm' : ''}>{feature}</span>
-                        </motion.div>
-                      ))}
+                    <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${channel.color} flex items-center justify-center mx-auto mb-3`}>
+                      <div className="text-2xl">{channel.icon}</div>
                     </div>
-                    
-                    <p className="text-white/60 italic text-sm">{section.note}</p>
+                    <div className="text-white font-semibold">{channel.label}</div>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </GlassCard>
           </div>
-        </section>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
 
-        {/* Benefits Section - Mobile optimized */}
-        <section className="py-12 lg:py-20 px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              className={`${isMobile ? 'text-2xl' : 'text-4xl'} font-bold text-white mb-8 lg:mb-12`}
-            >
-              Why Choose 360Airo's Unified Shared Inbox
-            </motion.h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8 lg:mb-12">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit}
-                  initial={{ opacity: 0, scale: isMobile ? 0.9 : 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: isMobile ? 0.5 : 0.6, delay: index * (isMobile ? 0.08 : 0.1) }}
-                  className="p-4 lg:p-6 bg-white/5 rounded-lg lg:rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300"
-                >
-                  <div className={`${isMobile ? 'w-8 h-8' : 'w-12 h-12'} bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-3 lg:mb-4`}>
-                    <CheckCircle2 className={`${isMobile ? 'h-4 w-4' : 'h-6 w-6'} text-blue-400`} />
+// AI Personalization Section
+const AIPersonalizationSection = () => (
+  <section id="personalization" className="py-20 px-4">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full px-4 py-2 mb-6 border border-purple-500/30">
+            <span className="text-purple-400 text-sm font-medium">AI-Powered Personalization</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Scale Personalization
+            <span className="block text-purple-400">Without Losing Authenticity</span>
+          </h2>
+          
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            Forget sending one-size-fits-all emails. Our AI engine writes personalized messages based on real-time data.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          <GlassCard className="p-8">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <div className="text-2xl">🤖</div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">Smart Message Generation</h3>
+                  <p className="text-white/60">Based on company, role, and online behavior</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {[
+                  "Personalized subject lines and message tone",
+                  "Real-time data integration for relevance",
+                  "Continuous learning from engagement patterns",
+                  "Automated customization at scale"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                    <div className="text-white/80">{item}</div>
                   </div>
-                  <p className={`text-white/80 leading-relaxed ${isMobile ? 'text-sm' : ''}`}>{benefit}</p>
-                </motion.div>
+                ))}
+              </div>
+            </div>
+          </GlassCard>
+          
+          <GlassCard className="p-8">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
+                  <div className="text-2xl">📈</div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-white">Performance Optimization</h3>
+                  <p className="text-white/60">AI learns what works for your audience</p>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                {[
+                  "40-60% higher open rates reported",
+                  "Continuous improvement over time",
+                  "Adaptive messaging strategies",
+                  "Data-backed personalization"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="w-2 h-2 bg-pink-400 rounded-full mr-3"></div>
+                    <div className="text-white/80">{item}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </GlassCard>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Automation Section
+const AutomationSection = () => (
+  <section id="automation" className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0014]/50">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500/20 to-green-500/20 rounded-full px-4 py-2 mb-6 border border-emerald-500/30">
+            <span className="text-emerald-400 text-sm font-medium">Smart Automation</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Automated Sequences and
+            <span className="block text-emerald-400">Intelligent Workflows</span>
+          </h2>
+        </div>
+        
+        <div className="grid lg:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Behavior-Triggered Workflows",
+              description: "Automatically trigger actions based on prospect behavior — opens, clicks, or meeting bookings.",
+              icon: "⚡",
+              color: "from-emerald-500 to-green-500"
+            },
+            {
+              title: "Smart Follow-ups",
+              description: "System pauses when leads reply and re-engages silent prospects at optimal times.",
+              icon: "🔄",
+              color: "from-green-500 to-teal-500"
+            },
+            {
+              title: "Zero Manual Labor",
+              description: "No lead is ever lost, forgotten, or mishandled. Campaigns stay organized and efficient.",
+              icon: "🤖",
+              color: "from-teal-500 to-cyan-500"
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <GlassCard className="p-8 h-full" hover>
+                <div className="flex flex-col h-full">
+                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6`}>
+                    <div className="text-2xl">{feature.icon}</div>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
+                  <p className="text-white/70 leading-relaxed flex-grow">{feature.description}</p>
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Unified Inbox Section
+const UnifiedInboxSection = () => (
+  <section id="inbox" className="py-20 px-4">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full px-4 py-2 mb-6 border border-cyan-500/30">
+              <span className="text-cyan-400 text-sm font-medium">Unified Communication</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              One Inbox for
+              <span className="block text-cyan-400">All Conversations</span>
+            </h2>
+            
+            <p className="text-lg text-white/70 mb-8 leading-relaxed">
+              Tired of switching tabs to find your conversations? Our unified inbox combines all your 
+              communication channels in one simple interface.
+            </p>
+            
+            <div className="space-y-6">
+              {[
+                "View and reply to emails, LinkedIn messages, and calls from one screen",
+                "Add notes, assign follow-ups, and tag teammates in real time",
+                "Keep your entire sales team aligned and organized",
+                "Never miss an important conversation again"
+              ].map((item, index) => (
+                <div key={index} className="flex items-start">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center mr-3 mt-1">
+                    <div className="text-white text-sm">✓</div>
+                  </div>
+                  <span className="text-white/80">{item}</span>
+                </div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              className="space-y-4 lg:space-y-6"
-            >
-              <p className={`${isMobile ? 'text-base' : 'text-xl'} text-white/70 max-w-2xl mx-auto leading-relaxed`}>
-                Manage outreach like a team, not a crowd. With 360Airo's Unified Shared Inbox, every reply, every lead, and every opportunity stays right where it belongs — in one place.
-              </p>
-
-              <Button 
-                size="lg" 
-                className={`bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 ${isMobile ? 'px-6 py-2 text-base' : 'px-8 py-3 text-lg'} rounded-xl w-full sm:w-auto`}
-                onClick={handleCTAClick}
-              >
-                Simplify Your Inbox
-                <ArrowRight className={`ml-2 ${isMobile ? 'h-4 w-4' : 'h-5 w-5'}`} />
-              </Button>
-            </motion.div>
           </div>
-        </section>
+          
+          <div className="lg:w-1/2">
+            <GlassCard className="p-6">
+              <div className="bg-black/30 rounded-xl p-6">
+                <div className="space-y-4">
+                  {/* Inbox Header */}
+                  <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                    <div className="text-white font-semibold">All Conversations</div>
+                    <div className="text-white/60 text-sm">24 unread</div>
+                  </div>
+                  
+                  {/* Conversation Items */}
+                  {[
+                    { name: "Sarah Johnson", company: "TechScale Inc.", channel: "Email", time: "2 min ago", unread: true },
+                    { name: "Mike Rodriguez", company: "GrowthLabs", channel: "LinkedIn", time: "15 min ago", unread: true },
+                    { name: "Alex Chen", company: "StartupXYZ", channel: "WhatsApp", time: "1 hour ago", unread: false },
+                    { name: "Jessica Williams", company: "EnterpriseCo", channel: "Email", time: "2 hours ago", unread: false }
+                  ].map((conv, index) => (
+                    <div key={index} className={`flex items-center p-3 rounded-lg ${conv.unread ? 'bg-cyan-500/10' : 'bg-white/5'}`}>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center mr-3">
+                        <div className="text-white text-sm">{conv.name.charAt(0)}</div>
+                      </div>
+                      <div className="flex-grow">
+                        <div className="flex items-center">
+                          <div className="text-white font-medium">{conv.name}</div>
+                          {conv.unread && <div className="w-2 h-2 bg-cyan-400 rounded-full ml-2"></div>}
+                        </div>
+                        <div className="text-white/60 text-sm">{conv.company}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-white/60 text-sm">{conv.channel}</div>
+                        <div className="text-white/40 text-xs">{conv.time}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </GlassCard>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
 
-        <Footer />
+// Analytics Section
+const AnalyticsSection = () => (
+  <section id="analytics" className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0014]/50">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-full px-4 py-2 mb-6 border border-orange-500/30">
+            <span className="text-orange-400 text-sm font-medium">Advanced Analytics</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Data-Driven Insights
+            <span className="block text-orange-400">That Drive Growth</span>
+          </h2>
+        </div>
+        
+        <GlassCard className="p-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">Track Everything That Matters</h3>
+              
+              <div className="space-y-6">
+                {[
+                  { metric: "Open Rates", value: "42%", change: "+18%" },
+                  { metric: "Reply Rates", value: "28%", change: "+12%" },
+                  { metric: "Meeting Bookings", value: "15%", change: "+7%" },
+                  { metric: "Conversion Rate", value: "8%", change: "+4%" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded-xl">
+                    <div>
+                      <div className="text-white/80">{item.metric}</div>
+                      <div className="text-2xl font-bold text-white">{item.value}</div>
+                    </div>
+                    <div className="text-emerald-400 font-semibold">{item.change}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">AI-Powered Forecasting</h3>
+              
+              <div className="space-y-6">
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-white/80 mb-2">Pipeline Health</div>
+                  <div className="flex items-center">
+                    <div className="flex-grow h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500" style={{ width: '78%' }}></div>
+                    </div>
+                    <div className="text-white font-bold ml-4">78% Healthy</div>
+                  </div>
+                </div>
+                
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-white/80 mb-2">Predicted Conversions</div>
+                  <div className="text-3xl font-bold text-white">42 Deals</div>
+                  <div className="text-white/60 text-sm mt-1">Next 30 days</div>
+                </div>
+                
+                <div className="p-4 bg-white/5 rounded-xl">
+                  <div className="text-white/80 mb-2">Top Performing Channel</div>
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mr-3">
+                      <div className="text-white">📧</div>
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold">Email Sequences</div>
+                      <div className="text-white/60 text-sm">68% engagement rate</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Features Grid
+const FeaturesGrid = () => {
+  const features = [
+    {
+      title: "AI Call Assistant",
+      description: "Transcribes, analyzes, and suggests follow-ups for every call",
+      icon: "🎙️",
+      color: "from-violet-500 to-purple-500"
+    },
+    {
+      title: "Built-in Lead Enrichment",
+      description: "Automatically adds verified contact details to your leads",
+      icon: "🔍",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "AI Coaching",
+      description: "Personalized feedback to optimize team performance",
+      icon: "👨‍🏫",
+      color: "from-emerald-500 to-green-500"
+    },
+    {
+      title: "Smart Scheduling",
+      description: "Automated meeting booking with timezone adjustments",
+      icon: "📅",
+      color: "from-pink-500 to-rose-500"
+    },
+    {
+      title: "Workflow Automation",
+      description: "CRM integrations that sync everything in real-time",
+      icon: "⚙️",
+      color: "from-orange-500 to-amber-500"
+    },
+    {
+      title: "Deliverability Optimizer",
+      description: "Domain warming and reputation monitoring",
+      icon: "📨",
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      title: "Team Collaboration",
+      description: "Shared workspace for marketing and sales alignment",
+      icon: "👥",
+      color: "from-cyan-500 to-blue-500"
+    },
+    {
+      title: "Compliance & Security",
+      description: "GDPR compliant with enterprise-grade encryption",
+      icon: "🔒",
+      color: "from-green-500 to-teal-500"
+    }
+  ];
+
+  return (
+    <section className="py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Complete Feature Suite
+              <span className="block text-[#b45ecf]">For Modern Outreach Teams</span>
+            </h2>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              Everything you need to automate, personalize, and scale your outreach strategy.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <GlassCard className="p-6 h-full" hover>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}>
+                    <div className="text-xl">{feature.icon}</div>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2">{feature.title}</h3>
+                  <p className="text-white/60 text-sm">{feature.description}</p>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
-    </>
+    </section>
+  );
+};
+
+// Pricing Section
+const PricingSection = () => (
+  <section id="pricing" className="py-20 px-4 bg-gradient-to-b from-transparent to-[#0a0014]/50">
+    <div className="max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-16"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Simple, Transparent
+            <span className="block text-[#b45ecf]">Pricing That Scales</span>
+          </h2>
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            Choose the plan that fits your team's needs. All plans include our core features.
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              name: "Starter",
+              price: "$49",
+              period: "/month",
+              description: "Perfect for individuals and small teams",
+              features: ["1,000 contacts", "Multi-channel outreach", "Basic analytics", "Email support"],
+              color: "from-blue-500/20 to-cyan-500/20",
+              border: "border-blue-500/30"
+            },
+            {
+              name: "Professional",
+              price: "$99",
+              period: "/month",
+              description: "For growing sales teams",
+              features: ["10,000 contacts", "AI personalization", "Advanced analytics", "Priority support", "CRM integration"],
+              color: "from-[#b45ecf]/20 to-[#805ad5]/20",
+              border: "border-[#b45ecf]/30",
+              popular: true
+            },
+            {
+              name: "Enterprise",
+              price: "Custom",
+              period: "",
+              description: "For large organizations",
+              features: ["Unlimited contacts", "All AI features", "Custom integrations", "Dedicated support", "Team training", "SLA guarantee"],
+              color: "from-purple-500/20 to-pink-500/20",
+              border: "border-purple-500/30"
+            }
+          ].map((plan, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="relative"
+            >
+              {plan.popular && (
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <div className="px-4 py-1 bg-gradient-to-r from-[#b45ecf] to-[#805ad5] text-white text-sm font-semibold rounded-full">
+                    MOST POPULAR
+                  </div>
+                </div>
+              )}
+              
+              <GlassCard className={`p-8 h-full border-2 ${plan.border} ${plan.popular ? 'border-[#b45ecf]/50' : ''}`}>
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline justify-center mb-4">
+                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+                    <span className="text-white/60">{plan.period}</span>
+                  </div>
+                  <p className="text-white/60">{plan.description}</p>
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  {plan.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-center">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-emerald-500 to-green-500 flex items-center justify-center mr-3">
+                        <div className="text-white text-xs">✓</div>
+                      </div>
+                      <span className="text-white/80">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <button className={`w-full py-3 rounded-xl font-semibold transition-all ${
+                  plan.popular
+                    ? 'bg-gradient-to-r from-[#b45ecf] to-[#805ad5] text-white hover:shadow-lg hover:shadow-[#b45ecf]/25'
+                    : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                }`}>
+                  {plan.popular ? 'Start Free Trial' : 'Get Started'}
+                </button>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Final CTA Section
+const FinalCTASection = () => (
+  <section className="py-20 px-4">
+    <div className="max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="text-center"
+      >
+        <div className="relative overflow-hidden rounded-3xl">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf] via-[#805ad5] to-[#553c9a] opacity-20"></div>
+          
+          <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 md:p-12 text-center border border-white/20">
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-r from-[#b45ecf] to-[#805ad5] flex items-center justify-center mx-auto mb-8">
+              <div className="text-white text-3xl">🚀</div>
+            </div>
+            
+            <h2 className="text-4xl font-bold text-white mb-6">
+              Ready to Transform Your Outreach?
+            </h2>
+            
+            <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+              Join thousands of teams who've increased reply rates by 40% and closed more deals with intelligent outreach automation.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-8 py-4 bg-gradient-to-r from-[#b45ecf] to-[#805ad5] text-white font-semibold rounded-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 text-lg">
+                Start Your Free Trial
+              </button>
+              
+              <button className="px-8 py-4 bg-white/10 text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-colors duration-300 text-lg">
+                Book a Demo
+              </button>
+            </div>
+            
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="text-center">
+                <div className="text-white font-semibold">14-Day Trial</div>
+                <div className="text-white/60 text-sm">No credit card</div>
+              </div>
+              <div className="text-center">
+                <div className="text-white font-semibold">100% Uptime</div>
+                <div className="text-white/60 text-sm">Enterprise SLA</div>
+              </div>
+              <div className="text-center">
+                <div className="text-white font-semibold">24/7 Support</div>
+                <div className="text-white/60 text-sm">Always available</div>
+              </div>
+              <div className="text-center">
+                <div className="text-white font-semibold">5,000+ Teams</div>
+                <div className="text-white/60 text-sm">Trust us</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+export default function HomePage() {
+  const [activeSection, setActiveSection] = useState('overview');
+
+  const handleScroll = () => {
+    const sections = [
+      'overview', 'channels', 'personalization', 
+      'automation', 'inbox', 'analytics', 'pricing'
+    ];
+    
+    const current = sections.find(section => {
+      const element = document.getElementById(section);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        return rect.top <= 100 && rect.bottom >= 100;
+      }
+      return false;
+    });
+    
+    if (current) {
+      setActiveSection(current);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+      <Navbar activeSection={activeSection} />
+
+      <main>
+        {/* Hero Section */}
+        <HeroSection />
+        
+        {/* Multi-Channel Section */}
+        <MultiChannelSection />
+        
+        {/* AI Personalization Section */}
+        <AIPersonalizationSection />
+        
+        {/* Automation Section */}
+        <AutomationSection />
+        
+        {/* Unified Inbox Section */}
+        <UnifiedInboxSection />
+        
+        {/* Analytics Section */}
+        <AnalyticsSection />
+        
+        {/* Features Grid */}
+        <FeaturesGrid />
+        
+        {/* Pricing Section */}
+        <PricingSection />
+        
+        {/* Final CTA Section */}
+        <FinalCTASection />
+      </main>
+
+      <Footer />
+    </div>
   );
 }
