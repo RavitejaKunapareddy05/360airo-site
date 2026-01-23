@@ -6,6 +6,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import {
   Linkedin,
@@ -1054,9 +1055,30 @@ export default function LinkedInAutomationPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
-      {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/linkedin-automation" />
-      
+      {/* Meta Tags for SEO */}
+        {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>AI-Powered LinkedIn Automation for Smarter Outreach | 360Airo</title>
+        <meta 
+          name="description" 
+          content="Automate LinkedIn prospecting with 360Airo — personalized connection requests, multi-step messaging, performance tracking & CRM sync for scalable, safe outreach."
+        />
+        <meta name="keywords" content="LinkedIn automation, LinkedIn prospecting, automated LinkedIn messages, LinkedIn outreach, LinkedIn CRM integration, AI LinkedIn automation" />
+        <meta property="og:title" content="AI-Powered LinkedIn Automation for Smarter Outreach | 360Airo" />
+        <meta 
+          property="og:description" 
+          content="Automate LinkedIn prospecting with 360Airo — personalized connection requests, multi-step messaging, performance tracking & CRM sync for scalable, safe outreach."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://360airo.com/features/linkedin-automation" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="AI-Powered LinkedIn Automation for Smarter Outreach | 360Airo" />
+        <meta 
+          name="twitter:description" 
+          content="Automate LinkedIn prospecting with 360Airo — personalized connection requests, multi-step messaging, performance tracking & CRM sync for scalable, safe outreach."
+        />
+        <link rel="canonical" href="https://360airo.com/features/linkedin-automation" />
+  </div>
       <Navbar />
 
       {/* Hero Section */}
