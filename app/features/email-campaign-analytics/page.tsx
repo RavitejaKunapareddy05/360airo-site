@@ -500,11 +500,14 @@ const visualizations = [
 export default function ReportsAnalyticsPage() {
   return (
     <>
-      <Head>
-        <title>Email Campaign Analytics Dashboard - Turn Every Email Into Insight | 360Airo</title>
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Email Campaign Analytics: Turn Every Email Into Insight with 360Airo
+</title>
         <meta 
           name="description" 
-          content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." 
+          content="Monitor email performance with real-time analytics, engagement reports, and deliverability insights. Optimize every campaign with 360Airo.
+" 
         />
         <meta 
           name="keywords" 
@@ -512,24 +515,27 @@ export default function ReportsAnalyticsPage() {
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/report-analytics" />
+        <link rel="canonical" href="https://360airo.com/features/email-campaign-analytics" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Email Campaign Analytics Dashboard - Turn Every Email Into Insight" />
-        <meta property="og:description" content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." />
-        <meta property="og:url" content="https://360airo.com/features/report-analytics" />
+        <meta property="og:title" content="Email Campaign Analytics: Turn Every Email Into Insight with 360Airo
+" />
+        <meta property="og:description" content="Monitor email performance with real-time analytics, engagement reports, and deliverability insights. Optimize every campaign with 360Airo.
+" />
+        <meta property="og:url" content="https://360airo.com/features/email-campaign-analytics" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
-        <meta property="og:image" content="https://360airo.com/og-reports-analytics.jpg" />
+        <meta property="og:image" content="https://360airo.com/og-email-campaign-analytics.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Email Campaign Analytics Dashboard - Turn Every Email Into Insight | 360Airo" />
+        <meta name="twitter:title" content="Email Campaign Analytics: Turn Every Email Into Insight with 360Airo
+" />
         <meta name="twitter:description" content="Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability." />
-        <meta name="twitter:image" content="https://360airo.com/twitter-reports-analytics.jpg" />
+        <meta name="twitter:image" content="https://360airo.com/twitter-email-campaign-analytics.jpg" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -538,6 +544,7 @@ export default function ReportsAnalyticsPage() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -547,7 +554,7 @@ export default function ReportsAnalyticsPage() {
               "@type": "Product",
               "name": "360Airo Email Campaign Analytics Dashboard",
               "description": "Measure what matters with 360Airo's Email campaign analytics dashboard. Transform campaign data into actionable insights and improve email deliverability.",
-              "url": "https://360airo.com/features/report-analytics",
+              "url": "https://360airo.com/features/email-campaign-analytics",
               "brand": {
                 "@type": "Brand",
                 "name": "360Airo"
@@ -568,7 +575,6 @@ export default function ReportsAnalyticsPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
