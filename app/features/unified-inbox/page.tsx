@@ -607,11 +607,13 @@ export default function UnifiedInboxRadialPage() {
 
   return (
     <>
-      <Head>
-        <title>Unified Shared Inbox for Team Collaboration | 360Airo</title>
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Unified Inbox Software for Email & LinkedIn Outreach | 360Airo</title>
         <meta 
           name="description" 
-          content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." 
+          content="Stop juggling inboxes. 360Airo’s Unified Inbox brings email, LinkedIn, and campaign replies into one workspace. Collaborate faster with AI-powered teamwork. Book a demo today.
+" 
         />
         <meta 
           name="keywords" 
@@ -619,12 +621,12 @@ export default function UnifiedInboxRadialPage() {
         />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/features/unified-shared-inbox" />
+        <link rel="canonical" href="https://360airo.com/features/unified-inbox" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
-        <meta property="og:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace for faster, smarter communication." />
-        <meta property="og:url" content="https://360airo.com/features/unified-shared-inbox" />
+        <meta property="og:title" content="Unified Inbox Software for Email & LinkedIn Outreach | 360Airo" />
+        <meta property="og:description" content="Stop juggling inboxes. 360Airo’s Unified Inbox brings email, LinkedIn, and campaign replies into one workspace. Collaborate faster with AI-powered teamwork. Book a demo today." />
+        <meta property="og:url" content="https://360airo.com/features/unified-inbox" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
         <meta property="og:image" content="https://360airo.com/og-unified-inbox.jpg" />
@@ -634,8 +636,9 @@ export default function UnifiedInboxRadialPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Unified Shared Inbox for Team Collaboration | 360Airo" />
-        <meta name="twitter:description" content="360Airo's Unified Shared Inbox organizes all your emails, LinkedIn replies, and campaign messages in one centralized workspace." />
+        <meta name="twitter:title" content="Unified Inbox Software for Email & LinkedIn Outreach | 360Airo" />
+        <meta name="twitter:description" content="Stop juggling inboxes. 360Airo’s Unified Inbox brings email, LinkedIn, and campaign replies into one workspace. Collaborate faster with AI-powered teamwork. Book a demo today.
+" />
         <meta name="twitter:image" content="https://360airo.com/twitter-unified-inbox.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -645,6 +648,7 @@ export default function UnifiedInboxRadialPage() {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         
+        </div>
         {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
@@ -675,7 +679,6 @@ export default function UnifiedInboxRadialPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
