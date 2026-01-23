@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useRef, useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
+import Head from 'next/head';
 
 import {
   Zap,
@@ -638,8 +639,31 @@ export default function MultiChannelPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-black overflow-hidden">
-      {/* Canonical URL for SEO */}
-      <link rel="canonical" href="https://360airo.com/features/multi-channel-platform" />
+      {/* Meta Tags for SEO */}
+
+        {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title>Multi-Channel Campaign Platform by 360Airo | Unify Email & LinkedIn</title>
+        <meta 
+          name="description" 
+          content="Reach prospects across email and LinkedIn with AI-powered multi-channel campaigns. Automate follow-ups, personalize outreach, and track results in one place."
+        />
+        <meta name="keywords" content="multi-channel marketing, email campaigns, LinkedIn outreach, AI automation, lead generation, sales outreach, multi-channel platform" />
+        <meta property="og:title" content="Multi-Channel Campaign Platform by 360Airo | Unify Email & LinkedIn" />
+        <meta 
+          property="og:description" 
+          content="Reach prospects across email and LinkedIn with AI-powered multi-channel campaigns. Automate follow-ups, personalize outreach, and track results in one place."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://360airo.com/features/multi-channel-campaign" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Multi-Channel Campaign Platform by 360Airo | Unify Email & LinkedIn" />
+        <meta 
+          name="twitter:description" 
+          content="Reach prospects across email and LinkedIn with AI-powered multi-channel campaigns. Automate follow-ups, personalize outreach, and track results in one place."
+        />
+        <link rel="canonical" href="https://360airo.com/features/multi-channel-campaign" />
+      </div>
       
       <Navbar />
 
