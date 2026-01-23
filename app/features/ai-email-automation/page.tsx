@@ -888,23 +888,24 @@ export default function AIEmailAutomationPage() {
 
   return (
     <>
-      <Head>
-        <title>AI Email Automation — Work Smarter, Scale Faster | 360Airo</title>
+      {/* Hidden meta tags for client-side rendering */}
+      <div className="hidden">
+        <title> AI Email Automation Software for Smarter Outreach | 360Airo
+</title>
         <meta 
           name="description" 
           content="Let automation handle the repetitive work so you can focus on strategy. 360Airo's AI email automation engine makes campaign execution effortless." 
         />
         <meta 
           name="keywords" 
-          content="AI email automation, email automation, workflow automation, intelligent automation, campaign automation, multi-channel automation, 360Airo, outreach automation" 
-        />
+          content=" 360Airo’s powerful LinkedIn automation tool helps you scale your network, engage prospects effortlessly, and run high-impact outreach campaigns with precision." />
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/ai-email-automation" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="AI Email Automation — Work Smarter, Scale Faster | 360Airo" />
-        <meta property="og:description" content="Let automation handle the repetitive work so you can focus on strategy. 360Airo's AI email automation engine makes campaign execution effortless." />
+        <meta property="og:title" content="AI Email Automation Software for Smarter Outreach | 360Airo" />
+        <meta property="og:description" content=" 360Airo’s powerful LinkedIn automation tool helps you scale your network, engage prospects effortlessly, and run high-impact outreach campaigns with precision." />
         <meta property="og:url" content="https://360airo.com/features/ai-email-automation" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
@@ -915,8 +916,8 @@ export default function AIEmailAutomationPage() {
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="AI Email Automation — Work Smarter, Scale Faster | 360Airo" />
-        <meta name="twitter:description" content="360Airo's AI email automation engine makes campaign execution effortless. Let automation handle the repetitive work so you can focus on strategy." />
+        <meta name="twitter:title" content="AI Email Automation Software for Smarter Outreach | 360Airo" />
+        <meta name="twitter:description" content=" 360Airo’s powerful LinkedIn automation tool helps you scale your network, engage prospects effortlessly, and run high-impact outreach campaigns with precision." />
         <meta name="twitter:image" content="https://360airo.com/twitter-ai-email-automation.jpg" />
         
         {/* Additional SEO Meta Tags */}
@@ -925,6 +926,7 @@ export default function AIEmailAutomationPage() {
         <meta name="theme-color" content="#ad60f8" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+         </div>
         
         {/* Structured Data for SEO */}
         <script
@@ -957,7 +959,6 @@ export default function AIEmailAutomationPage() {
             })
           }}
         />
-      </Head>
 
       {/* Hidden link for SEO */}
       <div className="hidden">
