@@ -219,9 +219,6 @@ export default function EmailVerifierPage() {
   const unknownCount = results.filter(r => r.status === 'unknown').length;
   const totalProcessed = results.length;
 
-  // Debug: Log results to console
-  console.log('Current results:', results);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
       <div className="max-w-7xl mx-auto py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
@@ -447,14 +444,7 @@ export default function EmailVerifierPage() {
                 <tbody className="divide-y divide-white/5">
                   {results.map((result, idx) => (
                     <tr key={idx} className="hover:bg-white/5 transition-colors">
-                      <td className="py-4 px-6 text-white font-mono text-sm">
-                        {result.email || 'No email field'}
-                        {!result.email && (
-                          <div className="text-xs text-red-400 mt-1">
-                            Debug: {JSON.stringify(result, null, 2)}
-                          </div>
-                        )}
-                      </td>
+                      <td className="py-4 px-6 text-white font-mono text-sm">{String(result.email || '')}</td>
                       <td className="py-4 px-6">
                         <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
                           result.status === 'valid' ? 'bg-green-500/20 text-green-400' :
