@@ -456,6 +456,12 @@ export function Navbar() {
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
                       }}
+                      onAnimationComplete={() => {
+                        // Prevent animation conflicts
+                        if (!featuresOpen) {
+                          setFeaturesOpen(false);
+                        }
+                      }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
                       
@@ -464,7 +470,7 @@ export function Navbar() {
                           <div className="grid grid-cols-3 gap-2">
                             {features.map((feature, index) => (
                               <motion.div
-                                key={feature.name}
+                                key={`feature-${feature.name}-${index}`}
                                 initial={{ opacity: 0, y: 8 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ 
@@ -628,6 +634,12 @@ export function Navbar() {
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
                       }}
+                      onAnimationComplete={() => {
+                        // Prevent animation conflicts
+                        if (!freeToolsOpen) {
+                          setFreeToolsOpen(false);
+                        }
+                      }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-xl pointer-events-none" />
                       
@@ -638,7 +650,7 @@ export function Navbar() {
                         <div className="grid grid-cols-3 gap-2">
                           {freeTools.map((tool, index) => (
                             <motion.div
-                              key={tool.name}
+                              key={`free-tool-${tool.name}-${index}`}
                               initial={{ opacity: 0, y: 8 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ 
@@ -683,23 +695,7 @@ export function Navbar() {
                         </div>
                       </div>
 
-                      {/* Custom Scrollbar Styles */}
-                      <style jsx global>{`
-                        .free-tools-dropdown::-webkit-scrollbar {
-                          width: 10px;
-                        }
-                        .free-tools-dropdown::-webkit-scrollbar-track {
-                          background: rgba(20, 10, 40, 0.3);
-                          border-radius: 10px;
-                        }
-                        .free-tools-dropdown::-webkit-scrollbar-thumb {
-                          background: rgba(139, 92, 246, 0.5);
-                          border-radius: 10px;
-                        }
-                        .free-tools-dropdown::-webkit-scrollbar-thumb:hover {
-                          background: rgba(139, 92, 246, 0.8);
-                        }
-                      `}</style>
+                      {/* Custom scrollbar styles applied via Tailwind CSS classes */}
                     </motion.div>
                   )}
                 </AnimatePresence>

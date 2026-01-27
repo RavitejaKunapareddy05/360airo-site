@@ -49,6 +49,8 @@ function validateEmailFormat(email: string): boolean {
 // Verify email using MailTester Ninja API
 async function verifyEmailViaMailTester(email: string): Promise<{ status: string; reason: string; code?: number; user?: string; domain?: string }> {
   try {
+    console.log(`🔍 Verifying email: ${email} with API key: ${BACKEND_API_KEY.substring(0, 10)}...`);
+    
     const { data } = await axios.get(MAILTESTER_API_ENDPOINT, {
       params: {
         email: email.toLowerCase().trim(),
@@ -57,6 +59,8 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
       timeout: 10000,
       family: 4,
     });
+    
+    console.log(`📥 API Response for ${email}:`, data);
     
     // Map MailTester response message to status
     // Accepted = Valid email
@@ -96,7 +100,12 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
       domain: data.domain,
     };
   } catch (error: any) {
-    console.error(`Error verifying ${email} via MailTester:`, error.message);
+    console.error(`❌ Error verifying ${email} via MailTester:`, error.message);
+    console.error(`❌ Error details:`, {
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message
+    });
     
     if (error.response?.status === 401 || error.response?.status === 403) {
       throw new Error('API authentication failed - please contact support');
@@ -167,8 +176,7 @@ export async function POST(request: NextRequest) {
     // Initialize results array
     const allResults = [];
 
-    // Process emails sequentially (10 seconds per email for speed)
-    
+    // Process emails sequentially
     const verifyEmailWithLimit = async (email: string) => {
       try {
         const trimmedEmail = email.toLowerCase().trim();
@@ -216,6 +224,7 @@ export async function POST(request: NextRequest) {
     const stream = new ReadableStream({
       async start(controller) {
         try {
+          console.log('🚀 Starting email verification stream...');
           controller.enqueue(encoder.encode('['));
           
           for (let i = 0; i < emails.length; i++) {
@@ -224,16 +233,18 @@ export async function POST(request: NextRequest) {
             
             // Send each result as it completes
             const json = JSON.stringify(result);
+            console.log('📤 Streaming result:', json);
             controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
             
             console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]} -> Status: ${result.status}`);
           }
           
           controller.enqueue(encoder.encode(']'));
+          console.log('🏁 Stream completed successfully');
           controller.close();
           console.log(`✅ All ${emails.length} emails verified and streamed`);
         } catch (error) {
-          console.error('Stream error:', error);
+          console.error('❌ Stream error:', error);
           controller.error(error);
         }
       },

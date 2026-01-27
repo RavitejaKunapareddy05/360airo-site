@@ -4,8 +4,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
-  serverless: {
-    timeout: 60,
+  experimental: {
+    serverComponentsExternalPackages: ['axios'],
   },
 };
 

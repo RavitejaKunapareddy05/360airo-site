@@ -92,22 +92,31 @@ export default function EmailVerifierPage() {
 
       let buffer = '';
       const resultsArray: VerificationResult[] = [];
+      const processedEmails = new Set<string>(); // Track processed emails to prevent duplicates
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
-          // Process any remaining data
-          if (buffer.trim() && buffer.trim() !== '[' && buffer.trim() !== ']') {
-            const cleaned = buffer.trim().replace(/^,|,$/g, '');
-            if (cleaned) {
-              try {
-                const result: VerificationResult = JSON.parse(cleaned);
-                resultsArray.push(result);
-                setResults(prev => [...prev, result]); // Use functional update
-                setProgress(100);
-                console.log('Final result:', result); // Add debugging
-              } catch (e) {
-                console.error('Failed to parse final result:', cleaned, e);
+          // Process any remaining complete JSON objects
+          const remaining = buffer.trim().replace(/^\[|\]$/g, '');
+          if (remaining) {
+            // Split by comma and process each complete JSON object
+            const parts = remaining.split(/,(?=\s*{)/);
+            for (const part of parts) {
+              const cleaned = part.trim();
+              if (cleaned && cleaned.startsWith('{')) {
+                try {
+                  const result: VerificationResult = JSON.parse(cleaned);
+                  console.log('📝 Final parsed result:', result);
+                  // Check for duplicates in final processing too using Set
+                  if (!processedEmails.has(result.email)) {
+                    processedEmails.add(result.email);
+                    resultsArray.push(result);
+                    setResults(prev => [...prev, result]);
+                  }
+                } catch (e) {
+                  console.error('❌ Failed to parse remaining:', cleaned, e);
+                }
               }
             }
           }
@@ -115,57 +124,42 @@ export default function EmailVerifierPage() {
         }
 
         buffer += decoder.decode(value, { stream: true });
+        console.log('📥 Received buffer chunk:', buffer);
 
-        // Extract complete JSON objects separated by commas
-        let objectDepth = 0;
-        let inString = false;
-        let escaped = false;
-        let lastCommaIndex = -1;
-
-        for (let i = 0; i < buffer.length; i++) {
-          const char = buffer[i];
-
-          if (escaped) {
-            escaped = false;
-            continue;
-          }
-
-          if (char === '\\') {
-            escaped = true;
-            continue;
-          }
-
-          if (char === '"') {
-            inString = !inString;
-            continue;
-          }
-
-          if (inString) continue;
-
-          if (char === '{') objectDepth++;
-          else if (char === '}') objectDepth--;
-          else if (char === ',' && objectDepth === 0) {
-            // Found complete object before comma
-            const jsonStr = buffer.substring(lastCommaIndex + 1, i).trim();
-            if (jsonStr && jsonStr !== '[') {
-              try {
-                const result: VerificationResult = JSON.parse(jsonStr);
-                resultsArray.push(result);
-                setResults(prev => [...prev, result]); // Use functional update
-                setProgress(Math.round((resultsArray.length / emailList.length) * 100));
-                console.log('Parsed result:', result); // Add debugging
-              } catch (e) {
-                console.error('Failed to parse:', jsonStr, e);
+        // Process complete JSON objects from buffer
+        const jsonArrayMatch = buffer.match(/\[(.*)\]/);
+        if (jsonArrayMatch) {
+          const jsonContent = jsonArrayMatch[1].trim();
+          if (jsonContent) {
+            // Split by comma and process each complete JSON object
+            const objects = jsonContent.split(/,(?=\s*{)/);
+            let processedCount = 0;
+            
+            for (const obj of objects) {
+              const cleaned = obj.trim();
+              if (cleaned && cleaned.startsWith('{') && cleaned.endsWith('}')) {
+                try {
+                  const result: VerificationResult = JSON.parse(cleaned);
+                  console.log('📝 Streaming parsed result:', result);
+                  console.log('📝 Result email field:', result.email);
+                  
+                  // Only add if not already processed (use Set for efficient lookup)
+                  if (!processedEmails.has(result.email)) {
+                    processedEmails.add(result.email);
+                    resultsArray.push(result);
+                    setResults(prev => [...prev, result]);
+                    processedCount++;
+                  }
+                } catch (e) {
+                  console.error('❌ Failed to parse streaming object:', cleaned, e);
+                }
               }
             }
-            lastCommaIndex = i;
+            
+            if (processedCount > 0) {
+              setProgress(Math.round((resultsArray.length / emailList.length) * 100));
+            }
           }
-        }
-
-        // Remove processed data from buffer
-        if (lastCommaIndex >= 0) {
-          buffer = buffer.substring(lastCommaIndex + 1);
-          lastCommaIndex = -1;
         }
       }
 
@@ -218,6 +212,15 @@ export default function EmailVerifierPage() {
   const invalidCount = results.filter(r => r.status === 'invalid').length;
   const unknownCount = results.filter(r => r.status === 'unknown').length;
   const totalProcessed = results.length;
+
+  // Debug: Log current state
+  console.log('📊 Current results state:', {
+    results,
+    validCount,
+    invalidCount,
+    unknownCount,
+    totalProcessed
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
