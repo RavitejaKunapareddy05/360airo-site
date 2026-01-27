@@ -89,7 +89,7 @@ async function verifyEmailViaMailTester(email: string): Promise<{ status: string
     }
 
     return {
-      status,
+      status: status || 'unknown', // Ensure status is never null/undefined
       reason: data.message || 'Verification completed',
       code: data.code,
       user: data.user,

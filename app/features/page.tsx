@@ -77,6 +77,7 @@ const Navbar = ({ activeSection }: { activeSection: string }) => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <div className="w-6 h-6 relative">
               <span className={`absolute h-0.5 w-6 bg-current transform transition-all ${isMenuOpen ? 'rotate-45 top-3' : 'top-1'}`} />
@@ -516,7 +517,7 @@ const UnifiedInboxSection = () => (
                   ].map((conv, index) => (
                     <div key={index} className={`flex items-center p-3 rounded-lg ${conv.unread ? 'bg-cyan-500/10' : 'bg-white/5'}`}>
                       <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center mr-3">
-                        <div className="text-white text-sm">{conv.name.charAt(0)}</div>
+                        <div className="text-white text-sm">{conv.name ? conv.name.charAt(0) : '?'}</div>
                       </div>
                       <div className="flex-grow">
                         <div className="flex items-center">

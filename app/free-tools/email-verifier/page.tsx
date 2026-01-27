@@ -454,7 +454,7 @@ export default function EmailVerifierPage() {
                             result.status === 'invalid' ? 'bg-red-400' :
                             'bg-yellow-400'
                           }`}></span>
-                          {result.status.charAt(0).toUpperCase() + result.status.slice(1)}
+                          {result.status ? result.status.charAt(0).toUpperCase() + result.status.slice(1) : 'Unknown'}
                         </span>
                       </td>
                       {showDetails && (
