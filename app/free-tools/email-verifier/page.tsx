@@ -30,10 +30,10 @@ export default function EmailVerifierPage() {
     setProgress(0);
     setShowDetails(false);
 
-    const emailList = emails
+    const emailList = [...new Set(emails
       .split('\n')
-      .map(e => e.trim())
-      .filter(e => e.length > 0);
+      .map(e => e.trim().toLowerCase()) // Normalize to lowercase
+      .filter(e => e.length > 0))];
 
     if (emailList.length === 0) {
       setError('Please enter at least one email address');
@@ -103,10 +103,11 @@ export default function EmailVerifierPage() {
               try {
                 const result: VerificationResult = JSON.parse(cleaned);
                 resultsArray.push(result);
-                setResults([...resultsArray]);
+                setResults(prev => [...prev, result]); // Use functional update
                 setProgress(100);
+                console.log('Final result:', result); // Add debugging
               } catch (e) {
-                console.error('Failed to parse final result:', cleaned);
+                console.error('Failed to parse final result:', cleaned, e);
               }
             }
           }
@@ -150,10 +151,11 @@ export default function EmailVerifierPage() {
               try {
                 const result: VerificationResult = JSON.parse(jsonStr);
                 resultsArray.push(result);
-                setResults([...resultsArray]);
+                setResults(prev => [...prev, result]); // Use functional update
                 setProgress(Math.round((resultsArray.length / emailList.length) * 100));
+                console.log('Parsed result:', result); // Add debugging
               } catch (e) {
-                console.error('Failed to parse:', jsonStr);
+                console.error('Failed to parse:', jsonStr, e);
               }
             }
             lastCommaIndex = i;
@@ -216,6 +218,9 @@ export default function EmailVerifierPage() {
   const invalidCount = results.filter(r => r.status === 'invalid').length;
   const unknownCount = results.filter(r => r.status === 'unknown').length;
   const totalProcessed = results.length;
+
+  // Debug: Log results to console
+  console.log('Current results:', results);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
@@ -442,7 +447,14 @@ export default function EmailVerifierPage() {
                 <tbody className="divide-y divide-white/5">
                   {results.map((result, idx) => (
                     <tr key={idx} className="hover:bg-white/5 transition-colors">
-                      <td className="py-4 px-6 text-white font-mono text-sm">{result.email}</td>
+                      <td className="py-4 px-6 text-white font-mono text-sm">
+                        {result.email || 'No email field'}
+                        {!result.email && (
+                          <div className="text-xs text-red-400 mt-1">
+                            Debug: {JSON.stringify(result, null, 2)}
+                          </div>
+                        )}
+                      </td>
                       <td className="py-4 px-6">
                         <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${
                           result.status === 'valid' ? 'bg-green-500/20 text-green-400' :

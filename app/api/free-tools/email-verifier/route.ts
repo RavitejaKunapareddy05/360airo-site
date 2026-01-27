@@ -202,7 +202,7 @@ export async function POST(request: NextRequest) {
       } catch (err) {
         console.error(`Error verifying ${email}:`, err);
         return {
-          email,
+          email: email.toLowerCase().trim(),
           status: 'unknown',
           reason: err instanceof Error ? err.message : 'Verification service error',
           verificationTime: 0,
@@ -226,7 +226,7 @@ export async function POST(request: NextRequest) {
             const json = JSON.stringify(result);
             controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
             
-            console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]}`);
+            console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]} -> Status: ${result.status}`);
           }
           
           controller.enqueue(encoder.encode(']'));
