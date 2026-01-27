@@ -51,7 +51,7 @@ const API_ENDPOINT = 'https://happy.mailtester.ninja/ninja';
 
 // Your API Key - Replace with your actual key
 // Or set environment variable: set MAILTESTER_KEY=your_key
-const API_KEY = process.env.MAILTESTER_KEY || 'sub_1SQ8ntAJu6gy4fiYiCXxoUQc';
+const API_KEY = process.env.MAILTESTER_KEY || 'sub_1Smcz1AJu6gy4fiYQNMZke52';
 
 // Throttle settings (100k emails per day = ~1 request per 865ms)
 const THROTTLE_MS = 865;

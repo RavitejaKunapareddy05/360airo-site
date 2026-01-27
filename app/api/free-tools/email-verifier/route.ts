@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import axios from 'axios';
 
 // Backend API Key from environment variable
-const BACKEND_API_KEY = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || 'sub_1SQ8ntAJu6gy4fiYiCXxoUQc';
+const BACKEND_API_KEY = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || 'sub_1Smcz1AJu6gy4fiYQNMZke52';
 const MAILTESTER_API_ENDPOINT = 'https://happy.mailtester.ninja/ninja';
 
 // Daily limit tracking (resets per deployment, use database for production)
