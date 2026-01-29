@@ -29,26 +29,66 @@ async function scrapeWebsiteInfo(website: string): Promise<string> {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       },
-      validateStatus: (status) => status < 500
+      validateStatus: (status) => status < 500,
+      maxRedirects: 5
     });
 
     if (response.status >= 400) return '';
 
     const $ = cheerio.load(response.data);
     
-    const title = $('title').text() || $('h1').first().text() || '';
-    const description = $('meta[name="description"]').attr('content') || '';
+    // Extract title - prioritize og:title, then regular title
+    let title = $('meta[property="og:title"]').attr('content') || 
+                $('title').text() || 
+                $('h1').first().text() || '';
+    title = title.trim();
+
+    // Extract description - prioritize og:description, then meta description
+    let description = $('meta[property="og:description"]').attr('content') || 
+                      $('meta[name="description"]').attr('content') || '';
+    description = description.trim().substring(0, 150);
+
+    // Extract meaningful headings and text (skip nav/footer)
     const headings: string[] = [];
+    const main = $('main, article, .content, [role="main"]').length > 0 
+      ? $('main, article, .content, [role="main"]')
+      : $('body');
     
-    $('h1, h2, h3').slice(0, 5).each((_, el) => {
+    main.find('h1, h2, h3').slice(0, 5).each((_, el) => {
       const text = $(el).text().trim();
-      if (text && text.length < 200) headings.push(text);
+      if (text && text.length > 3 && text.length < 200 && 
+          !text.toLowerCase().includes('sign in') && 
+          !text.toLowerCase().includes('login') &&
+          !text.toLowerCase().includes('cookie')) {
+        headings.push(text);
+      }
     });
+
+    // Extract value proposition from specific sections
+    let valueProp = '';
+    const aboutText = $('section').first().find('p').first().text().trim() ||
+                      $('[class*="about"]').first().text().trim() ||
+                      $('main p').first().text().trim() || '';
+    if (aboutText && aboutText.length > 10) {
+      valueProp = aboutText.substring(0, 120);
+    }
+
+    // Filter out generic results
+    const genericTerms = ['gmail', 'google', 'microsoft', 'apple', 'amazon', 'facebook', 'sign in', 'login'];
+    const isGeneric = genericTerms.some(term => 
+      title.toLowerCase().includes(term) || 
+      description.toLowerCase().includes(term)
+    );
+
+    if (isGeneric && !website.includes(title.toLowerCase().replace(/\s+/g, ''))) {
+      return ''; // Don't use generic results for company scraping
+    }
 
     const parts = [
       title && `Company: ${title}`,
-      description && `Description: ${description.substring(0, 100)}`,
-      headings.length > 0 && `Services: ${headings.slice(0, 2).join(', ')}`
+      description && `Description: ${description}`,
+      valueProp && `Value: ${valueProp}`,
+      headings.length > 0 && `Focus: ${headings.filter(h => h.length > 5).slice(0, 2).join(', ')}`
     ].filter(Boolean);
 
     return parts.join('\n');
