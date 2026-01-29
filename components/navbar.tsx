@@ -225,8 +225,8 @@ const features = [
     tag: 'Demo'
   },
   { 
-    name: 'Multi-Channel-Campaign', 
-    href: '/features/multi-channel-campaign',
+    name: 'Multi-Channel Platform', 
+    href: '/features/multi-channel-platform',
     description: 'Reach customers across multiple channels seamlessly',
     icon: Share2,
     color: 'from-indigo-500 to-purple-400',
@@ -329,17 +329,47 @@ export function Navbar() {
     window.location.href = 'https://app.360airo.com';
   }, []);
 
+  // Handle Free Tools Click (Toggle only - no hover)
+  const handleFreeToolsClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigation
+    setFreeToolsOpen(!freeToolsOpen);
+    // Close features dropdown if open
+    if (featuresOpen) {
+      setFeaturesOpen(false);
+    }
+  }, [freeToolsOpen, featuresOpen]);
+
   // Close mobile dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(event.target as Node)) {
         setMobileFeaturesOpen(false);
       }
+      if (freeToolsRef.current && !freeToolsRef.current.contains(event.target as Node)) {
+        setFreeToolsOpen(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  // Close dropdowns when clicking outside on desktop
+  useEffect(() => {
+    const handleClickOutsideDesktop = (event: MouseEvent) => {
+      if (freeToolsRef.current && !freeToolsRef.current.contains(event.target as Node)) {
+        setFreeToolsOpen(false);
+      }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setFeaturesOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutsideDesktop);
+    return () => {
+      document.removeEventListener('click', handleClickOutsideDesktop);
     };
   }, []);
 
@@ -456,12 +486,6 @@ export function Navbar() {
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
                       }}
-                      onAnimationComplete={() => {
-                        // Prevent animation conflicts
-                        if (!featuresOpen) {
-                          setFeaturesOpen(false);
-                        }
-                      }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-2xl pointer-events-none" />
                       
@@ -470,7 +494,7 @@ export function Navbar() {
                           <div className="grid grid-cols-3 gap-2">
                             {features.map((feature, index) => (
                               <motion.div
-                                key={`feature-${feature.name}-${index}`}
+                                key={feature.name}
                                 initial={{ opacity: 0, y: 8 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ 
@@ -570,24 +594,13 @@ export function Navbar() {
                 </AnimatePresence>
               </div>
 
-              {/* Free Tools Dropdown */}
+              {/* Free Tools Dropdown - CLICK ONLY (no hover) */}
               <div 
                 ref={freeToolsRef}
                 className="relative"
-                onMouseEnter={() => {
-                  if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                  setFreeToolsOpen(true);
-                  hideDropdown();
-                }}
-                onMouseLeave={() => {
-                  if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                  timeoutRef.current = setTimeout(() => {
-                    setFreeToolsOpen(false);
-                  }, 150);
-                }}
               >
-                <Link
-                  href="/free-tools"
+                <button
+                  onClick={handleFreeToolsClick}
                   className="flex items-center space-x-1 px-4 py-2 text-white/90 hover:text-white rounded-xl hover:bg-white/10 transition-all duration-300 group relative"
                 >
                   <span>Free Tools</span>
@@ -606,7 +619,7 @@ export function Navbar() {
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
-                </Link>
+                </button>
 
                 {/* Free Tools Dropdown */}
                 <AnimatePresence>
@@ -619,26 +632,10 @@ export function Navbar() {
                         duration: 0.2,
                         ease: [0.25, 0.46, 0.45, 0.94],
                       }}
-                      onMouseEnter={() => {
-                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                        setFreeToolsOpen(true);
-                      }}
-                      onMouseLeave={() => {
-                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                        timeoutRef.current = setTimeout(() => {
-                          setFreeToolsOpen(false);
-                        }, 150);
-                      }}
                       className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[600px] bg-[#1a0b2e] border-2 border-[#8B5CF6]/30 rounded-xl shadow-2xl overflow-hidden z-[100]"
                       style={{ 
                         background: 'linear-gradient(145deg, #1a0b2e 0%, #2d1b3d 50%, #1a0b2e 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(139, 92, 246, 0.3)'
-                      }}
-                      onAnimationComplete={() => {
-                        // Prevent animation conflicts
-                        if (!freeToolsOpen) {
-                          setFreeToolsOpen(false);
-                        }
                       }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/10 via-transparent to-[#C084FC]/10 rounded-xl pointer-events-none" />
@@ -650,7 +647,7 @@ export function Navbar() {
                         <div className="grid grid-cols-3 gap-2">
                           {freeTools.map((tool, index) => (
                             <motion.div
-                              key={`free-tool-${tool.name}-${index}`}
+                              key={tool.name}
                               initial={{ opacity: 0, y: 8 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ 
@@ -695,7 +692,23 @@ export function Navbar() {
                         </div>
                       </div>
 
-                      {/* Custom scrollbar styles applied via Tailwind CSS classes */}
+                      {/* Custom Scrollbar Styles */}
+                      <style jsx global>{`
+                        .free-tools-dropdown::-webkit-scrollbar {
+                          width: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-track {
+                          background: rgba(20, 10, 40, 0.3);
+                          border-radius: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-thumb {
+                          background: rgba(139, 92, 246, 0.5);
+                          border-radius: 10px;
+                        }
+                        .free-tools-dropdown::-webkit-scrollbar-thumb:hover {
+                          background: rgba(139, 92, 246, 0.8);
+                        }
+                      `}</style>
                     </motion.div>
                   )}
                 </AnimatePresence>
