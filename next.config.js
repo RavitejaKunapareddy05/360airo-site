@@ -5,7 +5,14 @@ const nextConfig = {
   },
   images: { unoptimized: true },
   experimental: {
-    serverComponentsExternalPackages: ['axios'],
+    serverComponentsExternalPackages: ['axios', 'undici', 'cheerio'],
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.externals = config.externals || {};
+      config.externals['undici'] = 'undici';
+    }
+    return config;
   },
 };
 
