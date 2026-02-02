@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp, Shield, Lock, Eye, Mail, Globe, UserCheck, Settings, Link, Users, Bell, AlertTriangle } from 'lucide-react';
+import { ChevronDown, ChevronUp, Shield, Lock, Eye, Mail, Globe, UserCheck, Settings, Link, Users, Bell, AlertTriangle, Cpu, Key } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 
@@ -60,6 +60,31 @@ Communication Data: When you use 360Airo for outreach campaigns, we process data
 6. Ensuring compliance with communication laws, anti-spam regulations, and platform integrity.
 
 360Airo never sells or shares your personal data with unrelated third parties. Any data sharing occurs only under strict confidentiality and only when it is necessary to deliver the service.`
+    },
+    {
+      title: 'Browser Extension Data Handling',
+      icon: <Cpu className="h-5 w-5" />,
+      content: `The 360AIRO LinkedIn Automation browser extension requires users to authenticate with their 360AIRO dashboard credentials prior to accessing its features. This step verifies the user's identity and securely links the extension to their 360AIRO account.
+
+LinkedIn Authentication Process
+
+Upon clicking the "Connect to LinkedIn" button within the extension, users are redirected to LinkedIn's official login page. Users enter their LinkedIn credentials directly on LinkedIn's secure site. At no point does 360AIRO collect, store, or access users' LinkedIn usernames or passwords.
+
+Session Data Usage
+
+Following successful LinkedIn login, the extension retrieves essential profile data & session data (e.g., session cookies) necessary for executing user-requested automation tasks. This data is handled as follows:
+• Stored securely within the extension.
+• Encrypted prior to transmission and storage in the 360AIRO database.
+• Used exclusively to deliver the automation features initiated by the user.
+
+User Control and Privacy
+
+Users maintain complete control over their data and can, at any time:
+• Log out of the extension.
+• Disconnect their LinkedIn account.
+• Delete all stored session data and account information.
+
+360AIRO does not sell, share, or disclose user data to third parties. All data is processed solely to provide the requested LinkedIn automation services.`
     },
     {
       title: 'Legal Basis for Processing',
@@ -192,8 +217,9 @@ Our data protection team is committed to ensuring your experience remains secure
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#19001d] via-[#480056] to-[#19001d] text-white">
-             {/* Canonical URL for SEO */}
+      {/* Canonical URL for SEO */}
       <link rel="canonical" href="https://360airo.com/Privacy-Policy-Page" />
+      
       {/* Add Navbar Component */}
       <Navbar />
       
