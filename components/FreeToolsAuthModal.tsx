@@ -328,7 +328,7 @@ export default function FreeToolsAuthModal({
                       onChange={(e) => handleOtpChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(index, e)}
                       maxLength={1}
-                      className="w-12 h-12 text-center text-lg font-semibold bg-white/70 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:bg-white focus:outline-none transition-all shadow-sm"
+                      className="w-12 h-12 text-center text-lg font-semibold bg-white/70 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:bg-white focus:outline-none transition-all shadow-sm text-gray-900"
                       aria-label={`Digit ${index + 1}`}
                     />
                   ))}
