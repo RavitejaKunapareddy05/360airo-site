@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Copy, Mail, AlertCircle, Loader, RefreshCw } from 'lucide-react';
-import { useToolAuth } from '@/app/contexts/ToolAuthContext';
+import { useFreeToolsAuth } from '@/app/contexts/FreeToolsAuthContext';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface PlacementResult {
   id: string;
@@ -24,7 +25,7 @@ export default function EmailDeliverabilityTest() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [placementResults, setPlacementResults] = useState<PlacementResult[]>([]);
   const [isLoadingPlacement, setIsLoadingPlacement] = useState(false);
-  const { verifiedEmail, isVerified } = useToolAuth();
+  const { email: verifiedEmail, isVerified } = useFreeToolsAuth();
 
   const handleCopyEmail = (email: string, index: number) => {
     navigator.clipboard.writeText(email);
@@ -54,7 +55,8 @@ export default function EmailDeliverabilityTest() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
+    <ProtectedFreeTool toolName="Email Deliverability Test">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -429,5 +431,6 @@ export default function EmailDeliverabilityTest() {
         </div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

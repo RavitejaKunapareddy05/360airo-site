@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
+import { FreeToolsAuthProvider } from '@/app/contexts/FreeToolsAuthContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,9 +18,11 @@ export const metadata: Metadata = {
       { url: '/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: {
+      url: '/apple-touch-icon.png',
+      sizes: '180x180',
+      type: 'image/png',
+    },
     shortcut: '/favicon.ico',
   },
 };
@@ -41,9 +43,7 @@ export default function RootLayout({
 
         {/* ✅ Favicon and Icons */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
 
         {/* ✅ Open Graph & Social Meta */}
@@ -72,26 +72,9 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
-        {children}
-
-        {/* ✅ Optional: Live Chat Widget (Tawk.to) */}
-        <Script
-          id="tawk-script"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-              (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/6908f8879dbef619524aff09/1j95glkte';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-              })();
-            `,
-          }}
-        />
+        <FreeToolsAuthProvider>
+          {children}
+        </FreeToolsAuthProvider>
       </body>
     </html>
   );

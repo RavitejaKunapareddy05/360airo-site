@@ -21,6 +21,7 @@ import {
   AlertCircle,
   Database
 } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface Lead {
   id: string;
@@ -171,7 +172,8 @@ export default function LeadConversionToolPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+    <ProtectedFreeTool toolName="Lead Conversion Platform">
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20">
         <div className="max-w-7xl mx-auto relative z-10 w-full">
@@ -259,7 +261,7 @@ export default function LeadConversionToolPage() {
                 <SearchIcon className="absolute left-3 top-3 w-5 h-5 text-white/40" />
                 <input type="text" placeholder="Search..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-purple-500" />
               </div>
-              <select value={filterQuality} onChange={(e) => setFilterQuality(e.target.value as any)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none">
+              <select value={filterQuality} onChange={(e) => setFilterQuality(e.target.value as any)} className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none" aria-label="Filter leads by quality">
                 <option value="All">All Quality</option>
                 <option value="High">High Quality</option>
                 <option value="Medium">Medium Quality</option>
@@ -314,7 +316,7 @@ export default function LeadConversionToolPage() {
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-[#19001d] border border-white/20 rounded-2xl p-8 max-w-md w-full">
             <h3 className="text-2xl font-bold text-white mb-4">Import Leads from CSV</h3>
             <p className="text-white/70 mb-6">Upload CSV with: Email, Name, Company, Phone, Score, Quality</p>
-            <input type="file" accept=".csv" onChange={importCSV} className="w-full mb-4 text-white" />
+            <input type="file" accept=".csv" onChange={importCSV} className="w-full mb-4 text-white" aria-label="Upload CSV file with leads" />
             <Button onClick={() => setShowImportModal(false)} className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20">Close</Button>
           </motion.div>
         </div>
@@ -372,5 +374,6 @@ export default function LeadConversionToolPage() {
         </div>
       </section>
     </div>
+    </ProtectedFreeTool>
   );
 }

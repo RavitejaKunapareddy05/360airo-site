@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, Zap } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 export default function SPFGeneratorPage() {
   const [domain, setDomain] = useState('');
@@ -68,7 +69,8 @@ export default function SPFGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
+    <ProtectedFreeTool toolName="SPF Generator">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -166,5 +168,6 @@ export default function SPFGeneratorPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

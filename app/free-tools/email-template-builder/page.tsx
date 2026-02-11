@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, FileText } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 export default function EmailTemplateBuilderPage() {
   const [htmlContent, setHtmlContent] = useState('');
@@ -65,7 +66,8 @@ export default function EmailTemplateBuilderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
+    <ProtectedFreeTool toolName="Email Template Builder">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -89,6 +91,7 @@ export default function EmailTemplateBuilderPage() {
                 value={templateType}
                 onChange={(e) => setTemplateType(e.target.value)}
                 className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white"
+                aria-label="Email template type"
               >
                 {templateTypes.map((type) => (
                   <option key={type} value={type}>
@@ -105,6 +108,7 @@ export default function EmailTemplateBuilderPage() {
                 onChange={(e) => setPurpose(e.target.value)}
                 placeholder="E.g., 'Welcome new users to our SaaS product' or 'Monthly product updates newsletter'"
                 className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white placeholder-white/30 min-h-24"
+                aria-label="Template purpose description"
               />
             </div>
 
@@ -129,6 +133,7 @@ export default function EmailTemplateBuilderPage() {
                   value={htmlContent}
                   onChange={(e) => setHtmlContent(e.target.value)}
                   className="w-full bg-white/5 border border-white/20 rounded-lg p-4 text-white min-h-64 font-mono text-sm"
+                  aria-label="HTML content editor"
                 />
               </div>
 
@@ -156,6 +161,7 @@ export default function EmailTemplateBuilderPage() {
               <iframe
                 srcDoc={`<!DOCTYPE html><html><head><meta charset="utf-8"><style>body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }</style></head><body>${htmlContent}</body></html>`}
                 className="w-full h-96 border-0"
+                title="Email template preview"
               />
             </div>
           </motion.div>
@@ -166,5 +172,6 @@ export default function EmailTemplateBuilderPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

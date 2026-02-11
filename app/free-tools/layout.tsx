@@ -2,7 +2,6 @@
 
 import { ToolAuthProvider } from '@/app/contexts/ToolAuthContext';
 import { ToolUserSidebar } from '@/components/ToolUserSidebar';
-import { OTPVerificationModal } from '@/components/OTPVerificationModal';
 import { useToolAuth } from '@/app/contexts/ToolAuthContext';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -41,9 +40,6 @@ function FreeToolsLayoutContent({
       <div>
         {children}
       </div>
-
-      {/* Show login modal if not verified - overlays on top with high z-index */}
-      {!isVerified && <OTPVerificationModal isOpen={!isVerified} onClose={() => {}} />}
 
       {/* Show sidebar when verified */}
       {isVerified && <ToolUserSidebar />}

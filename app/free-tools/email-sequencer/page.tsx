@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Zap, Copy, Download } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface EmailStep {
   id: string;
@@ -230,7 +231,8 @@ export default function EmailSequencerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
+    <ProtectedFreeTool toolName="Email Sequencer">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -439,5 +441,6 @@ export default function EmailSequencerPage() {
         </div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

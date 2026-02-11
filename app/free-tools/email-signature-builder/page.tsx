@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, PenTool, Image as ImageIcon } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface SignatureTemplate {
   name: string;
@@ -165,7 +166,8 @@ export default function EmailSignatureBuilderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
+    <ProtectedFreeTool toolName="Email Signature Builder">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -280,6 +282,7 @@ export default function EmailSignatureBuilderPage() {
                     value={logoSize}
                     onChange={(e) => setLogoSize(Number(e.target.value))}
                     className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                    aria-label="Logo size slider"
                   />
                   <Button
                     onClick={() => {
@@ -370,6 +373,7 @@ export default function EmailSignatureBuilderPage() {
                     value={color}
                     onChange={(e) => setColor(e.target.value)}
                     className="w-16 h-10 rounded cursor-pointer"
+                    aria-label="Accent color picker"
                   />
                   <span className="text-white/70 text-sm">{color}</span>
                 </div>
@@ -497,5 +501,6 @@ export default function EmailSignatureBuilderPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

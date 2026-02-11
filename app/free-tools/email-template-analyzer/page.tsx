@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, AlertCircle, CheckCircle, Zap, Copy } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface AnalysisResult {
   subjectLength: number;
@@ -632,7 +633,8 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
+    <ProtectedFreeTool toolName="Email Template Analyzer">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-12 text-center">
@@ -958,5 +960,6 @@ ${analysis.recommendations.map((r) => `- ${r}`).join('\n')}
         </div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

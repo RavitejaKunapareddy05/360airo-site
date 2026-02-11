@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Mail, CheckCircle, XCircle, Clock, Download, Upload, Eye, Copy, AlertCircle } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 interface VerificationResult {
   email: string;
@@ -223,7 +224,8 @@ export default function EmailVerifierPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+    <ProtectedFreeTool toolName="Email Verifier">
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
       <div className="max-w-7xl mx-auto py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -491,5 +493,6 @@ export default function EmailVerifierPage() {
         )}
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

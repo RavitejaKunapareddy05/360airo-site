@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Calculator as CalcIcon, Download } from 'lucide-react';
 import Link from 'next/link';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 export default function MailboxCalculatorPage() {
   const [emailsPerDay, setEmailsPerDay] = useState(50);
@@ -27,7 +28,8 @@ export default function MailboxCalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
+    <ProtectedFreeTool toolName="Mailbox Calculator">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -50,16 +52,16 @@ export default function MailboxCalculatorPage() {
               <div>
                 <label className="block text-white font-semibold mb-3">Target Emails/Day</label>
                 <div className="flex items-center gap-4">
-                  <input type="range" min="10" max="500" step="10" value={emailsPerDay} onChange={(e) => setEmailsPerDay(Number(e.target.value))} className="flex-1 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" />
-                  <input type="number" value={emailsPerDay} onChange={(e) => setEmailsPerDay(Number(e.target.value))} className="w-20 bg-white/5 border border-white/20 rounded-lg p-2 text-white" />
+                  <input type="range" min="10" max="500" step="10" value={emailsPerDay} onChange={(e) => setEmailsPerDay(Number(e.target.value))} className="flex-1 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" aria-label="Target emails per day slider" />
+                  <input type="number" value={emailsPerDay} onChange={(e) => setEmailsPerDay(Number(e.target.value))} className="w-20 bg-white/5 border border-white/20 rounded-lg p-2 text-white" aria-label="Target emails per day value" />
                 </div>
               </div>
 
               <div>
                 <label className="block text-white font-semibold mb-3">Warmup Duration (days)</label>
                 <div className="flex items-center gap-4">
-                  <input type="range" min="7" max="30" step="1" value={warmupDays} onChange={(e) => setWarmupDays(Number(e.target.value))} className="flex-1 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" />
-                  <input type="number" value={warmupDays} onChange={(e) => setWarmupDays(Number(e.target.value))} className="w-20 bg-white/5 border border-white/20 rounded-lg p-2 text-white" />
+                  <input type="range" min="7" max="30" step="1" value={warmupDays} onChange={(e) => setWarmupDays(Number(e.target.value))} className="flex-1 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" aria-label="Warmup duration slider" />
+                  <input type="number" value={warmupDays} onChange={(e) => setWarmupDays(Number(e.target.value))} className="w-20 bg-white/5 border border-white/20 rounded-lg p-2 text-white" aria-label="Warmup duration value" />
                 </div>
               </div>
             </div>
@@ -123,5 +125,6 @@ export default function MailboxCalculatorPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

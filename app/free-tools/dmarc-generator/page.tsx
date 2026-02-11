@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, Shield } from 'lucide-react';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 export default function DMARCGeneratorPage() {
   const [domain, setDomain] = useState('');
@@ -41,7 +42,8 @@ export default function DMARCGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
+    <ProtectedFreeTool toolName="DMARC Generator">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-32 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -72,7 +74,7 @@ export default function DMARCGeneratorPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-white font-semibold mb-3">Policy</label>
-                <select value={policy} onChange={(e) => setPolicy(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer">
+                <select value={policy} onChange={(e) => setPolicy(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer" aria-label="DMARC policy">
                   <option value="none" className="bg-[#1a0b2e] text-white">none - Monitor only</option>
                   <option value="quarantine" className="bg-[#1a0b2e] text-white">quarantine - Quarantine failures</option>
                   <option value="reject" className="bg-[#1a0b2e] text-white">reject - Reject failures</option>
@@ -81,7 +83,7 @@ export default function DMARCGeneratorPage() {
 
               <div>
                 <label className="block text-white font-semibold mb-3">Alignment</label>
-                <select value={alignment} onChange={(e) => setAlignment(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer">
+                <select value={alignment} onChange={(e) => setAlignment(e.target.value)} className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-white/90 focus:outline-none focus:border-blue-400 appearance-none cursor-pointer" aria-label="DMARC alignment mode">
                   <option value="relaxed" className="bg-[#1a0b2e] text-white">relaxed - More lenient</option>
                   <option value="strict" className="bg-[#1a0b2e] text-white">strict - Strict alignment</option>
                 </select>
@@ -90,7 +92,7 @@ export default function DMARCGeneratorPage() {
 
             <div>
               <label className="block text-white font-semibold mb-3">Policy Coverage: {percentage}%</label>
-              <input type="range" min="1" max="100" value={percentage} onChange={(e) => setPercentage(Number(e.target.value))} className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" />
+              <input type="range" min="1" max="100" value={percentage} onChange={(e) => setPercentage(Number(e.target.value))} className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer" aria-label="DMARC policy coverage percentage" />
               <p className="text-white/50 text-sm mt-2">Apply policy to this percentage of emails</p>
             </div>
 
@@ -148,5 +150,6 @@ export default function DMARCGeneratorPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }

@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Copy, Download, Sparkles, Mail, CheckCircle, Loader, Upload, Globe, Settings } from 'lucide-react';
-import { useToolAuth } from '@/app/contexts/ToolAuthContext';
+import { useFreeToolsAuth } from '@/app/contexts/FreeToolsAuthContext';
 import { parseCSV, validateProspect, type Prospect } from '@/lib/csvParser';
 import { scrapeWebsite, extractKeyInfo } from '@/lib/webScraper';
+import ProtectedFreeTool from '@/components/ProtectedFreeTool';
 
 export default function EmailPitchGeneratorPage() {
-  const { verifiedEmail } = useToolAuth();
+  const { email: verifiedEmail } = useFreeToolsAuth();
 
   // Mode Selection
   const [mode, setMode] = useState<'single' | 'batch' | 'company'>('single');
@@ -244,7 +245,8 @@ export default function EmailPitchGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-20 pb-12 px-4">
+    <ProtectedFreeTool toolName="Email Pitch Generator">
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0519] via-[#1a0b2e] to-[#2d1b3d] pt-20 pb-12 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
@@ -545,6 +547,7 @@ export default function EmailPitchGeneratorPage() {
         </motion.div>
       </div>
     </div>
+    </ProtectedFreeTool>
   );
 }
 
