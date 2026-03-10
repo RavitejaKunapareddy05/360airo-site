@@ -6,6 +6,10 @@ import { Footer } from '@/components/footer';
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import { Check, Star, Award, Zap, Shield, TrendingUp, DollarSign, Users, Calendar, Clock, ArrowRight } from 'lucide-react';
+<<<<<<< HEAD
+=======
+import Head from 'next/head';
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -966,6 +970,7 @@ const ConclusionSection = () => (
 export default function CheapestColdEmailSoftwareGuide() {
   return (
     <>
+<<<<<<< HEAD
       <div className="hidden">
         {/* Primary SEO Meta Tags */}
         <title>10 Cheapest Cold Email Software for Startups & Agencies (2026 Guide)</title>
@@ -1026,6 +1031,16 @@ export default function CheapestColdEmailSoftwareGuide() {
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+=======
+      <Head>
+        <title>10 Cheapest Cold Email Software for Startups & Agencies (2026 Guide)</title>
+        <meta name="description" content="Tested 25+ tools to find the cheapest cold email software that actually delivers results. Compare the best budget-friendly picks for startups & agencies in 2026." />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+        {/* Canonical URL for SEO */}
+        <link rel="canonical" href="https://360airo.com/blogs/cheapest-cold-email-software" />
+        
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
         <Navbar />
 
         <main className="text-white">

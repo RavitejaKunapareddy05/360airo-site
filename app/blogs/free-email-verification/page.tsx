@@ -5,6 +5,10 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Image from 'next/image';
 import { ReactNode } from 'react';
+<<<<<<< HEAD
+=======
+import Head from 'next/head';
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -359,6 +363,7 @@ const FinalThoughtsModule = () => (
 );
 
 export default function FreeEmailVerificationGuide() {
+<<<<<<< HEAD
   // Define SEO metadata
   const pageTitle = "Free Email Verification: How to Verify Email Addresses for Free | 360Airo";
   const pageDescription = "Verify email addresses for free with 360Airo's built-in email verification tool. Clean your lists, reduce bounce rates, protect sender reputation, and improve deliverability before every campaign.";
@@ -472,6 +477,18 @@ export default function FreeEmailVerificationGuide() {
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+=======
+  return (
+    <>
+              <Head>
+        <title>Free Email Verification: How to Verify Email Addresses for Free | 360Airo</title>
+        <meta name="description" content="Verify email addresses for free with 360Airo's built-in email verification tool. Clean your lists, reduce bounce rates, protect sender reputation, and improve deliverability before every campaign." />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+        {/* Canonical URL for SEO */}
+        <link rel="canonical" href="https://360airo.com/blogs/free-email-verification" />
+        
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
         <Navbar />
 
         <div className="min-h-screen text-white pt-32">
@@ -566,4 +583,8 @@ export default function FreeEmailVerificationGuide() {
       </div>
     </>
   );
+<<<<<<< HEAD
 }
+=======
+} 
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be

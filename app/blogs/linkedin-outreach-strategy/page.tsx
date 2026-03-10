@@ -5,6 +5,10 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Image from 'next/image';
 import { ReactNode } from 'react';
+<<<<<<< HEAD
+=======
+import Head from 'next/head';
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -248,6 +252,7 @@ const FinalThoughtsModule = () => (
 );
 
 export default function LinkedInOutreachStrategy2025() {
+<<<<<<< HEAD
   // Define SEO metadata
   const pageTitle = "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025";
   const pageDescription = "Learn a proven LinkedIn outreach strategy to get more replies and B2B meetings. Step-by-step playbook covering profile optimization, messaging, follow-ups & multichannel outreach.";
@@ -361,6 +366,17 @@ export default function LinkedInOutreachStrategy2025() {
       </div>
 
       <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+=======
+  return (
+    <>
+          <Head>
+        <title>LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025</title>
+        <meta name="description" content="Learn a proven LinkedIn outreach strategy to get more replies and B2B meetings. Step-by-step playbook covering profile optimization, messaging, follow-ups & multichannel outreach." />
+      </Head>
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+                                                {/* Canonical URL for SEO */}
+      <link rel="canonical" href="https://360airo.com/blogs/linkedin-outreach-strategy" />
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
         <Navbar />
 
         <div className="min-h-screen text-white pt-32">

@@ -5,6 +5,10 @@ import { ArrowRight, Calendar, Clock, User, Eye, Share2, BookOpen, Calculator, M
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import Link from 'next/link';
+<<<<<<< HEAD
+=======
+import Head from 'next/head';
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -112,6 +116,7 @@ const categories = [
 export default function BlogsPage() {
   return (
     <>
+<<<<<<< HEAD
       {/* Hidden SEO Meta Tags */}
       <div className="hidden">
         <title>Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo</title>
@@ -195,6 +200,12 @@ export default function BlogsPage() {
         />
       </div>
 
+=======
+      <Head>
+        <title>Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo</title>
+        <meta name="description" content="expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability. Actionable tips to grow your pipeline faster with 360Airo." />
+      </Head>
+>>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
       <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
         {/* Animated Background Elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
