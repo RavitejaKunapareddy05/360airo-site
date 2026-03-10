@@ -1,0 +1,267 @@
+import { NextRequest, NextResponse } from 'next/server';
+import axios from 'axios';
+
+// Backend API Key from environment variable
+const BACKEND_API_KEY = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || 'sub_1Smcz1AJu6gy4fiYQNMZke52';
+const MAILTESTER_API_ENDPOINT = 'https://happy.mailtester.ninja/ninja';
+
+// Daily limit tracking (resets per deployment, use database for production)
+const dailyLimits = new Map<string, { count: number; date: string }>();
+const DAILY_LIMIT = 30;
+
+function getDailyKey(ipAddress: string): string {
+  return `${ipAddress}:${new Date().toISOString().split('T')[0]}`;
+}
+
+function checkDailyLimit(ipAddress: string): { allowed: boolean; remaining: number } {
+  const key = getDailyKey(ipAddress);
+  const today = new Date().toISOString().split('T')[0];
+  
+  if (!dailyLimits.has(key)) {
+    dailyLimits.set(key, { count: 0, date: today });
+  }
+  
+  const limit = dailyLimits.get(key)!;
+  
+  if (limit.count >= DAILY_LIMIT) {
+    return { allowed: false, remaining: 0 };
+  }
+  
+  return { allowed: true, remaining: DAILY_LIMIT - limit.count };
+}
+
+function incrementDailyCount(ipAddress: string, count: number): number {
+  const key = getDailyKey(ipAddress);
+  if (!dailyLimits.has(key)) {
+    dailyLimits.set(key, { count: 0, date: new Date().toISOString().split('T')[0] });
+  }
+  const limit = dailyLimits.get(key)!;
+  limit.count += count;
+  return limit.count;
+}
+
+// Email format validation using regex
+function validateEmailFormat(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Verify email using MailTester Ninja API
+async function verifyEmailViaMailTester(email: string): Promise<{ status: string; reason: string; code?: number; user?: string; domain?: string }> {
+  try {
+    console.log(`🔍 Verifying email: ${email} with API key: ${BACKEND_API_KEY.substring(0, 10)}...`);
+    
+    const { data } = await axios.get(MAILTESTER_API_ENDPOINT, {
+      params: {
+        email: email.toLowerCase().trim(),
+        key: BACKEND_API_KEY,
+      },
+      timeout: 10000,
+      family: 4,
+    });
+    
+    console.log(`📥 API Response for ${email}:`, data);
+    
+    // Map MailTester response message to status
+    // Accepted = Valid email
+    // Rejected = Invalid email
+    // DNS check passed but email rejected = Unknown (DNS valid, email not accepted)
+    const messageToStatus: { [key: string]: string } = {
+      'Accepted': 'valid',
+      'Rejected': 'invalid',
+      'Invalid Format': 'invalid',
+      'Unknown': 'unknown',
+      'Domain has no MX records': 'invalid',
+    };
+
+    // Get status from message, default to message itself if not in map
+    let status = 'unknown';
+    if (data.message) {
+      const messageLower = data.message.toLowerCase();
+      
+      if (messageLower.includes('accepted')) {
+        status = 'valid';
+      } else if (messageLower.includes('rejected')) {
+        status = 'invalid';
+      } else if (messageLower.includes('invalid')) {
+        status = 'invalid';
+      } else if (messageLower.includes('unknown')) {
+        status = 'unknown';
+      } else if (messageLower.includes('invalid format')) {
+        status = 'invalid';
+      }
+    }
+
+    return {
+      status: status || 'unknown', // Ensure status is never null/undefined
+      reason: data.message || 'Verification completed',
+      code: data.code,
+      user: data.user,
+      domain: data.domain,
+    };
+  } catch (error: any) {
+    console.error(`❌ Error verifying ${email} via MailTester:`, error.message);
+    console.error(`❌ Error details:`, {
+      status: error.response?.status,
+      data: error.response?.data,
+      message: error.message
+    });
+    
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      throw new Error('API authentication failed - please contact support');
+    }
+    
+    if (error.code === 'ECONNREFUSED' || error.code === 'ETIMEDOUT') {
+      throw new Error('Verification service temporarily unavailable - please try again');
+    }
+
+    return {
+      status: 'unknown',
+      reason: error.response?.data?.message || 'Verification service error',
+      code: 2,
+    };
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { emails } = body;
+
+    if (!Array.isArray(emails) || emails.length === 0) {
+      return NextResponse.json(
+        { error: 'Please provide an array of emails' },
+        { status: 400 }
+      );
+    }
+
+    if (emails.length > 1000) {
+      return NextResponse.json(
+        { error: 'Maximum 1000 emails at a time' },
+        { status: 400 }
+      );
+    }
+
+    // Get IP address for rate limiting
+    const ipAddress = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+    
+    // Check daily limit
+    const { allowed, remaining } = checkDailyLimit(ipAddress);
+    if (!allowed) {
+      return NextResponse.json(
+        { 
+          error: 'You have reached today\'s limit of 30 emails. Come again tomorrow!',
+          remaining: 0,
+          limit: 30
+        },
+        { status: 429 }
+      );
+    }
+
+    // Check if batch exceeds remaining limit
+    if (emails.length > remaining) {
+      return NextResponse.json(
+        { 
+          error: `You can verify only ${remaining} more email(s) today. Your daily limit is 30. Limit resets tomorrow.`,
+          remaining: remaining,
+          limit: 30
+        },
+        { status: 429 }
+      );
+    }
+
+    // Increment daily count
+    const usedCount = incrementDailyCount(ipAddress, emails.length);
+
+    // Initialize results array
+    const allResults = [];
+
+    // Process emails sequentially
+    const verifyEmailWithLimit = async (email: string) => {
+      try {
+        const trimmedEmail = email.toLowerCase().trim();
+        const startTime = Date.now();
+
+        // Step 1: Format validation
+        if (!validateEmailFormat(trimmedEmail)) {
+          return {
+            email: trimmedEmail,
+            status: 'invalid',
+            reason: 'Invalid email format',
+            verificationTime: Date.now() - startTime,
+            verificationMethod: 'format-check',
+          };
+        }
+
+        // Step 2: Verify via MailTester API with backend key
+        const result = await verifyEmailViaMailTester(trimmedEmail);
+        
+        return {
+          email: trimmedEmail,
+          status: result.status,
+          reason: result.reason,
+          code: result.code,
+          user: result.user,
+          domain: result.domain,
+          verificationTime: Date.now() - startTime,
+          verificationMethod: 'mailtester-api',
+        };
+
+      } catch (err) {
+        console.error(`Error verifying ${email}:`, err);
+        return {
+          email: email.toLowerCase().trim(),
+          status: 'unknown',
+          reason: err instanceof Error ? err.message : 'Verification service error',
+          verificationTime: 0,
+          verificationMethod: 'error',
+        };
+      }
+    };
+
+    // Process all emails sequentially and stream results
+    const encoder = new TextEncoder();
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          console.log('🚀 Starting email verification stream...');
+          controller.enqueue(encoder.encode('['));
+          
+          for (let i = 0; i < emails.length; i++) {
+            const result = await verifyEmailWithLimit(emails[i]);
+            allResults.push(result);
+            
+            // Send each result as it completes
+            const json = JSON.stringify(result);
+            console.log('📤 Streaming result:', json);
+            controller.enqueue(encoder.encode(i === 0 ? json : `,${json}`));
+            
+            console.log(`✓ Verified ${i + 1}/${emails.length}: ${emails[i]} -> Status: ${result.status}`);
+          }
+          
+          controller.enqueue(encoder.encode(']'));
+          console.log('🏁 Stream completed successfully');
+          controller.close();
+          console.log(`✅ All ${emails.length} emails verified and streamed`);
+        } catch (error) {
+          console.error('❌ Stream error:', error);
+          controller.error(error);
+        }
+      },
+    });
+
+    return new NextResponse(stream, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Remaining-Daily-Limit': (DAILY_LIMIT - usedCount).toString(),
+        'Transfer-Encoding': 'chunked',
+      },
+    });
+  } catch (error: any) {
+    console.error('Email verifier route error:', error);
+    return NextResponse.json(
+      { error: error.message || 'Verification failed' },
+      { status: 500 }
+    );
+  }
+}
