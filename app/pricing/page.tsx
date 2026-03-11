@@ -115,55 +115,77 @@ const PricingParticles = () => {
 const PricingCards = () => {
   const plans = [
     {
-      name: "Starter",
-      description: "Perfect for freelancers & small teams",
-      price: "$29",
+      name: "Free",
+      description: "Getting started with email marketing",
+      price: "$0",
       period: "/month",
       icon: Zap,
-      color: COLORS.purpleLight,
+      color: "rgb(27, 73, 201)",
       popular: false,
+      cta: "Get Started",
       features: [
-        "Email warmup",
-        "1 inbox",
-        "AI writing assistant", 
-        "Basic reporting",
-        "500 contacts",
-        "1 domain"
-      ]
+        "Up to 1 user account",
+        "100 emails per month",
+        "AI email personalization (200/day)",
+        "Basic campaign analytics",
+        "Email warmup & list management"
+      ],
+      moreFeatures: 1
     },
     {
-      name: "Growth",
-      description: "Ideal for agencies & scaling teams",
-      price: "$79",
+      name: "Starter",
+      description: "Perfect for individual marketers",
+      price: "$99",
       period: "/month",
       icon: Rocket,
-      color: COLORS.purpleDark,
-      popular: true,
+      color: "rgb(27, 73, 201)",
+      popular: false,
+      cta: "Get Started",
       features: [
-        "Multiple domains",
-        "LinkedIn automation",
-        "Smart sequences",
-        "Shared inbox",
-        "5,000 contacts",
-        "Advanced analytics"
-      ]
+        "Up to 1 user account",
+        "10,000 emails per month",
+        "AI email personalization (200/day)",
+        "Campaign analytics & tracking",
+        "Email warmup & list management"
+      ],
+      moreFeatures: 3
     },
     {
-      name: "Pro",
-      description: "Built for enterprises & large organizations",
-      price: "$199",
+      name: "Professional",
+      description: "Best for growing teams",
+      price: "$299",
       period: "/month",
       icon: Crown,
-      color: COLORS.purpleDarker,
+      color: "rgb(25, 59, 154))",
+      popular: true,
+      tag: "Current Plan",
+      cta: "Current Plan",
+      features: [
+        "Up to 5 user accounts",
+        "50,000 emails per month",
+        "AI email personalization (1000/day)",
+        "Campaign analytics & tracking",
+        "Email warmup & list management"
+      ],
+      moreFeatures: 7
+    },
+    {
+      name: "Enterprise",
+      description: "Custom solution for large organizations",
+      price: "Custom Pricing",
+      period: "",
+      icon: Sparkles,
+      color: "#F5A623",
       popular: false,
+      cta: "Contact Sales",
       features: [
         "Unlimited users",
-        "Advanced analytics",
-        "API integrations",
-        "Dedicated support",
-        "Unlimited contacts",
-        "Custom domains"
-      ]
+        "Unlimited emails",
+        "Unlimited AI personalization",
+        "Everything in Professional",
+        "Custom integrations"
+      ],
+      moreFeatures: 5
     }
   ];
 
@@ -181,7 +203,7 @@ const PricingCards = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 max-w-5xl mx-auto">
       {plans.map((plan, index) => (
         <motion.div
           key={plan.name}
@@ -198,109 +220,92 @@ const PricingCards = () => {
           }}
           className="relative"
         >
-          {/* Popular Badge */}
-          {plan.popular && (
+          {/* Tag */}
+          {plan.tag && (
             <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              whileInView={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.5, type: "spring" }}
-              className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20"
+              initial={{ scale: 0, y: -10 }}
+              whileInView={{ scale: 1, y: 0 }}
+              transition={{ delay: 0.4, type: "spring" }}
+              className="absolute -top-4 left-1/2 -translate-x-1/2 z-20"
             >
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center space-x-2">
-                <Star className="h-4 w-4" />
-                <span>MOST POPULAR</span>
+              <div className="bg-[#7CFF86] text-black px-5 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                {plan.tag}
               </div>
             </motion.div>
           )}
 
           {/* Pricing Card */}
-          <div className={`bg-[#1A1A1A] rounded-3xl p-8 border-2 relative overflow-hidden h-full transition-all duration-500 ${
-            plan.popular ? 'border-purple-500 shadow-2xl' : 'border-gray-800 hover:border-current'
-          }`}>
-            {/* Animated Background */}
-            <motion.div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100"
-              animate={{
-                background: [
-                  `radial-gradient(circle at 20% 80%, ${plan.color}15, transparent 50%)`,
-                  `radial-gradient(circle at 80% 20%, ${plan.color}15, transparent 50%)`,
-                ],
-              }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-            />
-
+          <div
+            className={`relative h-full rounded-3xl p-5 border transition-all duration-500 ${
+              plan.popular
+                ? 'border-[#7CFF86] shadow-[0_0_24px_rgba(124,255,134,0.25)]'
+                : 'border-[#2A2A2A] hover:border-[#3A3A3A]'
+            }`}
+            style={{ background: 'linear-gradient(135deg, #120014 0%, #2a0033 70%, #3a0046 120%)' }}
+          >
             {/* Header */}
-            <div className="text-center mb-8 relative z-10">
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 360 }}
-                transition={{ duration: 0.6 }}
-                className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
+            <div className="mb-5">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
                 style={{ background: plan.color }}
               >
-                <plan.icon className="h-8 w-8 text-white" />
-              </motion.div>
-              
-              <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-              <p className="text-gray-400 mb-4">{plan.description}</p>
-              
-              <div className="flex items-baseline justify-center space-x-2 mb-6">
+                <plan.icon className="h-5 w-5 text-white" />
+              </div>
+
+              <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
+              <p className="text-gray-400 text-sm mb-4">{plan.description}</p>
+
+              <div className="flex items-baseline space-x-2 mb-3">
                 <motion.span
-                  className="text-4xl font-black text-white"
+                  className="text-3xl font-black text-white"
                   animate={{
-                    scale: hoveredCard === index ? [1, 1.1, 1] : 1,
+                    scale: hoveredCard === index ? [1, 1.05, 1] : 1,
                   }}
                   transition={{ duration: 0.5 }}
                 >
                   {plan.price}
                 </motion.span>
-                <span className="text-gray-400">{plan.period}</span>
+                {plan.period && <span className="text-gray-400 text-sm">{plan.period}</span>}
               </div>
-            </div>
 
-            {/* Features */}
-            <div className="space-y-4 mb-8 relative z-10">
-              {plan.features.map((feature, featureIndex) => (
-                <motion.div
-                  key={feature}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: featureIndex * 0.1 + index * 0.3 }}
-                  className="flex items-center space-x-3"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: plan.color }}
-                  >
-                    <CheckCircle2 className="h-4 w-4 text-white" />
-                  </motion.div>
-                  <span className="text-white text-sm">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA Button */}
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative z-10"
-            >
-              <Button 
-                className={`w-full py-3 text-lg font-bold rounded-xl transition-all duration-300 ${
-                  plan.popular 
-                    ? 'shadow-2xl shadow-purple-500/50' 
-                    : 'shadow-lg'
-                }`}
-                style={{ 
+              <Button
+                className="w-full py-2 text-sm font-semibold rounded-xl"
+                style={{
                   background: plan.color,
-                  borderColor: plan.color
+                  borderColor: plan.color,
+                  color: plan.name === "Enterprise" ? "#111" : "#fff"
                 }}
                 onClick={() => window.open('https://app.360airo.com/', '_blank')}
               >
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
+                {plan.cta}
               </Button>
-            </motion.div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-white/80 text-xs font-semibold mb-3">Key Features</p>
+              <div className="space-y-2.5">
+                {plan.features.map((feature, featureIndex) => (
+                  <motion.div
+                    key={feature}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: featureIndex * 0.08 + index * 0.2 }}
+                    className="flex items-start space-x-2.5"
+                  >
+                    <div
+                      className="w-4.5 h-4.5 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${plan.color}22`, border: `1px solid ${plan.color}` }}
+                    >
+                      <CheckCircle2 className="h-3 w-3 text-white" />
+                    </div>
+                    <span className="text-white/90 text-xs">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+              {plan.moreFeatures ? (
+                <p className="text-white/50 text-[11px] mt-3">+ {plan.moreFeatures} more features</p>
+              ) : null}
+            </div>
           </div>
         </motion.div>
       ))}
@@ -713,7 +718,7 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Plans Section */}
-      <section className="py-20 px-6 bg-[#0A0A0A] relative overflow-hidden">
+      <section className="py-20 px-6 bg-transparent relative overflow-hidden">
         <PricingParticles />
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -726,7 +731,7 @@ export default function PricingPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl md:text-5xl font-black text-white mb-6"
+              className="text-3xl sm:text-4xl md:text-4xl font-black text-white mb-6"
             >
               Find the Perfect Plan for Your Outreach Goals
             </motion.h2>
