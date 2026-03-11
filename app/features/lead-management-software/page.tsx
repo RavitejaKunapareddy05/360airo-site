@@ -1054,15 +1054,6 @@ export default function ProspectManagementPage() {
         
         {/* Canonical URL */}
         <link rel="canonical" href="https://360airo.com/features/lead-management-software" />
-<<<<<<< HEAD
-=======
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Lead Management Software for Sales Pipeline Visibility | 360Airo
-" />
-        <meta property="og:description" content="360Airo's AI-powered lead management software centralizes & tracks every lead in one dashboard. Automate follow-ups, gain AI insights & close more deals. Start free.
-" />
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
         <meta property="og:url" content="https://360airo.com/features/lead-management-software" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="360Airo" />
