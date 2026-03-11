@@ -1,14 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Clock, User, Eye, Share2, BookOpen, Calculator, Mail, Shield } from 'lucide-react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
-import Link from 'next/link';
-<<<<<<< HEAD
-=======
-import Head from 'next/head';
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
+import Image from 'next/image';
+import { ReactNode } from 'react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,159 +19,307 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Blog posts with proper status indicators
-const blogPosts = [
-  {
-    id: 1,
-    title: "Free Email Mailbox Calculator to Scale Outreach Safely",
-    excerpt: "Scale email outreach without hurting deliverability. Calculate exact mailbox needs to prevent reputation damage and optimize sending limits.",
-    slug: "free-mailbox-calculator",
-    author: "360Airo Team",
-    date: "December 3, 2025",
-    readTime: "6 min read",
-    category: "Email Tools",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    featured: true,
-    isNew: true,
-    views: "2.8K",
-    tags: ["Email Calculator", "Deliverability", "Cold Email", "Free Tools", "Email Scaling"]
-  },
-  {
-    id: 2,
-    title: "10 Cheapest Cold Email Software Tools for Startups & Agencies (2026 Guide)",
-    excerpt: "Cold email remains one of the most cost-effective growth channels for startups and agencies — but only if the tooling makes sense. Discover the 10 most affordable tools.",
-    slug: "cheapest-cold-email-software",
-    author: "360Airo Team",
-    date: "November 15, 2025",
-    readTime: "10 min read",
-    category: "Cold Email",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    featured: true,
-    isNew: false,
-    views: "4.1K",
-    tags: ["Cold Email", "Software Tools", "Startups", "Agencies", "Budget"]
-  },
-  {
-    id: 3,
-    title: "Free Email Verification: How to Verify Email Addresses for Free with 360Airo",
-    excerpt: "Clean your email lists, protect sender reputation, and improve outreach results before sending a single email. Learn how 360Airo's free email verification works.",
-    slug: "free-email-verification",
-    author: "360Airo Team",
-    date: "October 25, 2025",
-    readTime: "8 min read",
-    category: "Email Marketing",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    featured: true,
-    isNew: false,
-    views: "3.2K",
-    tags: ["Email Verification", "Email Deliverability", "Free Tools", "360Airo"]
-  },
-  {
-    id: 4,
-    title: "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025",
-    excerpt: "LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Learn the exact playbook that's generating 3x more meetings.",
-    slug: "linkedin-outreach-strategy",
-    author: "Mike Rodriguez",
-    date: "October 20, 2025",
-    readTime: "7 min read",
-    category: "LinkedIn",
-    image: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    featured: true,
-    isNew: false,
-    views: "1.8K",
-    tags: ["LinkedIn", "Outreach", "B2B Sales"]
-  },
-  {
-    id: 5,
-    title: "Top Cold Email Tools in 2025: Which One Actually Delivers Replies?",
-    excerpt: "In 2025, cold outreach has changed completely. What used to be a numbers game is now about precision, personalization, and performance. Discover the tools that actually get responses.",
-    slug: "top-cold-email-tools",
-    author: "Sarah Chen",
-    date: "October 23, 2025",
-    readTime: "8 min read",
-    category: "Cold Email",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    featured: true,
-    isNew: false,
-    views: "2.4K",
-    tags: ["Cold Email", "Sales Tools", "Automation"]
-  },
-];
+// Type definitions
+interface StrategyModuleProps {
+  title: string;
+  children: ReactNode;
+  icon: string;
+  isHighlighted?: boolean;
+}
 
-const categories = [
-  "All Posts",
-  "Email Tools",
-  "Email Marketing",
-  "Cold Email",
-  "LinkedIn",
-  "AI & Automation",
-  "Sales Strategy",
-  "Outreach"
-];
+// Unique Module Components
+const HeroSection = () => (
+  <motion.header 
+    initial="hidden"
+    animate="visible"
+    variants={containerVariants}
+    className="bg-gradient-to-b from-[#480056] to-[#19001d] py-16 px-4"
+  >
+    <motion.div variants={itemVariants} className="max-w-4xl mx-auto text-center">
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#ffffff]">
+        LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025
+      </h1>
+      
+      {/* Updated Header Image - More LinkedIn Specific */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="relative w-full max-w-3xl mx-auto mb-6 rounded-2xl overflow-hidden"
+      >
+        <Image
+          src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+          alt="LinkedIn Outreach Strategy 2025 - Professional networking and business connections"
+          width={1200}
+          height={600}
+          className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+          priority
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0014]/70 via-transparent to-[#0a0014]/40 rounded-2xl"></div>
+        
+        {/* Text Overlay */}
+        <div className="absolute bottom-4 left-4 right-4">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+            <p className="text-white text-sm font-medium">
+              Master the step-by-step process to get more responses and conversions on LinkedIn
+            </p>
+          </div>
+        </div>
+      </motion.div>
 
-export default function BlogsPage() {
+      <p className="text-lg text-[#b45ecf]">
+        Master the art of LinkedIn outreach that actually generates responses and conversions
+      </p>
+    </motion.div>
+  </motion.header>
+);
+
+const IntroductionModule = () => (
+  <motion.section 
+    variants={itemVariants} 
+    className="mb-16 bg-gradient-to-br from-white/5 to-white/10 rounded-3xl p-8 border border-white/10"
+  >
+    <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">
+          Why LinkedIn Outreach Matters in 2025
+        </h2>
+        <div className="space-y-4">
+          <p className="text-lg leading-relaxed text-white/80 text-justify">
+            LinkedIn isn't just a professional network anymore. It's the heart of B2B sales conversations. Whether you're a founder, SDR, or agency owner, mastering LinkedIn outreach can completely transform your lead generation in 2025.
+          </p>
+          <p className="text-lg leading-relaxed text-white/80 text-justify">
+            But here's the challenge: most people get it wrong. They treat LinkedIn like an email inbox, sending mass messages that nobody reads. The real magic happens when you approach it strategically, focusing on personalization, timing, and consistency.
+          </p>
+        </div>
+      </div>
+      <div className="bg-gradient-to-br from-[#b45ecf]/20 to-[#480056]/20 rounded-2xl p-6 border border-[#b45ecf]/30">
+        <div className="text-center space-y-4">
+          <div className="text-4xl">🎯</div>
+          <h3 className="text-xl font-bold text-white">Key Insight</h3>
+          <p className="text-white/70 text-justify">
+            Here's a step-by-step playbook to help you create a LinkedIn outreach strategy that actually converts and how 360Airo can simplify the process for you.
+          </p>
+        </div>
+      </div>
+    </div>
+  </motion.section>
+);
+
+const StrategyModule = ({ title, children, icon, isHighlighted = false }: StrategyModuleProps) => (
+  <motion.section 
+    variants={itemVariants} 
+    className="mb-8"
+  >
+    <div className={`bg-gradient-to-br from-white/5 to-white/10 rounded-2xl p-8 border border-white/10 hover:border-[#b45ecf]/30 transition-all duration-300 ${
+      isHighlighted ? 'ring-2 ring-[#b45ecf]/30' : ''
+    }`}>
+      <div className="flex items-start gap-6">
+        <div className="flex-shrink-0">
+          <div className="w-16 h-16 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-2xl flex items-center justify-center text-2xl">
+            {icon}
+          </div>
+        </div>
+        <div className="flex-1">
+          <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
+          <div className="space-y-4 text-white/80">
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.section>
+);
+
+const ExampleModule = () => (
+  <motion.section 
+    variants={itemVariants} 
+    className="mb-16 bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/10 rounded-3xl p-8 border border-[#b45ecf]/20"
+  >
+    <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <div>
+        <h3 className="text-2xl font-bold text-white mb-4">Real Connection Request Example</h3>
+        <p className="text-white/70 mb-4 text-justify">
+          Avoid generic messages like "Let's connect." Instead, reference something specific — their role, a post they wrote, or a shared interest. Keep it short and human.
+        </p>
+        <p className="text-white/80 text-justify">
+          Small efforts like this can double your connection acceptance rate.
+        </p>
+      </div>
+      <div className="bg-[#19001d] p-6 rounded-2xl border-2 border-[#480056]">
+        <div className="flex items-start space-x-3">
+          <div className="w-8 h-8 bg-[#b45ecf] rounded-full flex items-center justify-center text-white text-sm font-bold">
+            💬
+          </div>
+          <div className="flex-1">
+            <p className="text-white/90 italic leading-relaxed">
+              "Hi Sarah, I came across your post on scaling outbound teams and really liked your insights on personalization. Would love to connect and share thoughts."
+            </p>
+            <div className="mt-3 flex items-center space-x-2 text-xs text-white/60">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span>Recommended approach</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.section>
+);
+
+const TrustBuildingModule = () => (
+  <motion.section 
+    variants={itemVariants} 
+    className="mb-16 bg-gradient-to-br from-[#b45ecf]/10 to-[#480056]/10 rounded-3xl p-8 border border-[#b45ecf]/20"
+  >
+    <div className="text-center mb-8">
+      <h2 className="text-3xl font-bold text-white mb-4">Building Trust, Not Just Leads</h2>
+      <div className="w-32 h-1 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full mx-auto"></div>
+    </div>
+    
+    <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="space-y-4">
+        <p className="text-lg leading-relaxed text-white text-justify">
+          At its core, LinkedIn outreach is about building trust.
+        </p>
+        <p className="text-lg leading-relaxed text-white text-justify">
+          When your messages sound genuine and your timing feels natural, prospects don't see you as another salesperson, they see you as someone who can solve their problem.
+        </p>
+        <p className="text-lg leading-relaxed text-white font-semibold text-justify">
+          That's exactly what 360Airo helps teams achieve: scalable personalization with a human touch.
+        </p>
+      </div>
+      <div className="text-center">
+        <div className="text-6xl mb-4">🤝</div>
+        <p className="text-white/70 text-lg">
+          Focus on relationships, not just transactions
+        </p>
+      </div>
+    </div>
+  </motion.section>
+);
+
+const FinalThoughtsModule = () => (
+  <motion.section variants={itemVariants} className="mb-16">
+    <div className="relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#b45ecf]/20 to-[#480056]/20 rounded-3xl blur-xl opacity-50"></div>
+      
+      <div className="relative bg-gradient-to-br from-[#480056]/30 via-[#19001d]/50 to-[#480056]/30 backdrop-blur-sm rounded-2xl p-8 border-2 border-[#b45ecf]/30">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-white mb-4">Final Thoughts</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#b45ecf] to-[#480056] rounded-full mx-auto"></div>
+        </div>
+
+        <div className="space-y-6">
+          <p className="text-lg leading-relaxed text-white text-justify">
+            In 2025, LinkedIn remains one of the most powerful B2B channels for creating real business opportunities.
+          </p>
+          <p className="text-lg leading-relaxed text-white text-justify">
+            The difference between being ignored and getting replies lies in strategy, personalization, and consistency.
+          </p>
+          <p className="text-lg leading-relaxed text-white text-justify">
+            By using tools like 360Airo, businesses can manage email and LinkedIn outreach in one place, automate repetitive work, and still maintain authentic conversations.
+          </p>
+          <p className="text-lg leading-relaxed text-white font-semibold text-justify">
+            The result is a faster pipeline, more meaningful connections, and higher close rates without sacrificing personalization.
+          </p>
+          <p className="text-lg leading-relaxed text-white text-justify">
+            If you're ready to make your LinkedIn outreach smarter and more effective, start by optimizing your workflow with 360Airo — the intelligent outreach platform built for modern sales teams.
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between mt-6 pt-4 border-t border-[#b45ecf]/20">
+          <div className="flex items-center space-x-2">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-2 h-2 bg-[#b45ecf] rounded-full"
+            />
+            <span className="text-[#b45ecf] text-sm font-semibold">Ready to Transform?</span>
+          </div>
+          <div className="text-[#b45ecf] text-sm">
+            🚀 Start with 360Airo today
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.section>
+);
+
+export default function LinkedInOutreachStrategy2025() {
+  // Define SEO metadata
+  const pageTitle = "LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025";
+  const pageDescription = "Learn a proven LinkedIn outreach strategy to get more replies and B2B meetings. Step-by-step playbook covering profile optimization, messaging, follow-ups & multichannel outreach.";
+  const canonicalUrl = "https://360airo.com/blogs/linkedin-outreach-strategy";
+  const pageKeywords = "LinkedIn outreach strategy, B2B LinkedIn outreach, LinkedIn messaging tips, LinkedIn sales strategy, LinkedIn connection requests, LinkedIn follow-up strategy, LinkedIn automation, B2B lead generation LinkedIn";
+  const authorName = "Mike Rodriguez";
+  const pageImage = "https://360airo.com/og-linkedin-outreach.jpg";
+
   return (
     <>
-<<<<<<< HEAD
       {/* Hidden SEO Meta Tags */}
       <div className="hidden">
-        <title>Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo</title>
-        <meta 
-          name="description" 
-          content="Explore expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability. Actionable tips to grow your pipeline faster with 360Airo."
-        />
-        <meta 
-          name="keywords" 
-          content="cold email blog, LinkedIn outreach tips, AI sales automation, email deliverability guide, sales pipeline tips, B2B outreach strategies, 360Airo blog, email marketing insights"
-        />
-        <meta name="author" content="360Airo Team" />
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={pageKeywords} />
+        <meta name="author" content={authorName} />
         
         {/* Canonical URL */}
-        <link rel="canonical" href="https://360airo.com/blogs" />
+        <link rel="canonical" href={canonicalUrl} />
         
         {/* Robots Tag */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content="Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo" />
-        <meta 
-          property="og:description" 
-          content="Explore expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability. Actionable tips to grow your pipeline faster with 360Airo."
-        />
-        <meta property="og:url" content="https://360airo.com/blogs" />
-        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
         <meta property="og:site_name" content="360Airo - AI-Powered Email Outreach Platform" />
-        <meta property="og:image" content="https://360airo.com/og-blog.jpg" />
+        <meta property="og:image" content={pageImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo" />
-        <meta 
-          name="twitter:description" 
-          content="Explore expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability. Actionable tips to grow your pipeline faster with 360Airo."
-        />
-        <meta name="twitter:image" content="https://360airo.com/twitter-blog.jpg" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        <meta name="twitter:image" content={pageImage} />
         <meta name="twitter:site" content="@360airo" />
         
-        {/* Additional SEO Meta Tags */}
+        {/* Article Specific Meta Tags */}
+        <meta property="article:published_time" content="2025-10-20T08:00:00+00:00" />
+        <meta property="article:modified_time" content="2025-10-20T08:00:00+00:00" />
+        <meta property="article:section" content="LinkedIn Strategy" />
+        <meta property="article:tag" content="LinkedIn Outreach" />
+        <meta property="article:tag" content="B2B Sales" />
+        <meta property="article:tag" content="Lead Generation" />
+        
+        {/* Additional Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         
-        {/* JSON-LD Structured Data for Blog */}
+        {/* JSON-LD Structured Data for Article */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Blog",
-              "headline": "Outreach Insights Blog",
-              "description": "Expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability.",
-              "url": "https://360airo.com/blogs",
+              "@type": "Article",
+              "headline": pageTitle,
+              "description": pageDescription,
+              "image": pageImage,
+              "datePublished": "2025-10-20T08:00:00+00:00",
+              "dateModified": "2025-10-20T08:00:00+00:00",
+              "author": {
+                "@type": "Person",
+                "name": authorName,
+                "url": "https://360airo.com"
+              },
               "publisher": {
                 "@type": "Organization",
                 "name": "360Airo",
@@ -184,360 +328,141 @@ export default function BlogsPage() {
                   "url": "https://360airo.com/logo.png"
                 }
               },
-              "blogPost": blogPosts.map(post => ({
-                "@type": "BlogPosting",
-                "headline": post.title,
-                "description": post.excerpt,
-                "datePublished": post.date,
-                "author": {
-                  "@type": "Person",
-                  "name": post.author
-                },
-                "url": `https://360airo.com/blogs/${post.slug}`
-              }))
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": canonicalUrl
+              },
+              "keywords": pageKeywords
+            })
+          }}
+        />
+
+        {/* JSON-LD BreadcrumbList */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Blogs",
+                "item": "https://360airo.com/blogs"
+              },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": pageTitle,
+                "item": canonicalUrl
+              }]
             })
           }}
         />
       </div>
 
-=======
-      <Head>
-        <title>Outreach Insights Blog | Cold Email, LinkedIn & AI Sales Tips – 360Airo</title>
-        <meta name="description" content="expert guides on cold email outreach, LinkedIn strategies, AI automation, and email deliverability. Actionable tips to grow your pipeline faster with 360Airo." />
-      </Head>
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
-      <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
-        {/* Animated Background Elements */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-1000" />
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0014] via-[#19001d] to-[#0a0014]">
+        <Navbar />
+
+        <div className="min-h-screen text-white pt-32">
+          <HeroSection />
+
+          {/* Main Content */}
+          <motion.main 
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="max-w-4xl mx-auto px-4 py-12"
+          >
+            <IntroductionModule />
+
+            {/* Strategy Sections */}
+            <div className="space-y-6 mb-16">
+              <StrategyModule 
+                title="Optimize Your Profile Before Reaching Out" 
+                icon="👤"
+                isHighlighted={true}
+              >
+                <p className="text-justify">Your profile is your digital handshake. Before sending a single message, make sure your profile builds trust.</p>
+                <p className="text-justify">Use a clear, professional photo, a headline that communicates value, and an "About" section that explains who you help and how.</p>
+                <p className="text-justify">Most decision-makers check your profile before responding. A strong profile increases your acceptance and reply rates by over 40%.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Define Your Ideal Prospect" 
+                icon="🎯"
+              >
+                <p className="text-justify">Sending messages without clarity wastes time.</p>
+                <p className="text-justify">Create a clear picture of your ideal customer based on industry, company size, title, and pain points. LinkedIn's advanced search filters and Sales Navigator make this easier than ever.</p>
+                <p className="text-justify">360Airo allows you to import and manage these leads directly into your outreach sequences, so you can target the right people from day one.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Start with Warm Engagement" 
+                icon="❤️"
+              >
+                <p className="text-justify">Before you send a connection request, engage with your prospect's content.</p>
+                <p className="text-justify">Like, comment, or share their posts genuinely. This builds familiarity and makes your future message feel natural, not random.</p>
+                <p className="text-justify">360Airo can track engagement and suggest prospects who have interacted with your brand recently, helping you reach out at the perfect time.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Send Personalized Connection Requests" 
+                icon="💌"
+                isHighlighted={true}
+              >
+                <p className="text-justify">Avoid generic messages like "Let's connect." Instead, reference something specific — their role, a post they wrote, or a shared interest. Keep it short and human.</p>
+                <p className="text-justify">Small efforts like this can double your connection acceptance rate.</p>
+              </StrategyModule>
+            </div>
+
+            <ExampleModule />
+
+            <div className="space-y-6 mb-16">
+              <StrategyModule 
+                title="Follow Up the Right Way" 
+                icon="🔄"
+              >
+                <p className="text-justify">Once connected, don't pitch immediately.</p>
+                <p className="text-justify">Start with value. Share a useful article, offer a resource, or start a conversation about a topic they care about.</p>
+                <p className="text-justify">360Airo allows you to automate these touchpoints while keeping messages personalized. You can create sequences that combine LinkedIn messages, InMails, and follow-up reminders — all without sounding robotic.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Combine LinkedIn with Email" 
+                icon="📧"
+              >
+                <p className="text-justify">The most successful teams don't stop at LinkedIn. They combine it with cold email for a complete multichannel approach.</p>
+                <p className="text-justify">For example, after connecting on LinkedIn, send a short, value-driven email that references your earlier conversation.</p>
+                <p className="text-justify">With 360Airo, you can manage this entire flow from one dashboard — one campaign, multiple channels, consistent tracking.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Track and Optimize" 
+                icon="📊"
+                isHighlighted={true}
+              >
+                <p className="text-justify">Data tells you what's working.</p>
+                <p className="text-justify">Monitor metrics like connection acceptance, message replies, and meeting conversions.</p>
+                <p className="text-justify">360Airo's analytics dashboard helps identify which outreach templates and touchpoints bring the best results, so you can improve continuously.</p>
+              </StrategyModule>
+
+              <StrategyModule 
+                title="Stay Consistent" 
+                icon="⏰"
+              >
+                <p className="text-justify">Consistency beats intensity in outreach.</p>
+                <p className="text-justify">It's better to reach out to 20 quality prospects a day with a thoughtful message than to spam 200 people once.</p>
+                <p className="text-justify">360Airo's task manager and automation tools make it easy to stay consistent by managing daily outreach goals without burnout.</p>
+              </StrategyModule>
+            </div>
+
+            <TrustBuildingModule />
+
+            <FinalThoughtsModule />
+          </motion.main>
         </div>
 
-        <div className="relative z-10">
-          <Navbar />
-
-          {/* Hero Section */}
-          <section className="pt-32 pb-16 px-4">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={containerVariants}
-                className="text-center"
-              >
-                <motion.div variants={itemVariants} className="mb-12">
-                  <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-2 mb-6">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                    <span className="text-blue-300 text-sm font-medium">Blog & Resources</span>
-                  </div>
-                  
-                  <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-white to-purple-400 bg-clip-text text-transparent">
-                    Outreach Insights
-                  </h1>
-                  
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                    Expert strategies, tool guides, and actionable tips to master cold outreach 
-                    and grow your business faster.
-                  </p>
-                </motion.div>
-
-                {/* Categories Filter */}
-                <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-2 mb-8">
-                  {categories.map((category, index) => (
-                    <motion.button
-                      key={category}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                        index === 0 
-                          ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25' 
-                          : 'bg-gray-800/50 text-gray-300 hover:bg-gray-800 hover:text-white backdrop-blur-sm border border-gray-700/50'
-                      }`}
-                    >
-                      {category}
-                    </motion.button>
-                  ))}
-                </motion.div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Featured Blog Post */}
-          <section className="pb-16 px-4">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-gradient-to-br from-gray-900/80 via-gray-900/50 to-blue-900/30 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20 shadow-2xl shadow-blue-500/10"
-              >
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                  <div className="space-y-6">
-                    <div className="flex flex-wrap items-center gap-2">
-                      {/* Status Badge for Featured Post */}
-                      {blogPosts[0].isNew ? (
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 text-sm font-medium border border-green-500/30">
-                          <span className="animate-pulse">✨</span>
-                          <span>New Post</span>
-                        </div>
-                      ) : (
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500/20 to-amber-500/20 text-yellow-400 text-sm font-medium border border-yellow-500/30">
-                          <span>⭐</span>
-                          <span>Featured</span>
-                        </div>
-                      )}
-                      
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium border border-blue-500/30">
-                        <Calculator className="h-4 w-4" />
-                        <span>Free Tool</span>
-                      </div>
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-400 text-sm font-medium border border-purple-500/30">
-                        <Shield className="h-4 w-4" />
-                        <span>Deliverability Guide</span>
-                      </div>
-                    </div>
-                    
-                    <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                      {blogPosts[0].title}
-                    </h2>
-                    
-                    <p className="text-lg text-gray-300 leading-relaxed">
-                      {blogPosts[0].excerpt}
-                    </p>
-                    
-                    <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center">
-                          <User className="h-4 w-4 text-blue-400" />
-                        </div>
-                        <span>{blogPosts[0].author}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center">
-                          <Calendar className="h-4 w-4 text-purple-400" />
-                        </div>
-                        <span>{blogPosts[0].date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center">
-                          <Eye className="h-4 w-4 text-green-400" />
-                        </div>
-                        <span>{blogPosts[0].views} views</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {blogPosts[0].tags.map((tag, index) => (
-                        <span key={index} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-gray-300 text-sm transition-colors backdrop-blur-sm">
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    <Link href={`/blogs/${blogPosts[0].slug}`}>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-xl shadow-blue-500/20"
-                      >
-                        <Calculator className="mr-3 h-5 w-5" />
-                        Try Free Calculator Tool
-                        <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-2" />
-                      </motion.button>
-                    </Link>
-                  </div>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    className="relative h-64 lg:h-80 rounded-2xl overflow-hidden border border-blue-500/30 group"
-                  >
-                    <img 
-                      src={blogPosts[0].image} 
-                      alt={blogPosts[0].title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="bg-black/40 backdrop-blur-md rounded-xl p-4 border border-white/10">
-                        <p className="text-white text-sm font-medium flex items-center gap-2">
-                          <Mail className="h-4 w-4" />
-                          Calculate exact mailbox needs to prevent deliverability issues
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Blog Posts Grid */}
-          <section className="py-12 px-4">
-            <div className="max-w-6xl mx-auto">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={containerVariants}
-              >
-                <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
-                  All <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Blog Posts</span>
-                </motion.h2>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {blogPosts.map((post) => (
-                    <motion.article
-                      key={post.id}
-                      variants={itemVariants}
-                      whileHover={{ y: -6 }}
-                      className="group bg-gradient-to-br from-gray-900/50 to-gray-900/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 hover:border-blue-500/30 transition-all duration-300"
-                    >
-                      {/* Status Badge */}
-                      <div className="absolute top-4 right-4 z-10">
-                        {post.isNew ? (
-                          <div className="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-medium rounded-full border border-green-400/30 shadow-lg shadow-green-500/20">
-                            <span className="animate-pulse">✨</span> New
-                          </div>
-                        ) : post.featured ? (
-                          <div className="px-3 py-1 bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-xs font-medium rounded-full border border-yellow-400/30 shadow-lg shadow-yellow-500/20">
-                            ⭐ Featured
-                          </div>
-                        ) : null}
-                      </div>
-                      
-                      {/* Post Image */}
-                      <div className="relative h-48 overflow-hidden">
-                        <img 
-                          src={post.image} 
-                          alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                        <div className="absolute top-4 left-4">
-                          <div className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
-                            post.category === 'Email Tools' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' :
-                            post.category === 'Email Marketing' ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
-                            post.category === 'LinkedIn' ? 'bg-blue-600/20 text-blue-300 border border-blue-600/30' :
-                            post.category === 'Cold Email' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' :
-                            'bg-gray-800 text-gray-300 border border-gray-700'
-                          }`}>
-                            {post.category === 'Email Tools' && <Calculator className="h-3 w-3 mr-2" />}
-                            {post.category === 'Cold Email' && <Mail className="h-3 w-3 mr-2" />}
-                            {post.category}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6 space-y-4">
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">
-                          {post.title}
-                        </h3>
-                        
-                        <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
-                          {post.excerpt}
-                        </p>
-
-                        {/* Meta Information */}
-                        <div className="flex items-center justify-between text-gray-500 text-xs pt-4 border-t border-gray-800">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{post.date}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            <span>{post.readTime}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Eye className="h-3 w-3" />
-                            <span>{post.views}</span>
-                          </div>
-                        </div>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1">
-                          {post.tags.slice(0, 2).map((tag, tagIndex) => (
-                            <span key={tagIndex} className="px-2 py-1 bg-gray-800/50 hover:bg-gray-800 rounded text-gray-400 text-xs transition-colors">
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Action Buttons */}
-                        <div className="flex items-center justify-between pt-4">
-                          <Link href={`/blogs/${post.slug}`}>
-                            <motion.button
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                              className="group flex items-center gap-2 py-2.5 px-4 bg-gray-800 hover:bg-gradient-to-r hover:from-blue-600/20 hover:to-purple-600/20 text-white rounded-lg text-sm font-medium transition-all border border-gray-700"
-                            >
-                              Read {post.isNew ? "New Guide" : post.featured ? "Featured" : "More"}
-                              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                            </motion.button>
-                          </Link>
-                          <motion.button
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.9 }}
-                            className="p-2 text-gray-500 hover:text-white hover:bg-gray-800 rounded-lg transition-all border border-gray-700"
-                          >
-                            <Share2 className="h-4 w-4" />
-                          </motion.button>
-                        </div>
-                      </div>
-                    </motion.article>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* Newsletter Section */}
-          <section className="py-16 px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-4xl mx-auto"
-            >
-              <div className="bg-gradient-to-br from-blue-900/20 via-gray-900/40 to-purple-900/20 backdrop-blur-sm rounded-2xl p-12 border border-blue-500/20">
-                <div className="text-center">
-                  <div className="inline-flex items-center gap-3 mb-6">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse" />
-                    <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse delay-300" />
-                    <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse delay-600" />
-                  </div>
-                  
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                    Stay Updated with Outreach Insights
-                  </h2>
-                  <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                    Get the latest cold outreach strategies, AI automation tips, and sales insights delivered to your inbox.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      className="flex-1 px-5 py-3.5 bg-white/10 border-2 border-gray-700/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 backdrop-blur-sm transition-all"
-                    />
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-8 py-3.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-xl shadow-blue-500/25 hover:shadow-2xl hover:shadow-blue-500/40 transition-all"
-                    >
-                      Subscribe Free
-                    </motion.button>
-                  </div>
-                  <p className="text-gray-500 text-sm mt-6">
-                    Join 15,000+ outreach professionals. No spam. Unsubscribe anytime.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </section>
-
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </>
   );
