@@ -480,26 +480,19 @@ const DemoSteps = () => {
 const TargetAudience = () => {
   const audiences = [
     {
-<<<<<<< HEAD
       id: "sales-teams",
-=======
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
       icon: Users,
       title: "Sales Teams",
       description: "Scale outreach without losing personalization",
       color: COLORS.purpleLight
     },
     {
-<<<<<<< HEAD
       id: "marketing-pros",
-=======
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
       icon: TrendingUp,
       title: "Marketing Professionals",
       description: "Improve email deliverability and engagement",
       color: COLORS.purpleDark
     },
-<<<<<<< HEAD
     {
       id: "agencies-startups",
       icon: Rocket,
@@ -520,15 +513,6 @@ const TargetAudience = () => {
     },
     {
       id: "growth-leaders",
-=======
-{
-  icon: Rocket,
-  title: "Agencies & Startups",
-  description: "Agencies can also generate additional revenue by joining the <a href=\"https://360airo.com/features/360airo-affiliate-program\">360Airo Affiliate Program</a>.",
-  color: COLORS.purpleDarker
-},
-    {
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
       icon: Crown,
       title: "Growth Leaders",
       description: "Explore smarter automation workflows",
@@ -540,11 +524,7 @@ const TargetAudience = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {audiences.map((audience, index) => (
         <motion.div
-<<<<<<< HEAD
           key={audience.id}
-=======
-          key={audience.title}
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
           initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           whileHover={{ 
@@ -580,7 +560,6 @@ const TargetAudience = () => {
 
 // Benefits List with Animation
 const DemoBenefits = () => {
-<<<<<<< HEAD
   const benefits = [
     {
       id: "live-walkthrough",
@@ -616,25 +595,13 @@ const DemoBenefits = () => {
       id: "free-trial",
       content: "Free trial access post-demo to explore on your own"
     }
-=======
-const benefits = [
-    "Live, interactive walkthrough — not just a video",
-    "Personalized session tailored to your team's goals. Teams that love the platform can also earn rewards through the <a href=\"https://360airo.com/features/360airo-referral-program\">360Airo Referral Program</a>.",
-    "Real-time Q&A with our product experts",
-    "Hands-on experience with AI-driven tools and dashboards",
-    "Free trial access post-demo to explore on your own"
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
   ];
 
   return (
     <div className="space-y-4">
       {benefits.map((benefit, index) => (
         <motion.div
-<<<<<<< HEAD
           key={benefit.id}
-=======
-          key={benefit}
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -654,11 +621,7 @@ const benefits = [
             transition={{ duration: 0.3 }}
             className="text-white text-lg group-hover:text-gray-200 transition-colors"
           >
-<<<<<<< HEAD
             {benefit.content}
-=======
-            {benefit}
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
           </motion.p>
         </motion.div>
       ))}
@@ -1303,8 +1266,4 @@ export default function DemoPage() {
       </div>
     </>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ed47ab4716a94035ab708be5f0f0e76579d294be
