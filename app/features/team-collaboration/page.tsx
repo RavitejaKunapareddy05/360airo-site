@@ -280,9 +280,14 @@ export default function TeamCollaboration() {
 
   return (
     <>
-      {/* Hidden meta tags for client-side rendering */}
-      <div className="hidden">
+      <Head>
+        {/* SINGLE TITLE TAG - FIXED */}
         <title>AI-Powered Team Collaboration Platform | 360Airo</title>
+        
+        {/* SINGLE VIEWPORT META TAG - FIXED */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Original meta tags - kept exactly as they were but removed duplicates */}
         <meta name="description" content="AI-powered team collaboration for outreach campaigns. Centralized workspace, shared inbox, real-time collaboration across email & LinkedIn. Try 360Airo today.
 " />
         <meta name="keywords" content="team collaboration, team collaboration tools, unified workspace, AI team productivity, multi-channel campaigns, sales team coordination" />
@@ -310,38 +315,137 @@ export default function TeamCollaboration() {
         
         {/* Additional SEO Meta Tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#b45ecf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        </div>
-        {/* Structured Data for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "360Airo Team Collaboration Tools",
-              "description": "Unify sales, marketing, and customer success teams with centralized workspace and AI-powered collaboration tools.",
-              "url": "https://360airo.com/features/team-collaboration",
-              "brand": {
-                "@type": "Brand",
-                "name": "360Airo"
+      </Head>
+
+      {/* REMOVED: Product Schema - replaced with SoftwareApplication below */}
+
+      {/* ADDED: SoftwareApplication Schema (correct for SaaS) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "360Airo",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web",
+            "url": "https://360airo.com",
+            "description": "Unify sales, marketing, and customer success teams with centralized workspace and AI-powered collaboration tools.",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/OnlineOnly",
+              "url": "https://app.360airo.com/"
+            }
+          })
+        }}
+      />
+
+      {/* ADDED: BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://360airo.com"
               },
-              "offers": {
-                "@type": "Offer",
-                "url": "https://app.360airo.com/",
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/OnlineOnly"
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Features",
+                "item": "https://360airo.com/features"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Team Collaboration",
+                "item": "https://360airo.com/features/team-collaboration"
               }
-            })
-          }}
-        />
-      {/* Hidden link for SEO */}
-      <div className="hidden">
-        <a rel="canonical" href="https://360airo.com/features/team-collaboration">360Airo Team Collaboration Tools - Work Smarter Together</a>
-      </div>
+            ]
+          })
+        }}
+      />
+
+      {/* ADDED: FAQPage Schema for Rich Results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is a team collaboration tool, and how does it work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A team collaboration tool allows multiple team members to work together from a shared platform. It enables shared access to campaigns, inboxes, and lead data while maintaining visibility and accountability. This improves coordination, reduces duplicate work, and ensures smoother communication across sales and marketing teams."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can teams collaborate effectively using a shared workspace?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Teams can collaborate effectively by assigning conversations, sharing internal notes, and tracking activity in a shared workspace. 360Airo ensures everyone has context on each lead, reducing confusion and allowing teams to respond faster with consistent and aligned messaging."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can teams manage campaigns, tasks, and conversations from one platform?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, 360Airo allows teams to manage outreach campaigns, lead conversations, and follow ups from one centralized platform. This eliminates tool switching, improves efficiency, and ensures all outreach activities remain organized and easy to track."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does a shared inbox help teams respond faster and stay aligned?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A shared inbox centralizes all incoming messages and prevents overlap. Team members can see who is responding, add internal notes, and prioritize replies. This improves response times, avoids duplicate replies, and ensures consistent communication with prospects."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does AI improve team productivity and decision-making?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "AI helps teams by prioritizing conversations, highlighting high intent leads, and providing performance insights. It reduces manual analysis and surfaces actionable recommendations, allowing teams to focus on meaningful conversations and make faster, smarter decisions."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can teams collaborate on email and LinkedIn campaigns from one platform?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, 360Airo enables teams to collaborate on both email and LinkedIn campaigns from a single dashboard. Campaigns, sequences, and analytics are shared, ensuring alignment across channels and making it easier to scale outreach efforts collectively."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does 360Airo enable collaboration across sales, marketing, and customer success teams?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "360Airo centralizes lead data, conversations, and campaign insights, allowing different teams to work from the same information. This alignment improves handoffs, ensures consistent messaging, and helps teams collaborate efficiently throughout the customer journey."
+                }
+              }
+            ]
+          })
+        }}
+      />
+
+      {/* REMOVED: Hidden div with duplicate title and meta tags - no longer needed */}
 
       <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-black via-[#19001d] to-[#480056] text-white overflow-hidden">
         <Navbar />
