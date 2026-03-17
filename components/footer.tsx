@@ -110,7 +110,7 @@ export function Footer() {
     }
   ];
 
-  // Updated social links with all platforms
+  // Updated social links with all platforms and proper TypeScript typing
   const socialLinks = [
     { 
       icon: Facebook, 
@@ -125,7 +125,7 @@ export function Footer() {
       color: "hover:text-[#E4405F]"
     },
     { 
-      icon: ({ className }) => (
+      icon: ({ className }: { className?: string }) => (
         <svg 
           className={className} 
           viewBox="0 0 24 24" 
