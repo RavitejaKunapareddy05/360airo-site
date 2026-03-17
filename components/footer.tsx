@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Mail, Linkedin, Twitter, ArrowRight, Sparkles, Zap, Shield, Rocket, CheckCircle, XCircle } from 'lucide-react';
+import { Mail, Linkedin, Twitter, ArrowRight, Sparkles, Zap, Shield, Rocket, CheckCircle, XCircle, Facebook, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Footer() {
@@ -110,10 +110,53 @@ export function Footer() {
     }
   ];
 
+  // Updated social links with all platforms
   const socialLinks = [
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Mail, href: "#", label: "Email" }
+    { 
+      icon: Facebook, 
+      href: "https://www.facebook.com/globopersona/", 
+      label: "Facebook",
+      color: "hover:text-[#1877F2]"
+    },
+    { 
+      icon: Instagram, 
+      href: "https://www.instagram.com/globopersona/", 
+      label: "Instagram",
+      color: "hover:text-[#E4405F]"
+    },
+    { 
+      icon: ({ className }) => (
+        <svg 
+          className={className} 
+          viewBox="0 0 24 24" 
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M5.5 3.5h13A2.5 2.5 0 0 1 21 6v12a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18V6a2.5 2.5 0 0 1 2.5-2.5z M9 8h1.5v1.5H9V8zm3 0h1.5v1.5H12V8zm3 0h1.5v1.5H15V8zm-9 3h1.5v1.5H6V11zm3 0h1.5v1.5H9V11zm3 0h1.5v1.5H12V11zm3 0h1.5v1.5H15V11zm-6 3h1.5v1.5H9V14zm3 0h1.5v1.5H12V14zm3 0h1.5v1.5H15V14zm-6 3h1.5v1.5H9V17zm3 0h1.5v1.5H12V17zm3 0h1.5v1.5H15V17z"/>
+        </svg>
+      ),
+      href: "https://www.threads.com/@globopersona", 
+      label: "Threads",
+      color: "hover:text-[#000000]"
+    },
+    { 
+      icon: Twitter, 
+      href: "https://x.com/GloboPerso50139", 
+      label: "X (Twitter)",
+      color: "hover:text-[#1DA1F2]"
+    },
+    { 
+      icon: Linkedin, 
+      href: "https://www.linkedin.com/company/globo-persona-company/", 
+      label: "LinkedIn",
+      color: "hover:text-[#0A66C2]"
+    },
+    { 
+      icon: Mail, 
+      href: "mailto:info@globopersona.com", 
+      label: "Email",
+      color: "hover:text-[#EA4335]"
+    }
   ];
 
   return (
@@ -286,19 +329,22 @@ export function Footer() {
                 </div>
                 
                 {/* Social Links - Top right on mobile */}
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap justify-end gap-2 max-w-[60%]">
                   {socialLinks.map((social, index) => (
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-[#b45ecf] hover:border-[#b45ecf]/30 transition-all duration-300 group"
+                      className={`w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 ${social.color} hover:border-[#b45ecf]/30 transition-all duration-300 group`}
                       initial={{ opacity: 0, y: 15 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
+                      aria-label={social.label}
                     >
-                      <social.icon className="h-4 w-4" />
+                      <social.icon className="h-3.5 w-3.5" />
                     </motion.a>
                   ))}
                 </div>
@@ -337,9 +383,6 @@ export function Footer() {
                   </div>
                 ))}
               </div>
-
-              {/* Trust Indicators */}
-
 
               {/* Contact CTA - Mobile */}
               <motion.div
@@ -395,20 +438,21 @@ export function Footer() {
                 Transform your sales pipeline with intelligent prospect management and AI-driven outreach.
               </p>
 
-              
-
               {/* Social Links */}
-              <div className="flex space-x-3">
+              <div className="flex flex-wrap gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-[#b45ecf] hover:border-[#b45ecf]/30 transition-all duration-300 group"
+                    className={`w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/70 ${social.color} hover:border-[#b45ecf]/30 transition-all duration-300 group`}
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
+                    aria-label={social.label}
                   >
                     <social.icon className="h-4 w-4" />
                   </motion.a>
