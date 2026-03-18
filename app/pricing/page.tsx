@@ -116,76 +116,117 @@ const PricingCards = () => {
   const plans = [
     {
       name: "Free",
-      description: "Getting started with email marketing",
+      description: "For individuals starting with outbound email",
       price: "$0",
       period: "/month",
       icon: Zap,
-      color: "rgb(27, 73, 201)",
+      color: "#22c55e",
       popular: false,
-      cta: "Get Started",
-      features: [
-        "Up to 1 user account",
-        "100 emails per month",
-        "AI email personalization (200/day)",
-        "Basic campaign analytics",
-        "Email warmup & list management"
-      ],
-      moreFeatures: 1
-    },
-    {
-      name: "Starter",
-      description: "Perfect for individual marketers",
-      price: "$99",
-      period: "/month",
-      icon: Rocket,
-      color: "rgb(27, 73, 201)",
-      popular: false,
-      cta: "Get Started",
-      features: [
-        "Up to 1 user account",
-        "10,000 emails per month",
-        "AI email personalization (200/day)",
-        "Campaign analytics & tracking",
-        "Email warmup & list management"
-      ],
-      moreFeatures: 3
-    },
-    {
-      name: "Professional",
-      description: "Best for growing teams",
-      price: "$299",
-      period: "/month",
-      icon: Crown,
-      color: "rgb(25, 59, 154))",
-      popular: true,
       tag: "Current Plan",
       cta: "Current Plan",
       features: [
-        "Up to 5 user accounts",
-        "50,000 emails per month",
-        "AI email personalization (1000/day)",
-        "Campaign analytics & tracking",
-        "Email warmup & list management"
+        "Unlimited email sending",
+        "1,000 email contacts",
+        "1 mailbox",
+        "1 user",
+        "500 AI personalization credits",
+        "Email campaigns",
+        "Limited integrations"
       ],
-      moreFeatures: 7
+      moreFeatures: null
+    },
+    {
+      name: "Starter",
+      description: "For small outbound teams that need shared tools",
+      price: "$99",
+      period: "/month",
+      icon: Rocket,
+      color: "#1d4ed8",
+      popular: false,
+      cta: "Upgrade Now",
+      features: [
+        "Unlimited email sending",
+        "5,000 email contacts",
+        "8 mailboxes",
+        "Up to 3 users",
+        "3,000 AI personalization credits/month",
+        "3 LinkedIn seats",
+        "3,000 email verification credits/month",
+        "Unified inbox",
+        "Smart scheduler",
+        "Email warmup",
+        "Inbox rotation",
+        "Basic AI automation",
+        "Campaign automation",
+        "Basic integrations",
+        "Basic analytics",
+        "2 hours/month support"
+      ],
+      moreFeatures: null
+    },
+    {
+      name: "Pro",
+      description: "For growing teams running advanced outbound workflows",
+      price: "$299",
+      period: "/month",
+      icon: Crown,
+      color: "#6d28d9",
+      popular: true,
+      tag: "Recommended",
+      cta: "Upgrade Now",
+      features: [
+        "Unlimited email sending",
+        "25,000 email contacts",
+        "20 mailboxes",
+        "Up to 5 users",
+        "10,000 AI personalization credits/month",
+        "5 LinkedIn seats",
+        "10,000 email verification credits/month",
+        "Unified inbox",
+        "Smart scheduler",
+        "Email warmup",
+        "Advanced inbox rotation",
+        "Advanced AI automation",
+        "Multi-inbox management",
+        "Advanced campaign automation",
+        "Full integrations",
+        "Advanced analytics dashboard",
+        "A/B testing",
+        "6 hours/month support"
+      ],
+      moreFeatures: null
     },
     {
       name: "Enterprise",
-      description: "Custom solution for large organizations",
+      description: "Custom infrastructure and unlimited scale for large organizations",
       price: "Custom Pricing",
-      period: "",
+      period: "Contact for quote",
       icon: Sparkles,
-      color: "#F5A623",
+      color: "#f59e0b",
       popular: false,
       cta: "Contact Sales",
       features: [
         "Unlimited users",
-        "Unlimited emails",
+        "Unlimited email sending",
+        "Unlimited email contacts",
+        "Unlimited mailboxes",
         "Unlimited AI personalization",
-        "Everything in Professional",
-        "Custom integrations"
+        "Unlimited LinkedIn seats",
+        "Unlimited email verification credits",
+        "Custom voice calling seats",
+        "Unified inbox",
+        "Smart scheduler",
+        "Email warmup",
+        "Advanced inbox rotation",
+        "Custom AI automation models",
+        "API access",
+        "Custom CRM integrations",
+        "Advanced analytics and reporting",
+        "Team management and roles",
+        "Dedicated infrastructure",
+        "Dedicated account executive"
       ],
-      moreFeatures: 5
+      moreFeatures: null
     }
   ];
 
