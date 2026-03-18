@@ -110,50 +110,35 @@ export function Footer() {
     }
   ];
 
-  // Updated social links with all platforms and proper TypeScript typing
+  // Updated social links with 360airo profiles and proper TypeScript typing
   const socialLinks = [
     { 
       icon: Facebook, 
-      href: "https://www.facebook.com/globopersona/", 
+      href: "https://www.facebook.com/profile.php?id=61583637801140", 
       label: "Facebook",
       color: "hover:text-[#1877F2]"
     },
     { 
       icon: Instagram, 
-      href: "https://www.instagram.com/globopersona/", 
+      href: "https://www.instagram.com/360airo/", 
       label: "Instagram",
       color: "hover:text-[#E4405F]"
     },
     { 
-      icon: ({ className }: { className?: string }) => (
-        <svg 
-          className={className} 
-          viewBox="0 0 24 24" 
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M5.5 3.5h13A2.5 2.5 0 0 1 21 6v12a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18V6a2.5 2.5 0 0 1 2.5-2.5z M9 8h1.5v1.5H9V8zm3 0h1.5v1.5H12V8zm3 0h1.5v1.5H15V8zm-9 3h1.5v1.5H6V11zm3 0h1.5v1.5H9V11zm3 0h1.5v1.5H12V11zm3 0h1.5v1.5H15V11zm-6 3h1.5v1.5H9V14zm3 0h1.5v1.5H12V14zm3 0h1.5v1.5H15V14zm-6 3h1.5v1.5H9V17zm3 0h1.5v1.5H12V17zm3 0h1.5v1.5H15V17z"/>
-        </svg>
-      ),
-      href: "https://www.threads.com/@globopersona", 
-      label: "Threads",
-      color: "hover:text-[#000000]"
-    },
-    { 
       icon: Twitter, 
-      href: "https://x.com/GloboPerso50139", 
+      href: "https://x.com/360airo", 
       label: "X (Twitter)",
       color: "hover:text-[#1DA1F2]"
     },
     { 
       icon: Linkedin, 
-      href: "https://www.linkedin.com/company/globo-persona-company/", 
+      href: "https://www.linkedin.com/company/360-airo/", 
       label: "LinkedIn",
       color: "hover:text-[#0A66C2]"
     },
     { 
       icon: Mail, 
-      href: "mailto:info@globopersona.com", 
+      href: "mailto:info@360airo.com", 
       label: "Email",
       color: "hover:text-[#EA4335]"
     }
@@ -588,8 +573,7 @@ export function Footer() {
           </div>
         </motion.div>
       </div>
-
-      {/* Floating CTA - Hidden on mobile, visible on tablet and desktop */}
+     {/* Floating CTA - Hidden on mobile, visible on tablet and desktop */}
       <motion.div
         initial={{ opacity: 0, y: 80 }}
         whileInView={{ opacity: 1, y: 0 }}
