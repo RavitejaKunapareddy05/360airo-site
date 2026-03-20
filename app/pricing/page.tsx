@@ -122,8 +122,8 @@ const PricingCards = () => {
       icon: Zap,
       color: "#22c55e",
       popular: false,
-      tag: "Current Plan",
-      cta: "Current Plan",
+      // tag: "Current Plan",
+      // cta: "Current Plan",
       features: [
         "Unlimited email sending",
         "1,000 email contacts",
