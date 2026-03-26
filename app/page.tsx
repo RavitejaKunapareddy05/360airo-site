@@ -1751,7 +1751,7 @@ export default function Home() {
                       >
                         <Bot className="h-3 w-3 sm:h-4 sm:w-4 text-[#d67bff]" />
                       </motion.div>
-                      <span>The All-in-One AI Outreach Platform</span>
+                      <span>360Airo - The All-in-One AI Outreach Platform</span>
                     </span>
                   </div>
                 </motion.div>
@@ -1824,7 +1824,7 @@ export default function Home() {
                       transition={{ duration: 3.4, repeat: Infinity }}
                       className="font-semibold"
                     >
-                      AI-powered outreach tool
+                      360Airo – AI-Powered Multichannel Outreach Platform
                     </motion.span>{' '}
                     designed for teams that want to scale faster.
                   </p>
