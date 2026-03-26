@@ -582,8 +582,7 @@ export default function Home() {
                           transition={{ duration: 3.6, repeat: Infinity }}
                           className="flex items-center space-x-2"
                         >
-                          <span className="text-2xl sm:text-3xl font-black text-white/70">360°</span>
-                          <span className="text-base sm:text-lg font-bold text-[#b45ecf]">airo</span>
+                          <span className="text-2xl sm:text-3xl font-black text-white/70">360Airo</span>
                         </motion.div>
                         
                         {/* Live status indicator */}
@@ -1311,3 +1310,4 @@ export default function Home() {
     </>
   );
 }
+
