@@ -104,6 +104,7 @@ export function Footer() {
     {
       category: "Company",
       links: [
+        { name: 'Terms of Service', path: '/terms-of-service' },
         { name: 'Privacy Policy', path: '/Privacy-Policy-Page' },
         { name: 'Anti-Spam Policy', path: '/anti-Spam-Policy' }
       ]
@@ -563,6 +564,9 @@ export function Footer() {
               </a>
             </div>
             <div className="flex flex-wrap gap-4 md:gap-6 text-xs">
+              <Link href="/terms-of-service" className="text-white/60 hover:text-[#b45ecf] transition-colors">
+                Terms of Service
+              </Link>
               <Link href="/Privacy-Policy-Page" className="text-white/60 hover:text-[#b45ecf] transition-colors">
                 Privacy Policy
               </Link>
@@ -610,3 +614,4 @@ export function Footer() {
     </footer>
   );
 }
+  
