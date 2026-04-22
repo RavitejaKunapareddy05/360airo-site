@@ -225,8 +225,8 @@ const features = [
     tag: 'Demo'
   },
   { 
-    name: 'Multi-Channel Platform', 
-    href: '/features/multi-channel-platform',
+    name: 'Multi-Channel-Campaign', 
+    href: '/features/multi-channel-campaign',
     description: 'Reach customers across multiple channels seamlessly',
     icon: Share2,
     color: 'from-indigo-500 to-purple-400',
