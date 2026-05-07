@@ -546,7 +546,7 @@ const PricingSection = () => (
             Choose the plan that fits your team's needs. All plans include our core features.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 pt-6">
           {[
             {
               name: "Starter", price: "$49", period: "/month",
@@ -573,7 +573,7 @@ const PricingSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="relative"
+              className="relative pt-3"
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
